@@ -1,0 +1,129 @@
+@import "../../global";
+.main-page-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  overflow: hidden;
+  height: 800px;
+  display: flex;
+
+  .black {
+    position: absolute;
+    height: 800px;
+    width: 100%;
+    background-color: black;
+    z-index: 2;
+    opacity: 50%;
+  }
+  .background-video {
+    position: absolute;
+    width: 100vw;
+    z-index: 1;
+    padding: 0;
+  }
+  .main-info-block {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 3;
+    color: $white;
+    font-family: 'Montserrat', sans-serif;
+    padding: 0 5%;
+    width: 550px;
+
+    .main-title {
+      font-weight: 600;
+      font-size: 48px;
+      margin-bottom: 30px;
+
+      .simply {
+        color: $light-blue;
+      }
+    }
+
+    .main-subtitle {
+      font-weight: 400;
+      font-size: 18px;
+      margin-bottom: 30px;
+      line-height: 30px;
+    }
+
+    .calculate-button {
+      width: 210px;
+      height: 50px;
+      border-radius: 20px;
+      background: none;
+      border: 2px solid $light-blue;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      color: $white;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  .registration-form {
+    position: absolute;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    right: 5%;
+    padding: 45px 55px;
+    top: 50%;
+    margin-top: -250px;
+    border-radius: 20px;
+    z-index: 3;
+    width: 400px;
+    height: 400px;
+    background-color: $white;
+    font-family: 'Montserrat', sans-serif;
+
+    .form-title {
+      font-weight: 600;
+      font-size: 36px;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .form-subtitle {
+      font-weight: 400;
+      font-size: 15px;
+      text-align: center;
+      width: 310px;
+      margin-bottom: 30px;
+    }
+
+    .form-input {
+      width: 375px;
+      height: 55px;
+      padding: 0 10px;
+      background: #EFEFEF;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      margin-bottom: 35px;
+
+      &:focus,
+      &:active {
+        outline: none;
+      }
+    }
+
+    .create-account-btn {
+      width: 255px;
+      height: 59px;
+      background: $light-blue;
+      border-radius: 15px;
+      border: none;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 22px;
+      margin-bottom: 30px;
+    }
+  }
+
+}

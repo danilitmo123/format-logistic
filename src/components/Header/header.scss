@@ -1,0 +1,68 @@
+@import "../../global";
+.header {
+  position: absolute;
+  top: 30px;
+  width: 90%;
+  z-index: 3;
+  padding: 0 5%;
+  display: flex;
+  justify-content: space-between;
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $white;
+
+    .logo-text-block {
+      margin-left: 15px;
+      font-family: 'Montserrat', sans-serif;
+      .logo-main-text {
+        font-size: 24px;
+        font-weight: 400;
+        margin-bottom: 5px;
+        .format {
+          color: $light-blue;
+        }
+      }
+      .logo-subtitle {
+        font-weight: 400;
+        font-size: 11px;
+      }
+    }
+  }
+  .contacts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: $white;
+
+    .number {
+      margin-right: 65px;
+    }
+
+    .mail {
+      margin-right: 65px;
+    }
+
+    .profile {
+      display: inherit;
+      justify-content: inherit;
+      align-items: inherit;
+      flex-direction: row;
+
+      img {
+        width: 14px;
+        height: 14px;
+        margin-right: 10px;
+      }
+
+      .profile-text {
+        font-size: 12px;
+      }
+    }
+  }
+}

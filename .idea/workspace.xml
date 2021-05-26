@@ -1,11 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="23720729-d1c4-4a2b-91ac-660e889a5250" name="Default Changelist" comment="" />
+    <list default="true" id="23720729-d1c4-4a2b-91ac-660e889a5250" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/AdvantagesCard/AdvantagesCard.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/AdvantagesCard/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/AdvantagesPage/AdvantagesPage.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/AdvantagesPage/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Contacts/Contacts.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Contacts/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/DeliveryPage/DeliveryPage.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/DeliveryPage/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Footer/Footer.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Footer/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Header/header.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Header/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/HowWeWorkPage/HowWeWorkPage.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/HowWeWorkPage/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/InfoPage/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MainPage/MainPage.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MainPage/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MoreAdvantagesPage/MoreAdvantages.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MoreAdvantagesPage/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/OrderPage.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/global.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/img/background-video.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logo.svg" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="SCSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
   </component>
   <component name="ProjectId" id="1sn3UGLH5qaKdFMkszvQ16OhqB0" />
   <component name="ProjectViewState">
@@ -13,11 +74,19 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\format-logistic-frontend\src\img" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -27,11 +96,62 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1621494540645</updated>
-      <workItem from="1621494541838" duration="280000" />
+      <workItem from="1621494541838" duration="1271000" />
+      <workItem from="1621495898888" duration="5374000" />
+      <workItem from="1621511385614" duration="8845000" />
+      <workItem from="1621529769296" duration="4333000" />
+      <workItem from="1621540980347" duration="1928000" />
+      <workItem from="1621597352738" duration="3244000" />
+      <workItem from="1621603817742" duration="1194000" />
+      <workItem from="1621628982451" duration="7110000" />
+      <workItem from="1621636474343" duration="2327000" />
+      <workItem from="1621669820402" duration="4028000" />
+      <workItem from="1621797157724" duration="11883000" />
+      <workItem from="1621857849287" duration="7609000" />
+      <workItem from="1621868979737" duration="766000" />
+      <workItem from="1621948169487" duration="12369000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="490" y="214" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1621518480668">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="490" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1621518480668" />
+    <state x="498" y="192" key="#com.intellij.ide.scriptingContext.ui.PerFileMappingsDialogWrapper" timestamp="1621496061965">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="498" y="192" key="#com.intellij.ide.scriptingContext.ui.PerFileMappingsDialogWrapper/0.0.1536.824@0.0.1536.824" timestamp="1621496061965" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1621495495110">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1621495495110" />
+    <state x="277" y="57" key="SettingsEditor" timestamp="1621496299782">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1621496299782" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1621863360637">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1621863360637" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1621860198098">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1621860198098" />
   </component>
 </project>

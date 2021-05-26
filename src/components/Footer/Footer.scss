@@ -1,0 +1,71 @@
+@import "../../global";
+.footer {
+  position: relative;
+  height: 200px;
+  background-color: $dark-blue;
+  .footer-line {
+    position: absolute;
+    top: 60px;
+    height: 2px;
+    width: 100%;
+    background-color: $light-blue;
+  }
+
+  .footer-info-block {
+    position: relative;
+    top: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      align-items: center;
+      .description {
+        margin-left: 8px;
+        font-family: 'Montserrat', sans-serif;
+        color: $white;
+        .logo-subtitle {
+          font-weight: 400;
+          font-size: 24px;
+          margin-bottom: 4px;
+        }
+        .format {
+         color: $light-blue;
+        }
+        .subtitle {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 11px;
+        }
+      }
+    }
+    .link-block {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: $white;
+      display: flex;
+      align-items: center;
+
+      .link-block-text {
+        margin-left: 10px;
+      }
+    }
+
+    .mail-block {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: $white;
+      display: flex;
+      align-items: center;
+
+      .mail-block-text {
+        margin-left: 10px;
+      }
+    }
+
+  }
+}

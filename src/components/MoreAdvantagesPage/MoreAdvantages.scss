@@ -1,0 +1,149 @@
+@import "../../global";
+.more-advantages-wrapper {
+  height: 700px;
+  position: relative;
+  background-color: $dark-blue;
+  padding: 0 5%;
+
+  .more-advantages-text {
+    position: absolute;
+    top: 60px;
+    margin-bottom: 50px;
+    .more-advantages-overtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 24px;
+      color: $white;
+      margin-bottom: 25px;
+    }
+    .more-advantages-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 36px;
+      width: 620px;
+      color: $white;
+    }
+  }
+
+  .more-advantages-group {
+    position: absolute;
+    top: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 45px;
+
+    .first-advantage {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      .square {
+        border-bottom: 100px solid $white;
+        border-right: 90px solid transparent;
+        width: 900px;
+        height: 0;
+        transform: rotateX(180deg);
+        .square-text {
+          position: absolute;
+          top: 25px;
+          left: 30px;
+          transform: rotateX(-180deg);
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 500;
+          font-size: 18px;
+          width: 690px;
+        }
+      }
+      .border-square {
+        margin-top: 8px;
+        height: 100px;
+        top: 0;
+      }
+      .description {
+        position: absolute;
+        right: 75px;
+        top: 35px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        color: $white;
+        font-size: 36px;
+      }
+    }
+    .second-advantage {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      .square {
+        border-bottom: 100px solid $white;
+        border-right: 90px solid transparent;
+        width: 900px;
+        height: 0;
+        transform: rotateY(180deg);
+        .square-text {
+          position: absolute;
+          top: 25px;
+          right: 30px;
+          transform: rotateY(-180deg);
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 500;
+          font-size: 18px;
+          width: 690px;
+        }
+      }
+      .border-square {
+        margin-top: 8px;
+        height: 100px;
+        transform: scaleX(-1) scaleY(-1);
+        top: 0;
+      }
+      .description {
+        position: absolute;
+        left: 60px;
+        top: 190px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        color: $white;
+        font-size: 36px;
+      }
+    }
+  }
+  .third-advantage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    .square {
+      border-bottom: 100px solid $white;
+      border-right: 90px solid transparent;
+      width: 900px;
+      height: 0;
+      transform: rotateX(180deg);
+      .square-text {
+        position: absolute;
+        top: 25px;
+        left: 30px;
+        transform: rotateX(-180deg);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 18px;
+        width: 690px;
+      }
+    }
+    .border-square {
+      margin-top: 8px;
+      height: 100px;
+      top: 0;
+    }
+    .description {
+      position: absolute;
+      right: 60px;
+      bottom: 35px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      color: $white;
+      font-size: 36px;
+    }
+  }
+}

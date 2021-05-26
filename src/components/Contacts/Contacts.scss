@@ -1,0 +1,135 @@
+@import "../../global";
+
+.contacts-wrapper {
+  height: 800px;
+  position: relative;
+  background-color: $dark-blue;
+  padding: 0 5%;
+
+  .description-block {
+    font-family: 'Montserrat', sans-serif;
+    position: absolute;
+    top: 60px;
+    color: $white;
+
+    .overtitle {
+      font-weight: 400;
+      font-size: 24px;
+      color: $white;
+      margin-bottom: 25px;
+    }
+
+    .contacts-title {
+      font-weight: 600;
+      font-size: 36px;
+      width: 565px;
+      color: $white;
+      margin-bottom: 45px;
+    }
+
+    .contacts-img {
+      height: 570px;
+      margin-left: 50px;
+    }
+  }
+  .form-wrapper {
+    position: absolute;
+    right: 100px;
+    top: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    .registration-form {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: column;
+      //right: 105px;
+      padding: 45px 55px;
+      //top: 210px;
+      border-radius: 20px;
+      //z-index: 3;
+      width: 350px;
+      height: 350px;
+      background-color: $white;
+      font-family: 'Montserrat', sans-serif;
+
+      .form-title {
+        font-weight: 600;
+        font-size: 36px;
+        text-align: center;
+        margin-bottom: 5px;
+      }
+
+      .form-subtitle {
+        font-weight: 400;
+        font-size: 15px;
+        text-align: center;
+        width: 310px;
+        margin-bottom: 30px;
+      }
+
+      .form-input {
+        width: 375px;
+        height: 55px;
+        padding: 0 10px;
+        background: #EFEFEF;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        margin-bottom: 35px;
+
+        &:focus,
+        &:active {
+          outline: none;
+        }
+      }
+
+      .create-account-btn {
+        width: 255px;
+        height: 59px;
+        background: $light-blue;
+        border-radius: 15px;
+        border: none;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 22px;
+        margin-bottom: 30px;
+      }
+    }
+    .extra-text {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      gap: 13px;
+      ////position: absolute;
+      //right: 120px;
+      //bottom: 70px;
+      .first-line {
+        height: 1px;
+        width: 160px;
+        background-color: $light-blue;
+      }
+
+      .text {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 36px;
+        color: $white;
+      }
+
+      .second-line {
+        height: 1px;
+        width: 160px;
+        background-color: $light-blue;
+      }
+    }
+    .contacts-number {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 36px;
+      color: $white;
+    }
+  }
+}
