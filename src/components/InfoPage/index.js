@@ -5,8 +5,8 @@ import AdvantagesPage from "../AdvantagesPage";
 import DeliveryPage from "../DeliveryPage";
 import HowWeWorkPage from "../HowWeWorkPage";
 import MoreAdvantages from "../MoreAdvantagesPage";
-import Contacts from "../Contacts";
-import Footer from "../Footer";
+import Contacts from "../Contacts"
+import Footer from '../Footer'
 
 const InfoPage = () => {
   return (
