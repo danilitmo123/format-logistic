@@ -11,40 +11,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23720729-d1c4-4a2b-91ac-660e889a5250" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/AdvantagesCard/AdvantagesCard.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/AdvantagesCard/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/AdvantagesPage/AdvantagesPage.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/AdvantagesPage/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Contacts/Contacts.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Contacts/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/DeliveryPage/DeliveryPage.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/DeliveryPage/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Footer/Footer.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Footer/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Header/header.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Header/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/HowWeWorkPage/HowWeWorkPage.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/HowWeWorkPage/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/InfoPage/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/MainPage/MainPage.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/MainPage/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/MoreAdvantagesPage/MoreAdvantages.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/MoreAdvantagesPage/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/OrderPage.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/global.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/background-video.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/CheckPathPage/CheckPathPage.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/CheckPathPage/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/CountryForm/CountryForm.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/CountryForm/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/CustomsClearanceForm/CustomsClearanceForm.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/CustomsClearanceForm/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/InsuranceForm/InsuranceForm.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/InsuranceForm/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/logo192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/InfoPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/InfoPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/OrderPage/OrderPage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OrderPage/OrderPage.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/OrderPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OrderPage/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,8 +35,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="SCSS File" />
         <option value="JavaScript File" />
+        <option value="SCSS File" />
       </list>
     </option>
   </component>
@@ -78,12 +59,16 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/OrderPage" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\format-logistic-frontend\src\components\OrderPage" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\format-logistic-frontend\src\img" />
     </key>
@@ -110,7 +95,31 @@
       <workItem from="1621857849287" duration="7609000" />
       <workItem from="1621868979737" duration="766000" />
       <workItem from="1621948169487" duration="12369000" />
+      <workItem from="1622042463595" duration="1014000" />
+      <workItem from="1622050526529" duration="725000" />
+      <workItem from="1622051562646" duration="14185000" />
+      <workItem from="1622114666303" duration="14484000" />
+      <workItem from="1622137486995" duration="4377000" />
+      <workItem from="1622213780571" duration="6158000" />
+      <workItem from="1622233286770" duration="82000" />
+      <workItem from="1622233434305" duration="5340000" />
+      <workItem from="1622276466163" duration="1222000" />
+      <workItem from="1622290347200" duration="25000" />
+      <workItem from="1622707312725" duration="1968000" />
+      <workItem from="1622712989314" duration="4202000" />
+      <workItem from="1622876872704" duration="85000" />
+      <workItem from="1622877002344" duration="344000" />
+      <workItem from="1622877484522" duration="236000" />
+      <workItem from="1622877804526" duration="945000" />
     </task>
+    <task id="LOCAL-00001" summary="add">
+      <created>1622042520663</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1622042520663</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,6 +136,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add" />
+    <option name="LAST_COMMIT_MESSAGE" value="add" />
   </component>
   <component name="WindowStateProjectService">
     <state x="490" y="214" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1621518480668">
@@ -145,6 +158,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1621496299782" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1622042568136">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1622042568136" />
     <state x="425" y="187" key="run.anything.popup" timestamp="1621863360637">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
