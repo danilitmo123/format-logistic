@@ -11,21 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23720729-d1c4-4a2b-91ac-660e889a5250" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/CheckPathPage/CheckPathPage.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/CheckPathPage/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/CountryForm/CountryForm.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/CountryForm/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/CustomsClearanceForm/CustomsClearanceForm.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/CustomsClearanceForm/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/InsuranceForm/InsuranceForm.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/OrderPage/InsuranceForm/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/InfoPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/InfoPage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/OrderPage/OrderPage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OrderPage/OrderPage.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/OrderPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OrderPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/OrderPage/CountryForm/CountryForm.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OrderPage/CountryForm/CountryForm.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/OrderPage/CountryForm/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OrderPage/CountryForm/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +98,7 @@
       <workItem from="1622876872704" duration="85000" />
       <workItem from="1622877002344" duration="344000" />
       <workItem from="1622877484522" duration="236000" />
-      <workItem from="1622877804526" duration="945000" />
+      <workItem from="1622877804526" duration="3707000" />
     </task>
     <task id="LOCAL-00001" summary="add">
       <created>1622042520663</created>
@@ -119,7 +107,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622042520663</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add OrderPage">
+      <created>1622878972874</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1622878972874</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -139,7 +134,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add" />
-    <option name="LAST_COMMIT_MESSAGE" value="add" />
+    <MESSAGE value="add OrderPage" />
+    <option name="LAST_COMMIT_MESSAGE" value="add OrderPage" />
   </component>
   <component name="WindowStateProjectService">
     <state x="490" y="214" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1621518480668">

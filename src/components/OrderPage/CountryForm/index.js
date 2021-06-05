@@ -5,6 +5,11 @@ import axios from "axios";
 import './CountryForm.scss'
 
 const CountryForm = () => {
+
+  const getCountries = async () => {
+    let countries = await
+  }
+
   return (
       <div className={'country-form-wrapper'}>
         <div className={'from-form-wrapper'}>
@@ -14,6 +19,14 @@ const CountryForm = () => {
           </div>
           <div className={'country-select-from'}>
             <label htmlFor="country">Страна</label>
+            <select name="country-select" id="country">
+              <option value="">Россия</option>
+              <option value="">Германия</option>
+              <option value="">Франция</option>
+            </select>
+          </div>
+          <div className={'country-select-from'}>
+            <label htmlFor="country">Город</label>
             <select name="country-select" id="country">
               <option value="">Россия</option>
               <option value="">Германия</option>
@@ -36,6 +49,14 @@ const CountryForm = () => {
           </div>
           <div className={'country-select-where'}>
             <label htmlFor="country">Страна</label>
+            <select name="country-select" id="country">
+              <option value="">Россия</option>
+              <option value="">Германия</option>
+              <option value="">Франция</option>
+            </select>
+          </div>
+          <div className={'country-select-where'}>
+            <label htmlFor="country">Город</label>
             <select name="country-select" id="country">
               <option value="">Россия</option>
               <option value="">Германия</option>
