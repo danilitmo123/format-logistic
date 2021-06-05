@@ -1,16 +1,24 @@
 import React from 'react';
 
-import {GoogleMap, useJsApiLoader, Polyline} from "react-google-maps";
+// import {GoogleMap, useJsApiLoader, Polyline} from "react-google-maps";
 import {Route} from 'react-router-dom'
 
 import './CheckPathPage.scss'
+import MapContainer from "../../MapContainer";
 
-const CheckPathPage = ({path, }) => {
+const CheckPathPage = ({paths}) => {
+
+  console.log(paths)
 
   const containerStyle ={
     width: '400px',
     height: '400px'
   }
+
+  return (<MapContainer paths={paths}/>);
+  // return <div/>
+
+
 
   // const {isLoaded} = useJsApiLoader({
   //   id: 'google-map-script',
@@ -57,23 +65,23 @@ const CheckPathPage = ({path, }) => {
 
 
 
-  return (
-      <section className={'second-step-wrapper'}>
-          <div className={'path-card'}>
-            <div className={'path-info'}>
-              <div className={'path-route-info'}>
-              </div>
-              <div className={'total-info'}>
-                <span>Total distance: <strong>{99999}</strong> meters</span>
-                <span>Total duration: <strong>{99999}</strong> minutes</span>
-                <span>Total cost: <strong>{99999}</strong> euro</span>
-              </div>
-            </div>
-            <br/>
-
-          </div>
-      </section>
-  );
+  // return (
+  //     <section className={'second-step-wrapper'}>
+  //         <div className={'path-card'}>
+  //           <div className={'path-info'}>
+  //             <div className={'path-route-info'}>
+  //             </div>
+  //             <div className={'total-info'}>
+  //               <span>Total distance: <strong>{99999}</strong> meters</span>
+  //               <span>Total duration: <strong>{99999}</strong> minutes</span>
+  //               <span>Total cost: <strong>{99999}</strong> euro</span>
+  //             </div>
+  //           </div>
+  //           <br/>
+  //
+  //         </div>
+  //     </section>
+  // );
 };
 
 export default CheckPathPage;
