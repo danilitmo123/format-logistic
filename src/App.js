@@ -22,6 +22,7 @@ const App = () => {
               <OrderPage/>
             </Route>
           </Switch>
+          <Footer/>
         </div>
       </Router>
   );

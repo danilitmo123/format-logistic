@@ -17,7 +17,6 @@ const InfoPage = () => {
         <HowWeWorkPage/>
         <MoreAdvantages/>
         <Contacts/>
-        <Footer/>
       </div>
   );
 };
