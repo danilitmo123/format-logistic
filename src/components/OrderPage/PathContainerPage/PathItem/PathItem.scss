@@ -1,0 +1,45 @@
+@import '../../../../global';
+.path-item-wrapper {
+  display: flex;
+  height: 400px;
+  margin-bottom: 50px;
+  .info-routes-wrapper {
+    background-color: $white;
+    border-radius: 20px 0 0 20px;
+    width: 500px;
+    padding: 40px 30px;
+
+    .type-of-route-wrapper {
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      .step-circle {
+        border-radius: 50%;
+        background-color: $light-blue;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 40px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        color: $white;
+      }
+     .step-wrapper {
+       .source {
+         font-weight: 700;
+         margin-bottom: 5px;
+       }
+       .type{
+         margin-bottom: 5px;
+       }
+       .destination {
+         font-weight: 700;
+         margin-bottom: 5px;
+       }
+     }
+    }
+  }
+}

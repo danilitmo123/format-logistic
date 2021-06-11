@@ -4,7 +4,7 @@ import axios from "axios";
 
 import './CountryForm.scss'
 
-const CountryForm = () => {
+const CountryForm = ({setIdFrom, setIdTo}) => {
 
   const [allCountries, setAllCountries] = useState([])
   const [allCitiesFrom, setAllCitiesFrom] = useState([])
@@ -12,11 +12,12 @@ const CountryForm = () => {
   const [selectedCountryFrom, setSelectedCountryFrom] = useState('')
   const [selectedCountryTo, setSelectedCountryTo] = useState('')
 
+
+
   const getCountries = async () => {
     const countries = await axios.get('https://ancient-temple-39835.herokuapp.com/geo/countries/')
     setAllCountries([...countries.data])
   }
-
 
     const getCitiesFrom = async () => {
       if (selectedCountryFrom !== '') {
@@ -38,6 +39,14 @@ const CountryForm = () => {
 
     const selectedCountryToHandler = (e) => {
       setSelectedCountryTo(e.target.value)
+    }
+
+    const selectedCityIdFromHandler = (e) => {
+      setIdFrom(allCitiesFrom[e.target.value].id)
+    }
+
+    const selectedCityIdToHandler = (e) => {
+      setIdTo(allCitiesTo[e.target.value].id)
     }
 
     useEffect(() => {
@@ -66,9 +75,9 @@ const CountryForm = () => {
             </div>
             <div className={'country-select-from'}>
               <label htmlFor="country">Город</label>
-              <select name="country-select" id="country">
-                {allCitiesFrom.map(item => (
-                    <option value={item.name} key={item.id}>{item.name}</option>
+              <select name="country-select" id="country" onChange={selectedCityIdFromHandler}>
+                {allCitiesFrom.map((item, index) => (
+                    <option value={index} key={item.id}>{item.name}</option>
                 ))}
               </select>
             </div>
@@ -96,9 +105,9 @@ const CountryForm = () => {
             </div>
             <div className={'country-select-where'}>
               <label htmlFor="country">Город</label>
-              <select name="country-select" id="country">
-                {allCitiesTo.map(item => (
-                    <option value={item.name} key={item.id}>{item.name}</option>
+              <select name="country-select" id="country" onChange={selectedCityIdToHandler}>
+                {allCitiesTo.map((item, index) => (
+                    <option value={index} key={item.id}>{item.name}</option>
                 ))}
               </select>
             </div>

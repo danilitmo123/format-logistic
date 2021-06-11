@@ -10,11 +10,21 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23720729-d1c4-4a2b-91ac-660e889a5250" name="Default Changelist" comment="">
+    <list default="true" id="23720729-d1c4-4a2b-91ac-660e889a5250" name="Default Changelist" comment="Merge branch 'master' of https://github.com/danilitmo123/format-logistic&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <change afterPath="$PROJECT_DIR$/src/components/MapContainer/PathCard/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MapContainer/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MapContainer/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/InfoPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/InfoPage/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/OrderPage/CountryForm/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OrderPage/CountryForm/index.js" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/OrderPage/CheckPathPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OrderPage/CheckPathPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/OrderPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OrderPage/index.js" afterDir="false" />
+>>>>>>> b459aaa357735800115c002d53824cf2b2c515a4
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +60,12 @@
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/OrderPage" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -61,6 +77,18 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\format-logistic-frontend\src\img" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="start" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -99,12 +127,16 @@
       <workItem from="1622876872704" duration="85000" />
       <workItem from="1622877002344" duration="344000" />
       <workItem from="1622877484522" duration="236000" />
+<<<<<<< HEAD
       <workItem from="1622877804526" duration="10770000" />
       <workItem from="1622916634958" duration="322000" />
       <workItem from="1622917604799" duration="4396000" />
       <workItem from="1622969905390" duration="727000" />
       <workItem from="1622996749082" duration="1291000" />
       <workItem from="1623018278691" duration="298000" />
+=======
+      <workItem from="1622877804526" duration="945000" />
+>>>>>>> b459aaa357735800115c002d53824cf2b2c515a4
     </task>
     <task id="LOCAL-00001" summary="add">
       <created>1622042520663</created>
@@ -113,13 +145,21 @@
       <option name="project" value="LOCAL" />
       <updated>1622042520663</updated>
     </task>
-    <task id="LOCAL-00002" summary="add OrderPage">
-      <created>1622878972874</created>
+    <task id="LOCAL-00002" summary="Merge branch 'master' of https://github.com/danilitmo123/format-logistic&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1622884112082</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1622878972874</updated>
+      <updated>1622884112082</updated>
     </task>
+    <task id="LOCAL-00003" summary="Merge branch 'master' of https://github.com/danilitmo123/format-logistic&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1622884122573</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1622884122573</updated>
+    </task>
+<<<<<<< HEAD
     <task id="LOCAL-00003" summary="add img">
       <created>1622883417737</created>
       <option name="number" value="00003" />
@@ -128,6 +168,16 @@
       <updated>1622883417737</updated>
     </task>
     <option name="localTasksCounter" value="4" />
+=======
+    <task id="LOCAL-00004" summary="Merge branch 'master' of https://github.com/danilitmo123/format-logistic&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1622884126742</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1622884126742</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+>>>>>>> b459aaa357735800115c002d53824cf2b2c515a4
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,6 +197,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add" />
+<<<<<<< HEAD
     <MESSAGE value="add OrderPage" />
     <MESSAGE value="add img" />
     <option name="LAST_COMMIT_MESSAGE" value="add img" />
@@ -180,5 +231,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1621860198098" />
+=======
+    <MESSAGE value="Merge branch 'master' of https://github.com/danilitmo123/format-logistic&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/danilitmo123/format-logistic&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+>>>>>>> b459aaa357735800115c002d53824cf2b2c515a4
   </component>
 </project>

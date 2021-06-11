@@ -1,8 +1,10 @@
 @import '../../global';
 .order-page-wrapper {
-  min-height: 2000px;
+  height: auto;
+  min-height: 7000px;
   padding: 0 5%;
   background-color: $dark-blue;
+  background-size: cover;
   position: relative;
   font-family: 'Montserrat', sans-serif;
   .order-title {
@@ -59,7 +61,7 @@
   }
   .form-wrapper {
     position: absolute;
-    top: 450px;
+    top: 400px;
     left: 50%;
     margin-left: -525px;
     .cargo-wrapper {
