@@ -2,7 +2,7 @@ import React from 'react';
 
 import './InsuranceForm.scss'
 
-const CustomsClearanceForm = () => {
+const InsuranceForm = () => {
   return (
       <div className={'insurance-wrapper'}>
         <input type="checkbox"/>
@@ -11,4 +11,4 @@ const CustomsClearanceForm = () => {
   );
 };
 
-export default CustomsClearanceForm;
+export default InsuranceForm;

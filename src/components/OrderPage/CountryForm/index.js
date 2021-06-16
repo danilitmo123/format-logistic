@@ -4,7 +4,7 @@ import axios from "axios";
 
 import './CountryForm.scss'
 
-const CountryForm = ({setIdFrom, setIdTo}) => {
+const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarningFrom, setWarningFrom}) => {
 
   const [allCountries, setAllCountries] = useState([])
   const [allCitiesFrom, setAllCitiesFrom] = useState([])
@@ -42,10 +42,16 @@ const CountryForm = ({setIdFrom, setIdTo}) => {
     }
 
     const selectedCityIdFromHandler = (e) => {
+    if(e.target.value !== '') {
+      setWarningFrom(true)
+    }
       setIdFrom(allCitiesFrom[e.target.value].id)
     }
 
     const selectedCityIdToHandler = (e) => {
+      if(e.target.value !== '') {
+        setWarningTo(true)
+      }
       setIdTo(allCitiesTo[e.target.value].id)
     }
 
@@ -73,9 +79,9 @@ const CountryForm = ({setIdFrom, setIdTo}) => {
                 ))}
               </select>
             </div>
-            <div className={'country-select-from'}>
+            <div className={'city-select-from'}>
               <label htmlFor="country">Город</label>
-              <select name="country-select" id="country" onChange={selectedCityIdFromHandler}>
+              <select className={!cityWarningFrom ? 'warning-border' : 'select'} name="country-select" id="country" onChange={selectedCityIdFromHandler}>
                 {allCitiesFrom.map((item, index) => (
                     <option value={index} key={item.id}>{item.name}</option>
                 ))}
@@ -103,9 +109,9 @@ const CountryForm = ({setIdFrom, setIdTo}) => {
                 ))}
               </select>
             </div>
-            <div className={'country-select-where'}>
+            <div className={'city-select-where'}>
               <label htmlFor="country">Город</label>
-              <select name="country-select" id="country" onChange={selectedCityIdToHandler}>
+              <select className={!cityWarningTo ? 'warning-border' : 'select'} name="country-select" id="country" onChange={selectedCityIdToHandler}>
                 {allCitiesTo.map((item, index) => (
                     <option value={index} key={item.id}>{item.name}</option>
                 ))}

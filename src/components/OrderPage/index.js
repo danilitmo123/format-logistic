@@ -1,22 +1,24 @@
 import React, {useState, useEffect} from 'react';
 
-import CountryForm from "./CountryForm";
-import CustomsClearanceForm from "./CustomsClearanceForm";
-import InsuranceForm from './InsuranceForm'
-import CargoForm from "./CargoForm";
+import FirstStepForm from "./FirstStepForm";
 import PathContainerPage from "./PathContainerPage";
 
 import axios from "axios";
 
 import './OrderPage.scss'
+import ConfirmOrderPage from "./ConfirmOrderPage";
 
 
 const OrderPage = () => {
-
+  const [chosenPath, setChosenPath] = useState([])
   const [selectedCityIdFrom, setSelectedCityIdFrom] = useState('')
   const [selectedCityIdTo, setSelectedCityIdTo] = useState('')
   const [isLoaded, setIsLoaded] = useState(false)
   const [paths, setPaths] = useState([])
+  const [firstActivePage, setFirstActivePage] = useState(true)
+  const [secondActivePage, setSecondActivePage] = useState(false)
+  const [cityWarningTo, setCityWarningTo] = useState(true)
+  const [cityWarningFrom, setCityWarningFrom] = useState(true)
 
   const getPaths = async () => {
     if( selectedCityIdFrom !== '' && selectedCityIdTo !== '' ) {
@@ -25,14 +27,45 @@ const OrderPage = () => {
     }
   }
 
-  useEffect(() => {
-    getPaths()
-  }, [selectedCityIdTo && selectedCityIdFrom])
+  const secondPageActiveHandler = () => {
+    setSecondActivePage(false)
+    setFirstActivePage(true)
+  }
+
+  const thirdPageActiveHandler = () => {
+    setSecondActivePage(false)
+  }
+
+  const returnSecondPagHandler = () => {
+    setSecondActivePage(true)
+  }
 
   const Circle = ({number}) => {
     return (
         <div className={'order-circle'}>{number}</div>
     )
+  }
+
+  const disabledButtonHandler = () => {
+    if(selectedCityIdTo) {
+
+      setCityWarningTo(true)
+    } else {
+      setCityWarningTo(false)
+    }
+    if(selectedCityIdFrom) {
+      setCityWarningFrom(true)
+    } else {
+      setCityWarningFrom(false)
+    }
+    if(selectedCityIdFrom && selectedCityIdTo) {
+      getPaths()
+      setFirstActivePage(false)
+      setSecondActivePage(true)
+    } else {
+      setFirstActivePage(true)
+      setSecondActivePage(false)
+    }
   }
 
   return (
@@ -46,13 +79,44 @@ const OrderPage = () => {
           </ol>
         </div>
         <div className={'form-wrapper'}>
-          <CargoForm/>
-          <CountryForm
-              setIdTo={setSelectedCityIdTo}
-              setIdFrom={setSelectedCityIdFrom}/>
-          <CustomsClearanceForm/>
-          <InsuranceForm/>
-          <PathContainerPage paths={paths}/>
+          {firstActivePage ?
+             <>
+               <FirstStepForm
+                   setWarningFrom={setCityWarningFrom}
+                   cityWarningFrom={cityWarningFrom}
+                   setWarningTo={setCityWarningTo}
+                   cityWarningTo={cityWarningTo}
+                   setIdTo={setSelectedCityIdTo}
+                   setIdFrom={setSelectedCityIdFrom}
+               />
+                 <button
+                     className={'continue-button-first-page'}
+                     onClick={disabledButtonHandler}
+                     >Продолжить</button>
+             </>
+             : secondActivePage ?
+              <>
+                <PathContainerPage paths={paths} setChosenPath={setChosenPath}/>
+                <div className={'buttons-wrapper'}>
+                  <button
+                      onClick={secondPageActiveHandler}
+                      className={'continue-button'}
+                  >Назад</button>
+                  <button
+                      className={'continue-button'}
+                      onClick={thirdPageActiveHandler}
+                  >Продолжить</button>
+                </div>
+              </>
+              :
+              <>
+                <ConfirmOrderPage chosenPath={chosenPath}/>
+                <button
+                    className={'continue-button'}
+                    onClick={returnSecondPagHandler}
+                >Назад</button>
+              </>
+          }
         </div>
       </section>
   );

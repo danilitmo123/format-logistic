@@ -13,7 +13,9 @@ const objectTemplate = {
   height: 0,
   weight: 0,
   size: 'СМ',
-  sizePallet: '120 X 80см (Евро-1)',
+  lengthPallet: 120,
+  widthPallet: 0,
+  heightPallet: 0,
   weightBoxSelect: 'KG',
 }
 
@@ -28,11 +30,7 @@ const CargoForm = () => {
       const [volume, setVolume] = useState(0)
       const [weight, setWeight] = useState(0)
       const [data, setData] = useState([objectTemplate])
-      const [continueButton, setContinueButton] = useState(false)
-
-
-      const [pathLoaded, setPathLoaded] = useState(false)
-      const [paths, setPaths] = useState([])
+      const [activeInput, setActiveInput] = useState(false)
 
       const addItem = () => {
         const newData = [...data, {...objectTemplate}]
@@ -59,13 +57,6 @@ const CargoForm = () => {
           totalWeight += item.count * (+item.weight)
           setWeight(totalWeight)
         })
-        console.log(weight)
-      }
-
-      const Circle = ({number}) => {
-        return (
-            <div className={'order-circle'}>{number}</div>
-        )
       }
 
       const updateDataItemField = (index, field, newValue) => {
@@ -79,12 +70,12 @@ const CargoForm = () => {
       }
 
       const ActiveBoxButtonHandler = () => {
-        setActiveBoxButton(!activeBoxButton)
         setActiveContainerButton(false)
+        setActiveBoxButton(true)
       }
 
       const ActiveContainerButtonHandler = () => {
-        setActiveContainerButton(!activeContainerButton)
+        setActiveContainerButton(true)
         setActiveBoxButton(false)
       }
 
@@ -104,19 +95,6 @@ const CargoForm = () => {
         setActiveFirstContainerButton(false)
         setActiveSecondContainerButton(false)
         setActiveThirdContainerButton(!thirdContainerButton)
-      }
-
-      const loadPath = (city1, city2) => {
-        axios.get("http://127.0.0.1:8000/route/paths?city1=" + city1 + "&city2=" + city2).then(res => {
-              setPaths(res.data.paths)
-              setPathLoaded(true)
-            }
-        )
-      }
-
-      const ContinueButtonHandler = () => {
-        setContinueButton(true)
-        loadPath(98261, 34616)
       }
 
       return (
@@ -210,12 +188,18 @@ const CargoForm = () => {
                                               :
                                               <div className={'sizeof-pallet-wrapper'}>
                                                 <label htmlFor={'sizeof-pallet'}>Паллет</label>
-                                                <select name={'sizeof-pallet'} id={'sizeof-pallet'}
-                                                        value={item.sizePallet}
-                                                        onChange={(e) => updateItem('sizePallet', e.target.value)}>
-                                                  <option>120 X 80 (Евро-1)</option>
-                                                  <option>120 X 100 (Евро-2)</option>
-                                                </select>
+                                                <div className={'pallet-select-wrapper'}>
+                                                  <div className={'pallet-length'}>120</div>
+                                                  <select name="pallet-width" id="pallet-width"
+                                                          value={item.widthPallet}
+                                                          onChange={e => updateItem('widthPallet', e.target.value)}>
+                                                    <option value="100">100</option>
+                                                    <option value="80">80</option>
+                                                  </select>
+                                                  <input type='number' placeholder={'Высота'}
+                                                  value={item.heightPallet || ''}
+                                                         onChange={e => updateItem('heightPallet', e.target.value)}/>
+                                                </div>
                                               </div>
                                         }
                                       </div>

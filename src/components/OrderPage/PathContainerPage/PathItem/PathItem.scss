@@ -1,13 +1,31 @@
 @import '../../../../global';
 .path-item-wrapper {
   display: flex;
-  height: 400px;
+  height: 100%;
+  width: 1000px;
   margin-bottom: 50px;
+  &:hover {
+    cursor: pointer;
+  }
   .info-routes-wrapper {
     background-color: $white;
     border-radius: 20px 0 0 20px;
     width: 500px;
     padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .confirm-button {
+      width: 150px;
+      height: 40px;
+      background-color: $light-blue;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $white;
+    }
 
     .type-of-route-wrapper {
       font-family: 'Montserrat', sans-serif;
@@ -30,10 +48,37 @@
      .step-wrapper {
        .source {
          font-weight: 700;
-         margin-bottom: 5px;
+         margin-bottom: 10px;
        }
-       .type{
-         margin-bottom: 5px;
+       .route-info {
+         display: flex;
+         justify-content: flex-start;
+         align-items: center;
+         font-family: 'Montserrat', sans-serif;
+         font-weight: 400;
+
+         .truck {
+           width: 40px;
+         }
+
+         .airplane {
+           width: 40px;
+         }
+
+         .route-distance {
+           color: black;
+           opacity: 0.4;
+           font-size: 14px;
+           margin-right: 10px;
+         }
+         .route-duration {
+           color: black;
+           opacity: 0.4;
+         }
+         .type{
+           margin-bottom: 5px;
+           margin-right: 10px;
+         }
        }
        .destination {
          font-weight: 700;
@@ -42,4 +87,10 @@
      }
     }
   }
+  #HERE_MAP_CONTAINER.here-map-container {
+    border-radius: 0 20px 20px 0;
+    min-height: 400px;
+    width: 500px;
+  }
 }
+
