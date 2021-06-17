@@ -6,14 +6,22 @@ import truck from '../../../../img/black-truck-icon.svg'
 
 import './PathItem.scss'
 
-const PathItem = ({path, setIndex, index}) => {
-  const [chosenCard, setChosenCard] = useState(false)
-  const [route, setRoute] = useState([])
-   let points = []
-   path.routes.map(item => {
-     points.push({lat: item.source.location.latitude, lng: item.source.location.longitude})
-     points.push({lat: item.destination.location.latitude, lng: item.destination.location.longitude})
-   })
+const PathItem = ({path, setIndex, index, setPointsOfPath, pointsOfPat, isIdChanged}) => {
+  let points = []
+  if(isIdChanged) {
+    points = []
+    path.routes.map(item => {
+      points.push({lat: item.source.location.latitude, lng: item.source.location.longitude})
+      points.push({lat: item.destination.location.latitude, lng: item.destination.location.longitude})
+    })
+    console.log(points)
+  } else {
+    path.routes.map(item => {
+      points.push({lat: item.source.location.latitude, lng: item.source.location.longitude})
+      points.push({lat: item.destination.location.latitude, lng: item.destination.location.longitude})
+    })
+    console.log(points)
+  }
 
   const TypeOfRoutes = ({route, step}) => {
      return (
@@ -36,7 +44,7 @@ const PathItem = ({path, setIndex, index}) => {
       <div className={'path-item-wrapper'}>
         <div className={'info-routes-wrapper'}>
           {path.routes.map((route, index) => <TypeOfRoutes step={index} route={route}/>)}
-          <button onClick={() => setIndex(index)}>Выбрать</button>
+          <button className={'choose-button'} onClick={() => setIndex(index)}>Выбрать</button>
         </div>
         <HPlatform
             apikey={"lDfJOpVUkj3EiYJMC1Za_oSkIvvY2pL2i6R5801iSoo"}

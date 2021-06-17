@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
 import FirstStepForm from "./FirstStepForm";
 import PathContainerPage from "./PathContainerPage";
@@ -11,17 +11,31 @@ import ConfirmOrderPage from "./ConfirmOrderPage";
 
 const OrderPage = () => {
   const [chosenPath, setChosenPath] = useState([])
-  const [selectedCityIdFrom, setSelectedCityIdFrom] = useState('')
-  const [selectedCityIdTo, setSelectedCityIdTo] = useState('')
+  const [selectedCityIdFrom, setSelectedCityIdFrom] = useState()
+  const [selectedCityIdTo, setSelectedCityIdTo] = useState()
   const [isLoaded, setIsLoaded] = useState(false)
   const [paths, setPaths] = useState([])
   const [firstActivePage, setFirstActivePage] = useState(true)
   const [secondActivePage, setSecondActivePage] = useState(false)
   const [cityWarningTo, setCityWarningTo] = useState(true)
   const [cityWarningFrom, setCityWarningFrom] = useState(true)
+  const [pointsOfPath, setPointsOfPath] = useState([])
+  const [isIdChanged, setIdChanged] = useState(false)
+  const prevIdToCount = useRef()
+  const prevIdFromCount = useRef()
+
+  useEffect(() => {
+    prevIdFromCount.current = selectedCityIdFrom
+    prevIdToCount.current = selectedCityIdTo
+    if(prevIdFromCount.current !== selectedCityIdFrom || prevIdToCount.current !== selectedCityIdTo) {
+      setPaths([])
+      setIdChanged(true)
+    }
+  }, [selectedCityIdTo, selectedCityIdFrom])
+
 
   const getPaths = async () => {
-    if( selectedCityIdFrom !== '' && selectedCityIdTo !== '' ) {
+    if( selectedCityIdFrom !== '' && selectedCityIdTo !== '') {
       const newPaths = await axios.get(`https://ancient-temple-39835.herokuapp.com/route/paths?city1=${selectedCityIdFrom}&city2=${selectedCityIdTo}`)
       setPaths(newPaths.data)
     }
@@ -30,10 +44,6 @@ const OrderPage = () => {
   const secondPageActiveHandler = () => {
     setSecondActivePage(false)
     setFirstActivePage(true)
-  }
-
-  const thirdPageActiveHandler = () => {
-    setSecondActivePage(false)
   }
 
   const returnSecondPagHandler = () => {
@@ -96,25 +106,29 @@ const OrderPage = () => {
              </>
              : secondActivePage ?
               <>
-                <PathContainerPage paths={paths} setChosenPath={setChosenPath}/>
+                <PathContainerPage
+                    isIdChanged={isIdChanged}
+                    pointsOfPath={pointsOfPath}
+                    setPointsOfPath={setPointsOfPath}
+                    paths={paths}
+                    setChosenPath={setChosenPath}
+                    thirdPageActiveHandler={setSecondActivePage}/>
                 <div className={'buttons-wrapper'}>
                   <button
                       onClick={secondPageActiveHandler}
                       className={'continue-button'}
                   >Назад</button>
-                  <button
-                      className={'continue-button'}
-                      onClick={thirdPageActiveHandler}
-                  >Продолжить</button>
                 </div>
               </>
               :
               <>
                 <ConfirmOrderPage chosenPath={chosenPath}/>
-                <button
-                    className={'continue-button'}
-                    onClick={returnSecondPagHandler}
-                >Назад</button>
+                <div className={'buttons-wrapper'}>
+                  <button
+                      className={'continue-button'}
+                      onClick={returnSecondPagHandler}
+                  >Назад</button>
+                </div>
               </>
           }
         </div>
