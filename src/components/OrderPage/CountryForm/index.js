@@ -21,14 +21,14 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
 
     const getCitiesFrom = async () => {
       if (selectedCountryFrom !== '') {
-        const cities = await axios.get(`https://ancient-temple-39835.herokuapp.com/geo/cities/?country=${selectedCountryFrom}`)
+        const cities = await axios.get(`https://ancient-temple-39835.herokuapp.com/geo/cities/short/?country=${selectedCountryFrom}`)
         setAllCitiesFrom([...cities.data])
       }
     }
 
     const getCitiesTo = async () => {
       if (selectedCountryTo !== '') {
-        const cities = await axios.get(`https://ancient-temple-39835.herokuapp.com/geo/cities/?country=${selectedCountryTo}`)
+        const cities = await axios.get(`https://ancient-temple-39835.herokuapp.com/geo/cities/short/?country=${selectedCountryTo}`)
         setAllCitiesTo([...cities.data])
       }
     }
