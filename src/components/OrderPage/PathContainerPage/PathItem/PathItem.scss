@@ -15,16 +15,24 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative;
 
-    .confirm-button {
+    .choose-button {
+      position: absolute;
+      margin-left: -75px;
+      left: 50%;
+      bottom: 10px;
       width: 150px;
       height: 40px;
       background-color: $light-blue;
+      border: none;
       border-radius: 8px;
       display: flex;
       justify-content: center;
       align-items: center;
       color: $white;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
     }
 
     .type-of-route-wrapper {

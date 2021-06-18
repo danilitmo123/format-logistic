@@ -6,14 +6,22 @@ import truck from '../../../../img/black-truck-icon.svg'
 
 import './PathItem.scss'
 
-const PathItem = ({path, setIndex, index}) => {
-    const [chosenCard, setChosenCard] = useState(false)
-    const [route, setRoute] = useState([])
+const PathItem = ({path, setIndex, index, setPointsOfPath, pointsOfPat, isIdChanged}) => {
     let points = []
-    path.routes.map(item => {
-        points.push({lat: item.source.location.latitude, lng: item.source.location.longitude})
-        points.push({lat: item.destination.location.latitude, lng: item.destination.location.longitude})
-    })
+    if (isIdChanged) {
+        points = []
+        path.routes.map(item => {
+            points.push({lat: item.source.location.latitude, lng: item.source.location.longitude})
+            points.push({lat: item.destination.location.latitude, lng: item.destination.location.longitude})
+        })
+        console.log(points)
+    } else {
+        path.routes.map(item => {
+            points.push({lat: item.source.location.latitude, lng: item.source.location.longitude})
+            points.push({lat: item.destination.location.latitude, lng: item.destination.location.longitude})
+        })
+        console.log(points)
+    }
 
     const TypeOfRoutes = ({route, step}) => {
         return (
@@ -41,15 +49,20 @@ const PathItem = ({path, setIndex, index}) => {
             </div>
             <div>
                 <HPlatform
-                    apikey={"lDfJOpVUkj3EiYJMC1Za_oSkIvvY2pL2i6R5801iSoo"}>
-                    <HMap mapOptions={{zoom: 1}} >
-                        <HMapPolyLine points={points}/>
+                    apikey={"M5n1hlOPMvPzI6gE2uOAghTp8GTZsvTs6_dzbu62Qx4"}
+                    useCIT
+                    useHTTPS
+                    includeUI
+                    includePlaces
+                >
+                    <HMap mapOptions={{zoom: 1}}>
+                        {/*<HMapPolyLine points={points}/>*/}
                     </HMap>
                 </HPlatform>
             </div>
-
         </div>
-    );
-};
+    )
+}
+
 
 export default PathItem;
