@@ -40,25 +40,31 @@ const PathItem = ({path, setIndex, index, setPointsOfPath, pointsOfPat, isIdChan
             </div>
         )
     }
+    const Map = ({points}) => {
+        return (<HPlatform
+                apikey={"lDfJOpVUkj3EiYJMC1Za_oSkIvvY2pL2i6R5801iSoo"}
+                useCIT
+                useHTTPS
+                includeUI
+                includePlaces
+            >
+                <HMap
+                    mapOptions={{zoom: 1}}
+                >
+                    <HMapPolyLine points={points}/>
+                </HMap>
+            </HPlatform>
+        )
+    }
 
     return (
         <div className={'path-item-wrapper'}>
             <div className={'info-routes-wrapper'}>
                 {path.routes.map((route, index) => <TypeOfRoutes step={index} route={route}/>)}
-                <button onClick={() => setIndex(index)}>Выбрать</button>
+                <button className={'choose-button'} onClick={() => setIndex(index)}>Выбрать</button>
             </div>
             <div>
-                <HPlatform
-                    apikey={"M5n1hlOPMvPzI6gE2uOAghTp8GTZsvTs6_dzbu62Qx4"}
-                    useCIT
-                    useHTTPS
-                    includeUI
-                    includePlaces
-                >
-                    <HMap mapOptions={{zoom: 1}}>
-                        {/*<HMapPolyLine points={points}/>*/}
-                    </HMap>
-                </HPlatform>
+            <Map points={getPoints(path)}/>
             </div>
         </div>
     )
