@@ -58,7 +58,6 @@ const OrderPage = () => {
 
   const disabledButtonHandler = () => {
     if(selectedCityIdTo) {
-
       setCityWarningTo(true)
     } else {
       setCityWarningTo(false)

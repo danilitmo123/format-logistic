@@ -29,8 +29,8 @@ const CargoForm = () => {
       const [thirdContainerButton, setActiveThirdContainerButton] = useState(false)
       const [volume, setVolume] = useState(0)
       const [weight, setWeight] = useState(0)
+      const [units, setUnits] = useState('м³')
       const [data, setData] = useState([objectTemplate])
-      const [activeInput, setActiveInput] = useState(false)
 
       const addItem = () => {
         const newData = [...data, {...objectTemplate}]
@@ -43,10 +43,33 @@ const CargoForm = () => {
       }
 
       const calculateVolume = (newData) => {
+        let totalVolumeBox = 0
+        let totalVolumePallet = 0
         let totalVolume = 0
         newData.forEach(item => {
-          totalVolume += item.count * (item.height * item.width * item.length)
-          setVolume(totalVolume)
+          totalVolumeBox += item.count * (item.height * item.width * item.length)
+          totalVolumePallet += item.count * (item.lengthPallet * item.widthPallet * item.heightPallet)
+          totalVolume = totalVolumeBox + totalVolumePallet
+          switch (item.size) {
+            case 'CM':
+              totalVolume = totalVolume * 1000000
+              setVolume(totalVolume)
+              setUnits('см³')
+              break
+            case 'IN':
+              totalVolume = totalVolume * 1000
+              setVolume(totalVolume)
+              setUnits('IN')
+              break
+            case 'FT':
+              totalVolume = totalVolume * 35.3147
+              setVolume(totalVolume)
+              setUnits('FT')
+              break
+            default :
+              setUnits('м³')
+              setVolume(totalVolume)
+          }
         })
       }
 
@@ -102,7 +125,7 @@ const CargoForm = () => {
                     <div className={'title-wrapper'}>
                       <div className={'cargo-title'}>Груз</div>
                       <div className={'cargo-all-info'}>Элементов: {data.length} Общий вес: {weight} кг Общий
-                        объем: {volume} м³
+                        объем: {volume} {units}
                       </div>
                     </div>
                     <div className={'cargo-choice'}>

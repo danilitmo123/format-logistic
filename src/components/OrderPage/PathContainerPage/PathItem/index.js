@@ -6,22 +6,36 @@ import truck from '../../../../img/black-truck-icon.svg'
 
 import './PathItem.scss'
 
-const PathItem = ({path, setIndex, index, setPointsOfPath, pointsOfPat, isIdChanged}) => {
-  let points = []
-  if(isIdChanged) {
-    points = []
-    path.routes.map(item => {
-      points.push({lat: item.source.location.latitude, lng: item.source.location.longitude})
-      points.push({lat: item.destination.location.latitude, lng: item.destination.location.longitude})
-    })
-    console.log(points)
-  } else {
-    path.routes.map(item => {
-      points.push({lat: item.source.location.latitude, lng: item.source.location.longitude})
-      points.push({lat: item.destination.location.latitude, lng: item.destination.location.longitude})
-    })
-    console.log(points)
+const PathItem = ({path, setIndex, index}) => {
+  // const [points, setPoints] = useState([])
+  // if(isIdChanged) {
+  //   points = []
+  //   path.routes.map(item => {
+  //     points.push({lat: item.source.location.latitude, lng: item.source.location.longitude})
+  //     points.push({lat: item.destination.location.latitude, lng: item.destination.location.longitude})
+  //   })
+  //   console.log(points)
+  // } else {
+  //   path.routes.map(item => {
+  //     points.push({lat: item.source.location.latitude, lng: item.source.location.longitude})
+  //     points.push({lat: item.destination.location.latitude, lng: item.destination.location.longitude})
+  //   })
+  //   console.log(points)
+  // }
+
+  const getPoints = (pathOfItem) => {
+    let pointsOfPath = []
+    pathOfItem.routes.map(item => {
+          pointsOfPath.push({lat: item.source.location.latitude, lng: item.source.location.longitude})
+          pointsOfPath.push({lat: item.destination.location.latitude, lng: item.destination.location.longitude})
+        })
+    console.log(pointsOfPath)
+   return pointsOfPath
   }
+
+  // useEffect(() => {
+  //   getPoints()
+  // }, [path])
 
   const TypeOfRoutes = ({route, step}) => {
      return (
@@ -40,13 +54,8 @@ const PathItem = ({path, setIndex, index, setPointsOfPath, pointsOfPat, isIdChan
      )
   }
 
-  return (
-      <div className={'path-item-wrapper'}>
-        <div className={'info-routes-wrapper'}>
-          {path.routes.map((route, index) => <TypeOfRoutes step={index} route={route}/>)}
-          <button className={'choose-button'} onClick={() => setIndex(index)}>Выбрать</button>
-        </div>
-        <HPlatform
+  const Map = ({points}) => {
+    return (<HPlatform
             apikey={"lDfJOpVUkj3EiYJMC1Za_oSkIvvY2pL2i6R5801iSoo"}
             useCIT
             useHTTPS
@@ -54,13 +63,42 @@ const PathItem = ({path, setIndex, index, setPointsOfPath, pointsOfPat, isIdChan
             includePlaces
         >
           <HMap
-              mapOptions={{ zoom: 1 }}
+              mapOptions={{zoom: 1}}
           >
-            <HMapPolyLine points={points} />
+            <HMapPolyLine points={points}/>
           </HMap>
         </HPlatform>
+    )
+  }
+
+  return (
+      // <div className={'path-item-wrapper'}>
+      //   <div className={'info-routes-wrapper'}>
+      //     {path.routes.map((route, index) => <TypeOfRoutes step={index} route={route}/>)}
+      //     <button className={'choose-button'} onClick={() => setIndex(index)}>Выбрать</button>
+      //   </div>
+      //   <HPlatform
+      //       apikey={"lDfJOpVUkj3EiYJMC1Za_oSkIvvY2pL2i6R5801iSoo"}
+      //       useCIT
+      //       useHTTPS
+      //       includeUI
+      //       includePlaces
+      //   >
+      //     <HMap
+      //         mapOptions={{ zoom: 1 }}
+      //     >
+      //       <HMapPolyLine points={getPoints(path)} />
+      //     </HMap>
+      //   </HPlatform>
+      // </div>
+      <div className={'path-item-wrapper'}>
+        <div className={'info-routes-wrapper'}>
+          {path.routes.map((route, index) => <TypeOfRoutes step={index} route={route}/>)}
+          <button className={'choose-button'} onClick={() => setIndex(index)}>Выбрать</button>
+        </div>
+          <Map points={getPoints(path)}/>
       </div>
-  );
+  )
 };
 
 export default PathItem;
