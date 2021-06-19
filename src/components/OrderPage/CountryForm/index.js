@@ -22,6 +22,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
         const cities = await axios.get(`https://ancient-temple-39835.herokuapp.com/geo/cities/short/?country=${selectedCountryFrom}`)
         setAllCitiesFrom([...cities.data])
       }
+    }
 
 
     const getCitiesTo = async () => {
