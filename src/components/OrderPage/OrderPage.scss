@@ -2,16 +2,16 @@
 .order-page-wrapper {
   padding: 0 5%;
   height: 100%;
-  background-color: $dark-blue;
+  background-color: $white;
   background-size: cover;
-  position: relative;
   font-family: 'Montserrat', sans-serif;
   display: flex;
   justify-content: center;
   .order-title {
+    font-family: 'Montserrat', sans-serif;
     position: absolute;
     top: 170px;
-    color: $white;
+    color: black;
     font-weight: 600;
     font-size: 36px;
   }
@@ -62,12 +62,10 @@
   }
   .form-wrapper {
     margin-top: 400px;
-    //top: 400px;
-    //left: 50%;
-
-    //margin-left: -525px;
     margin-bottom: 60px;
     .cargo-wrapper {
+      box-shadow:  5px 5px 10px #aaaaaa,
+      -5px -5px 10px #ffffff;
       width: 1050px;
       min-height: 250px;
       padding: 40px 30px;

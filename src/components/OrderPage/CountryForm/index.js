@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from 'react';
 
 import axios from "axios";
+import Select from 'react-select';
 
 import './CountryForm.scss'
 
@@ -11,47 +12,82 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
   const [allCitiesTo, setAllCitiesTo] = useState([])
   const [selectedCountryFrom, setSelectedCountryFrom] = useState('')
   const [selectedCountryTo, setSelectedCountryTo] = useState('')
+  const [modifyCountryObj ,setModifyCountryObj] = useState([])
+  const [modifyCitiesFromObj ,setModifyCitiesFromObj] = useState([])
+  const [modifyCitiesToObj ,setModifyCitiesToObj] = useState([])
+  const [optionCountryFromValue, setOptionCountryFromValue] = useState({})
+  const [optionCountryToValue, setOptionCountryToValue] = useState({})
+  const [optionCityFromValue, setOptionCityToValue] = useState({})
+  const [optionCityToValue, setOptionCityFromValue] = useState({})
+
+  console.log(allCitiesFrom)
 
   const getCountries = async () => {
     const countries = await axios.get('https://ancient-temple-39835.herokuapp.com/geo/countries/')
     setAllCountries([...countries.data])
   }
 
+  const createModifyCountryObj = () => {
+    const countryOptions = []
+    allCountries.map(item => {
+      countryOptions.push({value: item.name, label: item.name})
+    })
+    setModifyCountryObj(countryOptions)
+  }
+
+  const createModifyCitiesFromObj = () => {
+    const citiesFromOptions = []
+    allCitiesFrom.map(item => {
+      citiesFromOptions.push({value: item.name, label: item.name, id: item.id})
+    })
+    setModifyCitiesFromObj(citiesFromOptions)
+  }
+
+  const createModifyCitiesToObj = () => {
+    const citiesToOptions = []
+    allCitiesTo.map(item => {
+      citiesToOptions.push({value: item.name, label: item.name, id: item.id})
+    })
+    setModifyCitiesToObj(citiesToOptions)
+  }
+
   const getCitiesFrom = async () => {
-    if (selectedCountryFrom !== '') {
-      const cities = await axios.get(`https://ancient-temple-39835.herokuapp.com/geo/cities/?country=${selectedCountryFrom}`)
+    if (optionCountryFromValue !== {}) {
+      const cities = await axios.get(`https://ancient-temple-39835.herokuapp.com/geo/cities/?country=${optionCountryFromValue.value}`)
       setAllCitiesFrom([...cities.data])
     }
   }
 
   const getCitiesTo = async () => {
-    if (selectedCountryTo !== '') {
-      const cities = await axios.get(`https://ancient-temple-39835.herokuapp.com/geo/cities/?country=${selectedCountryTo}`)
+    if (optionCountryToValue !== {}) {
+      const cities = await axios.get(`https://ancient-temple-39835.herokuapp.com/geo/cities/?country=${optionCountryToValue.value}`)
       setAllCitiesTo([...cities.data])
     }
   }
 
-  const selectedCountryFromHandler = (e) => {
-    setSelectedCountryFrom(e.target.value)
-  }
+  // const selectedCityIdFromHandler = () => {
+  //   // if(e.target.value !== '') {
+  //   //   setWarningFrom(true)
+  //   // }
+  //     setIdFrom(allCitiesFrom[e.target.value].id)
+  // }
+  //
+  // const selectedCityIdToHandler = (e) => {
+  //   if(e.target.value !== '') {
+  //     setWarningTo(true)
+  //   }
+  //   setIdTo(allCitiesTo[e.target.value].id)
+  // }
 
-  const selectedCountryToHandler = (e) => {
-    setSelectedCountryTo(e.target.value)
-  }
+  useEffect(() => {
+    createModifyCountryObj()
+  }, [allCountries])
 
-  const selectedCityIdFromHandler = (e) => {
-    if(e.target.value !== '') {
-      setWarningFrom(true)
-    }
-      setIdFrom(allCitiesFrom[e.target.value].id)
-  }
+  useEffect(() => {
+    createModifyCitiesFromObj()
+    createModifyCitiesToObj()
+  }, [allCitiesFrom, allCitiesTo])
 
-  const selectedCityIdToHandler = (e) => {
-    if(e.target.value !== '') {
-      setWarningTo(true)
-    }
-    setIdTo(allCitiesTo[e.target.value].id)
-  }
 
   useEffect(() => {
     getCountries()
@@ -60,7 +96,11 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
   useEffect(() => {
     getCitiesFrom()
     getCitiesTo()
-  }, [selectedCountryFrom, selectedCountryTo])
+  }, [optionCountryFromValue, optionCityToValue])
+
+  const handle = (value) => {
+    setOptionCountryFromValue(value)
+  }
 
   return (
       <div className={'country-form-wrapper'}>
@@ -71,19 +111,21 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
           </div>
           <div className={'country-select-from'}>
             <label htmlFor="country">Страна</label>
-            <select name="country-select" id="country" onChange={selectedCountryFromHandler}>
-              {allCountries.map(item => (
-                  <option value={item.name} key={item.id}>{item.name}</option>
-              ))}
-            </select>
+            <Select
+                options={modifyCountryObj}
+                onChange={handle}
+                noOptionsMessage={() => `Не найдено 🖕`}
+                placeholder={'Выберите страну'}
+            />
           </div>
           <div className={'city-select-from'}>
             <label htmlFor="country">Город</label>
-            <select className={!cityWarningFrom ? 'warning-border' : 'select'} name="country-select" id="country" onChange={selectedCityIdFromHandler}>
-              {allCitiesFrom.map((item, index) => (
-                  <option value={index} key={item.id}>{item.name}</option>
-              ))}
-            </select>
+            <Select
+              options={modifyCitiesFromObj}
+              onChange={setOptionCityFromValue}
+              noOptionsMessage={() => 'Не найдено 🖕'}
+              placeholder={'Выберите город'}
+            />
           </div>
           <div className={'place-select-from'}>
             <label htmlFor="place">Место</label>
@@ -101,19 +143,21 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
           </div>
           <div className={'country-select-where'}>
             <label htmlFor="country">Страна</label>
-            <select name="country-select" id="country" onChange={selectedCountryToHandler}>
-              {allCountries.map(item => (
-                  <option value={item.name} key={item.id}>{item.name}</option>
-              ))}
-            </select>
+            <Select
+                options={modifyCountryObj}
+                onChange={setOptionCountryToValue}
+                noOptionsMessage={() => `Не найдено 🖕`}
+                placeholder={'Выберите страну'}
+            />
           </div>
           <div className={'city-select-where'}>
             <label htmlFor="country">Город</label>
-            <select className={!cityWarningTo ? 'warning-border' : 'select'} name="country-select" id="country" onChange={selectedCityIdToHandler}>
-              {allCitiesTo.map((item, index) => (
-                  <option value={index} key={item.id}>{item.name}</option>
-              ))}
-            </select>
+            <Select
+                options={modifyCitiesToObj}
+                onChange={setOptionCityToValue}
+                noOptionsMessage={() => 'Не найдено 🖕'}
+                placeholder={'Выберите город'}
+            />
           </div>
           <div className={'place-select-where'}>
             <label htmlFor="place">Место</label>

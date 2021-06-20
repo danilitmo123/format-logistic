@@ -1,12 +1,10 @@
 @import "../../global";
 .header {
-  position: absolute;
-  top: 30px;
   width: 90%;
-  z-index: 3;
   padding: 0 5%;
   display: flex;
   justify-content: space-between;
+  background-color: $dark-blue;
   .logo {
     display: flex;
     justify-content: center;
@@ -39,6 +37,19 @@
     font-weight: 600;
     font-size: 14px;
     color: $white;
+
+    .admin-button {
+      color: $white;
+      background: none;
+      border-radius: 8px;
+      border: 1px solid $light-blue;
+      width: 160px;
+      height: 40px;
+      margin-right: 40px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
 
     .number {
       margin-right: 65px;

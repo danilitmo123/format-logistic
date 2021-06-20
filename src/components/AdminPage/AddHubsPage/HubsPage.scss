@@ -1,0 +1,29 @@
+@import '../../../global';
+.hubs-page-wrapper {
+  height: 2000px;
+  background-color: $dark-blue;
+  padding: 0 5%;
+  font-family: 'Montserrat', sans-serif;
+  .top-hubs-tile {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    .title {
+      color: $white;
+      font-weight: 400;
+      font-size: 30px;
+    }
+    .back-to-hubs-button {
+      font-family: 'Montserrat', sans-serif;
+      color: $white;
+      width: 120px;
+      height: 40px;
+      background: none;
+      border: 1px solid $light-blue;
+      border-radius: 8px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
