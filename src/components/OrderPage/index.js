@@ -13,7 +13,6 @@ const OrderPage = () => {
   const [chosenPath, setChosenPath] = useState([])
   const [selectedCityIdFrom, setSelectedCityIdFrom] = useState()
   const [selectedCityIdTo, setSelectedCityIdTo] = useState()
-  const [isLoaded, setIsLoaded] = useState(false)
   const [paths, setPaths] = useState([])
   const [firstActivePage, setFirstActivePage] = useState(true)
   const [secondActivePage, setSecondActivePage] = useState(false)
@@ -24,7 +23,7 @@ const OrderPage = () => {
   const prevIdToCount = useRef()
   const prevIdFromCount = useRef()
 
-
+  console.log(selectedCityIdFrom)
 
   useEffect(() => {
     prevIdFromCount.current = selectedCityIdFrom

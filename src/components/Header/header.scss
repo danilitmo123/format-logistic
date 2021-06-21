@@ -4,12 +4,12 @@
   padding: 0 5%;
   display: flex;
   justify-content: space-between;
-  background-color: $dark-blue;
+  background-color: $white;
   .logo {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: $white;
+    color: black;
 
     .logo-text-block {
       margin-left: 15px;
@@ -19,7 +19,7 @@
         font-weight: 400;
         margin-bottom: 5px;
         .format {
-          color: $light-blue;
+          color: black;
         }
       }
       .logo-subtitle {
@@ -36,10 +36,10 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     font-size: 14px;
-    color: $white;
+    color: black;
 
     .admin-button {
-      color: $white;
+      color: black;
       background: none;
       border-radius: 8px;
       border: 1px solid $light-blue;

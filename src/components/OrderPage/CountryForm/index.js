@@ -10,8 +10,6 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
   const [allCountries, setAllCountries] = useState([])
   const [allCitiesFrom, setAllCitiesFrom] = useState([])
   const [allCitiesTo, setAllCitiesTo] = useState([])
-  const [selectedCountryFrom, setSelectedCountryFrom] = useState('')
-  const [selectedCountryTo, setSelectedCountryTo] = useState('')
   const [modifyCountryObj ,setModifyCountryObj] = useState([])
   const [modifyCitiesFromObj ,setModifyCitiesFromObj] = useState([])
   const [modifyCitiesToObj ,setModifyCitiesToObj] = useState([])
@@ -19,8 +17,10 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
   const [optionCountryToValue, setOptionCountryToValue] = useState({})
   const [optionCityFromValue, setOptionCityToValue] = useState({})
   const [optionCityToValue, setOptionCityFromValue] = useState({})
-
+  console.log(optionCountryFromValue.value)
+  console.log(optionCountryToValue.value)
   console.log(allCitiesFrom)
+  console.log(allCitiesTo)
 
   const getCountries = async () => {
     const countries = await axios.get('https://ancient-temple-39835.herokuapp.com/geo/countries/')
@@ -52,32 +52,30 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
   }
 
   const getCitiesFrom = async () => {
-    if (optionCountryFromValue !== {}) {
+    if (optionCountryFromValue.value !== undefined) {
+      console.log(1)
       const cities = await axios.get(`https://ancient-temple-39835.herokuapp.com/geo/cities/?country=${optionCountryFromValue.value}`)
       setAllCitiesFrom([...cities.data])
     }
   }
 
   const getCitiesTo = async () => {
-    if (optionCountryToValue !== {}) {
+    if (optionCountryToValue.value !== undefined) {
+      console.log(2)
       const cities = await axios.get(`https://ancient-temple-39835.herokuapp.com/geo/cities/?country=${optionCountryToValue.value}`)
       setAllCitiesTo([...cities.data])
     }
   }
 
-  // const selectedCityIdFromHandler = () => {
-  //   // if(e.target.value !== '') {
-  //   //   setWarningFrom(true)
-  //   // }
-  //     setIdFrom(allCitiesFrom[e.target.value].id)
-  // }
-  //
-  // const selectedCityIdToHandler = (e) => {
-  //   if(e.target.value !== '') {
-  //     setWarningTo(true)
-  //   }
-  //   setIdTo(allCitiesTo[e.target.value].id)
-  // }
+  const selectedCityIdFromHandler = (newValue) => {
+      setOptionCityFromValue(newValue)
+      setIdFrom(newValue.id)
+  }
+
+  const selectedCityIdToHandler = (newValue) => {
+    setOptionCityToValue((newValue))
+    setIdTo(newValue.id)
+  }
 
   useEffect(() => {
     createModifyCountryObj()
@@ -96,11 +94,8 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
   useEffect(() => {
     getCitiesFrom()
     getCitiesTo()
-  }, [optionCountryFromValue, optionCityToValue])
+  }, [optionCityFromValue, optionCityToValue])
 
-  const handle = (value) => {
-    setOptionCountryFromValue(value)
-  }
 
   return (
       <div className={'country-form-wrapper'}>
@@ -113,7 +108,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
             <label htmlFor="country">Страна</label>
             <Select
                 options={modifyCountryObj}
-                onChange={handle}
+                onChange={setOptionCountryFromValue}
                 noOptionsMessage={() => `Не найдено 🖕`}
                 placeholder={'Выберите страну'}
             />
@@ -122,7 +117,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
             <label htmlFor="country">Город</label>
             <Select
               options={modifyCitiesFromObj}
-              onChange={setOptionCityFromValue}
+              onChange={selectedCityIdFromHandler}
               noOptionsMessage={() => 'Не найдено 🖕'}
               placeholder={'Выберите город'}
             />
@@ -154,7 +149,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
             <label htmlFor="country">Город</label>
             <Select
                 options={modifyCitiesToObj}
-                onChange={setOptionCityToValue}
+                onChange={selectedCityIdToHandler}
                 noOptionsMessage={() => 'Не найдено 🖕'}
                 placeholder={'Выберите город'}
             />
