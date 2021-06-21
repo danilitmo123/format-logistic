@@ -10,13 +10,15 @@
     }
   .final-map-wrapper {
     background-color: $white;
-    border-radius: 20px 20px 20px 20px;
     width: 1000px;
     padding: 40px 30px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 30px;
+    border-radius: 20px;
+    box-shadow:  5px 5px 10px #aaaaaa,
+    -5px -5px 10px #ffffff;
     .type-of-route-wrapper {
       font-family: 'Montserrat', sans-serif;
       display: flex;
@@ -79,7 +81,9 @@
   }
   .all-info-route {
     background-color: $white;
-    border-radius: 20px 20px 20px 20px;
+    border-radius: 20px;
+    box-shadow:  5px 5px 10px #aaaaaa,
+    -5px -5px 10px #ffffff;
     width: 1000px;
     padding: 40px 30px;
     display: flex;
@@ -98,6 +102,8 @@
     justify-content: space-between;
     height: 550px;
     border-radius: 20px;
+    box-shadow:  5px 5px 10px #aaaaaa,
+    -5px -5px 10px #ffffff;
     background-color: $white;
     padding: 40px 30px;
     margin-bottom: 40px;

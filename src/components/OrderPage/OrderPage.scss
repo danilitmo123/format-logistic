@@ -2,7 +2,7 @@
 .order-page-wrapper {
   padding: 0 5%;
   height: 100%;
-  background-color: $white;
+  background-color: $dark-blue;
   background-size: cover;
   font-family: 'Montserrat', sans-serif;
   display: flex;
@@ -25,7 +25,7 @@
     left: 50%;
     margin-left: -380px;
     .order-circle-container {
-      border-top: 1px dashed $light-blue;
+      border-top: 1px dashed rgba(53, 210, 210, 0.5);
       width: 700px;
       height: 100px;
       margin-bottom: 50px;
@@ -617,7 +617,8 @@
         font-family: "Montserrat", sans-serif;
         font-weight: 400;
         font-size: 16px;
-        color: #f6fbf9;
+        color: black;
+        outline: none;
         cursor: pointer;
       }
     }

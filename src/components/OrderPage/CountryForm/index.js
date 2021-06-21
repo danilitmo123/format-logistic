@@ -2,6 +2,7 @@ import React,{useEffect, useState} from 'react';
 
 import axios from "axios";
 import Select from 'react-select';
+import AsyncSelect from 'react-select/async';
 
 import './CountryForm.scss'
 
@@ -17,10 +18,6 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
   const [optionCountryToValue, setOptionCountryToValue] = useState({})
   const [optionCityFromValue, setOptionCityToValue] = useState({})
   const [optionCityToValue, setOptionCityFromValue] = useState({})
-  console.log(optionCountryFromValue.value)
-  console.log(optionCountryToValue.value)
-  console.log(allCitiesFrom)
-  console.log(allCitiesTo)
 
   const getCountries = async () => {
     const countries = await axios.get('https://ancient-temple-39835.herokuapp.com/geo/countries/')
@@ -51,17 +48,39 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
     setModifyCitiesToObj(citiesToOptions)
   }
 
+  const filterCitiesFrom = (inputValue) => {
+    return modifyCitiesFromObj.filter(i =>
+        i.label.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  };
+
+  const loadOptionsFrom = (inputValue, callback) => {
+    setTimeout(() => {
+      callback(filterCitiesFrom(inputValue));
+    }, 1000);
+  };
+
+  const filterCitiesTo = (inputValue) => {
+    return modifyCitiesToObj.filter(i =>
+        i.label.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  };
+
+  const loadOptionsTo = (inputValue, callback) => {
+    setTimeout(() => {
+      callback(filterCitiesTo(inputValue));
+    }, 1000);
+  };
+
   const getCitiesFrom = async () => {
-    if (optionCountryFromValue.value !== undefined) {
-      console.log(1)
+    if (optionCountryFromValue.value) {
       const cities = await axios.get(`https://ancient-temple-39835.herokuapp.com/geo/cities/?country=${optionCountryFromValue.value}`)
       setAllCitiesFrom([...cities.data])
     }
   }
 
   const getCitiesTo = async () => {
-    if (optionCountryToValue.value !== undefined) {
-      console.log(2)
+    if (optionCountryToValue.value) {
       const cities = await axios.get(`https://ancient-temple-39835.herokuapp.com/geo/cities/?country=${optionCountryToValue.value}`)
       setAllCitiesTo([...cities.data])
     }
@@ -70,11 +89,13 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
   const selectedCityIdFromHandler = (newValue) => {
       setOptionCityFromValue(newValue)
       setIdFrom(newValue.id)
+      return newValue
   }
 
   const selectedCityIdToHandler = (newValue) => {
-    setOptionCityToValue((newValue))
+    setOptionCityToValue(newValue)
     setIdTo(newValue.id)
+    return newValue
   }
 
   useEffect(() => {
@@ -94,7 +115,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
   useEffect(() => {
     getCitiesFrom()
     getCitiesTo()
-  }, [optionCityFromValue, optionCityToValue])
+  }, [optionCountryFromValue.value || optionCountryToValue.value])
 
 
   return (
@@ -115,7 +136,8 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
           </div>
           <div className={'city-select-from'}>
             <label htmlFor="country">Город</label>
-            <Select
+            <AsyncSelect
+              loadOptions={loadOptionsFrom}
               options={modifyCitiesFromObj}
               onChange={selectedCityIdFromHandler}
               noOptionsMessage={() => 'Не найдено 🖕'}
@@ -147,7 +169,8 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
           </div>
           <div className={'city-select-where'}>
             <label htmlFor="country">Город</label>
-            <Select
+            <AsyncSelect
+                loadOptions={loadOptionsTo}
                 options={modifyCitiesToObj}
                 onChange={selectedCityIdToHandler}
                 noOptionsMessage={() => 'Не найдено 🖕'}

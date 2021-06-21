@@ -53,7 +53,7 @@ const OrderPage = () => {
 
   const Circle = ({number}) => {
     return (
-        <div className={'order-circle'}>{number}</div>
+        <div className={'order-circle' }>{number}</div>
     )
   }
 
