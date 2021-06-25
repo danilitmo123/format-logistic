@@ -44,6 +44,9 @@ const AddHubsPage = () => {
   const [allCountries, setAllCountries] = useState([])
   const [allCitiesFrom, setAllCitiesFrom] = useState([])
   const [allCitiesTo, setAllCitiesTo] = useState([])
+  const [destination, setDestination] = useState('')
+  const [duration, setDuration] = useState('')
+  const [prepareDays, setPrepareDays] = useState('')
   const [modifyCountryObj, setModifyCountryObj] = useState([])
   const [optionCountryFromValue, setOptionCountryFromValue] = useState({})
   const [optionCountryToValue, setOptionCountryToValue] = useState({})
@@ -54,8 +57,14 @@ const AddHubsPage = () => {
   const [activeButtonForWeight, setActiveButtonForWeight] = useState(true)
   const [activeButtonForVolume, setActiveButtonForVolume] = useState(false)
   const [activeButtonForMeter, setActiveButtonForMeter] = useState(false)
-
-  console.log(dataMeter)
+  const [activeMonday, setActiveMonday] = useState(false)
+  const [activeTuesday, setActiveTuesday] = useState(false)
+  const [activeWednesday, setActiveWednesday] = useState(false)
+  const [activeThursday, setActiveThursday] = useState(false)
+  const [activeFriday, setActiveFriday] = useState(false)
+  const [activeSaturday, setActiveSaturday] = useState(false)
+  const [activeSunday, setActiveSunday] = useState(false)
+  const [activeTimetableDays, setActiveTimetableDays] = useState([])
 
   const prevCountryFromValue = useRef()
   const prevCountryToValue = useRef()
@@ -158,6 +167,51 @@ const AddHubsPage = () => {
     setDataMeter(newData)
   }
 
+  const destinationHandler = (e) => {
+    setDestination(e.target.value)
+  }
+
+  const durationHandler = (e) => {
+    setDuration(e.target.value)
+  }
+
+  const activeMondayButtonHandler = (e) => {
+    setActiveMonday(!activeMonday)
+    setActiveTimetableDays([...activeTimetableDays, e.target.value])
+  }
+
+  const activeTuesdayButtonHandler = (e) => {
+    setActiveTimetableDays([...activeTimetableDays, e.target.value])
+    setActiveTuesday(!activeTuesday)
+  }
+  const activeWednesdayButtonHandler = (e) => {
+    setActiveTimetableDays([...activeTimetableDays, e.target.value])
+    setActiveWednesday(!activeWednesday)
+  }
+
+  const activeThursdayButtonHandler = (e) => {
+    setActiveTimetableDays([...activeTimetableDays, e.target.value])
+    setActiveThursday(!activeThursday)
+  }
+
+  const activeFridayButtonHandler = (e) => {
+    setActiveTimetableDays([...activeTimetableDays, e.target.value])
+    setActiveFriday(!activeFriday)
+  }
+
+  const activeSaturdayButtonHandler = (e) => {
+    setActiveTimetableDays([...activeTimetableDays, e.target.value])
+    setActiveSaturday(!activeSaturday)
+  }
+
+  const activeSundayButtonHandler = (e) => {
+    setActiveTimetableDays([...activeTimetableDays, e.target.value])
+    setActiveSunday(!activeSunday)
+  }
+
+  const prepareDaysHandler = (e) => {
+    setPrepareDays(e.target.value)
+  }
 
   useEffect(() => {
     prevCountryFromValue.current = optionCountryFromValue.value;
@@ -209,7 +263,7 @@ const AddHubsPage = () => {
                     theme={customTheme}
                     onChange={setOptionCountryFromValue}
                     options={modifyCountryObj}
-                    placeholder={'Срана'}
+                    placeholder={'Страна'}
                     noOptionsMessage={() => `Не найдено 🖕`}
                 />
               </div>
@@ -232,7 +286,7 @@ const AddHubsPage = () => {
                     theme={customTheme}
                     onChange={setOptionCountryToValue}
                     options={modifyCountryObj}
-                    placeholder={'Срана'}
+                    placeholder={'Страна'}
                     noOptionsMessage={() => `Не найдено 🖕`}
                 />
               </div>
@@ -254,8 +308,27 @@ const AddHubsPage = () => {
                   theme={customTheme}
                   options={typeOfShipping}
                   noOptionsMessage={() => `Не найдено 🖕`}
-                  placeholder={'Первозка'}
+                  placeholder={'Перевозка'}
               />
+            </div>
+          </div>
+          <div className={'upload-dest-and-dur'}>
+            <div className={'upload-title'}>Расстояние и время</div>
+            <div className={'upload-inputs-wrapper'}>
+              <div className={'destination-wrapper'}>
+                <label>Расстояние</label>
+                <input
+                    onChange={destinationHandler}
+                    type="text"
+                    placeholder={'Расстояния'}/>
+              </div>
+              <div className={'duration-wrapper'}>
+                <label>Дни</label>
+                <input
+                    placeholder={'Дни'}
+                    type="number"
+                    onChange={durationHandler}/>
+              </div>
             </div>
           </div>
           <div className={'set-price-wrapper'}>
@@ -390,6 +463,48 @@ const AddHubsPage = () => {
               }
             </div>
           </div>
+          <div className={'timetable-wrapper'}>
+            <div className={'timetable-title'}>Расписание</div>
+              <div className={'timetable'}>
+                <div className={'days-and-buttons-wrapper'}>
+                  <div className={'timetable-days'}>Дни недели</div>
+                  <div className={'buttons-wrapper'}>
+                    <button
+                        value={'Monday'}
+                        onClick={activeMondayButtonHandler}
+                        className={activeMonday ? 'active-button-day': 'button-day'}>Понедельник</button>
+                    <button
+                        value={'Tuesday'}
+                        onClick={activeTuesdayButtonHandler}
+                        className={activeTuesday ? 'active-button-day': 'button-day'}>Вторник</button>
+                    <button
+                        value={'Wednesday'}
+                        onClick={activeWednesdayButtonHandler}
+                        className={activeWednesday ? 'active-button-day': 'button-day'}>Среда</button>
+                    <button
+                        value={'Thursday'}
+                        onClick={activeThursdayButtonHandler}
+                        className={activeThursday ? 'active-button-day': 'button-day'}>Четверг</button>
+                    <button
+                        value={'Friday'}
+                        onClick={activeFridayButtonHandler}
+                        className={activeFriday ? 'active-button-day': 'button-day'}>Пятница</button>
+                    <button
+                        value={'Saturday'}
+                        onClick={activeSaturdayButtonHandler}
+                        className={activeSaturday ? 'active-button-day': 'button-day'}>Суббота</button>
+                    <button
+                        value={'Sunday'}
+                        onClick={activeSundayButtonHandler}
+                        className={activeSunday ? 'active-button-day': 'button-day'}>Воскресенье</button>
+                  </div>
+                </div>
+                <div className={'timetable-input'}>
+                  <label>Время погрзуки</label>
+                  <input type="number" placeholder={'Дни'} onChange={prepareDaysHandler}/>
+                </div>
+              </div>
+            </div>
           <div className={'services-wrapper'}>
             <div className={'service-title'}>Услуги</div>
           </div>

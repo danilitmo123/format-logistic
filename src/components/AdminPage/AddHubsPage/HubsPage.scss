@@ -272,6 +272,169 @@
         }
       }
     }
+    .upload-dest-and-dur {
+      margin-bottom: 20px;
+      input {
+        margin-top: 10px;
+        width: 220px;
+        height: 38px;
+        padding: 2px 8px;
+        align-items: center;
+        background-color: hsl(0, 0%, 100%);
+        border-color: hsl(0, 0%, 80%);
+        border-radius: 4px;
+        border-style: solid;
+        border-width: 1px;
+        cursor: default;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        min-height: 38px;
+        outline: none;
+        position: relative;
+        transition: all 100ms;
+        box-sizing: border-box;
+        &:focus {
+          border-color: $light-blue;
+          box-shadow: 0 0 0 1px $light-blue;
+        }
+      }
+      .upload-title {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      .upload-inputs-wrapper {
+        display: flex;
+        flex-direction: row;
+        .destination-wrapper {
+          margin-right: 20px;
+          label {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            margin-right: 10px;
+            opacity: .4;
+          }
+        }
+        .duration-wrapper {
+          label {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            margin-right: 10px;
+            opacity: .4;
+          }
+        }
+      }
+    }
+    .timetable-wrapper {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      .timetable-title {
+        margin-bottom: 20px;
+        font-size: 24px;
+      }
+      .timetable {
+        display: flex;
+        flex-direction: row;
+        width: 250px;
+        margin-bottom: 20px;
+        .timetable-input {
+          label {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            opacity: .4;
+          }
+          input {
+            margin-top: 20px;
+            width: 200px;
+            height: 38px;
+            padding: 2px 8px;
+            align-items: center;
+            background-color: hsl(0, 0%, 100%);
+            border-color: hsl(0, 0%, 80%);
+            border-radius: 4px;
+            border-style: solid;
+            border-width: 1px;
+            cursor: default;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            min-height: 38px;
+            outline: none;
+            position: relative;
+            transition: all 100ms;
+            box-sizing: border-box;
+            &:focus {
+              border-color: $light-blue;
+              box-shadow: 0 0 0 1px $light-blue;
+            }
+          }
+        }
+        .days-and-buttons-wrapper {
+          margin-right: 20px;
+          .timetable-days {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            margin-right: 10px;
+            opacity: .4;
+            margin-bottom: 20px;
+          }
+          .button-day {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid $light-blue;
+            width: 220px;
+            height: 60px;
+            cursor: pointer;
+            background: none;
+            outline: none;
+            margin-bottom: 1px;
+            &:nth-child(1) {
+              border-radius: 20px 20px 0 0;
+            }
+            &:nth-child(7) {
+              border-radius: 0 0 20px 20px;
+            }
+          }
+          .active-button-day {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: $light-blue;
+            width: 220px;
+            height: 60px;
+            cursor: pointer;
+            color: $white;
+            border: none;
+            outline: none;
+            margin-bottom: 1px;
+            &:nth-child(1) {
+              border-radius: 20px 20px 0 0;
+            }
+            &:nth-child(7) {
+              border-radius: 0 0 20px 20px;
+            }
+          }
+        }
+      }
+      .chosen-timetable {
+        width: 500px;
+        height: 500px;
+        border: 1px solid $light-blue;
+      }
+    }
     .services-wrapper {
       font-family: 'Montserrat', sans-serif;
       font-weight: 500;
