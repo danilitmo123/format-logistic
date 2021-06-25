@@ -11,8 +11,8 @@
   align-items: center;
   gap: 20px;
   margin-bottom: 60px;
-  box-shadow:  5px 5px 10px #aaaaaa,
-  -5px -5px 10px #ffffff;
+  border: 1px solid gray;
+  box-shadow: 0 5px 5px -5px #333;
   .title {
     font-weight: 400;
     font-size: 24px;

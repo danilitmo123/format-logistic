@@ -1,8 +1,18 @@
-import React,{useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 import axios from "axios";
 import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
+
+import {placeOfCargoOptions, customTheme} from "../../../templates/templatesOfOptions";
+import {
+  getCountries,
+  getCitiesFrom,
+  getCitiesTo,
+  createModifyCountryObj,
+  createModifyCitiesFromObj,
+  createModifyCitiesToObj
+} from "../../../templates/templateGetCountryAndCity";
 
 import './CountryForm.scss'
 
@@ -16,37 +26,12 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
   const [modifyCitiesToObj ,setModifyCitiesToObj] = useState([])
   const [optionCountryFromValue, setOptionCountryFromValue] = useState({})
   const [optionCountryToValue, setOptionCountryToValue] = useState({})
-  const [optionCityFromValue, setOptionCityToValue] = useState({})
-  const [optionCityToValue, setOptionCityFromValue] = useState({})
 
-  const getCountries = async () => {
-    const countries = await axios.get('https://ancient-temple-39835.herokuapp.com/geo/countries/')
-    setAllCountries([...countries.data])
-  }
+  const prevCountryFromValue = useRef()
+  const prevCountryToValue = useRef()
 
-  const createModifyCountryObj = () => {
-    const countryOptions = []
-    allCountries.map(item => {
-      countryOptions.push({value: item.name, label: item.name})
-    })
-    setModifyCountryObj(countryOptions)
-  }
-
-  const createModifyCitiesFromObj = () => {
-    const citiesFromOptions = []
-    allCitiesFrom.map(item => {
-      citiesFromOptions.push({value: item.name, label: item.name, id: item.id})
-    })
-    setModifyCitiesFromObj(citiesFromOptions)
-  }
-
-  const createModifyCitiesToObj = () => {
-    const citiesToOptions = []
-    allCitiesTo.map(item => {
-      citiesToOptions.push({value: item.name, label: item.name, id: item.id})
-    })
-    setModifyCitiesToObj(citiesToOptions)
-  }
+  const prevCountryFrom = prevCountryFromValue.current;
+  const prevCountryTo = prevCountryToValue.current;
 
   const filterCitiesFrom = (inputValue) => {
     return modifyCitiesFromObj.filter(i =>
@@ -72,51 +57,47 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
     }, 1000);
   };
 
-  const getCitiesFrom = async () => {
-    if (optionCountryFromValue.value) {
-      const cities = await axios.get(`https://ancient-temple-39835.herokuapp.com/geo/cities/?country=${optionCountryFromValue.value}`)
-      setAllCitiesFrom([...cities.data])
-    }
-  }
-
-  const getCitiesTo = async () => {
-    if (optionCountryToValue.value) {
-      const cities = await axios.get(`https://ancient-temple-39835.herokuapp.com/geo/cities/?country=${optionCountryToValue.value}`)
-      setAllCitiesTo([...cities.data])
-    }
-  }
-
   const selectedCityIdFromHandler = (newValue) => {
-      setOptionCityFromValue(newValue)
-      setIdFrom(newValue.id)
-      return newValue
+    setIdFrom(newValue.id)
+    return newValue
   }
 
   const selectedCityIdToHandler = (newValue) => {
-    setOptionCityToValue(newValue)
     setIdTo(newValue.id)
     return newValue
   }
 
   useEffect(() => {
-    createModifyCountryObj()
+    prevCountryFromValue.current = optionCountryFromValue.value;
+  }, [optionCountryFromValue.value]);
+
+  useEffect(() => {
+    prevCountryToValue.current = optionCountryToValue.value;
+  }, [optionCountryToValue.value]);
+
+  useEffect(() => {
+    createModifyCountryObj(allCountries, setModifyCountryObj)
   }, [allCountries])
 
   useEffect(() => {
-    createModifyCitiesFromObj()
-    createModifyCitiesToObj()
-  }, [allCitiesFrom, allCitiesTo])
-
+    createModifyCitiesFromObj(allCitiesFrom, setModifyCitiesFromObj)
+  }, [allCitiesFrom])
 
   useEffect(() => {
-    getCountries()
+    createModifyCitiesToObj(allCitiesTo, setModifyCitiesToObj)
+  }, [allCitiesTo])
+
+  useEffect(() => {
+    getCountries(setAllCountries)
   }, [])
 
   useEffect(() => {
-    getCitiesFrom()
-    getCitiesTo()
-  }, [optionCountryFromValue.value || optionCountryToValue.value])
+    getCitiesFrom(prevCountryFrom, optionCountryFromValue, setAllCitiesFrom)
+  }, [optionCountryFromValue.value])
 
+  useEffect(() => {
+    getCitiesTo(prevCountryTo, optionCountryToValue, setAllCitiesTo)
+  }, [optionCountryToValue.value])
 
   return (
       <div className={'country-form-wrapper'}>
@@ -128,6 +109,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
           <div className={'country-select-from'}>
             <label htmlFor="country">Страна</label>
             <Select
+                theme={customTheme}
                 options={modifyCountryObj}
                 onChange={setOptionCountryFromValue}
                 noOptionsMessage={() => `Не найдено 🖕`}
@@ -137,20 +119,22 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
           <div className={'city-select-from'}>
             <label htmlFor="country">Город</label>
             <AsyncSelect
-              loadOptions={loadOptionsFrom}
-              options={modifyCitiesFromObj}
-              onChange={selectedCityIdFromHandler}
-              noOptionsMessage={() => 'Не найдено 🖕'}
-              placeholder={'Выберите город'}
+                theme={customTheme}
+                loadOptions={loadOptionsFrom}
+                options={modifyCitiesFromObj}
+                onChange={selectedCityIdFromHandler}
+                noOptionsMessage={() => 'Не найдено 🖕'}
+                placeholder={'Выберите город'}
             />
           </div>
           <div className={'place-select-from'}>
             <label htmlFor="place">Место</label>
-            <select name="place-select" id="place">
-              <option value="">Со склада</option>
-              <option value="">Морской порт</option>
-              <option value="">Аэропорт</option>
-            </select>
+            <Select
+                theme={customTheme}
+                options={placeOfCargoOptions}
+                noOptionsMessage={() => `Не найдено 🖕`}
+                placeholder={'Выберите место отправления'}
+            />
           </div>
         </div>
         <div className={'where-form-wrapper'}>
@@ -161,6 +145,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
           <div className={'country-select-where'}>
             <label htmlFor="country">Страна</label>
             <Select
+                theme={customTheme}
                 options={modifyCountryObj}
                 onChange={setOptionCountryToValue}
                 noOptionsMessage={() => `Не найдено 🖕`}
@@ -170,6 +155,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
           <div className={'city-select-where'}>
             <label htmlFor="country">Город</label>
             <AsyncSelect
+                theme={customTheme}
                 loadOptions={loadOptionsTo}
                 options={modifyCitiesToObj}
                 onChange={selectedCityIdToHandler}
@@ -179,11 +165,12 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
           </div>
           <div className={'place-select-where'}>
             <label htmlFor="place">Место</label>
-            <select name="place-select" id="place">
-              <option value="">Со склада</option>
-              <option value="">Морской порт</option>
-              <option value="">Аэропорт</option>
-            </select>
+            <Select
+                theme={customTheme}
+                options={placeOfCargoOptions}
+                noOptionsMessage={() => `Не найдено 🖕`}
+                placeholder={'Выберите место прибытия'}
+            />
           </div>
         </div>
       </div>

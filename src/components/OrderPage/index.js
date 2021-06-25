@@ -23,8 +23,6 @@ const OrderPage = () => {
   const prevIdToCount = useRef()
   const prevIdFromCount = useRef()
 
-  console.log(selectedCityIdFrom)
-
   useEffect(() => {
     prevIdFromCount.current = selectedCityIdFrom
     prevIdToCount.current = selectedCityIdTo
@@ -35,10 +33,10 @@ const OrderPage = () => {
   }, [selectedCityIdTo, selectedCityIdFrom])
 
 
-  const getPaths = async () => {
+  const getPaths = () => {
     if( selectedCityIdFrom !== '' && selectedCityIdTo !== '') {
-      const newPaths = await axios.get(`https://ancient-temple-39835.herokuapp.com/route/paths?city1=${selectedCityIdFrom}&city2=${selectedCityIdTo}`)
-      setPaths(newPaths.data)
+      axios.get(`https://ancient-temple-39835.herokuapp.com/route/paths?city1=${selectedCityIdFrom}&city2=${selectedCityIdTo}`)
+          .then((res => {setPaths(res.data)}))
     }
   }
 
@@ -49,12 +47,6 @@ const OrderPage = () => {
 
   const returnSecondPagHandler = () => {
     setSecondActivePage(true)
-  }
-
-  const Circle = ({number}) => {
-    return (
-        <div className={'order-circle' }>{number}</div>
-    )
   }
 
   const disabledButtonHandler = () => {
@@ -81,13 +73,6 @@ const OrderPage = () => {
   return (
       <section className={'order-page-wrapper'}>
         <div className={'order-title'}>Рассчитать перевозку</div>
-        <div className={'roadmap-order-wrapper'}>
-          <ol className={'order-circle-container'}>
-            <li><Circle number={'1'}/></li>
-            <li><Circle number={'2'}/></li>
-            <li><Circle number={'3'}/></li>
-          </ol>
-        </div>
         <div className={'form-wrapper'}>
           {firstActivePage ?
              <>

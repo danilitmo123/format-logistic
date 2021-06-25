@@ -8,32 +8,54 @@ import truck from '../../../img/black-truck-icon.svg'
 
 const ConfirmOrderPage = ({chosenPath}) => {
   console.log(chosenPath)
-  let points = []
-  chosenPath[0].routes.map(item => {
-    points.push({lat: item.source.location.latitude, lng: item.source.location.longitude})
-    points.push({lat: item.destination.location.latitude, lng: item.destination.location.longitude})
-  })
+  const getPoints = (pathOfItem) => {
+    let pointsOfPath = []
+    pathOfItem[0].routes.map(item => {
+      pointsOfPath.push({lat: item.source.location.latitude, lng: item.source.location.longitude})
+      pointsOfPath.push({lat: item.destination.location.latitude, lng: item.destination.location.longitude})
+    })
+    return pointsOfPath
+  }
+
+  const Map = ({points}) => {
+    return (<HPlatform
+            apikey={"lDfJOpVUkj3EiYJMC1Za_oSkIvvY2pL2i6R5801iSoo"}
+            useCIT
+            useHTTPS
+            includeUI
+            includePlaces
+        >
+          <HMap
+              mapOptions={{zoom: 1}}
+          >
+            <HMapPolyLine points={points}/>
+          </HMap>
+        </HPlatform>
+    )
+  }
 
   return (
       <div className={'final-order-page-wrapper'}>
         <div className={'final-map-wrapper'}>
-          <>
+          <div className={'route'}>
             {chosenPath[0].routes ? chosenPath[0].routes.map((item, index) => ((
-                    <div className={'type-of-route-wrapper'}>
-                      <div className={'step-circle'}>{index + 1}</div>
-                      <div className={'step-wrapper'}>
-                        <div className={'source'}>{item.source.name}</div>
-                        <div className={'route-info'}>
-                          <div className={'type'}>{item.type === 'TRUCK' ? <img className={'truck'} src={truck} alt="truck"/> :
-                              <img className={'airplane'} src={airplane} alt="airplane"/>}</div>
-                          <div className={'route-distance'}>{(item.distance / 1000).toFixed(0)}км</div>
-                        </div>
-                        <div className={'destination'}>{item.destination.name}</div>
-                      </div>
+                <div className={'type-of-route-wrapper'}>
+                  <div className={'step-circle'}>{index + 1}</div>
+                  <div className={'step-wrapper'}>
+                    <div className={'source'}>{item.source.name}</div>
+                    <div className={'route-info'}>
+                      <div className={'type'}>{item.type === 'TRUCK' ? <img className={'truck'} src={truck} alt="truck"/> :
+                          <img className={'airplane'} src={airplane} alt="airplane"/>}</div>
+                      <div className={'route-distance'}>{(item.distance / 1000).toFixed(0)}км</div>
                     </div>
-                )
-            )) : '' }
-          </>
+                    <div className={'destination'}>{item.destination.name}</div>
+                  </div>
+                </div>)))
+                :
+                ''
+            }
+          </div>
+          <Map points={getPoints(chosenPath)}/>
         </div>
         <div className={'all-info-route'}>
           <div className={'title'}>Итого:</div>
