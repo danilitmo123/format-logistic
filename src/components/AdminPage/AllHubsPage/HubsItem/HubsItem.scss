@@ -1,0 +1,11 @@
+@import '../../../../global';
+.hub-wrapper {
+  width: 300px;
+  height: 300px;
+  border-radius: 20px;
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $white;
+}

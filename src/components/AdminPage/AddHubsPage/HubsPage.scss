@@ -442,4 +442,18 @@
       margin-bottom: 20px;
     }
   }
+  .create-hub-button {
+    width: 210px;
+    height: 50px;
+    border-radius: 20px;
+    background: none;
+    border: 2px solid #35d2d2;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: $white;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 60px;
+  }
 }

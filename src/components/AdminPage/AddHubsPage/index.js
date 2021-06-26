@@ -2,7 +2,8 @@ import React, {useState, useEffect, useRef} from 'react';
 
 import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import axios from "axios";
 
 import {customTheme, typeOfShipping} from "../../../templates/templatesOfOptions";
 import {
@@ -19,21 +20,24 @@ import trash from '../../../img/trash-icon.svg'
 import './HubsPage.scss'
 
 const objectWeightTemplate = {
-  startWeight: 0,
-  endWeight: 0,
-  price: 0
+  range_from: 0,
+  range_to: 0,
+  price_per_unit: 0,
+  type: 'MASS'
 }
 
 const objectVolumeTemplate = {
-  startVolume: 0,
-  endVolume: 0,
-  price: 0
+  range_from: 0,
+  range_to: 0,
+  price_per_unit: 0,
+  type: 'SIZE'
 }
 
 const objectMeterTemplate = {
-  startMeter: 0,
-  endMeter: 0,
-  price: 0
+  range_from: 0,
+  range_to: 0,
+  price_per_unit: 0,
+  type: 'LDM'
 }
 
 const AddHubsPage = () => {
@@ -50,8 +54,10 @@ const AddHubsPage = () => {
   const [modifyCountryObj, setModifyCountryObj] = useState([])
   const [optionCountryFromValue, setOptionCountryFromValue] = useState({})
   const [optionCountryToValue, setOptionCountryToValue] = useState({})
-  const [optionCityFromValue, setOptionCityToValue] = useState({})
-  const [optionCityToValue, setOptionCityFromValue] = useState({})
+  const [optionCityToValue, setOptionCityToValue] = useState({})
+  const [optionCityFromValue, setOptionCityFromValue] = useState({})
+  const [typeofShippingOption, setTypeofShippingOption] = useState({})
+  const [finalTypeofShipping, setFinalTypeofShipping] = useState('')
   const [modifyCitiesFromObj ,setModifyCitiesFromObj] = useState([])
   const [modifyCitiesToObj ,setModifyCitiesToObj] = useState([])
   const [activeButtonForWeight, setActiveButtonForWeight] = useState(true)
@@ -66,11 +72,62 @@ const AddHubsPage = () => {
   const [activeSunday, setActiveSunday] = useState(false)
   const [activeTimetableDays, setActiveTimetableDays] = useState([])
 
+  const daysObj = {
+    'Monday': activeMonday ? 1 : 0,
+    'Tuesday': activeTuesday ? 1 : 0,
+    'Wednesday': activeWednesday ? 1 : 0,
+    'Thursday': activeThursday ? 1 : 0,
+    'Friday': activeFriday ? 1 : 0,
+    'Saturday': activeSaturday ? 1 : 0,
+    'Sunday': activeSunday ? 1 : 0
+  }
+
+  const valuesDaysObj = Object.values(daysObj)
+
+  const allInfoHubsObj = {
+  'source': {
+      'id': optionCityFromValue.id,
+      'name': optionCityFromValue.value
+    },
+    'destination': {
+      'id': optionCityToValue.id,
+      'name': optionCityToValue.value,
+    },
+    'type': finalTypeofShipping,
+    'distance': destination,
+    'duration': duration * 60 * 24,
+    'rates': [
+        ...dataWeight,
+        ...dataMeter,
+        ...dataVolume
+    ],
+    'timetable': {
+      'weekdays': valuesDaysObj,
+      'preparation_period': prepareDays
+    }
+  }
+
   const prevCountryFromValue = useRef()
   const prevCountryToValue = useRef()
 
   const prevCountryFrom = prevCountryFromValue.current;
   const prevCountryTo = prevCountryToValue.current;
+
+  const shippingOptionHandler = (item) => {
+    switch (item.value) {
+      case 'Авиафрахт':
+        setFinalTypeofShipping('AIR')
+        break
+      case 'Автомобильная перевозка':
+        setFinalTypeofShipping('TRUCK')
+        break
+      case 'Железнодородная перевозка':
+        setFinalTypeofShipping('TRAIN')
+        break
+      default:
+        return ''
+    }
+  }
 
   const addWeightItem = () => {
     const newData = [...dataWeight, {...objectWeightTemplate}]
@@ -213,6 +270,18 @@ const AddHubsPage = () => {
     setPrepareDays(e.target.value)
   }
 
+  const shippingSelectHandler = (newValue) => {
+    setTypeofShippingOption(newValue)
+    shippingOptionHandler(newValue)
+  }
+
+  const sendRequest = () => {
+    const options = {
+      headers: { 'Content-Type': 'application/json' }
+    }
+    axios.post('https://ancient-temple-39835.herokuapp.com/api-admin/admin-routes/', allInfoHubsObj,options)
+  }
+
   useEffect(() => {
     prevCountryFromValue.current = optionCountryFromValue.value;
   }, [optionCountryFromValue.value]);
@@ -307,6 +376,7 @@ const AddHubsPage = () => {
               <Select
                   theme={customTheme}
                   options={typeOfShipping}
+                  onChange={shippingSelectHandler}
                   noOptionsMessage={() => `Не найдено 🖕`}
                   placeholder={'Перевозка'}
               />
@@ -362,23 +432,23 @@ const AddHubsPage = () => {
                               <div className={'start-input'}>
                                 <label>от</label>
                                 <input
-                                    onChange={e => updateItem('startWeight', e.target.value)}
+                                    onChange={e => updateItem('range_from', e.target.value)}
                                     type="number"
-                                    value={item.startWeight}/>
+                                    value={item.range_from}/>
                               </div>
                               <div className={'end-input'}>
                                 <label>до</label>
                                 <input
-                                    onChange={e => updateItem('endWeight', e.target.value)}
+                                    onChange={e => updateItem('range_to', e.target.value)}
                                     type="number"
-                                    value={item.endWeight}/>
+                                    value={item.range_to}/>
                               </div>
                               <div className={'weight-unit'}>кг</div>
                               <div className={'price-input'}>
                                 <input
-                                    onChange={e => updateItem('price', e.target.value)}
+                                    onChange={e => updateItem('price_per_unit', e.target.value)}
                                     type="number"
-                                    value={item.price}/>
+                                    value={item.price_per_unit}/>
                                 <label className={'icon-euro'}>€</label>
                               </div>
                               <img src={trash} onClick={() => deleteWeightItem(index)} alt="trash"/>
@@ -399,23 +469,23 @@ const AddHubsPage = () => {
                               <div className={'start-input'}>
                                 <label>от</label>
                                 <input
-                                    onChange={e => updateItem('startVolume', e.target.value)}
+                                    onChange={e => updateItem('range_from', e.target.value)}
                                     type="number"
-                                    value={item.startVolume}/>
+                                    value={item.range_from}/>
                               </div>
                               <div className={'end-input'}>
                                 <label>до</label>
                                 <input
-                                    onChange={e => updateItem('endVolume', e.target.value)}
+                                    onChange={e => updateItem('range_to', e.target.value)}
                                     type="number"
-                                    value={item.endVolume}/>
+                                    value={item.range_to}/>
                               </div>
                               <div className={'weight-unit'}>см³</div>
                               <div className={'price-input'}>
                                 <input
-                                    onChange={e => updateItem('price', e.target.value)}
+                                    onChange={e => updateItem('price_per_unit', e.target.value)}
                                     type="number"
-                                    value={item.price}/>
+                                    value={item.price_per_unit}/>
                                 <label className={'icon-euro'}>€</label>
                               </div>
                               <img src={trash} onClick={() => deleteVolumeItem(index)} alt="trash"/>
@@ -436,23 +506,23 @@ const AddHubsPage = () => {
                               <div className={'start-input'}>
                                 <label>от</label>
                                 <input
-                                    onChange={e => updateItem('startMeter', e.target.value)}
+                                    onChange={e => updateItem('range_from', e.target.value)}
                                     type="number"
-                                    value={item.startMeter}/>
+                                    value={item.range_from}/>
                               </div>
                               <div className={'end-input'}>
                                 <label>до</label>
                                 <input
-                                    onChange={e => updateItem('endMeter', e.target.value)}
+                                    onChange={e => updateItem('range_to', e.target.value)}
                                     type="number"
-                                    value={item.endMeter}/>
+                                    value={item.range_to}/>
                               </div>
                               <div className={'weight-unit'}>LDM</div>
                               <div className={'price-input'}>
                                 <input
-                                    onChange={e => updateItem('price', e.target.value)}
+                                    onChange={e => updateItem('price_per_unit', e.target.value)}
                                     type="number"
-                                    value={item.price}/>
+                                    value={item.price_per_unit}/>
                                 <label className={'icon-euro'}>€</label>
                               </div>
                               <img src={trash} onClick={() => deleteMeterItem(index)} alt="trash"/>
@@ -509,6 +579,7 @@ const AddHubsPage = () => {
             <div className={'service-title'}>Услуги</div>
           </div>
         </div>
+        <button onClick={sendRequest} className={'create-hub-button'}>Создать</button>
       </section>
   );
 };

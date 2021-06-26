@@ -1,22 +1,25 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
+
 import {Link} from 'react-router-dom'
+import axios from 'axios'
 
 import './MainMenuAdmin.scss'
 
 const MainMenuAdmin = () => {
+
   return (
       <section className={'admin-page-wrapper'}>
         <div className={'admin-buttons-wrapper'}>
           <Link to={'/admin/hubs'}>
             <button className={'button-in-admin'}>Хабовые плечи</button>
           </Link>
-          <Link to={'./services'}>
+          <Link to={'./admin/services'}>
             <button className={'button-in-admin'}>Услуги</button>
           </Link>
-          <Link to={'./routes'}>
+          <Link to={'./admin/routes'}>
             <button className={'button-in-admin'}>Вспомогательные плечи</button>
           </Link>
-          <Link to={'./zones'}>
+          <Link to={'./admin/zones'}>
             <button className={'button-in-admin'}>Районы</button>
           </Link>
         </div>

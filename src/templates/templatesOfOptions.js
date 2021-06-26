@@ -6,7 +6,6 @@ export const placeOfCargoOptions = [
 
 export const typeOfShipping = [
   {value: 'Автомобильная перевозка', label: 'Автомобильная перевозка'},
-  {value: 'Морская перевозка', label: 'Морская перевозка'},
   {value: 'Авиафрахт', label: 'Авиафрахт'},
   {value: 'Железнодородная перевозка', label: 'Железнодородная перевозка'},
 ]
