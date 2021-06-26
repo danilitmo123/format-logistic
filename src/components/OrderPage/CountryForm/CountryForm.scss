@@ -11,6 +11,8 @@
     background-color: $white;
     padding: 40px 30px;
     border-radius: 20px;
+    border: 1px solid gray;
+    box-shadow: 0 5px 5px -5px #333;
     .from-form-title-wrapper {
       display: flex;
       justify-content: space-between;
@@ -106,6 +108,8 @@
     background-color: $white;
     padding: 40px 30px;
     border-radius: 20px;
+    border: 1px solid gray;
+    box-shadow: 0 5px 5px -5px #333;
     .where-form-title-wrapper {
       display: flex;
       justify-content: space-between;

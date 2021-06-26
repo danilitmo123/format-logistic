@@ -20,6 +20,9 @@ const Header = () => {
           </div>
         </div>
         <div className={'contacts'}>
+          <Link to={'/admin'}>
+            <button className={'admin-button'}>Админка</button>
+          </Link>
           <div className={'number'}>+7 (499) 281-60-81</div>
           <div className={'mail'}>customfreight2020@gmail.com</div>
           <div className={'profile'}>

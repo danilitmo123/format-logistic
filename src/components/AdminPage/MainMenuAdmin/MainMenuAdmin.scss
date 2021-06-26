@@ -1,0 +1,32 @@
+@import '../../../global';
+.admin-page-wrapper {
+  height: 100vh;
+  min-height: 700px;
+  background-color: #028090;
+  display: flex;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  .admin-buttons-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 700px;
+    height: 300px;
+    margin-top: 200px;
+    a {
+      .button-in-admin {
+        width: 300px;
+        height: 100px;
+        background: none;
+        border-radius: 20px;
+        border: 2px solid $light-blue;
+        margin-right: 20px;
+        color: $white;
+        font-weight: 400;
+        font-size: 20px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

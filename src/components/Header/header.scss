@@ -1,18 +1,16 @@
 @import "../../global";
 .header {
-  position: absolute;
-  top: 30px;
   width: 90%;
-  z-index: 3;
   padding: 0 5%;
   display: flex;
   justify-content: space-between;
+  background-color: #028090;
+  height: 100px;
   .logo {
     display: flex;
     justify-content: center;
     align-items: center;
     color: $white;
-
     .logo-text-block {
       margin-left: 15px;
       font-family: 'Montserrat', sans-serif;
@@ -21,7 +19,7 @@
         font-weight: 400;
         margin-bottom: 5px;
         .format {
-          color: $light-blue;
+          color: $white;
         }
       }
       .logo-subtitle {
@@ -39,6 +37,19 @@
     font-weight: 600;
     font-size: 14px;
     color: $white;
+
+    .admin-button {
+      color: $white;
+      background: none;
+      border-radius: 8px;
+      border: 1px solid $light-blue;
+      width: 160px;
+      height: 40px;
+      margin-right: 40px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
 
     .number {
       margin-right: 65px;
