@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
@@ -8,9 +8,12 @@ import AllHubsPage from "./AllHubsPage";
 
 import './AdminPage.scss'
 
-
-
 const AdminPage = () => {
+
+  const [isEditingHub, setIsEditingHub] = useState(false)
+  const [allHubsInfo, setAllHubsInfo] = useState([])
+  const [hubId, setHubId] = useState('')
+
   return (
      <Router>
        <Switch>
@@ -18,10 +21,14 @@ const AdminPage = () => {
            <MainMenuAdmin/>
          </Route>
          <Route path={'/admin/hubs'}>
-           <AddHubsPage/>
+           <AllHubsPage
+               setId={setHubId}
+               setEditing={setIsEditingHub}
+               allHubsInfo={allHubsInfo}
+               setAllHubs={setAllHubsInfo}/>
          </Route>
-         <Route path={'/admin/hubs/create'}>
-           <AddHubsPage/>
+         <Route path={!isEditingHub ? '/admin/create-hub' : '/admin/edit-hub'}>
+           <AddHubsPage isEditing={isEditingHub} hubId={hubId}/>
          </Route>
        </Switch>
      </Router>

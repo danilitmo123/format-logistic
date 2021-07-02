@@ -1,11 +1,43 @@
 @import '../../../../global';
+a {
+  text-decoration: none;
+  text-underline: none;
+  color: #333333;
+}
 .hub-wrapper {
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 100px;
   border-radius: 20px;
-  flex-direction: row;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   background: $white;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  .countries-hub-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 10px;
+    .source-name {
+      margin-right: 10px;
+    }
+    .destination-name {
+      margin-left: 10px;
+    }
+  }
+  .cities-hub-wrapper {
+    .hub-type {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+  }
 }

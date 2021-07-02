@@ -1,19 +1,29 @@
 import React from 'react';
 
+import {Link} from 'react-router-dom'
+
 import './HubsItem.scss'
 
-const HubsItem = ({hub, index}) => {
+const HubsItem = ({hub, setEditing, setId}) => {
+
+  const setEditingAndIdHandler = () => {
+    setId(hub.id)
+    setEditing(true)
+  }
+
   return (
-      <div className={'hub-wrapper'}>
-        <div className={'countries-hub-wrapper'}>
-          <div>{hub.source.name}</div>
-          <div>{hub.destination.name}</div>
+      <Link to={'/admin/edit-hub'}>
+        <div className={'hub-wrapper'} onClick={setEditingAndIdHandler}>
+          <div className={'countries-hub-wrapper'}>
+            <div className={'source-name'}>{hub.source.name}</div>
+            -
+            <div className={'destination-name'}>{hub.destination.name}</div>
+          </div>
+          <div className={'cities-hub-wrapper'}>
+            <div className={'hub-type'}>{hub.type}</div>
+          </div>
         </div>
-        <div className={'cities-hub-wrapper'}>
-          <div>{hub.type}</div>
-          <div></div>
-        </div>
-      </div>
+      </Link>
   );
 };
 
