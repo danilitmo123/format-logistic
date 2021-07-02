@@ -13,9 +13,6 @@ const MainMenuAdmin = () => {
           <Link to={'/admin/hubs'}>
             <button className={'button-in-admin'}>Хабовые плечи</button>
           </Link>
-          <Link to={'./admin/services'}>
-            <button className={'button-in-admin'}>Услуги</button>
-          </Link>
           <Link to={'./admin/routes'}>
             <button className={'button-in-admin'}>Вспомогательные плечи</button>
           </Link>
