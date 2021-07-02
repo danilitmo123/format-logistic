@@ -72,8 +72,7 @@ const AddHubsPage = ({isEditing, hubId}) => {
   const [activeSunday, setActiveSunday] = useState(false)
   const [activeTimetableDays, setActiveTimetableDays] = useState([])
   const [prevHubData, setPrevHubData] = useState([])
-
-  console.log(dataVolume)
+  const [prevCountry, setPrevCountry] = useState('')
 
   const setData = () => {
     if(isEditing && prevHubData[0] !== undefined) {
@@ -93,8 +92,11 @@ const AddHubsPage = ({isEditing, hubId}) => {
               range_from: item.range_from,
               range_to: item.range_to,
               price_per_unit: item.price_per_unit,
-              type: 'LDM'
+              type: 'MASS'
             }
+            const obj = {}
+            obj.push(massObj)
+              console.log(obj)
             setDataWeight([massObj])
             break
           case 'SIZE':
@@ -102,7 +104,7 @@ const AddHubsPage = ({isEditing, hubId}) => {
               range_from: item.range_from,
               range_to: item.range_to,
               price_per_unit: item.price_per_unit,
-              type: 'LDM'
+              type: 'SIZE'
             }
             console.log(sizeObj)
             setDataVolume([sizeObj])
@@ -370,10 +372,23 @@ const AddHubsPage = ({isEditing, hubId}) => {
     getCitiesTo(prevCountryTo, optionCountryToValue, setAllCitiesTo)
   }, [optionCountryToValue.value])
 
+  const getPrevCountries = () => {
+    if(isEditing && prevHubData[0] !== undefined) {
+      setPrevCountry(prevHubData[0].source.name)
+    }
+  }
+
+  useEffect(() => {
+    getPrevCountries()
+  }, [])
+
   return (
       <section className={'hubs-page-wrapper'}>
         <div className={'top-hubs-tile'}>
-          <div className={'title'}>{!isEditing ? 'Добавить плечо' : 'Редактироавть плечо'}</div>
+          <div className={'title'}>
+              <div className={'hubs-title'}>{!isEditing ? 'Добавить плечо' : 'Редактировать плечо'}:</div>
+              <div className={'way-title'}>{isEditing && prevHubData[0] !== undefined ? prevHubData[0].source.name : ''} - {isEditing && prevHubData[0] !== undefined ? prevHubData[0].destination.name : ''}</div>
+          </div>
          <Link to={'/admin/hubs'}>
            <button className={'back-to-hubs-button'}>Вернуться</button>
          </Link>
@@ -385,8 +400,6 @@ const AddHubsPage = ({isEditing, hubId}) => {
               <div className={'departure-country-select'}>
                 <label className={'label-departure-select'}>Страна отправления</label>
                 <Select
-                    // defaultInputValue={isEditing && prevHubData[0] !== undefined ? prevHubData[0].source.name : ''}
-                    // defaultValue={{ label: 'Germany', name: 'Germany' }}
                     theme={customTheme}
                     onChange={setOptionCountryFromValue}
                     options={modifyCountryObj}
@@ -432,7 +445,6 @@ const AddHubsPage = ({isEditing, hubId}) => {
             <div className={'type-of-place-select'}>
               <label className={'label-shipping-select'}>Вид перевозки</label>
               <Select
-                  // defaultInputValue={'XY'}
                   theme={customTheme}
                   options={typeOfShipping}
                   onChange={shippingSelectHandler}

@@ -5,8 +5,10 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import MainMenuAdmin from "./MainMenuAdmin";
 import AddHubsPage from "./AddHubsPage";
 import AllHubsPage from "./AllHubsPage";
+import ExtraShouldersPage from "./ExtraShouldersPage";
 
 import './AdminPage.scss'
+
 
 const AdminPage = () => {
 
@@ -29,6 +31,9 @@ const AdminPage = () => {
          </Route>
          <Route path={!isEditingHub ? '/admin/create-hub' : '/admin/edit-hub'}>
            <AddHubsPage isEditing={isEditingHub} hubId={hubId}/>
+         </Route>
+         <Route path={'/admin/routes'}>
+             <ExtraShouldersPage/>
          </Route>
        </Switch>
      </Router>

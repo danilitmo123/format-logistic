@@ -1,0 +1,56 @@
+@import '../../../global';
+.extra-shoulder-page-wrapper {
+  height: 1200px;
+  background-color: #028090;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 5%;
+  .top-extra-shoulders-tile {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    width: 1200px;
+    .back-to-hubs-button {
+      font-family: 'Montserrat', sans-serif;
+      color: $white;
+      width: 120px;
+      height: 40px;
+      background: none;
+      border: 1px solid $light-blue;
+      border-radius: 8px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .extra-shoulders-title {
+      margin-top: 40px;
+      font-family: 'Montserrat', sans-serif;
+      color: $white;
+      font-weight: 400;
+      font-size: 30px;
+      margin-bottom: 40px;
+    }
+  }
+
+  .items-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-bottom: 20px;
+  }
+  .refresh-price-button {
+    width: 210px;
+    height: 50px;
+    border-radius: 20px;
+    background: none;
+    border: 2px solid #35d2d2;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: $white;
+    outline: none;
+    cursor: pointer;
+  }
+}
