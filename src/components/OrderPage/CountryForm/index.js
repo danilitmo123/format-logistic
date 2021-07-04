@@ -1,9 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
 
-import axios from "axios";
-import Select from 'react-select';
+import Select, {createFilter} from 'react-select';
 import AsyncSelect from 'react-select/async';
 
+import {filterConfig} from "../../../templates/filterSelectTemplate";
 import {placeOfCargoOptions, customTheme} from "../../../templates/templatesOfOptions";
 import {
   getCountries,
@@ -112,8 +112,9 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
                 theme={customTheme}
                 options={modifyCountryObj}
                 onChange={setOptionCountryFromValue}
-                noOptionsMessage={() => `Не найдено 🖕`}
+                noOptionsMessage={() => `Не найдено`}
                 placeholder={'Выберите страну'}
+                filterOption={createFilter(filterConfig)}
             />
           </div>
           <div className={'city-select-from'}>
@@ -123,8 +124,9 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
                 loadOptions={loadOptionsFrom}
                 options={modifyCitiesFromObj}
                 onChange={selectedCityIdFromHandler}
-                noOptionsMessage={() => 'Не найдено 🖕'}
+                noOptionsMessage={() => 'Не найдено'}
                 placeholder={'Выберите город'}
+                filterOption={createFilter(filterConfig)}
             />
           </div>
           <div className={'place-select-from'}>
@@ -132,8 +134,9 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
             <Select
                 theme={customTheme}
                 options={placeOfCargoOptions}
-                noOptionsMessage={() => `Не найдено 🖕`}
+                noOptionsMessage={() => `Не найдено`}
                 placeholder={'Выберите место отправления'}
+                filterOption={createFilter(filterConfig)}
             />
           </div>
         </div>
@@ -148,8 +151,9 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
                 theme={customTheme}
                 options={modifyCountryObj}
                 onChange={setOptionCountryToValue}
-                noOptionsMessage={() => `Не найдено 🖕`}
+                noOptionsMessage={() => `Не найдено`}
                 placeholder={'Выберите страну'}
+                filterOption={createFilter(filterConfig)}
             />
           </div>
           <div className={'city-select-where'}>
@@ -159,8 +163,9 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
                 loadOptions={loadOptionsTo}
                 options={modifyCitiesToObj}
                 onChange={selectedCityIdToHandler}
-                noOptionsMessage={() => 'Не найдено 🖕'}
+                noOptionsMessage={() => 'Не найдено'}
                 placeholder={'Выберите город'}
+                filterOption={createFilter(filterConfig)}
             />
           </div>
           <div className={'place-select-where'}>
@@ -168,7 +173,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
             <Select
                 theme={customTheme}
                 options={placeOfCargoOptions}
-                noOptionsMessage={() => `Не найдено 🖕`}
+                noOptionsMessage={() => `Не найдено`}
                 placeholder={'Выберите место прибытия'}
             />
           </div>

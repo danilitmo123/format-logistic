@@ -1,6 +1,11 @@
 import React, {useState} from 'react';
 
-import {typeOfCargoOptions, typeOfVolumeUnits, customTheme} from "../../../templates/templatesOfOptions";
+import {
+  typeOfCargoOptions,
+  typeOfVolumeUnits,
+  customTheme,
+  typeOfWeightUnits
+} from "../../../templates/templatesOfOptions";
 
 import Select from 'react-select';
 
@@ -13,9 +18,10 @@ const objectTemplate = {
   width: 0,
   height: 0,
   weight: 0,
-  size: 'СМ',
+  volumeUnits: 'CM',
+  weightUnits: 'КГ',
   lengthPallet: 120,
-  widthPallet: 0,
+  widthPallet: 100,
   heightPallet: 0,
   weightBoxSelect: 'КГ',
 }
@@ -29,7 +35,6 @@ const CargoForm = () => {
   const [thirdContainerButton, setActiveThirdContainerButton] = useState(false)
   const [volume, setVolume] = useState(0)
   const [weight, setWeight] = useState(0)
-  const [units, setUnits] = useState('м³')
   const [data, setData] = useState([objectTemplate])
 
   const addItem = () => {
@@ -39,25 +44,54 @@ const CargoForm = () => {
 
   const deleteItem = (i) => {
     const newData = [...data.slice(0, i), ...data.slice(i + 1)]
+    setWeight(weight - data[i].weight)
+    if (data[i].cargo === 'Паллеты') {
+      setVolume(volume - 120 * data[i].heightPallet * data[i].widthPallet)
+    } else {
+      setVolume(volume - data[i].length * data[i].width * data[i].height)
+    }
     setData(newData)
   }
 
   const calculateVolume = (newData) => {
-    let totalVolumeBox = 0
-    let totalVolumePallet = 0
-    let totalVolume = 0
+    let totalVolumeCM = 0
+    let totalVolumeIN = 0
     newData.forEach(item => {
-      totalVolumeBox += item.count * (item.height * item.width * item.length)
-      totalVolumePallet += item.count * (item.lengthPallet * item.widthPallet * item.heightPallet)
-      totalVolume = totalVolumeBox + totalVolumePallet
+      switch (item.volumeUnits) {
+        case 'CM':
+          if(item.cargo === 'Паллеты') {
+            totalVolumeCM += 120 * item.widthPallet * item.heightPallet
+          } else {
+            totalVolumeCM += item.width * item.length * item.height
+          }
+          setVolume(totalVolumeCM + totalVolumeIN)
+          break
+        case 'IN':
+          if(item.cargo === 'Паллеты') {
+            totalVolumeIN += (120 * item.widthPallet * item.heightPallet) * 2.54
+          } else {
+            totalVolumeIN += (item.width * item.length * item.height) * 2.54
+          }
+          setVolume(totalVolumeCM + totalVolumeIN)
+          break
+      }
     })
   }
 
   const calculateWeight = (newData) => {
-    let totalWeight = 0
+    let totalWeightKG = 0
+    let totalWeightLB = 0
     newData.forEach(item => {
-      totalWeight += item.count * (+item.weight)
-      setWeight(totalWeight)
+      switch (item.weightUnits) {
+        case 'КГ':
+          totalWeightKG += +item.weight
+          setWeight(totalWeightKG + totalWeightLB)
+          break
+        case 'LB':
+          totalWeightLB += item.weight * 2.2
+          setWeight(totalWeightKG + totalWeightLB)
+          break
+      }
     })
   }
 
@@ -103,15 +137,15 @@ const CargoForm = () => {
       <div className={'cargo-wrapper'}>
         <div className={'title-wrapper'}>
           <div className={'cargo-title'}>Груз</div>
-          <div className={'cargo-all-info'}>Элементов: {data.length} Общий вес: {weight} кг Общий объем: {volume} {units}</div>
+          <div className={'cargo-all-info'}>Грузов: {data.length} Общий вес: {weight} кг Общий объем: {volume} см³</div>
         </div>
         <div className={'cargo-choice'}>
           <div className={activeBoxButton ? 'active-box-button' : 'box'}
                onClick={ActiveBoxButtonHandler}>Коробки/Паллеты
           </div>
-          <div className={activeContainerButton ? 'active-container-button' : 'container'}
-               onClick={ActiveContainerButtonHandler}>Контейнеры
-          </div>
+          {/*<div className={activeContainerButton ? 'active-container-button' : 'container'}*/}
+          {/*     onClick={ActiveContainerButtonHandler}>Контейнеры*/}
+          {/*</div>*/}
         </div>
         {data.map((item, index) => {
 
@@ -184,9 +218,10 @@ const CargoForm = () => {
                                         <Select
                                             theme={customTheme}
                                             options={typeOfVolumeUnits}
-                                            // onChange={(value) => updateItem('cargo', value)}
+                                            defaultValue={{value: 'CM', label: 'CM'}}
+                                            onChange={(e) => updateItem('volumeUnits', e.value)}
                                             noOptionsMessage={() => `Не найдено 🖕`}
-                                            placeholder={'М'}
+                                            placeholder={'СМ'}
                                         />
                                       </div>
                                     </div>
@@ -210,6 +245,14 @@ const CargoForm = () => {
                                           placeholder={'Высота'}
                                           value={item.heightPallet || ''}
                                           onChange={e => updateItem('heightPallet', e.target.value)}/>
+                                      <Select
+                                          theme={customTheme}
+                                          options={typeOfVolumeUnits}
+                                          defaultValue={{value: 'CM', label: 'CM'}}
+                                          onChange={(e) => updateItem('volumeUnits', e.value)}
+                                          noOptionsMessage={() => `Не найдено 🖕`}
+                                          placeholder={'СМ'}
+                                      />
                                     </div>
                                   </div>
                             }
@@ -229,10 +272,11 @@ const CargoForm = () => {
                             />
                             <Select
                                 theme={customTheme}
-                                options={typeOfVolumeUnits}
-                                onChange={(value) => updateItem('cargo', value)}
-                                noOptionsMessage={() => `Не найдено 🖕`}
-                                placeholder={'М'}
+                                options={typeOfWeightUnits}
+                                defaultValue={{value: 'КГ', label: 'КГ'}}
+                                onChange={(e) => updateItem('weightUnits', e.value)}
+                                noOptionsMessage={() => `Не найдено`}
+                                placeholder={'КГ'}
                             />
                           </div>
                         </div>
