@@ -1,10 +1,10 @@
 @import '../../../global';
 .all-hubs-page-wrapper {
-  height: 700px;
+  height: 800px;
   background: #028090;
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex-direction: column;
   .loading-wrapper {
     display: flex;
     justify-content: center;
@@ -17,9 +17,38 @@
       font-size: 16px;
     }
   }
-
-  .cards-wrapper{
+  .hub-title {
+    font-family: 'Montserrat', sans-serif;
+    color: $white;
+    font-weight: 600;
+    font-size: 36px;
+    margin-bottom: 40px;
+    margin-top: 40px;
+  }
+  .create-hubs-button {
+    margin-top: 20px;
+    width: 210px;
+    height: 50px;
+    border-radius: 20px;
+    background: none;
+    border: 2px solid #35d2d2;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: $white;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 60px;
+  }
+  .all-hubs-wrapper {
+    width: 700px;
     display: flex;
     flex-direction: row;
+    .hubs {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 1200px;
+    }
   }
 }

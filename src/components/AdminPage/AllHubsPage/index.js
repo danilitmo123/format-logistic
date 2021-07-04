@@ -9,18 +9,19 @@ import loader from '../../../img/loader.svg'
 
 import './AllHubsPage.scss'
 
-const AllHubsPage = () => {
+const AllHubsPage = ({setEditing, allHubsInfo, setAllHubs, setId}) => {
 
-  const [allHubsInfo, setAllHubsInfo] = useState([])
   const [loading, setLoading] = useState(true)
 
   const getHubs = () => {
     axios.get('https://ancient-temple-39835.herokuapp.com/api-admin/admin-routes/?short')
-        .then(res => {setAllHubsInfo([res.data])})
+        .then(res => {setAllHubs([res.data])})
     setLoading(false)
   }
 
-  console.log(allHubsInfo[0])
+  const setEditingHandler = () => {
+    setEditing(false)
+  }
 
   useEffect(() => {
     getHubs()
@@ -28,18 +29,23 @@ const AllHubsPage = () => {
 
  return (
     <section className={'all-hubs-page-wrapper'}>
+      <div className={'hub-title'}>Хабовые плечи</div>
       {loading ?
           <div className={'loading-wrapper'}>
             <img src={loader} alt="loader"/>
             <div className={'loader-text'}>Загрузка...</div>
           </div>
           :
-          <div>
+          <div className={'all-hubs-wrapper'}>
             {
               allHubsInfo[0] ?
-                  <div className={'card-wrapper'}>
+                  <div className={'hubs'}>
                     {
-                      allHubsInfo[0].map((item) => <HubsItem hub={item}/>)
+                      allHubsInfo[0].map((item) => <HubsItem
+                          key={item.id}
+                          setEditing={setEditing}
+                          hub={item}
+                          setId={setId}/>)
                     }
                   </div>
                   :
@@ -48,8 +54,8 @@ const AllHubsPage = () => {
 
           </div>
       }
-      <Link to={'/admin/hubs/create'}>
-        <button>Добавить плечо</button>
+      <Link to={'/admin/create-hub'}>
+        <button className={'create-hubs-button'} onClick={setEditingHandler}>Создать плечо</button>
       </Link>
     </section>
  );

@@ -40,7 +40,7 @@ const objectMeterTemplate = {
   type: 'LDM'
 }
 
-const AddHubsPage = () => {
+const AddHubsPage = ({isEditing, hubId}) => {
 
   const [dataWeight, setDataWeight] = useState([objectWeightTemplate])
   const [dataVolume, setDataVolume] = useState([objectVolumeTemplate])
@@ -48,8 +48,8 @@ const AddHubsPage = () => {
   const [allCountries, setAllCountries] = useState([])
   const [allCitiesFrom, setAllCitiesFrom] = useState([])
   const [allCitiesTo, setAllCitiesTo] = useState([])
-  const [destination, setDestination] = useState('')
-  const [duration, setDuration] = useState('')
+  const [destination, setDestination] = useState(0)
+  const [duration, setDuration] = useState(0)
   const [prepareDays, setPrepareDays] = useState('')
   const [modifyCountryObj, setModifyCountryObj] = useState([])
   const [optionCountryFromValue, setOptionCountryFromValue] = useState({})
@@ -71,6 +71,49 @@ const AddHubsPage = () => {
   const [activeSaturday, setActiveSaturday] = useState(false)
   const [activeSunday, setActiveSunday] = useState(false)
   const [activeTimetableDays, setActiveTimetableDays] = useState([])
+  const [prevHubData, setPrevHubData] = useState([])
+  const [prevCountry, setPrevCountry] = useState('')
+
+  const setData = () => {
+    if(isEditing && prevHubData[0] !== undefined) {
+      prevHubData[0].rates.map(item => {
+        switch (item.type) {
+          case 'LDM':
+            const ldmObj = {
+              range_from: item.range_from,
+              range_to: item.range_to,
+              price_per_unit: item.price_per_unit,
+              type: 'LDM'
+            }
+            setDataMeter([ldmObj])
+            break
+          case 'MASS':
+            const massObj = {
+              range_from: item.range_from,
+              range_to: item.range_to,
+              price_per_unit: item.price_per_unit,
+              type: 'MASS'
+            }
+            setDataWeight([massObj])
+            break
+          case 'SIZE':
+            const sizeObj = {
+              range_from: item.range_from,
+              range_to: item.range_to,
+              price_per_unit: item.price_per_unit,
+              type: 'SIZE'
+            }
+            console.log(sizeObj)
+            setDataVolume([sizeObj])
+            break
+        }
+      })
+    }
+  }
+
+  useEffect(() => {
+    setData()
+  }, [prevHubData])
 
   const daysObj = {
     'Monday': activeMonday ? 1 : 0,
@@ -280,7 +323,19 @@ const AddHubsPage = () => {
       headers: { 'Content-Type': 'application/json' }
     }
     axios.post('https://ancient-temple-39835.herokuapp.com/api-admin/admin-routes/', allInfoHubsObj,options)
+        .then(res => console.log(res))
   }
+
+  const getHubInfo = () => {
+    if(isEditing) {
+      axios.get(`https://ancient-temple-39835.herokuapp.com/api-admin/admin-routes/${hubId}`)
+          .then(res => {setPrevHubData([res.data])})
+    }
+  }
+
+  useEffect(() => {
+    getHubInfo()
+  }, [])
 
   useEffect(() => {
     prevCountryFromValue.current = optionCountryFromValue.value;
@@ -314,11 +369,24 @@ const AddHubsPage = () => {
     getCitiesTo(prevCountryTo, optionCountryToValue, setAllCitiesTo)
   }, [optionCountryToValue.value])
 
+  const getPrevCountries = () => {
+    if(isEditing && prevHubData[0] !== undefined) {
+      setPrevCountry(prevHubData[0].source.name)
+    }
+  }
+
+  useEffect(() => {
+    getPrevCountries()
+  }, [])
+
   return (
       <section className={'hubs-page-wrapper'}>
         <div className={'top-hubs-tile'}>
-          <div className={'title'}>Добавить плечо</div>
-         <Link to={'/admin'}>
+          <div className={'title'}>
+              <div className={'hubs-title'}>{!isEditing ? 'Добавить плечо' : 'Редактировать плечо'}:</div>
+              <div className={'way-title'}>{isEditing && prevHubData[0] !== undefined ? prevHubData[0].source.name : ''} - {isEditing && prevHubData[0] !== undefined ? prevHubData[0].destination.name : ''}</div>
+          </div>
+         <Link to={'/admin/hubs'}>
            <button className={'back-to-hubs-button'}>Вернуться</button>
          </Link>
         </div>
@@ -388,6 +456,7 @@ const AddHubsPage = () => {
               <div className={'destination-wrapper'}>
                 <label>Расстояние</label>
                 <input
+                    value={isEditing && prevHubData[0] !== undefined ? prevHubData[0].distance : ''}
                     onChange={destinationHandler}
                     type="text"
                     placeholder={'Расстояния'}/>
@@ -395,6 +464,7 @@ const AddHubsPage = () => {
               <div className={'duration-wrapper'}>
                 <label>Дни</label>
                 <input
+                    value={isEditing && prevHubData[0] !== undefined ? prevHubData[0].duration : ''}
                     placeholder={'Дни'}
                     type="number"
                     onChange={durationHandler}/>
@@ -571,7 +641,7 @@ const AddHubsPage = () => {
                 </div>
                 <div className={'timetable-input'}>
                   <label>Время погрзуки</label>
-                  <input type="number" placeholder={'Дни'} onChange={prepareDaysHandler}/>
+                  <input type="number" placeholder={'Дни'} value={isEditing && prevHubData[0] !== undefined ? prevHubData[0].timetable.preparation_period : ''} onChange={prepareDaysHandler}/>
                 </div>
               </div>
             </div>
@@ -579,7 +649,8 @@ const AddHubsPage = () => {
             <div className={'service-title'}>Услуги</div>
           </div>
         </div>
-        <button onClick={sendRequest} className={'create-hub-button'}>Создать</button>
+          <button onClick={sendRequest} className={'create-hub-button'}>{!isEditing ? 'Создать' : 'Сохранить изменения'}</button>
+
       </section>
   );
 };
