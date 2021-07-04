@@ -74,6 +74,8 @@ const AddHubsPage = ({isEditing, hubId}) => {
   const [activeTimetableDays, setActiveTimetableDays] = useState([])
   const [prevHubData, setPrevHubData] = useState([])
 
+  const [prevCountry, setPrevCountry] = useState('')
+
   const setData = () => {
     if(isEditing && prevHubData[0] !== undefined) {
       prevHubData[0].rates.map(item => {
@@ -92,7 +94,7 @@ const AddHubsPage = ({isEditing, hubId}) => {
               range_from: item.range_from,
               range_to: item.range_to,
               price_per_unit: item.price_per_unit,
-              type: 'LDM'
+              type: 'MASS'
             }
             setDataWeight([massObj])
             break
@@ -101,7 +103,7 @@ const AddHubsPage = ({isEditing, hubId}) => {
               range_from: item.range_from,
               range_to: item.range_to,
               price_per_unit: item.price_per_unit,
-              type: 'LDM'
+              type: 'SIZE'
             }
             console.log(sizeObj)
             setDataVolume([sizeObj])
@@ -369,10 +371,23 @@ const AddHubsPage = ({isEditing, hubId}) => {
     getCitiesTo(prevCountryTo, optionCountryToValue, setAllCitiesTo)
   }, [optionCountryToValue.value])
 
+  const getPrevCountries = () => {
+    if(isEditing && prevHubData[0] !== undefined) {
+      setPrevCountry(prevHubData[0].source.name)
+    }
+  }
+
+  useEffect(() => {
+    getPrevCountries()
+  }, [])
+
   return (
       <section className={'hubs-page-wrapper'}>
         <div className={'top-hubs-tile'}>
-          <div className={'title'}>{!isEditing ? 'Добавить плечо' : 'Редактироавть плечо'}</div>
+          <div className={'title'}>
+              <div className={'hubs-title'}>{!isEditing ? 'Добавить плечо' : 'Редактировать плечо'}:</div>
+              <div className={'way-title'}>{isEditing && prevHubData[0] !== undefined ? prevHubData[0].source.name : ''} - {isEditing && prevHubData[0] !== undefined ? prevHubData[0].destination.name : ''}</div>
+          </div>
          <Link to={'/admin/hubs'}>
            <button className={'back-to-hubs-button'}>Вернуться</button>
          </Link>
@@ -641,7 +656,7 @@ const AddHubsPage = ({isEditing, hubId}) => {
             <div className={'service-title'}>Услуги</div>
           </div>
         </div>
-          <button onClick={sendRequest} className={'create-hub-button'}>Создать</button>
+          <button onClick={sendRequest} className={'create-hub-button'}>{!isEditing ? 'Создать' : 'Сохранить изменения'}</button>
 
       </section>
   );
