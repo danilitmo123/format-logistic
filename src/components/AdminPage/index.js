@@ -6,6 +6,7 @@ import MainMenuAdmin from "./MainMenuAdmin";
 import AddHubsPage from "./AddHubsPage";
 import AllHubsPage from "./AllHubsPage";
 import ExtraShouldersPage from "./ExtraShouldersPage";
+import SideBar from "../SideBar";
 
 import './AdminPage.scss'
 
@@ -18,16 +19,14 @@ const AdminPage = () => {
 
   return (
      <Router>
+         <SideBar/>
        <Switch>
-         <Route path={'/admin'} exact={true}>
-           <MainMenuAdmin/>
-         </Route>
-         <Route path={'/admin/hubs'}>
-           <AllHubsPage
-               setId={setHubId}
-               setEditing={setIsEditingHub}
-               allHubsInfo={allHubsInfo}
-               setAllHubs={setAllHubsInfo}/>
+         <Route path={'/admin/hubs'} exact={true}>
+             <AllHubsPage
+                 setId={setHubId}
+                 setEditing={setIsEditingHub}
+                 allHubsInfo={allHubsInfo}
+                 setAllHubs={setAllHubsInfo}/>
          </Route>
          <Route path={!isEditingHub ? '/admin/create-hub' : '/admin/edit-hub'}>
            <AddHubsPage isEditing={isEditingHub} hubId={hubId}/>

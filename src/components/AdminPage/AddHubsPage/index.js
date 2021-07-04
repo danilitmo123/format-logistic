@@ -94,9 +94,6 @@ const AddHubsPage = ({isEditing, hubId}) => {
               price_per_unit: item.price_per_unit,
               type: 'MASS'
             }
-            const obj = {}
-            obj.push(massObj)
-              console.log(obj)
             setDataWeight([massObj])
             break
           case 'SIZE':

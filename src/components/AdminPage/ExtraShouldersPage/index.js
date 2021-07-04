@@ -17,7 +17,7 @@ const ExtraShouldersPage = () => {
       <div className={'extra-shoulder-page-wrapper'}>
           <div className={'top-extra-shoulders-tile'}>
               <div className={'extra-shoulders-title'}>Вспомогательные плечи</div>
-              <Link to={'/admin/'}>
+              <Link to={'/admin/hubs'}>
                   <button className={'back-to-hubs-button'}>Вернуться</button>
               </Link>
           </div>
