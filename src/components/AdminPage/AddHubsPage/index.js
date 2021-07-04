@@ -649,7 +649,7 @@ const AddHubsPage = ({isEditing, hubId}) => {
             <div className={'service-title'}>Услуги</div>
           </div>
         </div>
-          <button onClick={sendRequest} className={'create-hub-button'}>Создать</button>
+          <button onClick={sendRequest} className={'create-hub-button'}>{!isEditing ? 'Создать' : 'Сохранить изменения'}</button>
 
       </section>
   );

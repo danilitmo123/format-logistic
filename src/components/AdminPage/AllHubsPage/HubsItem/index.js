@@ -20,7 +20,7 @@ const HubsItem = ({hub, setEditing, setId}) => {
             <div className={'destination-name'}>{hub.destination.name}</div>
           </div>
           <div className={'cities-hub-wrapper'}>
-            <div className={'hub-type'}>{hub.type}</div>
+            <div className={'hub-type'}>{hub.type === 'AIR' ? 'Авиафрахт' : hub.type === 'TRAIN' ? 'ЖД перевозка' : 'Автомобильная перевозка'}</div>
           </div>
         </div>
       </Link>
