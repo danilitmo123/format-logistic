@@ -33,7 +33,6 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
     const prevCountryFrom = prevCountryFromValue.current;
     const prevCountryTo = prevCountryToValue.current;
 
-
     const filterCitiesFrom = (inputValue) => {
         return modifyCitiesFromObj.filter(i =>
             i.label.toLowerCase().includes(inputValue.toLowerCase())

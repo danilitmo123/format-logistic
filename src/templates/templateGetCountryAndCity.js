@@ -7,14 +7,14 @@ export const getCountries = (setAllCountries) => {
 
 export const getCitiesFrom = (prevCountryFrom, optionCountryFromValue, setAllCitiesFrom) => {
   if (prevCountryFrom !== optionCountryFromValue.value) {
-    axios.get(`https://ancient-temple-39835.herokuapp.com/geo/cities/?country=${optionCountryFromValue.value}`)
+    axios.get(`https://ancient-temple-39835.herokuapp.com/geo/cities/short?country=${optionCountryFromValue.value}`)
         .then(res => {setAllCitiesFrom([...res.data])})
   }
 }
 
 export const getCitiesTo = (prevCountryTo, optionCountryToValue, setAllCitiesTo) => {
   if (prevCountryTo !== optionCountryToValue.value) {
-    axios.get(`https://ancient-temple-39835.herokuapp.com/geo/cities/?country=${optionCountryToValue.value}`)
+    axios.get(`https://ancient-temple-39835.herokuapp.com/geo/cities/short?country=${optionCountryToValue.value}`)
         .then(res => {setAllCitiesTo([...res.data])})
   }
 }
