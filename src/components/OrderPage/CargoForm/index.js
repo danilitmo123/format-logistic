@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {
   typeOfCargoOptions,
@@ -35,7 +35,31 @@ const CargoForm = () => {
   const [thirdContainerButton, setActiveThirdContainerButton] = useState(false)
   const [volume, setVolume] = useState(0)
   const [weight, setWeight] = useState(0)
-  const [data, setData] = useState([objectTemplate])
+  const [data, setData] = useState([])
+
+  localStorage.setItem('myCat', 'Tom');
+
+  // // console.log('data', data)
+  // // console.log('storageData', storageData)
+  //
+  // useEffect(() => {
+  //   // let storageCargo = JSON.parse(localStorage.getItem('cargo')); // get the data
+  //   // console.log(storageCargo)
+  //   // if(storageCargo)  {
+  //   //   setStorageData(storageCargo); // update the state if taskList has data
+  //   // }
+  // }, []);
+
+  useEffect(() => {
+    localStorage.setItem('cargo', JSON.stringify(data))
+  }, [data])
+
+  useEffect(() => {
+    const storageCargo = JSON.parse(localStorage.getItem('cargo'));
+    if (storageCargo) {
+      setData(storageCargo);
+    }
+  }, []);
 
   const addItem = () => {
     const newData = [...data, {...objectTemplate}]
