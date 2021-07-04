@@ -211,6 +211,9 @@
                 .units-select {
                   width: 100px;
                   height: 38px;
+                  .units-select-select__value-container{
+                    height: 42px;
+                  }
                 }
                 input {
                   width: 100px;
@@ -245,13 +248,19 @@
                 .pallet-select-wrapper {
                   display: flex;
                   flex-direction: row;
-
+                  .units-select-pallet{
+                    height: 38px;
+                    width: 88px;
+                    .units-select-pallet-select__value-container{
+                      height: 37px;
+                    }
+                  }
                   .pallet-length {
                     background-color: white;
                     display: flex;
                     justify-content: flex-start;
                     align-items: center;
-                    width: 113px;
+                    width: 100px;
                     height: 38px;
                     border: 1px solid $light-blue;
                     border-radius: 2px 0 0 2px;
@@ -261,7 +270,7 @@
                   }
 
                   select {
-                    width: 130px;
+                    width: 100px;
                     height: 40px;
                     border: 1px solid $light-blue;
                     padding: 0 5px 0 12px;
@@ -297,7 +306,13 @@
 
             .weight-cargo-input {
               display: flex;
-
+              .units-select-weight {
+                width: 100px;
+                height: 38px;
+                .units-select-weigh-select__value-container{
+                  height: 37px;
+                }
+              }
               input {
                 width: 100px;
                 height: 38px;

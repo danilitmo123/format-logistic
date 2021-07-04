@@ -240,6 +240,7 @@ const CargoForm = () => {
                                       />
                                       <div className={'units-select'}>
                                         <Select
+                                            classNamePrefix="units-select-select"
                                             theme={customTheme}
                                             options={typeOfVolumeUnits}
                                             defaultValue={{value: 'CM', label: 'CM'}}
@@ -269,7 +270,9 @@ const CargoForm = () => {
                                           placeholder={'Высота'}
                                           value={item.heightPallet || ''}
                                           onChange={e => updateItem('heightPallet', e.target.value)}/>
+                                      <div className={'units-select-pallet'}>
                                       <Select
+                                          classNamePrefix="units-select-pallet-select"
                                           theme={customTheme}
                                           options={typeOfVolumeUnits}
                                           defaultValue={{value: 'CM', label: 'CM'}}
@@ -277,6 +280,7 @@ const CargoForm = () => {
                                           noOptionsMessage={() => `Не найдено 🖕`}
                                           placeholder={'СМ'}
                                       />
+                                      </div>
                                     </div>
                                   </div>
                             }
@@ -294,7 +298,9 @@ const CargoForm = () => {
                                 step={1}
                                 placeholder={item.weightBoxSelect === 'КГ' ? 'КГ' : 'Фунты'}
                             />
+                            <div className={'units-select-weight'}>
                             <Select
+                                classNamePrefix="units-select-weigh-select"
                                 theme={customTheme}
                                 options={typeOfWeightUnits}
                                 defaultValue={{value: 'КГ', label: 'КГ'}}
@@ -302,6 +308,7 @@ const CargoForm = () => {
                                 noOptionsMessage={() => `Не найдено`}
                                 placeholder={'КГ'}
                             />
+                            </div>
                           </div>
                         </div>
                         <img
