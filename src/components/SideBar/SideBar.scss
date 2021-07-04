@@ -21,6 +21,9 @@
     align-items: center;
     color: $white;
     margin-bottom: 30px;
+    transform: translateX(-50%);
+    transition: opacity .5s .1s, transform .5s .1s;
+    opacity: 0;
 
     .logo-text-block {
       margin-left: 15px;
@@ -143,6 +146,14 @@ body {
 }
 
 [id='nav-toggle']:checked ~ .nav > ul > li {
+  opacity: 1;
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+}
+
+[id='nav-toggle']:checked ~ .nav > .logo {
   opacity: 1;
   -webkit-transform: translateX(0);
   -moz-transform: translateX(0);

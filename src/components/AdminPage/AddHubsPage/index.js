@@ -1,10 +1,11 @@
 import React, {useState, useEffect, useRef} from 'react';
 
-import Select from 'react-select';
+import Select,{createFilter} from 'react-select';
 import AsyncSelect from 'react-select/async';
 import {Link} from 'react-router-dom';
 import axios from "axios";
 
+import {filterConfig} from "../../../templates/filterSelectTemplate";
 import {customTheme, typeOfShipping} from "../../../templates/templatesOfOptions";
 import {
   getCountries,
@@ -72,6 +73,7 @@ const AddHubsPage = ({isEditing, hubId}) => {
   const [activeSunday, setActiveSunday] = useState(false)
   const [activeTimetableDays, setActiveTimetableDays] = useState([])
   const [prevHubData, setPrevHubData] = useState([])
+
   const [prevCountry, setPrevCountry] = useState('')
 
   const setData = () => {
@@ -401,7 +403,8 @@ const AddHubsPage = ({isEditing, hubId}) => {
                     onChange={setOptionCountryFromValue}
                     options={modifyCountryObj}
                     placeholder={'Страна'}
-                    noOptionsMessage={() => `Не найдено 🖕`}
+                    noOptionsMessage={() => `Не найдено`}
+                    filterOption={createFilter(filterConfig)}
                 />
               </div>
               <div className={'departure-city-select'}>
@@ -412,7 +415,8 @@ const AddHubsPage = ({isEditing, hubId}) => {
                     onChange={setOptionCityFromValue}
                     options={modifyCitiesFromObj}
                     placeholder={'Город'}
-                    noOptionsMessage={() => `Не найдено 🖕`}
+                    noOptionsMessage={() => `Не найдено`}
+                    filterOption={createFilter(filterConfig)}
                 />
               </div>
             </div>
@@ -424,7 +428,8 @@ const AddHubsPage = ({isEditing, hubId}) => {
                     onChange={setOptionCountryToValue}
                     options={modifyCountryObj}
                     placeholder={'Страна'}
-                    noOptionsMessage={() => `Не найдено 🖕`}
+                    noOptionsMessage={() => `Не найдено`}
+                    filterOption={createFilter(filterConfig)}
                 />
               </div>
               <div className={'arrival-city-select'}>
@@ -435,7 +440,8 @@ const AddHubsPage = ({isEditing, hubId}) => {
                     onChange={setOptionCityToValue}
                     options={modifyCitiesToObj}
                     placeholder={'Город'}
-                    noOptionsMessage={() => `Не найдено 🖕`}
+                    noOptionsMessage={() => `Не найдено`}
+                    filterOption={createFilter(filterConfig)}
                 />
               </div>
             </div>
@@ -445,8 +451,9 @@ const AddHubsPage = ({isEditing, hubId}) => {
                   theme={customTheme}
                   options={typeOfShipping}
                   onChange={shippingSelectHandler}
-                  noOptionsMessage={() => `Не найдено 🖕`}
+                  noOptionsMessage={() => `Не найдено`}
                   placeholder={'Перевозка'}
+                  filterOption={createFilter(filterConfig)}
               />
             </div>
           </div>
