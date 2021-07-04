@@ -51,7 +51,21 @@ const CargoForm = () => {
   // }, []);
 
   useEffect(() => {
-    localStorage.setItem('cargo', JSON.stringify(data))
+    let init_data = [{
+      cargo: "Коробки",
+      count: 1,
+      height: 0,
+      heightPallet: 0,
+      length: 0,
+      lengthPallet: 120,
+      volumeUnits: "CM",
+      weight: 0,
+      weightBoxSelect: "КГ",
+      weightUnits: "КГ",
+      width: 0,
+      widthPallet: 100
+    }]
+    localStorage.setItem('cargo', JSON.stringify(init_data))
   }, [data])
 
   useEffect(() => {
