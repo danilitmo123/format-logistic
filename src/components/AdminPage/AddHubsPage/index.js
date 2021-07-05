@@ -19,6 +19,7 @@ import {
 import trash from '../../../img/trash-icon.svg'
 
 import './HubsPage.scss'
+import ServiceContainer from "../common/ServiceContainer";
 
 const objectWeightTemplate = {
   range_from: 0,
@@ -635,6 +636,9 @@ const AddHubsPage = ({isEditing, hubId}) => {
             </div>
           <div className={'services-wrapper'}>
             <div className={'service-title'}>Услуги</div>
+            <ServiceContainer>
+
+            </ServiceContainer>
           </div>
         </div>
           <button onClick={sendRequest} className={'create-hub-button'}>{!isEditing ? 'Создать' : 'Сохранить изменения'}</button>
