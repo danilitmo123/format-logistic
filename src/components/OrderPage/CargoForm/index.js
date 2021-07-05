@@ -35,7 +35,7 @@ const CargoForm = () => {
   const [thirdContainerButton, setActiveThirdContainerButton] = useState(false)
   const [volume, setVolume] = useState(0)
   const [weight, setWeight] = useState(0)
-  const [data, setData] = useState([])
+  const [data, setDataRaw] = useState([])
 
   localStorage.setItem('myCat', 'Tom');
 
@@ -50,22 +50,34 @@ const CargoForm = () => {
   //   // }
   // }, []);
 
+  const setData = (data) => {
+    localStorage.setItem('cargo', JSON.stringify(data))
+    console.log("setData " + localStorage.getItem('cargo'))
+    setDataRaw(data)
+  }
+
   useEffect(() => {
-    let init_data = [{
-      cargo: "Коробки",
-      count: 1,
-      height: 0,
-      heightPallet: 0,
-      length: 0,
-      lengthPallet: 120,
-      volumeUnits: "CM",
-      weight: 0,
-      weightBoxSelect: "КГ",
-      weightUnits: "КГ",
-      width: 0,
-      widthPallet: 100
-    }]
-    localStorage.setItem('cargo', JSON.stringify(init_data))
+    if (data.length === 0) {
+      let init_data = [{
+        cargo: "Коробки",
+        count: 1,
+        height: 0,
+        heightPallet: 0,
+        length: 0,
+        lengthPallet: 120,
+        volumeUnits: "CM",
+        weight: 0,
+        weightBoxSelect: "КГ",
+        weightUnits: "КГ",
+        width: 0,
+        widthPallet: 100
+      }]
+      localStorage.setItem('cargo', JSON.stringify(init_data))
+    }
+    else {
+      localStorage.setItem('cargo', JSON.stringify(data))
+    }
+
   }, [data])
 
   useEffect(() => {
@@ -77,6 +89,7 @@ const CargoForm = () => {
 
   const addItem = () => {
     const newData = [...data, {...objectTemplate}]
+
     setData(newData)
   }
 
