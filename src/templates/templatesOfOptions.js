@@ -25,8 +25,9 @@ export const typeOfWeightUnits = [
   {value: 'LB', label: 'LB'},
 ]
 
-export const typeOfWidthUnits = [
-
+export const typeOfWidthPalletUnits = [
+  {value: '100', label: '100'},
+  {value: '80', label: '80'},
 ]
 
 export const customTheme = (theme) => {

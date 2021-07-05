@@ -4,7 +4,8 @@ import {
   typeOfCargoOptions,
   typeOfVolumeUnits,
   customTheme,
-  typeOfWeightUnits
+  typeOfWeightUnits,
+  typeOfWidthPalletUnits
 } from "../../../templates/templatesOfOptions";
 
 import Select from 'react-select';
@@ -36,19 +37,6 @@ const CargoForm = () => {
   const [volume, setVolume] = useState(0)
   const [weight, setWeight] = useState(0)
   const [data, setData] = useState([])
-
-  localStorage.setItem('myCat', 'Tom');
-
-  // // console.log('data', data)
-  // // console.log('storageData', storageData)
-  //
-  // useEffect(() => {
-  //   // let storageCargo = JSON.parse(localStorage.getItem('cargo')); // get the data
-  //   // console.log(storageCargo)
-  //   // if(storageCargo)  {
-  //   //   setStorageData(storageCargo); // update the state if taskList has data
-  //   // }
-  // }, []);
 
   useEffect(() => {
     let init_data = [{
@@ -82,13 +70,31 @@ const CargoForm = () => {
 
   const deleteItem = (i) => {
     const newData = [...data.slice(0, i), ...data.slice(i + 1)]
-    setWeight(weight - data[i].weight)
-    if (data[i].cargo === 'Паллеты') {
-      setVolume(volume - 120 * data[i].heightPallet * data[i].widthPallet)
-    } else {
-      setVolume(volume - data[i].length * data[i].width * data[i].height)
-    }
     setData(newData)
+    switch (data[i].weightUnits) {
+      case 'LB':
+        setWeight(weight - data[i].weight * data[i].count * 2.2)
+        break
+      case 'КГ':
+        setWeight(weight - data[i].weight * data[i].count)
+        break
+    }
+    switch (data[i].volumeUnits) {
+      case 'CM':
+        if (data[i].cargo === 'Паллеты') {
+          setVolume((volume - 120 * data[i].heightPallet * data[i].widthPallet * data[i].count).toFixed(2))
+        } else {
+          setVolume((volume - data[i].length * data[i].width * data[i].height * data[i].count).toFixed(2))
+        }
+        break
+      case 'IN':
+        if (data[i].cargo === 'Паллеты') {
+          setVolume((volume - 120 * data[i].heightPallet * data[i].widthPallet * data[i].count * 2.54).toFixed(2))
+        } else {
+          setVolume((volume - data[i].length * data[i].width * data[i].height * data[i].count * 2.54).toFixed(2))
+        }
+        break
+    }
   }
 
   const calculateVolume = (newData) => {
@@ -98,19 +104,19 @@ const CargoForm = () => {
       switch (item.volumeUnits) {
         case 'CM':
           if(item.cargo === 'Паллеты') {
-            totalVolumeCM += 120 * item.widthPallet * item.heightPallet
+            totalVolumeCM += 120 * item.widthPallet * item.heightPallet * item.count
           } else {
-            totalVolumeCM += item.width * item.length * item.height
+            totalVolumeCM += item.width * item.length * item.height * item.count
           }
-          setVolume(totalVolumeCM + totalVolumeIN)
+          setVolume((totalVolumeCM + totalVolumeIN).toFixed(2))
           break
         case 'IN':
           if(item.cargo === 'Паллеты') {
-            totalVolumeIN += (120 * item.widthPallet * item.heightPallet) * 2.54
+            totalVolumeIN += (120 * item.widthPallet * item.heightPallet) * item.count * 2.54
           } else {
-            totalVolumeIN += (item.width * item.length * item.height) * 2.54
+            totalVolumeIN += (item.width * item.length * item.height) * item.count  * 2.54
           }
-          setVolume(totalVolumeCM + totalVolumeIN)
+          setVolume((totalVolumeCM + totalVolumeIN).toFixed(2))
           break
       }
     })
@@ -122,11 +128,11 @@ const CargoForm = () => {
     newData.forEach(item => {
       switch (item.weightUnits) {
         case 'КГ':
-          totalWeightKG += +item.weight
+          totalWeightKG += +item.weight * item.count
           setWeight(totalWeightKG + totalWeightLB)
           break
         case 'LB':
-          totalWeightLB += item.weight * 2.2
+          totalWeightLB += item.weight * item.count * 2.2
           setWeight(totalWeightKG + totalWeightLB)
           break
       }
@@ -259,7 +265,7 @@ const CargoForm = () => {
                                             options={typeOfVolumeUnits}
                                             defaultValue={{value: 'CM', label: 'CM'}}
                                             onChange={(e) => updateItem('volumeUnits', e.value)}
-                                            noOptionsMessage={() => `Не найдено 🖕`}
+                                            noOptionsMessage={() => `Не найдено`}
                                             placeholder={'СМ'}
                                         />
                                       </div>
@@ -270,15 +276,26 @@ const CargoForm = () => {
                                     <label htmlFor={'sizeof-pallet'}>Паллет</label>
                                     <div className={'pallet-select-wrapper'}>
                                       <div className={'pallet-length'}>120</div>
-                                      <select
-                                          name="pallet-width"
-                                          id="pallet-width"
-                                          value={item.widthPallet}
-                                          onChange={e => updateItem('widthPallet', e.target.value)}
-                                      >
-                                        <option value="100">100</option>
-                                        <option value="80">80</option>
-                                      </select>
+                                      {/*<select*/}
+                                      {/*    name="pallet-width"*/}
+                                      {/*    id="pallet-width"*/}
+                                      {/*    value={item.widthPallet}*/}
+                                      {/*    onChange={e => updateItem('widthPallet', e.target.value)}*/}
+                                      {/*>*/}
+                                      {/*  <option value="100">100</option>*/}
+                                      {/*  <option value="80">80</option>*/}
+                                      {/*</select>*/}
+                                      <div className={'units-select-pallet'}>
+                                        <Select
+                                            classNamePrefix="units-select-pallet-select"
+                                            theme={customTheme}
+                                            options={typeOfWidthPalletUnits}
+                                            defaultValue={{value: '100', label: '100'}}
+                                            onChange={e => updateItem('widthPallet', e.value)}
+                                            noOptionsMessage={() => `Не найдено`}
+                                            placeholder={'100'}
+                                        />
+                                      </div>
                                       <input
                                           type='number'
                                           placeholder={'Высота'}
