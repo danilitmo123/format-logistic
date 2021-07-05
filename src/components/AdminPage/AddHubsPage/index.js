@@ -78,40 +78,21 @@ const AddHubsPage = ({isEditing, hubId}) => {
 
   const setData = () => {
     if(isEditing && prevHubData[0] !== undefined) {
-      prevHubData[0].rates.map(item => {
-        switch (item.type) {
-          case 'LDM':
-            const ldmObj = {
-              range_from: item.range_from,
-              range_to: item.range_to,
-              price_per_unit: item.price_per_unit,
-              type: 'LDM'
-            }
-            setDataMeter([ldmObj])
-            break
-          case 'MASS':
-            const massObj = {
-              range_from: item.range_from,
-              range_to: item.range_to,
-              price_per_unit: item.price_per_unit,
-              type: 'MASS'
-            }
-            setDataWeight([massObj])
-            break
-          case 'SIZE':
-            const sizeObj = {
-              range_from: item.range_from,
-              range_to: item.range_to,
-              price_per_unit: item.price_per_unit,
-              type: 'SIZE'
-            }
-            console.log(sizeObj)
-            setDataVolume([sizeObj])
-            break
-        }
-      })
+      let ratesLDM = []
+      let ratesMASS = []
+      let ratesSIZE = []
+
+      // 6 раз обхожу список вместо одного но мне похуй
+      prevHubData[0].rates.filter(rate => rate.type === 'LDM').map(rate => ratesLDM.push(rate))
+      prevHubData[0].rates.filter(rate => rate.type === 'MASS').map(rate => ratesMASS.push(rate))
+      prevHubData[0].rates.filter(rate => rate.type === 'SIZE').map(rate => ratesSIZE.push(rate))
+
+      setDataWeight(ratesMASS)
+      setDataVolume(ratesSIZE)
+      setDataMeter(ratesLDM)
     }
   }
+
 
   useEffect(() => {
     setData()
