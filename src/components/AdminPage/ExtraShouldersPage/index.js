@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 
 import {Link} from "react-router-dom";
 
@@ -7,11 +7,6 @@ import ExtraShoulderItem from "./ExtraShoulderItem";
 import './ExtraShouldersPage.scss'
 
 const ExtraShouldersPage = () => {
-
-  const [carInputRussia, setCarInputRussia] = useState('')
-  const [railwayInputRussia, setRailwayInputRussia] = useState('')
-  const [airInputRussia, setAirInputRussia] = useState('')
-  const [waterInputRussia, setWaterInputRussia] = useState('')
 
   return (
       <div className={'extra-shoulder-page-wrapper'}>

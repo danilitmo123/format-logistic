@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import HPlatform, {HMap, HMapPolyLine} from "react-here-map";
 
 import airplane from '../../../../img/black-airplane-icon.svg'

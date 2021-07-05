@@ -74,8 +74,6 @@ const AddHubsPage = ({isEditing, hubId}) => {
   const [activeTimetableDays, setActiveTimetableDays] = useState([])
   const [prevHubData, setPrevHubData] = useState([])
 
-  const [prevCountry, setPrevCountry] = useState('')
-
   const setData = () => {
     if(isEditing && prevHubData[0] !== undefined) {
       let ratesLDM = []
@@ -351,16 +349,6 @@ const AddHubsPage = ({isEditing, hubId}) => {
   useEffect(() => {
     getCitiesTo(prevCountryTo, optionCountryToValue, setAllCitiesTo)
   }, [optionCountryToValue.value])
-
-  const getPrevCountries = () => {
-    if(isEditing && prevHubData[0] !== undefined) {
-      setPrevCountry(prevHubData[0].source.name)
-    }
-  }
-
-  useEffect(() => {
-    getPrevCountries()
-  }, [])
 
   return (
       <section className={'hubs-page-wrapper'}>

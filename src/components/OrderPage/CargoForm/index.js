@@ -88,11 +88,13 @@ const CargoForm = () => {
     setData(newData)
     switch (data[i].weightUnits) {
       case 'LB':
-        setWeight(weight - data[i].weight * data[i].count * 2.2)
+        setWeight((weight - data[i].weight * data[i].count * 2.2).toFixed(2))
         break
       case 'КГ':
-        setWeight(weight - data[i].weight * data[i].count)
+        setWeight((weight - data[i].weight * data[i].count).toFixed(2))
         break
+      default:
+        return ''
     }
     switch (data[i].volumeUnits) {
       case 'CM':
@@ -109,6 +111,8 @@ const CargoForm = () => {
           setVolume((volume - data[i].length * data[i].width * data[i].height * data[i].count * 2.54).toFixed(2))
         }
         break
+      default:
+        return ''
     }
   }
 
@@ -133,6 +137,8 @@ const CargoForm = () => {
           }
           setVolume((totalVolumeCM + totalVolumeIN).toFixed(2))
           break
+        default:
+          return ''
       }
     })
   }
@@ -144,12 +150,14 @@ const CargoForm = () => {
       switch (item.weightUnits) {
         case 'КГ':
           totalWeightKG += +item.weight * item.count
-          setWeight(totalWeightKG + totalWeightLB)
+          setWeight((totalWeightKG + totalWeightLB).toFixed(2))
           break
         case 'LB':
           totalWeightLB += item.weight * item.count * 2.2
-          setWeight(totalWeightKG + totalWeightLB)
+          setWeight((totalWeightKG + totalWeightLB).toFixed(2))
           break
+        default:
+          return ''
       }
     })
   }
@@ -167,11 +175,6 @@ const CargoForm = () => {
   const ActiveBoxButtonHandler = () => {
     setActiveContainerButton(false)
     setActiveBoxButton(true)
-  }
-
-  const ActiveContainerButtonHandler = () => {
-    setActiveContainerButton(true)
-    setActiveBoxButton(false)
   }
 
   const FirstContainerActiveButtonHandler = () => {
