@@ -28,6 +28,9 @@
       border-radius: 20px;
       background-color: $white;
       .add-cargo-btn {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        border-radius: 4px;
         width: 140px;
         height: 30px;
         display: flex;
@@ -35,7 +38,6 @@
         align-items: center;
         border: 1px solid $light-blue;
         background: none;
-        border-radius: 2px;
       }
 
       .title-wrapper {
