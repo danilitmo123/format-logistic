@@ -20,6 +20,7 @@ import trash from '../../../img/trash-icon.svg'
 
 import './HubsPage.scss'
 import ServiceContainer from "../common/ServiceContainer";
+import {ADMIN_SERVER_URL} from "../../../constants/URL";
 
 const objectWeightTemplate = {
   range_from: 0,
@@ -310,13 +311,13 @@ const AddHubsPage = ({isEditing, hubId}) => {
     const options = {
       headers: { 'Content-Type': 'application/json' }
     }
-    axios.post('https://ancient-temple-39835.herokuapp.com/api-admin/admin-routes/', allInfoHubsObj,options)
+    axios.post(`${ADMIN_SERVER_URL}admin-routes/`, allInfoHubsObj,options)
         .then(res => console.log(res))
   }
 
   const getHubInfo = () => {
     if(isEditing) {
-      axios.get(`https://ancient-temple-39835.herokuapp.com/api-admin/admin-routes/${hubId}`)
+      axios.get(`${ADMIN_SERVER_URL}admin-routes/${hubId}`)
           .then(res => {setPrevHubData([res.data])})
     }
   }

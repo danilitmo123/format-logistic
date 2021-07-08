@@ -8,13 +8,14 @@ import {Link} from "react-router-dom";
 import loader from '../../../img/loader.svg'
 
 import './AllHubsPage.scss'
+import {ADMIN_SERVER_URL} from "../../../constants/URL";
 
 const AllHubsPage = ({setEditing, allHubsInfo, setAllHubs, setId}) => {
 
   const [loading, setLoading] = useState(true)
 
   const getHubs = () => {
-    axios.get('https://ancient-temple-39835.herokuapp.com/api-admin/admin-routes/?short')
+    axios.get(`${ADMIN_SERVER_URL}admin-routes/?short`)
         .then(res => {setAllHubs([res.data])})
     setLoading(false)
   }
