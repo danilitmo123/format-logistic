@@ -5,11 +5,11 @@ import ServiceRankedItem from "../ServiceRankedItem";
 const defaultAdditionalServiceData = {name: "blya", price: 0.0}
 const defaultRankedServiceData = {name: "huy", rank_type: "MASS", price_per_unit: 0.0}
 
-const ServiceContainer = ({initData, routId}) => {
+const ServiceContainer = ({initData, uniqueKey}) => {
 
-    // routeId required to avoid collisions
-    const ADDITIONAL_SERVICE_KEY = `additionalServices-${routId}`
-    const RANKED_SERVICE_KEY = `rankedServices-${routId}`
+    // uniqueKey required to avoid collisions. Uses routeId or hubId as uniqueKey in AddsHubsPage component.
+    const ADDITIONAL_SERVICE_KEY = `additionalServices-${uniqueKey}`
+    const RANKED_SERVICE_KEY = `rankedServices-${uniqueKey}`
 
     const [data, setData] = useState(initData)
 
@@ -35,11 +35,10 @@ const ServiceContainer = ({initData, routId}) => {
         uploadRankedServiceDataToLocalStorage(initData.rankedServices)
     }, [])
 
-    const deleteAdditionalServiceItem = (index) => {
+    const deleteAdditionalServiceItemWrapper = (index) => {
         function deleteServiceItem() {
             let services = loadAdditionalServiceDataFromStorage()
             delete services[index]
-            console.log("additional", services, index)
             uploadAdditionalServiceDataToLocalStorage(services)
             setData({...data, additionalServices: services})
         }
@@ -47,11 +46,10 @@ const ServiceContainer = ({initData, routId}) => {
         return deleteServiceItem
     }
 
-    const deleteRankedServiceItem = (index) => {
+    const deleteRankedServiceItemWrapper = (index) => {
         function deleteServiceItem() {
             let services = loadRankedServiceDataFromStorage()
             delete services[index]
-            console.log("ranked", services, index)
             uploadRankedServiceDataToLocalStorage(services)
             setData({...data, rankedServices: services})
         }
@@ -104,7 +102,7 @@ const ServiceContainer = ({initData, routId}) => {
                         <ServiceAdditionalItem
                             initData={item}
                             setData={setAdditionalServiceDataWrapper(index)}
-                            onDelete={deleteAdditionalServiceItem(index)}/>
+                            onDelete={deleteAdditionalServiceItemWrapper(index)}/>
                     )
                 }
             })}
@@ -116,7 +114,7 @@ const ServiceContainer = ({initData, routId}) => {
                             <ServiceRankedItem
                                 initData={item}
                                 setData={setRankedServiceDataWrapper(index)}
-                                onDelete={deleteRankedServiceItem(index)}/>
+                                onDelete={deleteRankedServiceItemWrapper(index)}/>
                         )
                     }
                 })}
