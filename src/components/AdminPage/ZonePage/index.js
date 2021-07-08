@@ -1,26 +1,30 @@
 import {useState, useEffect} from 'react';
-import {ADMIN_SERVER_URL} from "../../../constants/URL";
+import {ADMIN_SERVER_URL, GEO_SERVER_URL} from "../../../constants/URL";
 import axios from "axios";
+import ZoneItem from "./ZoneItem";
 
-const ZONE_URL = `${ADMIN_SERVER_URL}admin-zones`
+const ZONE_SUMMARY_URL = `${ADMIN_SERVER_URL}admin-zones/summary`
 
 const ZonePage = () => {
-    const [zoneData, setZoneData] = useState()
+    const [zoneSummaryData, setZoneSummaryData] = useState([])
 
 
-    const loadZoneData = () => {
-        axios.get(ZONE_URL).then(res => {
-            setZoneData(res.data)
+    const loadZoneSummaryData = () => {
+        axios.get(ZONE_SUMMARY_URL).then(res => {
+            setZoneSummaryData(res.data)
+            console.log(res.data)
         })
     }
 
     useEffect(() => {
-        loadZoneData()
+        loadZoneSummaryData()
     }, [])
 
     return (
         <div>
-            {JSON.stringify(zoneData)}
+            {zoneSummaryData.map(item => {
+                return (<ZoneItem data={item}/>)
+            })}
         </div>
     )
 }
