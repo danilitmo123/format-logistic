@@ -42,6 +42,10 @@ const objectMeterTemplate = {
   type: 'LDM'
 }
 
+let serviceInitData = {
+  additionalServices: [],
+  rankedServices: []}
+
 const AddHubsPage = ({isEditing, hubId}) => {
 
   const [dataWeight, setDataWeight] = useState([objectWeightTemplate])
@@ -636,9 +640,7 @@ const AddHubsPage = ({isEditing, hubId}) => {
             </div>
           <div className={'services-wrapper'}>
             <div className={'service-title'}>Услуги</div>
-            <ServiceContainer>
-
-            </ServiceContainer>
+            <ServiceContainer initData={serviceInitData} routId={hubId}/>
           </div>
         </div>
           <button onClick={sendRequest} className={'create-hub-button'}>{!isEditing ? 'Создать' : 'Сохранить изменения'}</button>
