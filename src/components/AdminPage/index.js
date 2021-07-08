@@ -8,6 +8,7 @@ import ExtraShouldersPage from "./ExtraShouldersPage";
 import SideBar from "../SideBar";
 
 import './AdminPage.scss'
+import ZonePage from "./ZonePage";
 
 const AdminPage = () => {
 
@@ -32,6 +33,9 @@ const AdminPage = () => {
          <Route path={'/admin/routes'}>
              <ExtraShouldersPage/>
          </Route>
+           <Route path={'/admin/zones'}>
+                <ZonePage/>
+           </Route>
        </Switch>
      </Router>
   );

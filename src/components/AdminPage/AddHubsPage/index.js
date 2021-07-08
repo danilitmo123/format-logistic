@@ -19,6 +19,8 @@ import {
 import trash from '../../../img/trash-icon.svg'
 
 import './HubsPage.scss'
+import ServiceContainer from "../common/ServiceContainer";
+import {ADMIN_SERVER_URL} from "../../../constants/URL";
 
 const objectWeightTemplate = {
   range_from: 0,
@@ -40,6 +42,10 @@ const objectMeterTemplate = {
   price_per_unit: 0,
   type: 'LDM'
 }
+
+let serviceInitData = {
+  additionalServices: [],
+  rankedServices: []}
 
 const AddHubsPage = ({isEditing, hubId}) => {
 
@@ -303,13 +309,13 @@ const AddHubsPage = ({isEditing, hubId}) => {
     const options = {
       headers: { 'Content-Type': 'application/json' }
     }
-    axios.post('https://ancient-temple-39835.herokuapp.com/api-admin/admin-routes/', allInfoHubsObj,options)
+    axios.post(`${ADMIN_SERVER_URL}admin-routes/`, allInfoHubsObj,options)
         .then(res => console.log(res))
   }
 
   const getHubInfo = () => {
     if(isEditing) {
-      axios.get(`https://ancient-temple-39835.herokuapp.com/api-admin/admin-routes/${hubId}`)
+      axios.get(`${ADMIN_SERVER_URL}admin-routes/${hubId}`)
           .then(res => {setPrevHubData([res.data])})
     }
   }
@@ -623,6 +629,7 @@ const AddHubsPage = ({isEditing, hubId}) => {
             </div>
           <div className={'services-wrapper'}>
             <div className={'service-title'}>Услуги</div>
+            <ServiceContainer initData={serviceInitData} routId={hubId}/>
           </div>
         </div>
           <button onClick={sendRequest} className={'create-hub-button'}>{!isEditing ? 'Создать' : 'Сохранить изменения'}</button>
