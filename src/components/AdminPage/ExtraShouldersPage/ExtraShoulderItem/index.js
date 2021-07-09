@@ -2,39 +2,73 @@ import React, {useState} from 'react';
 
 import './ExtraShoulderItem.scss'
 import trash from "../../../../img/trash-icon.svg";
+import {ADMIN_SERVER_URL} from "../../../../constants/URL";
+import axios from "axios";
 
-const objectWeightTemplate = {
+const defaultMassRate = {
     range_from: 0,
     range_to: 0,
     price_per_unit: 0,
     type: 'MASS'
 }
 
-const objectVolumeTemplate = {
+const defaultSizeRate = {
     range_from: 0,
     range_to: 0,
     price_per_unit: 0,
     type: 'SIZE'
 }
 
-const objectMeterTemplate = {
+const defaultLdmRate = {
     range_from: 0,
     range_to: 0,
     price_per_unit: 0,
     type: 'LDM'
 }
 
-const ExtraShoulderItem = ({item}) => {
+const massRatesFromItem = (item) => {
+    let rates = item.rates.filter(rete => {
+        return rete.type === 'MASS'
+    })
+    if (rates.length === 0)
+        return [defaultMassRate]
+    else
+        return rates;
+}
 
-    const [dataWeight, setDataWeight] = useState([objectWeightTemplate])
-    const [dataVolume, setDataVolume] = useState([objectVolumeTemplate])
-    const [dataMeter, setDataMeter] = useState([objectMeterTemplate])
+const sizeRatesFromItem = (item) => {
+    let rates = item.rates.filter(rete => {
+        return rete.type === 'SIZE'
+    })
+    if (rates.length === 0)
+        return [defaultSizeRate]
+    else
+        return rates;
+}
+
+const ldmRatesFromItem = (item) => {
+    let rates = item.rates.filter(rete => {
+        return rete.type === 'LDM'
+    })
+    if (rates.length === 0)
+        return [defaultLdmRate]
+    else
+        return rates;
+}
+
+const UPDATE_RATES_URL = `${ADMIN_SERVER_URL}admin-zones`
+
+
+const ExtraShoulderItem = ({item}) => {
+    const [dataWeight, setDataWeight] = useState(massRatesFromItem(item))
+    const [dataVolume, setDataVolume] = useState(sizeRatesFromItem(item))
+    const [dataMeter, setDataMeter] = useState(ldmRatesFromItem(item))
     const [activeButtonForWeight, setActiveButtonForWeight] = useState(true)
     const [activeButtonForVolume, setActiveButtonForVolume] = useState(false)
     const [activeButtonForMeter, setActiveButtonForMeter] = useState(false)
 
     const addWeightItem = () => {
-        const newData = [...dataWeight, {...objectWeightTemplate}]
+        const newData = [...dataWeight, {...defaultMassRate}]
         setDataWeight(newData)
     }
 
@@ -44,7 +78,7 @@ const ExtraShoulderItem = ({item}) => {
     }
 
     const addVolumeItem = () => {
-        const newData = [...dataVolume, {...objectVolumeTemplate}]
+        const newData = [...dataVolume, {...defaultSizeRate}]
         setDataVolume(newData)
     }
 
@@ -54,7 +88,7 @@ const ExtraShoulderItem = ({item}) => {
     }
 
     const addMeterItem = () => {
-        const newData = [...dataMeter, {...objectMeterTemplate}]
+        const newData = [...dataMeter, {...defaultLdmRate}]
         setDataMeter(newData)
     }
 
@@ -104,6 +138,19 @@ const ExtraShoulderItem = ({item}) => {
         setDataMeter(newData)
     }
 
+    const flatRates = () => {
+        let rates = []
+        dataWeight.map(rate => {rates.push(rate)})
+        dataVolume.map(rate => {rates.push(rate)})
+        dataMeter.map(rate => {rates.push(rate)})
+        return rates
+    }
+
+    const sendRatesData = () => {
+        let body = {rates: flatRates()}
+        axios.patch(`${UPDATE_RATES_URL}/${item.id}/`, body).then()
+    }
+
     return (
         <div className={'extra-shoulder-item-wrapper'}>
             <div className={'zone-title'}>{item ? item.name : ''}</div>
@@ -112,16 +159,19 @@ const ExtraShoulderItem = ({item}) => {
                 <div className={'price-for-type-wrapper'}>
                     <button
                         onClick={weightButtonActiveHandler}
-                        className={activeButtonForWeight ? 'active-price-button': 'price-button'}
-                    >Цена за вес груза</button>
+                        className={activeButtonForWeight ? 'active-price-button' : 'price-button'}
+                    >Цена за вес груза
+                    </button>
                     <button
                         onClick={volumeButtonActiveHandler}
-                        className={activeButtonForVolume ? 'active-price-button': 'price-button'}
-                    >Цена за объём груза</button>
+                        className={activeButtonForVolume ? 'active-price-button' : 'price-button'}
+                    >Цена за объём груза
+                    </button>
                     <button
                         onClick={meterButtonActiveHandler}
-                        className={activeButtonForMeter ? 'active-price-button': 'price-button'}
-                    >Цена за погрузочный метр</button>
+                        className={activeButtonForMeter ? 'active-price-button' : 'price-button'}
+                    >Цена за погрузочный метр
+                    </button>
                 </div>
                 {
                     activeButtonForWeight ?
@@ -158,7 +208,8 @@ const ExtraShoulderItem = ({item}) => {
                                         </div>
                                         <img src={trash} onClick={() => deleteWeightItem(index)} alt="trash"/>
                                     </div>
-                                )})}
+                                )
+                            })}
                             <button className={'add-button'} onClick={addWeightItem}>Добавить промежуток</button>
                         </div>
                         : activeButtonForVolume ?
@@ -195,7 +246,8 @@ const ExtraShoulderItem = ({item}) => {
                                         </div>
                                         <img src={trash} onClick={() => deleteVolumeItem(index)} alt="trash"/>
                                     </div>
-                                )})}
+                                )
+                            })}
                             <button className={'add-button'} onClick={addVolumeItem}>Добавить промежуток</button>
                         </div>
                         :
@@ -232,11 +284,13 @@ const ExtraShoulderItem = ({item}) => {
                                         </div>
                                         <img src={trash} onClick={() => deleteMeterItem(index)} alt="trash"/>
                                     </div>
-                                )})}
+                                )
+                            })}
                             <button className={'add-button'} onClick={addMeterItem}>Добавить промежуток</button>
                         </div>
                 }
             </div>
+            <button onClick={sendRatesData}>save</button>
         </div>
     );
 };
