@@ -4,10 +4,12 @@ import HPlatform, {HMap, HMapPolyLine} from "react-here-map";
 import airplane from '../../../../img/black-airplane-icon.svg'
 import truck from '../../../../img/black-truck-icon.svg'
 
+
 import './PathItem.scss'
 
-
 const PathItem = ({path, setIndex, index}) => {
+
+  console.log(path)
 
   const getPoints = (pathOfItem) => {
     let pointsOfPath = []
@@ -27,13 +29,16 @@ const PathItem = ({path, setIndex, index}) => {
               <div className={'route-info'}>
                 <div className={'type'}>{route.type === 'TRUCK' ? <img className={'truck'} src={truck} alt="truck"/> :
                     <img className={'airplane'} src={airplane} alt="airplane"/>}</div>
-                <div className={'route-distance'}>{(route.distance / 1000).toFixed(0)}км</div>
+                <div className={'route-distance'}>{(route.distance / 1000).toFixed(0)}км {route.total_cost}</div>
+                <div></div>
               </div>
               <div className={'destination'}>{route.destination.name}</div>
            </div>
          </div>
      )
   }
+
+  console.log(path)
 
   const Map = ({points}) => {
     return (
@@ -54,6 +59,10 @@ const PathItem = ({path, setIndex, index}) => {
       <div className={'path-item-wrapper'}>
         <div className={'info-routes-wrapper'}>
           {path.routes.map((route, index) => <TypeOfRoutes step={index} route={route}/>)}
+          <div className={'route-time-and-cost-wrapper'}>
+            <div className={'route-total-cost'}>Цена: {path.total_cost}€/{(path.total_cost * 1.18).toFixed(2)}$</div>
+            <div className={'route-total-duration'}>Время прибытия: {path.total_duration.min} - {path.total_duration.max} дней</div>
+          </div>
           <button className={'choose-button'} onClick={() => setIndex(index)}>Выбрать</button>
         </div>
         <Map points={getPoints(path)}/>
