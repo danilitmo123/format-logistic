@@ -15,6 +15,17 @@
     justify-content: center;
     position: relative;
 
+    .route-time-and-cost-wrapper {
+      display: flex;
+      flex-direction: row;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      .route-total-cost {
+        margin-right: 15px;
+      }
+    }
+
     .choose-button {
       position: absolute;
       margin-left: -75px;

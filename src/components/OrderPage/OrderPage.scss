@@ -191,6 +191,10 @@
                 border-color: $light-blue;
                 box-shadow: 0 0 0 1px $light-blue;
               }
+
+              input::placeholder {
+               color: red;
+              }
             }
           }
 
@@ -213,6 +217,12 @@
                 .units-select {
                   width: 100px;
                   height: 38px;
+                  border-radius: 0;
+                  .css-2b097c-container {
+                    .css-yk16xz-control {
+                      border-radius: 0 4px 4px 0;
+                    }
+                  }
                   .units-select-select__value-container{
                     height: 42px;
                   }
@@ -254,8 +264,13 @@
                   .units-select-pallet{
                     height: 38px;
                     width: 88px;
+                    .css-2b097c-container {
+                      .css-yk16xz-control {
+                        border-radius: 0;
+                      }
+                    }
                     .units-select-pallet-select__value-container{
-                      height: 37px;
+                      height: 38px;
                     }
                   }
                   .pallet-length {
@@ -318,6 +333,9 @@
                     &:focus {
                       border-color: $light-blue;
                       box-shadow: 0 0 0 1px $light-blue;
+                    }
+                    &::placeholder {
+                      color: red;
                     }
                   }
 

@@ -73,6 +73,7 @@ const AddHubsPage = ({isEditing, hubId}) => {
   const [activeSunday, setActiveSunday] = useState(false)
   const [activeTimetableDays, setActiveTimetableDays] = useState([])
   const [prevHubData, setPrevHubData] = useState([])
+  const [activeTimetable, setActiveTimetable] = useState(true)
 
   const setData = () => {
     if(isEditing && prevHubData[0] !== undefined) {
@@ -432,7 +433,7 @@ const AddHubsPage = ({isEditing, hubId}) => {
               <div className={'destination-wrapper'}>
                 <label>Расстояние</label>
                 <input
-                    value={isEditing && prevHubData[0] !== undefined ? prevHubData[0].distance : ''}
+                    value={destination}
                     onChange={destinationHandler}
                     type="text"
                     placeholder={'Расстояния'}/>
@@ -440,7 +441,7 @@ const AddHubsPage = ({isEditing, hubId}) => {
               <div className={'duration-wrapper'}>
                 <label>Дни</label>
                 <input
-                    value={isEditing && prevHubData[0] !== undefined ? prevHubData[0].duration : ''}
+                    value={duration}
                     placeholder={'Дни'}
                     type="number"
                     onChange={durationHandler}/>
@@ -580,8 +581,12 @@ const AddHubsPage = ({isEditing, hubId}) => {
             </div>
           </div>
           <div className={'timetable-wrapper'}>
-            <div className={'timetable-title'}>Расписание</div>
-              <div className={'timetable'}>
+            <div className={'timetable-title-wrapper'}>
+              <div className={'timetable-title'}>Расписание</div>
+              <input type="checkbox" onClick={() => setActiveTimetable(!activeTimetable)}/>
+            </div>
+            {
+              activeTimetable ? <div className={'timetable'}>
                 <div className={'days-and-buttons-wrapper'}>
                   <div className={'timetable-days'}>Дни недели</div>
                   <div className={'buttons-wrapper'}>
@@ -619,7 +624,8 @@ const AddHubsPage = ({isEditing, hubId}) => {
                   <label>Время погрзуки</label>
                   <input type="number" placeholder={'Дни'} value={isEditing && prevHubData[0] !== undefined ? prevHubData[0].timetable.preparation_period : ''} onChange={prepareDaysHandler}/>
                 </div>
-              </div>
+              </div> : ''
+            }
             </div>
           <div className={'services-wrapper'}>
             <div className={'service-title'}>Услуги</div>
