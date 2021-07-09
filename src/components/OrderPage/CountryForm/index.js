@@ -99,6 +99,8 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
         getCitiesTo(prevCountryTo, optionCountryToValue, setAllCitiesTo)
     }, [optionCountryToValue.value])
 
+    console.log(modifyCountryObj)
+
     return (
         <div className={'country-form-wrapper'}>
             <div className={'from-form-wrapper'}>

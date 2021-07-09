@@ -2,7 +2,10 @@ import {useState, useEffect} from 'react';
 import {GEO_SERVER_URL} from "../../../constants/URL";
 import axios from "axios";
 
+import './ZoneItem.scss'
+
 const STATES_BY_ZONE_URL = `${GEO_SERVER_URL}states`
+
 
 const ZoneItem = ({data}) => {
 
@@ -40,14 +43,13 @@ const ZoneItem = ({data}) => {
     }
 
     return (
-        <div style={{marginLeft: 50}} onClick={onClick}>
+        <div onClick={onClick} className={'zone-item-wrapper'}>
             <h2>{data.zone.name}</h2>
-            <div>
-                количество городов: {data.city_count}
-                <br/>
-                количество регионов: {data.state_count}
+            <div className={'count-wrapper'}>
+                <div className={'count-of-cities'}>Количество городов: {data.city_count}</div>
+                <div className={'count-of-zones'}>Количество регионов: {data.state_count}</div>
             </div>
-            { open ? (loadedStates ? <StateList states={states}/> : "huy") : ""}
+            { open ? (loadedStates ? <StateList states={states}/> : "") : ""}
         </div>
     )
 }
