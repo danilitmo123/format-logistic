@@ -1,6 +1,8 @@
-import {useState} from 'react';
+import React,{useState} from 'react';
 import trash from "../../../../img/trash-icon.svg";
-import React from "react";
+
+
+import './ServiceRankedItem.scss'
 
 const ServiceRankedItem = ({initData, setData, onDelete}) => {
 
@@ -22,12 +24,12 @@ const ServiceRankedItem = ({initData, setData, onDelete}) => {
     }
 
     return (
-        <div>
-            <input type="text" onChange={setName} value={name}/>
+        <div className={'service-ranked-wrapper'}>
+            <input type="text" onChange={setName} placeholder={'Услуга'}/>
             <input type="text" onChange={setPpu} value={ppu}/>
             <select name="rank_type" id="rank_type" onChange={setType} value={rank_type}>
                 <option value="MASS">за кг</option>
-                <option value="SIZE">за см3</option>
+                <option value="SIZE">за м³</option>
                 <option value="LDM">за ldm</option>
             </select>
             <img src={trash} onClick={onDelete} alt="trash"/>

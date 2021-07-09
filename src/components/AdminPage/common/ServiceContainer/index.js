@@ -1,6 +1,9 @@
+import React from 'react'
 import {useState, useEffect} from 'react';
 import ServiceAdditionalItem from "../ServiceAdditionalItem";
 import ServiceRankedItem from "../ServiceRankedItem";
+
+import './ServiceContainer.scss'
 
 const defaultAdditionalServiceData = {name: "blya", price: 0.0}
 const defaultRankedServiceData = {name: "huy", rank_type: "MASS", price_per_unit: 0.0}
@@ -119,8 +122,8 @@ const ServiceContainer = ({initData, uniqueKey}) => {
                     }
                 })}
             </div>
-            <button onClick={addAdditionalServiceItem}>blya+</button>
-            <button onClick={addRankedServiceItem}>hui+</button>
+            <button className={'add-service-button'} onClick={addAdditionalServiceItem}>Фиксированная цена</button>
+            <button className={'add-service-button'} onClick={addRankedServiceItem}>Зависящая от ед.измер</button>
         </div>
     )
 }

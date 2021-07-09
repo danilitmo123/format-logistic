@@ -639,7 +639,6 @@ const AddHubsPage = ({isEditing, hubId}) => {
           </div>
         </div>
           <button onClick={sendRequest} className={'create-hub-button'}>{!isEditing ? 'Создать' : 'Сохранить изменения'}</button>
-
       </section>
   );
 };

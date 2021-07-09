@@ -2,6 +2,8 @@ import {useState} from 'react';
 import trash from "../../../../img/trash-icon.svg";
 import React from "react";
 
+import './ServiceAdditionalItem.scss'
+
 const ServiceAdditionalItem = ({initData, setData, onDelete}) => {
     const [name, setNameRaw] = useState(initData.name)
     const [price, setPriceRaw] = useState(initData.price)
@@ -16,8 +18,8 @@ const ServiceAdditionalItem = ({initData, setData, onDelete}) => {
     }
 
     return (
-        <div>
-            <input type="text" onChange={setName} value={name}/>
+        <div className={'service-additional-item-wrapper'}>
+            <input type="text" onChange={setName} placeholder={'Услуга'}/>
             <input type="text" onChange={setPrice} value={price}/>
             <img src={trash} onClick={onDelete} alt="trash"/>
         </div>

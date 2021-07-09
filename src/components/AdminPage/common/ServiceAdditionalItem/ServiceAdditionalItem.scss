@@ -1,0 +1,37 @@
+@import "../../../../global";
+.service-additional-item-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+  input {
+    width: 100px;
+    padding: 2px 8px;
+    align-items: center;
+    background-color: hsl(0, 0%, 100%);
+    border-color: hsl(0, 0%, 80%);
+    border-style: solid;
+    border-width: 1px;
+    cursor: default;
+    display: flex;
+    height: 24px;
+    outline: none;
+    position: relative;
+    transition: all 100ms;
+
+    &:focus {
+      border-color: $light-blue;
+      box-shadow: 0 0 0 1px $light-blue;
+    }
+
+    &::placeholder {
+      color: black;
+      font-family: "Montserrat", sans-serif;
+    }
+  }
+  img {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+  }
+}
