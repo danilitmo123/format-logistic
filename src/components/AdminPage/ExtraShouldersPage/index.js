@@ -1,12 +1,29 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 import ExtraShoulderItem from "./ExtraShoulderItem";
 
+import {ADMIN_SERVER_URL} from "../../../constants/URL";
+
 import './ExtraShouldersPage.scss'
+import {get} from "react-hook-form";
+
+const ZONE_URL = `${ADMIN_SERVER_URL}admin-zones/`
+
 
 const ExtraShouldersPage = () => {
+
+  const [zones, setZones] = useState([])
+
+  const getZones = () => {
+    axios.get(ZONE_URL).then(res => setZones([res.data]))
+  }
+
+  useEffect(() => {
+    getZones()
+  }, [])
 
   return (
       <div className={'extra-shoulder-page-wrapper'}>
@@ -17,22 +34,7 @@ const ExtraShouldersPage = () => {
               </Link>
           </div>
           <div className={'items-wrapper'}>
-              <ExtraShoulderItem type={'Автомобильная перевозка'} title={'Россия'}/>
-              <ExtraShoulderItem type={'Морская перевозка'} title={'Россия'}/>
-              <ExtraShoulderItem type={'Авиафрахт'} title={'Россия'}/>
-              <ExtraShoulderItem type={'Железнодорожная перевозка'} title={'Россия'}/>
-              <ExtraShoulderItem type={'Автомобильная перевозка'} title={'США'}/>
-              <ExtraShoulderItem type={'Морская перевозка'} title={'США'}/>
-              <ExtraShoulderItem type={'Авиафрахт'} title={'США'}/>
-              <ExtraShoulderItem type={'Железнодорожная перевозка'} title={'США'}/>
-              <ExtraShoulderItem type={'Автомобильная перевозка'} title={'Европейский союз'}/>
-              <ExtraShoulderItem type={'Морская перевозка'} title={'Европейский союз'}/>
-              <ExtraShoulderItem type={'Авиафрахти'} title={'Европейский союз'}/>
-              <ExtraShoulderItem type={'Железнодорожная перевозка'} title={'Европейский союз'}/>
-              <ExtraShoulderItem type={'Автомобильная перевозка'} title={'Азиатский регион'}/>
-              <ExtraShoulderItem type={'Морская перевозкаа'} title={'Азиатский регион'}/>
-              <ExtraShoulderItem type={'Авиафрахт'} title={'Азиатский регион'}/>
-              <ExtraShoulderItem type={'Железнодорожная перевозка'} title={'Азиатский регион'}/>
+            {zones[0] !== undefined ? zones[0].map(item => <ExtraShoulderItem item={item}/>) : '' }
           </div>
           <button className={'refresh-price-button'}>Обновить цены</button>
       </div>
