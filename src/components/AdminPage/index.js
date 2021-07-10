@@ -2,8 +2,8 @@ import React,{useState} from 'react';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
-import AddHubsPage from "./AddHubsPage";
-import AllHubsPage from "./AllHubsPage";
+import CreateHubRoutePage from "./hub-route/CreateHubRoutePage";
+import AllHubsPage from "./hub-route/AllHubsPage";
 import ExtraShouldersPage from "./ExtraShouldersPage";
 import SideBar from "../SideBar";
 
@@ -28,7 +28,7 @@ const AdminPage = () => {
                  setAllHubs={setAllHubsInfo}/>
          </Route>
          <Route path={!isEditingHub ? '/admin/create-hub' : '/admin/edit-hub'}>
-           <AddHubsPage isEditing={isEditingHub} hubId={hubId}/>
+           <CreateHubRoutePage isEditing={isEditingHub} hubId={hubId}/>
          </Route>
          <Route path={'/admin/routes'}>
              <ExtraShouldersPage/>
