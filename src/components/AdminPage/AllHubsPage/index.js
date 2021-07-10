@@ -10,7 +10,7 @@ import loader from '../../../img/loader.svg'
 import './AllHubsPage.scss'
 import {ADMIN_SERVER_URL} from "../../../constants/URL";
 
-const AllHubsPage = ({setEditing, allHubsInfo, setAllHubs, setId}) => {
+const AllHubsPage = ({setEditing, allHubsInfo, setAllHubs, setId, hubId}) => {
 
   const [loading, setLoading] = useState(true)
 
@@ -24,9 +24,21 @@ const AllHubsPage = ({setEditing, allHubsInfo, setAllHubs, setId}) => {
     setEditing(false)
   }
 
+  const deleteHubHandler = (i) => {
+    const newData = [...allHubsInfo.slice(0, i), ...allHubsInfo.slice(i + 1)]
+    console.log(newData)
+    // setAllHubs(newData)
+    // axios.delete(`${ADMIN_SERVER_URL}admin-routes/${hubId}/`)
+    //     .then(res => console.log(res))
+  }
+
   useEffect(() => {
     getHubs()
   }, [])
+
+  useEffect(() => {
+    deleteHubHandler()
+  }, [hubId])
 
  return (
     <section className={'all-hubs-page-wrapper'}>
@@ -42,7 +54,9 @@ const AllHubsPage = ({setEditing, allHubsInfo, setAllHubs, setId}) => {
               allHubsInfo[0] ?
                   <div className={'hubs'}>
                     {
-                      allHubsInfo[0].map((item) => <HubsItem
+                      allHubsInfo[0].map((item, index) => <HubsItem
+                          deleteHub={deleteHubHandler}
+                          index={index}
                           key={item.id}
                           setEditing={setEditing}
                           hub={item}
