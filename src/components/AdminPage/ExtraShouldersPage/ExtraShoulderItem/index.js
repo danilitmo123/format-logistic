@@ -60,9 +60,9 @@ const UPDATE_RATES_URL = `${ADMIN_SERVER_URL}admin-zones`
 
 
 const ExtraShoulderItem = ({item}) => {
-    const [dataWeight, setDataWeight] = useState(massRatesFromItem(item))
-    const [dataVolume, setDataVolume] = useState(sizeRatesFromItem(item))
-    const [dataMeter, setDataMeter] = useState(ldmRatesFromItem(item))
+    const [dataWeight, setDataWeight] = useState(() => massRatesFromItem(item))
+    const [dataVolume, setDataVolume] = useState(()=> sizeRatesFromItem(item))
+    const [dataMeter, setDataMeter] = useState(()=>ldmRatesFromItem(item))
     const [activeButtonForWeight, setActiveButtonForWeight] = useState(true)
     const [activeButtonForVolume, setActiveButtonForVolume] = useState(false)
     const [activeButtonForMeter, setActiveButtonForMeter] = useState(false)

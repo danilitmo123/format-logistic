@@ -39,7 +39,6 @@ const ExtraShouldersPage = () => {
             <div className={'items-wrapper'}>
                 {zonesLoaded ? zones.map(item => <ExtraShoulderItem item={item}/>) : ''}
             </div>
-            <button className={'refresh-price-button'}>Обновить цены</button>
         </div>
     );
 };
