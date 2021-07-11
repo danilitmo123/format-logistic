@@ -79,7 +79,7 @@ const AddHubsPage = ({isEditing, hubId}) => {
   const [activeSunday, setActiveSunday] = useState(false)
   const [activeTimetableDays, setActiveTimetableDays] = useState([])
   const [prevHubData, setPrevHubData] = useState([])
-  const [activeTimetable, setActiveTimetable] = useState(true)
+  const [activeTimetable, setActiveTimetable] = useState(false)
 
   const setData = () => {
     if(isEditing && prevHubData[0] !== undefined) {
