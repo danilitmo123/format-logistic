@@ -13,7 +13,6 @@ import ZonePage from "./ZonePage";
 const AdminPage = () => {
 
   const [isEditingHub, setIsEditingHub] = useState(false)
-  const [allHubsInfo, setAllHubsInfo] = useState([])
   const [hubId, setHubId] = useState('')
 
   return (
@@ -25,8 +24,7 @@ const AdminPage = () => {
                  hubId={hubId}
                  setId={setHubId}
                  setEditing={setIsEditingHub}
-                 allHubsInfo={allHubsInfo}
-                 setAllHubs={setAllHubsInfo}/>
+                 />
          </Route>
          <Route path={!isEditingHub ? '/admin/create-hub' : '/admin/edit-hub'}>
            <AddHubsPage isEditing={isEditingHub} hubId={hubId}/>

@@ -22,7 +22,10 @@ const HubsItem = ({hub, setEditing, setId, deleteHub, index}) => {
           <div className={'cities-hub-wrapper'}>
             <div className={'hub-type'}>{hub.type === 'AIR' ? 'Авиафрахт' : hub.type === 'TRAIN' ? 'ЖД перевозка' : 'Автомобильная перевозка'}</div>
           </div>
-          <button className={'delete-hub-button'} onClick={deleteHub(index)}>X</button>
+          <button className={'delete-hub-button'} onClick={(e) => {
+            deleteHub(hub.id)
+            e.preventDefault()
+          }}>X</button>
         </div>
       </Link>
   );
