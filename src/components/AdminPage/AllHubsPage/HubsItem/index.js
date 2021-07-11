@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 
 import './HubsItem.scss'
 
-const HubsItem = ({hub, setEditing, setId}) => {
+const HubsItem = ({hub, setEditing, setId, deleteHub, index}) => {
 
   const setEditingAndIdHandler = () => {
     setId(hub.id)
@@ -22,6 +22,7 @@ const HubsItem = ({hub, setEditing, setId}) => {
           <div className={'cities-hub-wrapper'}>
             <div className={'hub-type'}>{hub.type === 'AIR' ? 'Авиафрахт' : hub.type === 'TRAIN' ? 'ЖД перевозка' : 'Автомобильная перевозка'}</div>
           </div>
+          <button className={'delete-hub-button'} onClick={deleteHub(index)}>X</button>
         </div>
       </Link>
   );

@@ -17,7 +17,7 @@ export const typeOfCargoOptions = [
 
 export const typeOfVolumeUnits = [
   {value: 'M', label: 'M'},
-  {value: 'IN', label: 'IN'},
+  {value: 'CM', label: 'CM'},
 ]
 
 export const typeOfWeightUnits = [

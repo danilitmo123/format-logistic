@@ -22,6 +22,7 @@ const AdminPage = () => {
        <Switch>
          <Route path={'/admin/hubs'} exact={true}>
              <AllHubsPage
+                 hubId={hubId}
                  setId={setHubId}
                  setEditing={setIsEditingHub}
                  allHubsInfo={allHubsInfo}
