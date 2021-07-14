@@ -1,6 +1,6 @@
-import trash from "../../../../../../img/trash-icon.svg";
+import trash from "../../../../../../../img/trash-icon.svg";
 import React from "react";
-import RateType from "../../../../../../constants/unit";
+import {RateType} from "../../../../../../../constants/unit";
 
 const measurementFromRateType = (rateType) => {
     switch (rateType){
@@ -18,6 +18,12 @@ const measurementFromRateType = (rateType) => {
 const PriceItem = ({rateData, setRateData, onDelete}) => {
 
     const updateItem = (key, value) => {
+        console.log({key, value})
+        if (key === 'range_to'){
+            if (value <= rateData.range_from){
+                return
+            }
+        }
         rateData[key] = value
         setRateData(rateData)
     }
@@ -27,21 +33,24 @@ const PriceItem = ({rateData, setRateData, onDelete}) => {
             <div className={'start-input'}>
                 <label>от</label>
                 <input
-                    onChange={e => updateItem('range_from', e.target.value)}
+                    disabled={true}
+                    onChange={e => updateItem('range_from', +e.target.value)}
                     type="number"
-                    value={rateData.range_from}/>
+                    value={rateData.range_from}
+                />
             </div>
             <div className={'end-input'}>
                 <label>до</label>
                 <input
-                    onChange={e => updateItem('range_to', e.target.value)}
+                    onChange={e => updateItem('range_to', +e.target.value)}
                     type="number"
-                    value={rateData.range_to}/>
+                    value={rateData.range_to}
+                />
             </div>
             <div className={'weight-unit'}>{measurementFromRateType(rateData.type)}</div>
             <div className={'price-input'}>
                 <input
-                    onChange={e => updateItem('price_per_unit', e.target.value)}
+                    onChange={e => updateItem('price_per_unit', +e.target.value)}
                     type="number"
                     value={rateData.price_per_unit}/>
                 <label className={'icon-euro'}>€</label>

@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import trash from "../../../../../img/trash-icon.svg";
+import trash from "../../../../../../img/trash-icon.svg";
 
 
 import './ServiceRankedItem.scss'

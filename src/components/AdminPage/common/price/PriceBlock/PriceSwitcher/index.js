@@ -1,7 +1,10 @@
 import React from "react";
-import RateType from "../../../../../constants/unit";
+import {RateType} from "../../../../../../constants/unit";
+import {useRateTypeOptionContext} from "../../PriceContext";
 
-const PriceSwitcher = ({option, setOption}) => {
+const PriceSwitcher = () => {
+
+    const {option, setOption} = useRateTypeOptionContext()
 
     return (
         <div className={'price-for-type-wrapper'}>

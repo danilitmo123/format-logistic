@@ -1,46 +1,31 @@
 import React, {useState, useEffect, useRef} from 'react';
 import PriceItem from "./PriceItem";
+import {useRatesContext, useRateTypeOptionContext} from "../../PriceContext";
 
-const defaultRate = {
-    range_from: 0,
-    range_to: 0,
-    price_per_unit: 0
-}
+const PriceContainer = ({rates, dispatchRates}) => {
 
-const PriceContainer = ({rates, setRates, option}) => {
-
-    // TODO... To avoid such bullshit use useReducer, useContext, useSelector, useRef and wrap components where needed
-    const [render, setRender] = useState(0)
+    const {option} = useRateTypeOptionContext()
 
     const addRate = () => {
-        let rate = {...defaultRate, type: option}
-        rates.push(rate)
-        setRates(rates)
-        setRender(render + 1)
+        dispatchRates({type: "add", rateType: option})
     }
     const updateRateWrapper = (index) => {
         function updateRate(rate) {
-            rates[index] = rate
-            setRates(rates)
-            setRender(render +2)
+            dispatchRates({type: "change", data: rate, index: index, rateType: option})
         }
-
         return updateRate;
     }
     const deleteRateWrapper = (index) => {
         function deleteRate() {
-            delete rates[index]
-            setRates(rates)
-            setRender(render*2)
+            dispatchRates({type: "delete", index: index, rateType: option})
         }
-
         return deleteRate;
     }
 
     return (
         <div className={'weight-settings-wrapper'}>
             {rates.map((rate, index) => {
-                if (rate !== null) {
+                if (rate) {
                     if (rate.type === option) {
                         return <PriceItem
                             rateData={rate}

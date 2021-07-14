@@ -4,5 +4,11 @@ const RateType = Object.freeze({
     LDM: 'LDM'
 })
 
-export default RateType
+const ShippingType = Object.freeze({
+    TRAIN: "TRAIN",
+    AIR: "AIR",
+    TRUCK: "TRUCK"
+})
+
+export {RateType, ShippingType}
 
