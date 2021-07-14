@@ -15,7 +15,6 @@ const ZonePage = () => {
     const loadZoneSummaryData = () => {
         axios.get(ZONE_SUMMARY_URL).then(res => {
             setZoneSummaryData(res.data)
-            console.log(res.data)
         })
     }
 
