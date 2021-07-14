@@ -19,28 +19,24 @@ const defaultRateMass = {
     price_per_unit: 0,
     type: 'MASS'
 }
-
 const defaultRateSize = {
     range_from: 0,
     range_to: 0,
     price_per_unit: 0,
     type: 'SIZE'
 }
-
 const defaultRateLdm = {
     range_from: 0,
     range_to: 0,
     price_per_unit: 0,
     type: 'LDM'
 }
-
 const initRates = (initData) => {
     if (initData.rates)
         return initData.rates
     else
         return [defaultRateMass, defaultRateSize, defaultRateLdm]
 }
-
 const placeReducer = (ref, action) => {
     switch (action.type) {
         case "setCity":
@@ -65,14 +61,18 @@ const initPlaces = {
     countryFrom: "",
     countryTo: ""
 }
-
+const labelTypeOfShipping = {
+    [ShippingType.AIR]: "Авиафрахт",
+    [ShippingType.TRAIN]: "Железнодородная перевозка",
+    [ShippingType.TRUCK]: "Автомобильная перевозка"
+}
 const typeOfShippingOptions = [
-    {value: ShippingType.AIR, label: "Авиафрахт", id: ShippingType.AIR},
-    {value: ShippingType.TRUCK, label: "Автомобильная перевозка", id: ShippingType.TRUCK},
-    {value: ShippingType.TRAIN, label: "Железнодородная перевозка", id: ShippingType.TRAIN},
+    {value: ShippingType.AIR, label: labelTypeOfShipping[ShippingType.AIR], id: ShippingType.AIR},
+    {value: ShippingType.TRUCK, label: labelTypeOfShipping[ShippingType.TRUCK], id: ShippingType.TRUCK},
+    {value: ShippingType.TRAIN, label: labelTypeOfShipping[ShippingType.TRAIN], id: ShippingType.TRAIN},
 ]
-
 const placeObjectFromInitData = (initData) => {
+    console.log("place OFID", initData)
     if (initData.source && initData.destination) {
         return {
             cityFrom: {id: initData.source.id, name: initData.source.name},
@@ -86,7 +86,9 @@ const placeObjectFromInitData = (initData) => {
 
 }
 
-export const HubRouteBlock = ({initData}) => {
+
+
+export const HubRouteBlock = ({initData, onSubmit}) => {
 
     const [distance, setDistance] = useState(initData.distance ? initData.distance : 0)
     const [duration, setDuration] = useState(initData.duration ? initData.duration : 0)
@@ -95,7 +97,7 @@ export const HubRouteBlock = ({initData}) => {
     const [timetableDays, setTimetableDays] = useState(initData.timetable ? initData.timetable.weekdays : [0, 0, 0, 0, 0, 0, 0])
     const [prepareDays, setPrepareDays] = useState(initData.timetable ? initData.timetable.preparation_period : 0)
 
-    const [places, dispatchPlaces] = useRefReducer(placeReducer, () => {return placeObjectFromInitData(initData)})
+    const [places, dispatchPlaces] = useRefReducer(placeReducer, placeObjectFromInitData(initData))
     const [typeOfShipping, setTypeOfShipping] = useRefSetter(initData.type ? initData.type: typeOfShippingOptions[0].value)
     const [rates, setRates] = useState(() => initRates(initData))
     const [additionalServices, setAdditionalServices] = useState(initData.additional_services ? initData.additional_services: [])
@@ -106,34 +108,20 @@ export const HubRouteBlock = ({initData}) => {
         setTimetableDays([...timetableDays])
     }
 
-    const sendRequest = () => {
-        const options = {
-            headers: {'Content-Type': 'application/json'}
-        }
-        let body = {
-            source: {
-                id: places.current.cityFrom.id,
-            },
-            destination: {
-                id: places.current.cityTo.id
-            },
-            type: typeOfShipping.current,
-            distance: distance,
-            duration: duration * 60 * 24,
-            rates: rates,
-            additional_services: additionalServices,
-            ranked_services: rankedServices
-        }
-        if (activeTimetable) {
-            body.timetable = {
-                weekdays: timetableDays,
-                preparation_period: prepareDays
-            }
-        }
-
-        console.log({body})
-        axios.post(`${ADMIN_SERVER_URL}admin-routes/`, body, options)
-            .then(res => console.log(res))
+    const submit = () =>{
+        onSubmit({
+            sourceId: places.current.cityFrom.id,
+            destinationId: places.current.cityTo.id,
+            distance,
+            duration,
+            rates: rates.filter(rate => {return !!rate}),
+            typeOfShipping: typeOfShipping.current,
+            additionalServices : additionalServices.filter(service => {return !!service}),
+            rankedServices: rankedServices.filter(service => {return !!service}),
+            timetableDays,
+            prepareDays,
+            activeTimetable
+        })
     }
 
 
@@ -156,7 +144,9 @@ export const HubRouteBlock = ({initData}) => {
                         options={typeOfShippingOptions}
                         onChange={({value}) => setTypeOfShipping(value)}
                         noOptionsMessage={() => `Не найдено`}
-                        defaultValue={{value: initData.type ? initData.type: typeOfShippingOptions[0].value}}
+                        defaultValue={{
+                            value: initData.type ? initData.type: typeOfShippingOptions[0].value,
+                            label: initData.type ? labelTypeOfShipping[initData.type]: typeOfShippingOptions[0].label}}
                         placeholder={'Перевозка'}
                         filterOption={createFilter(filterConfig)}
                     />
@@ -249,7 +239,7 @@ export const HubRouteBlock = ({initData}) => {
                     <ServiceContainer/>
                 </ServiceContext.Provider>
             </div>
-            <button onClick={sendRequest} className={'create-hub-button'}>Сохранить</button>
+            <button onClick={submit} className={'create-hub-button'}>Сохранить</button>
         </div>
     )
 }

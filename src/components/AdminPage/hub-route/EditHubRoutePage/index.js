@@ -16,6 +16,50 @@ const EditHubRoutePage = () => {
         })
     }, [])
 
+    const sendRequest = ({
+                             sourceId,
+                             destinationId,
+                             distance,
+                             duration,
+                             rates,
+                             typeOfShipping,
+                             additionalServices,
+                             rankedServices,
+                             timetableDays,
+                             prepareDays,
+                             activeTimetable
+                         }) => {
+        const options = {
+            headers: {'Content-Type': 'application/json'}
+        }
+        let body = {
+            source: {
+                id: sourceId,
+            },
+            destination: {
+                id: destinationId
+            },
+            type: typeOfShipping,
+            distance: distance,
+            duration: duration * 60 * 24,
+            rates: rates,
+            additional_services: additionalServices,
+            ranked_services: rankedServices
+        }
+        if (activeTimetable) {
+            body.timetable = {
+                weekdays: timetableDays,
+                preparation_period: prepareDays
+            }
+        }
+
+        console.log({body})
+        axios.put(`${ADMIN_SERVER_URL}admin-routes/${id}/`, body, options)
+            .then(res => {
+                console.log(res.data)
+            }).catch(error => console.log({error}))
+    }
+
 
     return (
         <section className={'hubs-page-wrapper'}>
@@ -28,7 +72,7 @@ const EditHubRoutePage = () => {
                 </Link>
             </div>
             {!loading ?
-                <HubRouteBlock initData={initData}/> : ""
+                <HubRouteBlock initData={initData} onSubmit={sendRequest}/> : ""
             }
 
         </section>
