@@ -44,7 +44,7 @@ const AllHubsPage = () => {
                             <div className={'hubs'}>
                                 {
                                     routes.map((item) => <HubsItem
-                                        hub={item}
+                                        hub={item} setManageHub
                                     />)
                                 }
                             </div>

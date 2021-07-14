@@ -3,7 +3,6 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 import './HubsPage.scss'
-import { useHistory } from "react-router-dom";
 
 import {HubRouteBlock} from "../HubRouteBlock";
 import axios from "axios";
@@ -11,10 +10,8 @@ import {ADMIN_SERVER_URL} from "../../../../constants/URL";
 
 const CreateHubRoutePage = ({}) => {
 
-    const history = useHistory()
-
-    const refreshPage = () => {
-        history.push('/admin/hub-routes/');
+    const toAdminPage = () => {
+        window.location = '/admin/hub-routes/'
     }
 
     const sendRequest = ({
@@ -56,9 +53,11 @@ const CreateHubRoutePage = ({}) => {
 
         console.log({body})
         axios.post(`${ADMIN_SERVER_URL}admin-routes/`, body, options)
-            .then(res => console.log(res))
+            .then(res => {
+                toAdminPage()
+                console.log(res)
+            })
 
-        refreshPage()
     }
 
     return (
