@@ -1,0 +1,16 @@
+@import '../../../global';
+.zone-item-wrapper {
+  font-family: 'Montserrat', sans-serif;
+  width: 300px;
+  height: max-content;
+  background-color: $white;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  margin-left: 50px;
+  cursor: pointer;
+  h2 {
+    margin-bottom: 10px;
+  }
+}

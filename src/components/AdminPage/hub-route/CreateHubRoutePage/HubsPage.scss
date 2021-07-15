@@ -1,4 +1,4 @@
-@import '../../../global';
+@import '../../../../global';
 .hubs-page-wrapper {
   height: 100%;
   background-color: #028090;
@@ -338,10 +338,17 @@
     .timetable-wrapper {
       font-family: 'Montserrat', sans-serif;
       font-weight: 500;
-      .timetable-title {
+      .timetable-title-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .timetable-title {
+          font-size: 24px;
+          margin-right: 20px;
+        }
         margin-bottom: 20px;
-        font-size: 24px;
       }
+
       .timetable {
         display: flex;
         flex-direction: row;
@@ -448,7 +455,10 @@
       font-family: 'Montserrat', sans-serif;
       font-weight: 500;
       font-size: 24px;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+      .service-title {
+        margin-bottom: 20px;
+      }
     }
   }
   .create-hub-button {

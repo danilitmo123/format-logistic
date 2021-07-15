@@ -19,7 +19,7 @@ const objectTemplate = {
   width: 0,
   height: 0,
   weight: 0,
-  volumeUnits: 'CM',
+  volumeUnits: 'M',
   weightUnits: 'КГ',
   lengthPallet: 120,
   widthPallet: 100,
@@ -38,8 +38,6 @@ const CargoForm = () => {
   const [weight, setWeight] = useState(0)
   const [data, setDataRaw] = useState([])
 
-  localStorage.setItem('myCat', 'Tom');
-
   const setData = (data) => {
     localStorage.setItem('cargo', JSON.stringify(data))
     console.log("setData " + localStorage.getItem('cargo'))
@@ -55,7 +53,7 @@ const CargoForm = () => {
         heightPallet: 0,
         length: 0,
         lengthPallet: 120,
-        volumeUnits: "CM",
+        volumeUnits: "M",
         weight: 0,
         weightBoxSelect: "КГ",
         weightUnits: "КГ",
@@ -97,18 +95,18 @@ const CargoForm = () => {
         return ''
     }
     switch (data[i].volumeUnits) {
-      case 'CM':
+      case 'M':
         if (data[i].cargo === 'Паллеты') {
           setVolume((volume - 120 * data[i].heightPallet * data[i].widthPallet * data[i].count).toFixed(2))
         } else {
           setVolume((volume - data[i].length * data[i].width * data[i].height * data[i].count).toFixed(2))
         }
         break
-      case 'IN':
+      case 'CM':
         if (data[i].cargo === 'Паллеты') {
-          setVolume((volume - 120 * data[i].heightPallet * data[i].widthPallet * data[i].count * 2.54).toFixed(2))
+          setVolume(((volume - 120 * data[i].heightPallet * data[i].widthPallet * data[i].count) / 1000000).toFixed(2))
         } else {
-          setVolume((volume - data[i].length * data[i].width * data[i].height * data[i].count * 2.54).toFixed(2))
+          setVolume(((volume - data[i].length * data[i].width * data[i].height * data[i].count ) / 1000000).toFixed(2))
         }
         break
       default:
@@ -117,25 +115,26 @@ const CargoForm = () => {
   }
 
   const calculateVolume = (newData) => {
+    let totalVolumeM = 0
     let totalVolumeCM = 0
-    let totalVolumeIN = 0
     newData.forEach(item => {
+      console.log(item.volumeUnits)
       switch (item.volumeUnits) {
+        case 'M':
+          if(item.cargo === 'Паллеты') {
+            totalVolumeM += 120 * item.widthPallet * item.heightPallet * item.count
+          } else {
+            totalVolumeM += item.width * item.length * item.height * item.count
+          }
+          setVolume((totalVolumeM + totalVolumeCM).toFixed(2))
+          break
         case 'CM':
           if(item.cargo === 'Паллеты') {
-            totalVolumeCM += 120 * item.widthPallet * item.heightPallet * item.count
+            totalVolumeCM += ((120 * item.widthPallet * item.heightPallet) * item.count) / 1000000
           } else {
-            totalVolumeCM += item.width * item.length * item.height * item.count
+            totalVolumeCM += ((item.width * item.length * item.height) * item.count)  / 1000000
           }
-          setVolume((totalVolumeCM + totalVolumeIN).toFixed(2))
-          break
-        case 'IN':
-          if(item.cargo === 'Паллеты') {
-            totalVolumeIN += (120 * item.widthPallet * item.heightPallet) * item.count * 2.54
-          } else {
-            totalVolumeIN += (item.width * item.length * item.height) * item.count  * 2.54
-          }
-          setVolume((totalVolumeCM + totalVolumeIN).toFixed(2))
+          setVolume((totalVolumeM + totalVolumeCM).toFixed(2))
           break
         default:
           return ''
@@ -199,7 +198,7 @@ const CargoForm = () => {
       <div className={'cargo-wrapper'}>
         <div className={'title-wrapper'}>
           <div className={'cargo-title'}>Груз</div>
-          <div className={'cargo-all-info'}>Грузов: {data.length} Общий вес: {weight} кг Общий объем: {volume} см³</div>
+          <div className={'cargo-all-info'}>Грузов: {data.length} Общий вес: {weight} кг Общий объем: {volume} м³</div>
         </div>
         <div className={'cargo-choice'}>
           <div className={activeBoxButton ? 'active-box-button' : 'box'}
@@ -281,7 +280,7 @@ const CargoForm = () => {
                                             classNamePrefix="units-select-select"
                                             theme={customTheme}
                                             options={typeOfVolumeUnits}
-                                            defaultValue={{value: 'CM', label: 'CM'}}
+                                            defaultValue={{value: 'M', label: 'M'}}
                                             onChange={(e) => updateItem('volumeUnits', e.value)}
                                             noOptionsMessage={() => `Не найдено`}
                                             placeholder={'СМ'}
@@ -315,7 +314,7 @@ const CargoForm = () => {
                                           classNamePrefix="units-select-pallet-select"
                                           theme={customTheme}
                                           options={typeOfVolumeUnits}
-                                          defaultValue={{value: 'CM', label: 'CM'}}
+                                          defaultValue={{value: 'M', label: 'M'}}
                                           onChange={(e) => updateItem('volumeUnits', e.value)}
                                           noOptionsMessage={() => `Не найдено 🖕`}
                                           placeholder={'СМ'}

@@ -20,7 +20,7 @@ const Header = () => {
           </div>
         </div>
         <div className={'contacts'}>
-          <Link to={'/admin/hubs'}>
+          <Link to={'/admin/hub-routes'}>
             <button className={'admin-button'}>Админка</button>
           </Link>
           <div className={'number'}>+7 (499) 281-60-81</div>

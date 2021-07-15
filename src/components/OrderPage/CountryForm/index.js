@@ -26,6 +26,10 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
     const [modifyCitiesToObj, setModifyCitiesToObj] = useState([])
     const [optionCountryFromValue, setOptionCountryFromValue] = useState({})
     const [optionCountryToValue, setOptionCountryToValue] = useState({})
+    const [activeCityButton, setActiveCityButton] = useState(true)
+    const [activeSeaButton, setActiveSeaButton] = useState(false)
+    const [activeAirButton, setActiveAirButton] = useState(false)
+    const [activeTrainButton, setActiveTrainButton] = useState(false)
 
     const prevCountryFromValue = useRef()
     const prevCountryToValue = useRef()
@@ -67,6 +71,34 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
         return newValue
     }
 
+    const activeCityButtonHandler = () => {
+        setActiveCityButton(true)
+        setActiveSeaButton(false)
+        setActiveTrainButton(false)
+        setActiveAirButton(false)
+    }
+
+    const activeAirButtonHandler = () => {
+        setActiveCityButton(false)
+        setActiveSeaButton(false)
+        setActiveTrainButton(false)
+        setActiveAirButton(true)
+    }
+
+    const activeSeaButtonHandler = () => {
+        setActiveCityButton(false)
+        setActiveSeaButton(true)
+        setActiveTrainButton(false)
+        setActiveAirButton(false)
+    }
+
+    const activeTrainButtonHandler = () => {
+        setActiveCityButton(false)
+        setActiveSeaButton(false)
+        setActiveTrainButton(true)
+        setActiveAirButton(false)
+    }
+
     useEffect(() => {
         prevCountryFromValue.current = optionCountryFromValue.value;
     }, [optionCountryFromValue.value]);
@@ -98,6 +130,8 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
     useEffect(() => {
         getCitiesTo(prevCountryTo, optionCountryToValue, setAllCitiesTo)
     }, [optionCountryToValue.value])
+
+    console.log(modifyCountryObj)
 
     return (
         <div className={'country-form-wrapper'}>
@@ -156,6 +190,20 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
                         filterOption={createFilter(filterConfig)}
                     />
                 </div>
+                <div className={'place-select-where'}>
+                    <button
+                      onClick={activeCityButtonHandler}
+                      className={activeCityButton ? 'active-city-button' : 'place-button'}>Город</button>
+                    <button
+                      onClick={activeSeaButtonHandler}
+                      className={activeSeaButton ? 'active-sea-button' : 'place-button'}>Морской порт</button>
+                    <button
+                    onClick={activeAirButtonHandler}
+                      className={activeAirButton ? 'active-air-button' : 'place-button'}>Аэропорт</button>
+                    <button
+                      onClick={activeTrainButtonHandler}
+                      className={activeTrainButton ? 'active-train-button' : 'place-button'}>Ж/Д станция</button>
+                </div>
                 <div className={'city-select-where'}>
                     <label htmlFor="country">Город</label>
                     <AsyncSelect
@@ -166,15 +214,6 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
                         noOptionsMessage={() => 'Не найдено'}
                         placeholder={'Выберите город'}
                         filterOption={createFilter(filterConfig)}
-                    />
-                </div>
-                <div className={'place-select-where'}>
-                    <label htmlFor="place">Место</label>
-                    <Select
-                        theme={customTheme}
-                        options={placeOfCargoOptions}
-                        noOptionsMessage={() => `Не найдено`}
-                        placeholder={'Выберите место прибытия'}
                     />
                 </div>
             </div>

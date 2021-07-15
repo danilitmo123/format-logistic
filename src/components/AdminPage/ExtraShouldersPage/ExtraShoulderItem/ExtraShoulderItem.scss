@@ -2,82 +2,196 @@
 .extra-shoulder-item-wrapper {
   background-color: $white;
   border-radius: 20px;
-  height: 70px;
+  height: max-content;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 610px;
-  padding: 12px;
+  padding: 20px;
   margin-bottom: 20px;
   margin-right: 10px;
-  .extra-shoulder-text {
-    margin-right: 40px;
-    .extra-shoulder-title {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      margin-bottom: 10px;
+  .zone-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .set-price-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .settings-for-price-wrapper {
+    display: flex;
+    flex-direction: row;
+    .price-for-type-wrapper {
+      display: flex;
+      flex-direction: column;
+      margin-right: 20px;
+      .price-button {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid $light-blue;
+        width: 170px;
+        height: 40px;
+        cursor: pointer;
+        background: none;
+        outline: none;
+        margin-bottom: 1px;
+        &:nth-child(1) {
+          border-radius: 20px 20px 0 0;
+        }
+        &:nth-child(3) {
+          border-radius: 0 0 20px 20px;
+        }
+      }
+
+      .active-price-button {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: $light-blue;
+        width: 170px;
+        height: 40px;
+        cursor: pointer;
+        color: $white;
+        border: none;
+        outline: none;
+        margin-bottom: 1px;
+        &:nth-child(1) {
+          border-radius: 20px 20px 0 0;
+        }
+        &:nth-child(3) {
+          border-radius: 0 0 20px 20px;
+        }
+      }
     }
-    .extra-shoulder-type {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 400;
-      font-size: 10px;
+    .weight-settings-wrapper {
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border: 1px solid $light-blue;
+      padding: 20px 20px;
+      width: 380px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      .inputs-wrapper {
+        display: flex;
+        flex-direction: row;
+        input {
+          width: 70px;
+          height: 38px;
+          padding: 2px 8px;
+          align-items: center;
+          background-color: hsl(0, 0%, 100%);
+          border-color: hsl(0, 0%, 80%);
+          border-radius: 4px;
+          border-style: solid;
+          border-width: 1px;
+          cursor: default;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          min-height: 38px;
+          outline: none;
+          position: relative;
+          transition: all 100ms;
+          box-sizing: border-box;
+          &:focus {
+            border-color: $light-blue;
+            box-shadow: 0 0 0 1px $light-blue;
+          }
+        }
+        label {
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 400;
+          font-size: 16px;
+          margin-right: 10px;
+        }
+        .start-input {
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          width: max-content;
+          height: 50px;
+          margin-right: 20px;
+        }
+
+        .end-input {
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          width: max-content;
+          height: 50px;
+          margin-right: 5px;
+        }
+
+        .weight-unit {
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 400;
+          font-size: 16px;
+          width: max-content;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          margin-right: 20px;
+        }
+
+        .price-input {
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          width: max-content;
+          height: 50px;
+          .icon-euro {
+            margin-left: 5px;
+          }
+        }
+
+        img {
+          width: 15px;
+          cursor: pointer;
+        }
+      }
+
+      .add-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        color: $white;
+        border: none;
+        width: 170px;
+        height: 40px;
+        border-radius: 8px;
+        background: $light-blue;
+        outline: none;
+        margin-top: 20px;
+        cursor: pointer;
+      }
     }
   }
-  .inputs-wrapper {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    input {
-      margin-right: 20px;
-      width: 100px;
-      height: 38px;
-      padding: 2px 8px;
-      align-items: center;
-      background-color: hsl(0, 0%, 100%);
-      border-color: hsl(0, 0%, 80%);
-      border-radius: 4px;
-      border-style: solid;
-      border-width: 1px;
-      cursor: default;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      min-height: 38px;
-      outline: none;
-      position: relative;
-      transition: all 100ms;
-      box-sizing: border-box;
-      &:focus {
-        border-color: $light-blue;
-        box-shadow: 0 0 0 1px $light-blue;
-      }
-    }
-    .input-per-kg {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      margin-right: 20px;
-      input {
-        height: 20px;
-      }
-    }
-    .input-per-volume {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      margin-right: 20px;
-      input {
-        height: 20px;
-      }
-    }
-    .input-per-ldm {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      margin-right: 20px;
-      input {
-        height: 20px;
-      }
-    }
+  .save-button {
+    margin-top: 10px;
+    width: 150px;
+    height: 40px;
+    border-radius: 8px;
+    background: none;
+    border: 2px solid #35d2d2;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: black;
+    outline: none;
+    cursor: pointer;
   }
 }

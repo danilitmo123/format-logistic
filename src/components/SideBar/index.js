@@ -11,7 +11,7 @@ const SideBar = () => {
         <section>
             <input type="checkbox" id="nav-toggle" hidden/>
             <nav className={'nav'}>
-                <label htmlFor="nav-toggle" className="nav-toggle" onClick></label>
+                <label htmlFor="nav-toggle" className="nav-toggle" onClick/>
                 <div className={'logo'}>
                     <img src={logo} alt=""/>
                     <div className={'logo-text-block'}>
@@ -21,18 +21,23 @@ const SideBar = () => {
                 </div>
                 <ul>
                     <li>
-                        <Link to={'/admin/hubs'}>
+                        <Link to={'/admin/hub-routes'}>
                             <button className={'button-in-sidebar'}>Хабовые плечи</button>
                         </Link>
                     </li>
                     <li>
-                        <Link to={'/admin/routes'}>
+                        <Link to={'/admin/zones/rates'}>
                             <button className={'button-in-sidebar'}>Вспомогательные плечи</button>
                         </Link>
                     </li>
                     <li>
                         <Link to={'/admin/zones'}>
                             <button className={'button-in-sidebar'}>Районы</button>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to={'/admin/orders'}>
+                            <button className={'button-in-sidebar'}>Заказы</button>
                         </Link>
                     </li>
                 </ul>

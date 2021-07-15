@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import HPlatform, {HMap, HMapPolyLine} from "react-here-map";
 
 import './ConfirmOrderPage.scss'
@@ -7,7 +7,14 @@ import airplane from '../../../img/black-airplane-icon.svg'
 import truck from '../../../img/black-truck-icon.svg'
 
 const ConfirmOrderPage = ({chosenPath}) => {
-  console.log(chosenPath)
+
+  const [company, setCompany] = useState('')
+  const [index, setIndex] = useState('')
+  const [address, setAddress] = useState('')
+  const [contactName, setContactName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
+
   const getPoints = (pathOfItem) => {
     let pointsOfPath = []
     pathOfItem[0].routes.map(item => {
@@ -32,6 +39,30 @@ const ConfirmOrderPage = ({chosenPath}) => {
           </HMap>
         </HPlatform>
     )
+  }
+
+  const companyInputHandler = (e) => {
+    setCompany(e.target.value)
+  }
+
+  const indexInputHandler = (e) => {
+    setIndex(e.target.value)
+  }
+
+  const addressInputHandler = (e) => {
+    setAddress(e.target.value)
+  }
+
+  const contactNameInputHandler = (e) => {
+    setContactName(e.target.value)
+  }
+
+  const phoneInputHandler = (e) => {
+    setPhone(e.target.value)
+  }
+
+  const emailInputHandler = (e) => {
+    setEmail(e.target.value)
   }
 
   return (
@@ -60,63 +91,48 @@ const ConfirmOrderPage = ({chosenPath}) => {
         <div className={'all-info-route'}>
           <div className={'title'}>Итого:</div>
           <div>Расстояние: {(chosenPath[0].total_distance / 1000).toFixed(0)} км</div>
-          <div>Цена: {(chosenPath[0].total_cost)} руб</div>
+          <div>Цена: {(chosenPath[0].total_cost)}€/{(chosenPath[0].total_cost * 1.18).toFixed(2)}$</div>
           <div>Время в пути: {(chosenPath[0].total_duration.min)} - {chosenPath[0].total_duration.max} дней </div>
         </div>
        <div className={'final-form-wrapper'}>
+         <div className={'shipper-title'}>Грузоотправитель</div>
          <div className="shipper">
-           <div className={'shipper-title'}>Грузоотправитель</div>
            <div className={'input-example'}>
              <label htmlFor="">Компания</label>
-             <input type="text"/>
+             <input type="text" value={company} onChange={companyInputHandler}/>
            </div>
            <div className={'input-example'}>
              <label htmlFor="">Индекс</label>
-             <input type="number"/>
+             <input type="number" value={index} onChange={indexInputHandler}/>
            </div>
            <div className={'input-example'}>
              <label htmlFor="">Адрес</label>
-             <input type="text"/>
+             <input type="text" value={address} onChange={addressInputHandler}/>
            </div>
            <div className={'input-example'}>
              <label htmlFor="">Контактное лицо</label>
-             <input type="text"/>
+             <input type="text" value={contactName} onChange={contactNameInputHandler}/>
            </div>
            <div className={'input-example'}>
              <label htmlFor="">Телефон</label>
-             <input type="tel" pattern={'+7([0-9]){3}-[0-9]{3}-[0-9]{2}-[0-9]{2}'} placeholder={'+7(999)-999-99-99'}/>
+             <input
+               value={phone}
+               onChange={phoneInputHandler}
+               type="tel"
+               pattern={'+7([0-9]){3}-[0-9]{3}-[0-9]{2}-[0-9]{2}'}
+               placeholder={'+7(999)-999-99-99'}/>
            </div>
            <div className={'input-example'}>
              <label htmlFor="">Email</label>
-             <input type="email" placeholder={'email@gmail.com'}/>
+             <input
+               value={email}
+               onChange={emailInputHandler}
+               type="email"
+               placeholder={'email@gmail.com'}/>
            </div>
          </div>
-         <div className="consignee">
-           <div className={'consignee-title'}>Грузополучатель</div>
-           <div className={'input-example'}>
-             <label htmlFor="">Компания</label>
-             <input type="text"/>
-           </div>
-           <div className={'input-example'}>
-             <label htmlFor="">Индекс</label>
-             <input type="number"/>
-           </div>
-           <div className={'input-example'}>
-             <label htmlFor="">Адрес</label>
-             <input type="text"/>
-           </div>
-           <div className={'input-example'}>
-             <label htmlFor="">Контактное лицо</label>
-             <input type="text"/>
-           </div>
-           <div className={'input-example'}>
-             <label htmlFor="">Телефон</label>
-             <input type="tel" pattern={'+7([0-9]){3}-[0-9]{3}-[0-9]{2}-[0-9]{2}'} placeholder={'+7(999)-999-99-99'}/>
-           </div>
-           <div className={'input-example'}>
-             <label htmlFor="">Email</label>
-             <input type="email" placeholder={'email@gmail.com'}/>
-           </div>
+         <div className={'button-wrapper'}>
+           <button className={'send-order-button'}>Отправить</button>
          </div>
        </div>
       </div>

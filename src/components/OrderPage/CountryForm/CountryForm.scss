@@ -150,6 +150,77 @@
         }
       }
     }
+    .place-select-where {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 10px;
+      .place-button {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        width: 117px;
+        height: 35px;
+        background: white;
+        border: 1px solid hsl(0, 0%, 80%);
+        cursor: pointer;
+        &:nth-child(1) {
+          border-radius: 8px 0 0 8px;
+        }
+        &:nth-child(4) {
+          border-radius: 0 8px 8px 0;
+        }
+      }
+      .active-city-button {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        width: 117px;
+        height: 35px;
+        background: $light-blue;
+        border: none;
+        cursor: pointer;
+        color: $white;
+        &:nth-child(1) {
+          border-radius: 8px 0 0 8px;
+        }
+      }
+      .active-sea-button {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        width: 117px;
+        height: 35px;
+        background: $light-blue;
+        border: none;
+        cursor: pointer;
+        color: $white;
+      }
+      .active-air-button {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        width: 117px;
+        height: 35px;
+        background: $light-blue;
+        border: none;
+        cursor: pointer;
+        color: $white;
+      }
+      .active-train-button {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        width: 117px;
+        height: 35px;
+        background: $light-blue;
+        border: none;
+        cursor: pointer;
+        color: $white;
+        &:nth-child(4) {
+          border-radius: 0 8px 8px 0;
+        }
+      }
+    }
     .city-select-where {
       display: flex;
       justify-content: flex-start;
@@ -176,28 +247,6 @@
         border-radius: 0 2px 2px 0;
         padding: 0 5px 0 12px;
         outline: none;
-      }
-    }
-    .place-select-where {
-      display: flex;
-      justify-content: flex-start;
-      flex-direction: column;
-      label {
-        color: black;
-        font-size: 12px;
-        font-weight: 400;
-        opacity: 0.4;
-        margin-bottom: 10px;
-      }
-      select {
-        width: 470px;
-        height: 40px;
-        border: 1px solid $light-blue;
-        border-radius: 0 2px 2px 0;
-        padding: 0 5px 0 12px;
-        &:focus {
-          outline: none;
-        }
       }
     }
   }

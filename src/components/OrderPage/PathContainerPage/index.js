@@ -16,7 +16,8 @@ const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler, points
         {paths.paths ? <div>{paths.paths.map((item, index) => <PathItem
             index={index}
             setIndex={setIndex}
-            path={item}/>)}</div> : ''}
+            path={item}/>)}
+        </div> : ''}
       </div>
   );
 };

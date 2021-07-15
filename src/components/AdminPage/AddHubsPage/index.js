@@ -19,6 +19,8 @@ import {
 import trash from '../../../img/trash-icon.svg'
 
 import './HubsPage.scss'
+import ServiceContainer from "../common/ServiceContainer";
+import {ADMIN_SERVER_URL} from "../../../constants/URL";
 
 const objectWeightTemplate = {
   range_from: 0,
@@ -41,7 +43,14 @@ const objectMeterTemplate = {
   type: 'LDM'
 }
 
+
 const daysOfWeek = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье']
+
+let serviceInitData = {
+  additionalServices: [],
+  rankedServices: []
+}
+
 
 const AddHubsPage = ({isEditing, hubId}) => {
 
@@ -75,7 +84,11 @@ const AddHubsPage = ({isEditing, hubId}) => {
   const [activeSunday, setActiveSunday] = useState(false)
   const [activeTimetableDays, setActiveTimetableDays] = useState([])
   const [prevHubData, setPrevHubData] = useState([])
+
   const [activeDayWeek, setActiveDayWeek] = useState(false)
+
+  const [activeTimetable, setActiveTimetable] = useState(false)
+
 
   const setData = () => {
     if(isEditing && prevHubData[0] !== undefined) {
@@ -330,7 +343,7 @@ const AddHubsPage = ({isEditing, hubId}) => {
     const options = {
       headers: { 'Content-Type': 'application/json' }
     }
-    axios.post('https://ancient-temple-39835.herokuapp.com/api-admin/admin-routes/', allInfoHubsObj,options)
+    axios.post(`${ADMIN_SERVER_URL}admin-routes/`, allInfoHubsObj,options)
         .then(res => console.log(res))
   }
 
@@ -344,7 +357,7 @@ const AddHubsPage = ({isEditing, hubId}) => {
 
   const getHubInfo = () => {
     if(isEditing) {
-      axios.get(`https://ancient-temple-39835.herokuapp.com/api-admin/admin-routes/${hubId}`)
+      axios.get(`${ADMIN_SERVER_URL}admin-routes/${hubId}`)
           .then(res => {setPrevHubData([res.data])})
     }
   }
@@ -471,7 +484,7 @@ const AddHubsPage = ({isEditing, hubId}) => {
               <div className={'destination-wrapper'}>
                 <label>Расстояние</label>
                 <input
-                    value={isEditing && prevHubData[0] !== undefined ? prevHubData[0].distance : ''}
+                    value={destination}
                     onChange={destinationHandler}
                     type="text"
                     placeholder={'Расстояния'}/>
@@ -479,7 +492,7 @@ const AddHubsPage = ({isEditing, hubId}) => {
               <div className={'duration-wrapper'}>
                 <label>Дни</label>
                 <input
-                    value={isEditing && prevHubData[0] !== undefined ? prevHubData[0].duration : ''}
+                    value={duration}
                     placeholder={'Дни'}
                     type="number"
                     onChange={durationHandler}/>
@@ -619,8 +632,12 @@ const AddHubsPage = ({isEditing, hubId}) => {
             </div>
           </div>
           <div className={'timetable-wrapper'}>
-            <div className={'timetable-title'}>Расписание</div>
-              <div className={'timetable'}>
+            <div className={'timetable-title-wrapper'}>
+              <div className={'timetable-title'}>Расписание</div>
+              <input type="checkbox" onClick={() => setActiveTimetable(!activeTimetable)}/>
+            </div>
+            {
+              activeTimetable ? <div className={'timetable'}>
                 <div className={'days-and-buttons-wrapper'}>
                   <div className={'timetable-days'}>Дни недели</div>
                   <div className={'buttons-wrapper'}>
@@ -667,13 +684,16 @@ const AddHubsPage = ({isEditing, hubId}) => {
                   <label>Время погрзуки</label>
                   <input type="number" placeholder={'Дни'} value={isEditing && prevHubData[0] !== undefined ? prevHubData[0].timetable.preparation_period : ''} onChange={prepareDaysHandler}/>
                 </div>
-              </div>
+              </div> : ''
+            }
             </div>
           <div className={'services-wrapper'}>
             <div className={'service-title'}>Услуги</div>
+            <ServiceContainer initData={serviceInitData} routId={hubId}/>
           </div>
         </div>
           <button onClick={isEditing ? sendChangeRequest : sendRequest} className={'create-hub-button'}>{!isEditing ? 'Создать' : 'Сохранить изменения'}</button>
+          <button onClick={sendRequest} className={'create-hub-button'}>{!isEditing ? 'Создать' : 'Сохранить изменения'}</button>
       </section>
   );
 };

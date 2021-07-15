@@ -1,0 +1,57 @@
+@import "../../../global";
+.admin-order-page-wrapper {
+  min-height: 750px;
+  background-color: #028090;
+  padding: 0 5%;
+  .admin-order-page-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    color: $white;
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  .find-order-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: $white;
+      margin-bottom: 10px;
+    }
+    input {
+      width: 170px;
+      height: 40px;
+      padding: 2px 8px;
+      align-items: center;
+      background-color: hsl(0, 0%, 100%);
+      border-color: hsl(0, 0%, 80%);
+      border-radius: 4px;
+      border-style: solid;
+      border-width: 1px;
+      cursor: default;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      min-height: 38px;
+      outline: none;
+      position: relative;
+      transition: all 100ms;
+      box-sizing: border-box;
+      &:focus {
+        border-color: $light-blue;
+        box-shadow: 0 0 0 1px $light-blue;
+      }
+
+      &::placeholder {
+        color: black;
+        font-family: "Montserrat", sans-serif;
+      }
+    }
+  }
+}
