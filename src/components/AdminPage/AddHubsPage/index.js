@@ -41,6 +41,8 @@ const objectMeterTemplate = {
   type: 'LDM'
 }
 
+const daysOfWeek = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье']
+
 const AddHubsPage = ({isEditing, hubId}) => {
 
   const [dataWeight, setDataWeight] = useState([objectWeightTemplate])
@@ -73,6 +75,7 @@ const AddHubsPage = ({isEditing, hubId}) => {
   const [activeSunday, setActiveSunday] = useState(false)
   const [activeTimetableDays, setActiveTimetableDays] = useState([])
   const [prevHubData, setPrevHubData] = useState([])
+  const [activeDayWeek, setActiveDayWeek] = useState(false)
 
   const setData = () => {
     if(isEditing && prevHubData[0] !== undefined) {
@@ -130,6 +133,30 @@ const AddHubsPage = ({isEditing, hubId}) => {
       'preparation_period': prepareDays
     }
   }
+
+  const allInfoChangeHubsObj = {
+    'source': {
+      'id': prevHubData[0] !== undefined ? prevHubData[0].source.id || optionCityFromValue.id : '',
+      'name': prevHubData[0] !== undefined ? prevHubData[0].source.name : '' || optionCityFromValue.value
+    },
+    'destination': {
+      'id': optionCityToValue.id,
+      'name': optionCityToValue.value,
+    },
+    'type': finalTypeofShipping,
+    'distance': destination,
+    'duration': duration * 60 * 24,
+    'rates': [
+      ...dataWeight,
+      ...dataMeter,
+      ...dataVolume
+    ],
+    'timetable': {
+      'weekdays': valuesDaysObj ,
+      'preparation_period': prepareDays
+    }
+  }
+
 
   const prevCountryFromValue = useRef()
   const prevCountryToValue = useRef()
@@ -307,6 +334,14 @@ const AddHubsPage = ({isEditing, hubId}) => {
         .then(res => console.log(res))
   }
 
+  const sendChangeRequest = () => {
+    const options = {
+      headers: { 'Content-Type': 'application/json' }
+    }
+    axios.put(`https://ancient-temple-39835.herokuapp.com/api-admin/admin-routes/${hubId}/`, allInfoHubsObj,options)
+        .then(res => console.log(res))
+  }
+
   const getHubInfo = () => {
     if(isEditing) {
       axios.get(`https://ancient-temple-39835.herokuapp.com/api-admin/admin-routes/${hubId}`)
@@ -349,6 +384,10 @@ const AddHubsPage = ({isEditing, hubId}) => {
   useEffect(() => {
     getCitiesTo(prevCountryTo, optionCountryToValue, setAllCitiesTo)
   }, [optionCountryToValue.value])
+
+  const setDayOfWeekActiveHandler = (i) => {
+    console.log(i)
+  }
 
   return (
       <section className={'hubs-page-wrapper'}>
@@ -585,34 +624,43 @@ const AddHubsPage = ({isEditing, hubId}) => {
                 <div className={'days-and-buttons-wrapper'}>
                   <div className={'timetable-days'}>Дни недели</div>
                   <div className={'buttons-wrapper'}>
-                    <button
-                        value={'Monday'}
-                        onClick={activeMondayButtonHandler}
-                        className={activeMonday ? 'active-button-day': 'button-day'}>Понедельник</button>
-                    <button
-                        value={'Tuesday'}
-                        onClick={activeTuesdayButtonHandler}
-                        className={activeTuesday ? 'active-button-day': 'button-day'}>Вторник</button>
-                    <button
-                        value={'Wednesday'}
-                        onClick={activeWednesdayButtonHandler}
-                        className={activeWednesday ? 'active-button-day': 'button-day'}>Среда</button>
-                    <button
-                        value={'Thursday'}
-                        onClick={activeThursdayButtonHandler}
-                        className={activeThursday ? 'active-button-day': 'button-day'}>Четверг</button>
-                    <button
-                        value={'Friday'}
-                        onClick={activeFridayButtonHandler}
-                        className={activeFriday ? 'active-button-day': 'button-day'}>Пятница</button>
-                    <button
-                        value={'Saturday'}
-                        onClick={activeSaturdayButtonHandler}
-                        className={activeSaturday ? 'active-button-day': 'button-day'}>Суббота</button>
-                    <button
-                        value={'Sunday'}
-                        onClick={activeSundayButtonHandler}
-                        className={activeSunday ? 'active-button-day': 'button-day'}>Воскресенье</button>
+                    {
+                      daysOfWeek.map((item, index) => {
+                        return (
+                            <div
+                                onClick={setDayOfWeekActiveHandler(index)}
+                                className={activeDayWeek ? 'active-button-day' :'button-day'}>{item}</div>
+                        )
+                      })
+                    }
+                    {/*<button*/}
+                    {/*    value={'Monday'}*/}
+                    {/*    onClick={activeMondayButtonHandler}*/}
+                    {/*    className={activeMonday ? 'active-button-day': 'button-day'}>Понедельник</button>*/}
+                    {/*<button*/}
+                    {/*    value={'Tuesday'}*/}
+                    {/*    onClick={activeTuesdayButtonHandler}*/}
+                    {/*    className={activeTuesday ? 'active-button-day': 'button-day'}>Вторник</button>*/}
+                    {/*<button*/}
+                    {/*    value={'Wednesday'}*/}
+                    {/*    onClick={activeWednesdayButtonHandler}*/}
+                    {/*    className={activeWednesday ? 'active-button-day': 'button-day'}>Среда</button>*/}
+                    {/*<button*/}
+                    {/*    value={'Thursday'}*/}
+                    {/*    onClick={activeThursdayButtonHandler}*/}
+                    {/*    className={activeThursday ? 'active-button-day': 'button-day'}>Четверг</button>*/}
+                    {/*<button*/}
+                    {/*    value={'Friday'}*/}
+                    {/*    onClick={activeFridayButtonHandler}*/}
+                    {/*    className={activeFriday ? 'active-button-day': 'button-day'}>Пятница</button>*/}
+                    {/*<button*/}
+                    {/*    value={'Saturday'}*/}
+                    {/*    onClick={activeSaturdayButtonHandler}*/}
+                    {/*    className={activeSaturday ? 'active-button-day': 'button-day'}>Суббота</button>*/}
+                    {/*<button*/}
+                    {/*    value={'Sunday'}*/}
+                    {/*    onClick={activeSundayButtonHandler}*/}
+                    {/*    className={activeSunday ? 'active-button-day': 'button-day'}>Воскресенье</button>*/}
                   </div>
                 </div>
                 <div className={'timetable-input'}>
@@ -625,8 +673,7 @@ const AddHubsPage = ({isEditing, hubId}) => {
             <div className={'service-title'}>Услуги</div>
           </div>
         </div>
-          <button onClick={sendRequest} className={'create-hub-button'}>{!isEditing ? 'Создать' : 'Сохранить изменения'}</button>
-
+          <button onClick={isEditing ? sendChangeRequest : sendRequest} className={'create-hub-button'}>{!isEditing ? 'Создать' : 'Сохранить изменения'}</button>
       </section>
   );
 };
