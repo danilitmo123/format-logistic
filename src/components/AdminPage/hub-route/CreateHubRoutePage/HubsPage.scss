@@ -1,6 +1,7 @@
 @import '../../../../global';
 .hubs-page-wrapper {
   height: 100%;
+  min-height: 1200px;
   background-color: #028090;
   padding: 0 5%;
   font-family: 'Montserrat', sans-serif;
@@ -470,9 +471,10 @@
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
     font-size: 16px;
-    color: $white;
+    color: black;
     outline: none;
     cursor: pointer;
-    margin-bottom: 60px;
+    margin-bottom: 10px;
+    margin-left: 400px;
   }
 }

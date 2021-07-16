@@ -1,4 +1,16 @@
 @import "../../../global";
 .path-container-page {
-  height: auto;
+  height: 100%;
+  min-height: 1000px;
+}
+
+.loader {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  flex-direction: column;
+  color: $white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
 }

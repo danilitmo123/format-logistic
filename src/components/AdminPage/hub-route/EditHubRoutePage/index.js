@@ -3,6 +3,7 @@ import {HubRouteBlock} from "../HubRouteBlock";
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import {ADMIN_SERVER_URL} from "../../../../constants/URL";
+import loader from '../../../../img/loader.svg'
 
 const EditHubRoutePage = () => {
     const { id } = useParams();
@@ -72,7 +73,7 @@ const EditHubRoutePage = () => {
                 </Link>
             </div>
             {!loading ?
-                <HubRouteBlock initData={initData} onSubmit={sendRequest}/> : ""
+                <HubRouteBlock initData={initData} onSubmit={sendRequest}/> : <img src={loader} alt=""/>
             }
 
         </section>

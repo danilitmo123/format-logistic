@@ -130,10 +130,10 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
             <div className={'shipping-title'}>Отправление</div>
             <PlaceDispatcherContext.Provider value={{dispatch: dispatchPlaces}}>
                 <PlaceSelectBlock titleCountry={"Страна отправки"}
-                                  titleCity={"город отпрвки"}
+                                  titleCity={"Город отправки"}
                                   dispatchKey={"from"}/>
                 <PlaceSelectBlock titleCountry={"Страна прибытия"}
-                                  titleCity={"город приюытия"}
+                                  titleCity={"Город прибытия"}
                                   dispatchKey={"to"}/>
             </PlaceDispatcherContext.Provider>
             <div className={'shipping-selects-wrapper'}>

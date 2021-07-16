@@ -8,6 +8,8 @@ import {GEO_SERVER_URL} from "../../../../../constants/URL";
 import axios from "axios";
 import {usePlaceDispatcherContext} from "../placeContext";
 
+import './PlaceSelectBlock.scss'
+
 const loadCountries = async () => {
     let response = await axios.get(`${GEO_SERVER_URL}countries`)
     return response.data
@@ -106,7 +108,7 @@ export const PlaceSelectBlock = ({titleCountry, titleCity, dispatchKey}) => {
                         cacheOptions
                         loadOptions={loadOptions}
                         placeholder={'Город'}
-                        noOptionsMessage={() => !cityLoaded ? `загрузка...` : `Не найдено`}
+                        noOptionsMessage={() => !cityLoaded ? `Загрузка...` : `Не найдено`}
                         filterOption={createFilter(filterConfig)}
                     />
                 </div> : ""}
