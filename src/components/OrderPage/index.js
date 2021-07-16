@@ -17,8 +17,8 @@ const OrderPage = () => {
     const [paths, setPaths] = useState([])
     const [firstActivePage, setFirstActivePage] = useState(true)
     const [secondActivePage, setSecondActivePage] = useState(false)
-    const [cityWarningTo, setCityWarningTo] = useState(true)
-    const [cityWarningFrom, setCityWarningFrom] = useState(true)
+    const [cityWarningTo, setCityWarningTo] = useState(false)
+    const [cityWarningFrom, setCityWarningFrom] = useState(false)
     const [pointsOfPath, setPointsOfPath] = useState([])
     const [isIdChanged, setIdChanged] = useState(false)
     const prevIdToCount = useRef()
@@ -82,14 +82,14 @@ const OrderPage = () => {
 
     const disabledButtonHandler = () => {
         if (selectedCityIdTo) {
-            setCityWarningTo(true)
-        } else {
             setCityWarningTo(false)
+        } else {
+            setCityWarningTo(true)
         }
         if (selectedCityIdFrom) {
-            setCityWarningFrom(true)
-        } else {
             setCityWarningFrom(false)
+        } else {
+            setCityWarningFrom(true)
         }
         if (selectedCityIdFrom && selectedCityIdTo) {
             getPaths()
@@ -100,6 +100,8 @@ const OrderPage = () => {
             setSecondActivePage(false)
         }
     }
+
+    console.log(selectedCityIdFrom, selectedCityIdTo)
 
     return (
         <section className={'order-page-wrapper'}>

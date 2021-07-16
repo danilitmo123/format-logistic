@@ -163,8 +163,6 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
         getCitiesTo(prevCountryTo, optionCountryToValue, setAllCitiesTo)
     }, [optionCountryToValue.value])
 
-    console.log(modifyCountryObj)
-
     return (
         <div className={'country-form-wrapper'}>
             <div className={'from-form-wrapper'}>
@@ -200,6 +198,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
                 <div className={'city-select-from'}>
                     <label htmlFor="country">Город</label>
                     <AsyncSelect
+                        classNamePrefix={cityWarningFrom ? 'react-select' : ''}
                         theme={customTheme}
                         loadOptions={loadOptionsFrom}
                         options={modifyCitiesFromObj}
@@ -243,6 +242,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarni
                 <div className={'city-select-where'}>
                     <label htmlFor="country">Город</label>
                     <AsyncSelect
+                        classNamePrefix={cityWarningTo ? 'react-select' : ''}
                         theme={customTheme}
                         loadOptions={loadOptionsTo}
                         options={modifyCitiesToObj}

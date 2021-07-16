@@ -64,6 +64,10 @@
       flex-direction: column;
       margin-bottom: 20px;
 
+      .react-select__control {
+        border-color: red;
+      }
+
       label {
         color: black;
         font-size: 12px;
@@ -296,6 +300,9 @@
       justify-content: flex-start;
       flex-direction: column;
       margin-bottom: 20px;
+      .react-select__control {
+        border-color: red;
+      }
       label {
         color: black;
         font-size: 12px;
