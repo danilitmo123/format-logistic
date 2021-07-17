@@ -1,5 +1,6 @@
 import axios from "axios";
 import {GEO_SERVER_URL} from "../constants/URL";
+
 export const getCountries = (setAllCountries) => {
     axios.get(`${GEO_SERVER_URL}countries/`)
         .then(res => {
@@ -7,22 +8,23 @@ export const getCountries = (setAllCountries) => {
         })
 }
 
-export const getCitiesFrom = (prevCountryFrom, optionCountryFromValue, setAllCitiesFrom) => {
-    if (prevCountryFrom !== optionCountryFromValue.value) {
-        axios.get(`${GEO_SERVER_URL}cities/short?country=${optionCountryFromValue.value}`)
-            .then(res => {
-                setAllCitiesFrom([...res.data])
-            })
-    }
+export const getCitiesFrom = (prevCountryFrom, optionCountryFromValue, setAllCitiesFrom, sourceType) => {
+
+    console.log({sourceType})
+    axios.get(`${GEO_SERVER_URL}cities/short?country=${optionCountryFromValue.value}&type=${sourceType}`)
+        .then(res => {
+            setAllCitiesFrom([...res.data])
+        })
+
 }
 
-export const getCitiesTo = (prevCountryTo, optionCountryToValue, setAllCitiesTo) => {
-    if (prevCountryTo !== optionCountryToValue.value) {
-        axios.get(`${GEO_SERVER_URL}cities/short?country=${optionCountryToValue.value}`)
-            .then(res => {
-                setAllCitiesTo([...res.data])
-            })
-    }
+export const getCitiesTo = (prevCountryTo, optionCountryToValue, setAllCitiesTo, destinationType) => {
+    console.log({destinationType})
+    axios.get(`${GEO_SERVER_URL}cities/short?country=${optionCountryToValue.value}&type=${destinationType}`)
+        .then(res => {
+            setAllCitiesTo([...res.data])
+        })
+
 }
 
 export const createModifyCountryObj = (allCountries, setModifyCountryObj) => {

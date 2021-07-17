@@ -10,5 +10,12 @@ const ShippingType = Object.freeze({
     TRUCK: "TRUCK"
 })
 
-export {RateType, ShippingType}
+const PlaceType = Object.freeze({
+    CITY: 'CITY',
+    AIRPORT: 'AIRPORT',
+    RAILWAY_STATION: 'RAILWAY_STATION',
+    SEAPORT: 'SEAPORT'
+})
+
+export {RateType, ShippingType, PlaceType}
 

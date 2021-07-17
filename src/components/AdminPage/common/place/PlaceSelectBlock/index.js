@@ -98,20 +98,19 @@ export const PlaceSelectBlock = ({titleCountry, titleCity, dispatchKey}) => {
                     filterOption={createFilter(filterConfig)}
                 />
             </div>
-            {activeCitySelect ?
-                <div className={'departure-city-select'}>
-                    <label className={'label-departure-select'}>{titleCity}</label>
-                    <AsyncSelect
-                        theme={customTheme}
-                        onChange={setCity}
-                        options={cityOptions}
-                        cacheOptions
-                        loadOptions={loadOptions}
-                        placeholder={'Город'}
-                        noOptionsMessage={() => !cityLoaded ? `Загрузка...` : `Не найдено`}
-                        filterOption={createFilter(filterConfig)}
-                    />
-                </div> : ""}
+            <div className={'departure-city-select'}>
+                <label className={'label-departure-select'}>{titleCity}</label>
+                <AsyncSelect
+                    theme={customTheme}
+                    onChange={setCity}
+                    options={cityOptions}
+                    cacheOptions
+                    loadOptions={loadOptions}
+                    placeholder={'Город'}
+                    noOptionsMessage={() => !cityLoaded ? `Загрузка...` : `Не найдено`}
+                    filterOption={createFilter(filterConfig)}
+                />
+            </div>
         </div>
     )
 }

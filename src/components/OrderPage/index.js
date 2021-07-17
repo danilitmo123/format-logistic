@@ -8,6 +8,7 @@ import axios from "axios";
 import './OrderPage.scss'
 import ConfirmOrderPage from "./ConfirmOrderPage";
 import {ROUTES_SERVER_URL} from "../../constants/URL";
+import {PlaceType} from "../../constants/unit";
 
 
 const OrderPage = () => {
@@ -21,6 +22,8 @@ const OrderPage = () => {
     const [cityWarningFrom, setCityWarningFrom] = useState(false)
     const [pointsOfPath, setPointsOfPath] = useState([])
     const [isIdChanged, setIdChanged] = useState(false)
+    const [sourceType, setSourceType] = useState(PlaceType.CITY)
+    const [destinationType, setDestinationType] = useState(PlaceType.CITY)
     const prevIdToCount = useRef()
     const prevIdFromCount = useRef()
 
@@ -62,7 +65,9 @@ const OrderPage = () => {
                     {id: selectedCityIdTo},
                 good: {
                     boxes: data_cargos
-                }
+                },
+                source_type: sourceType,
+                destination_type: destinationType
             }
             axios.post(`${ROUTES_SERVER_URL}paths`, data)
                 .then((res => {
@@ -101,8 +106,6 @@ const OrderPage = () => {
         }
     }
 
-    console.log(selectedCityIdFrom, selectedCityIdTo)
-
     return (
         <section className={'order-page-wrapper'}>
             <div className={'order-title'}>Рассчитать перевозку</div>
@@ -116,6 +119,10 @@ const OrderPage = () => {
                             cityWarningTo={cityWarningTo}
                             setIdTo={setSelectedCityIdTo}
                             setIdFrom={setSelectedCityIdFrom}
+                            sourceType={sourceType}
+                            destinationType={destinationType}
+                            setSourceType={setSourceType}
+                            setDestinationType={setDestinationType}
                         />
                         <button
                             className={'continue-button-first-page'}
