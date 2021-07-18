@@ -5,7 +5,6 @@ import {withRouter} from "react-router-dom";
 import CargoForm from "../CargoForm";
 import CountryForm from "../CountryForm";
 import CustomsClearanceForm from "../CustomsClearanceForm";
-import InsuranceForm from "../InsuranceForm";
 
 const FirstStepForm = ({
                            setIdFrom,
@@ -36,7 +35,6 @@ const FirstStepForm = ({
                 setIdFrom={setIdFrom}
             />
             <CustomsClearanceForm/>
-            <InsuranceForm/>
         </div>
     );
 };

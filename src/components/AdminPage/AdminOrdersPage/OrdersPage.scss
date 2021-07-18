@@ -55,3 +55,12 @@
     }
   }
 }
+.loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  color: $white;
+  margin-left: -50px;
+}

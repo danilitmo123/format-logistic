@@ -100,6 +100,7 @@
         background: white;
         border: 1px solid hsl(0, 0%, 80%);
         cursor: pointer;
+        outline: none;
 
         &:nth-child(1) {
           border-radius: 8px 0 0 8px;
@@ -120,6 +121,7 @@
         border: none;
         cursor: pointer;
         color: $white;
+        outline: none;
 
         &:nth-child(1) {
           border-radius: 8px 0 0 8px;
@@ -136,6 +138,7 @@
         border: none;
         cursor: pointer;
         color: $white;
+        outline: none;
       }
 
       .active-air-button {
@@ -148,6 +151,7 @@
         border: none;
         cursor: pointer;
         color: $white;
+        outline: none;
       }
 
       .active-train-button {
@@ -160,6 +164,7 @@
         border: none;
         cursor: pointer;
         color: $white;
+        outline: none;
 
         &:nth-child(4) {
           border-radius: 0 8px 8px 0;
@@ -228,6 +233,8 @@
         background: white;
         border: 1px solid hsl(0, 0%, 80%);
         cursor: pointer;
+        outline: none;
+
         &:nth-child(1) {
           border-radius: 8px 0 0 8px;
         }
@@ -260,6 +267,7 @@
         border: none;
         cursor: pointer;
         color: $white;
+        outline: none;
       }
       .active-air-button {
         font-family: 'Montserrat', sans-serif;
@@ -271,6 +279,7 @@
         border: none;
         cursor: pointer;
         color: $white;
+        outline: none;
       }
       .active-train-button {
         font-family: 'Montserrat', sans-serif;
@@ -282,6 +291,7 @@
         border: none;
         cursor: pointer;
         color: $white;
+        outline: none;
         &:nth-child(4) {
           border-radius: 0 8px 8px 0;
         }

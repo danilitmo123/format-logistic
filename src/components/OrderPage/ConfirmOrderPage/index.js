@@ -9,7 +9,6 @@ import truck from '../../../img/black-truck-icon.svg'
 const ConfirmOrderPage = ({chosenPath}) => {
 
   const [company, setCompany] = useState('')
-  const [index, setIndex] = useState('')
   const [address, setAddress] = useState('')
   const [contactName, setContactName] = useState('')
   const [phone, setPhone] = useState('')
@@ -43,10 +42,6 @@ const ConfirmOrderPage = ({chosenPath}) => {
 
   const companyInputHandler = (e) => {
     setCompany(e.target.value)
-  }
-
-  const indexInputHandler = (e) => {
-    setIndex(e.target.value)
   }
 
   const addressInputHandler = (e) => {
@@ -100,10 +95,6 @@ const ConfirmOrderPage = ({chosenPath}) => {
            <div className={'input-example'}>
              <label htmlFor="">Компания</label>
              <input type="text" value={company} onChange={companyInputHandler}/>
-           </div>
-           <div className={'input-example'}>
-             <label htmlFor="">Индекс</label>
-             <input type="number" value={index} onChange={indexInputHandler}/>
            </div>
            <div className={'input-example'}>
              <label htmlFor="">Адрес</label>
