@@ -92,4 +92,88 @@
       font-size: 14px;
     }
   }
+  .close-button {
+    margin-top: 20px;
+    width: 120px;
+    height: 30px;
+    background: none;
+    border: 1px solid $light-blue;
+    font-weight: 400;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+  }
+}
+.short-order-info {
+  cursor: pointer;
+  width: 570px;
+  background: $white;
+  border-radius: 20px;
+  padding: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  .all-short-info {
+    margin-bottom: 15px;
+    .short-client-info{
+      display: flex;
+      flex-direction: row;
+      font-size: 14px;
+    }
+    .agent-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .bold {
+      font-weight: 700;
+      margin-right: 5px;
+    }
+    .company {
+      margin-right: 10px;
+      display: flex;
+    }
+    .person {
+      margin-right: 10px;
+      display: flex;
+    }
+    .phone {
+      display: flex;
+    }
+  }
+  .delivery-short-wrapper {
+    .delivery-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .delivery-block-wrapper {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 10px;
+      .route-wrapper {
+        margin-right: 20px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        .source-title {
+          margin-bottom: 15px;
+        }
+        .cargo-img {
+          margin-bottom: 10px;
+          height: 30px;
+        }
+      }
+    }
+    .all-cargo-info {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+    }
+  }
 }
