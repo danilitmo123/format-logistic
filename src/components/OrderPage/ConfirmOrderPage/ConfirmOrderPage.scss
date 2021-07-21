@@ -193,3 +193,17 @@
 
   }
 }
+@media (min-width: 992px) and (max-width: 1199px) {
+  .final-order-page-wrapper {
+    width: 100%;
+    .final-map-wrapper {
+      width: 950px;
+    }
+    .all-info-route {
+      width: 890px;
+    }
+    .final-form-wrapper {
+      width: 890px;
+    }
+  }
+}

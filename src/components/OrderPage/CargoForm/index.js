@@ -310,7 +310,7 @@ const CargoForm = () => {
                                           defaultValue={{value: '100', label: '100'}}
                                           onChange={e => updateItem('widthPallet', e.value)}
                                           noOptionsMessage={() => `Не найдено`}
-                                          placeholder={'100'}
+                                          placeholder={'Ширина'}
                                         />
                                       </div>
                                       <div className={'units-select-pallet'}>

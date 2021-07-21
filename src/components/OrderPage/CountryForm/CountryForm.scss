@@ -323,3 +323,48 @@
     }
   }
 }
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .country-form-wrapper {
+    .from-form-wrapper {
+      width: 400px;
+      .place-select-to {
+        .place-button {
+          font-size: 12px;
+        }
+        .active-city-button {
+          font-size: 12px;
+        }
+        .active-sea-button {
+          font-size: 12px;
+        }
+        .active-train-button {
+          font-size: 12px;
+        }
+        .active-air-button {
+          font-size: 12px;
+        }
+      }
+    }
+    .where-form-wrapper {
+      width: 400px;
+      .place-select-where {
+        .place-button {
+          font-size: 12px;
+        }
+        .active-city-button {
+          font-size: 12px;
+        }
+        .active-sea-button {
+          font-size: 12px;
+        }
+        .active-train-button {
+          font-size: 12px;
+        }
+        .active-air-button {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

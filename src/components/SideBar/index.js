@@ -40,6 +40,11 @@ const SideBar = () => {
                             <button className={'button-in-sidebar'}>Заказы</button>
                         </Link>
                     </li>
+                    <li>
+                        <Link to={'/admin/services'}>
+                            <button className={'button-in-sidebar'}>Сервисы</button>
+                        </Link>
+                    </li>
                 </ul>
             </nav>
         </section>

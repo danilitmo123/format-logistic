@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
@@ -9,6 +9,7 @@ import SideBar from "../SideBar";
 import ZonePage from "./ZonePage";
 import EditHubRoutePage from "./hub-route/EditHubRoutePage";
 import AdminOrderPage from "./AdminOrdersPage";
+import ServicesPage from "./ServicesPage";
 
 import './AdminPage.scss'
 
@@ -35,6 +36,9 @@ const AdminPage = () => {
                 </Route>
                 <Route path={'/admin/orders'}>
                     <AdminOrderPage/>
+                </Route>
+                <Route path={'/admin/services'}>
+                    <ServicesPage/>
                 </Route>
             </Switch>
         </Router>

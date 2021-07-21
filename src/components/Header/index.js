@@ -18,7 +18,7 @@ const Header = ({firstActivePage, setActive}) => {
       <header className={'header'}>
         <div className={'logo'} onClick={firstActivePageHandler}>
          <Link to={'/'}>
-           <img src={logo} alt="logo"/>
+           <img src={logo} alt="logo" className={'logo-img'}/>
          </Link>
           <div className={'logo-text-block'}>
             <div className={'logo-main-text'}><span className={'format'}>Format</span> Logistic</div>
@@ -31,10 +31,6 @@ const Header = ({firstActivePage, setActive}) => {
           </Link>
           <div className={'number'}>+7 (499) 281-60-81</div>
           <div className={'mail'}>customfreight2020@gmail.com</div>
-          <div className={'profile'}>
-            <img src={userIcon} alt="user-icon"/>
-            <div className={'profile-text'}>ЛИЧНЫЙ КАБИНЕТ</div>
-          </div>
         </div>
       </header>
   );

@@ -1,0 +1,13 @@
+@import '../../../global';
+.services-page-wrapper {
+  min-height: 750px;
+  background-color: #028090;
+  padding: 0 5%;
+  .services-title {
+    font-family: 'Montserrat', sans-serif;
+    color: $white;
+    font-weight: 400;
+    font-size: 30px;
+    margin-bottom: 40px;
+  }
+}

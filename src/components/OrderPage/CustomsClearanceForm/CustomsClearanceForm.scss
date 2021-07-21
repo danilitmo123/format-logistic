@@ -71,3 +71,9 @@
     left: 20px;
   }
 }
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .customs-clearance-wrapper {
+    width: 890px;
+  }
+}
