@@ -1,3 +1,4 @@
+import React, {useState} from "react";
 import {PlaceDispatcherContext} from "../../common/place/placeContext";
 import {PlaceSelectBlock} from "../../common/place/PlaceSelectBlock";
 import Select, {createFilter} from "react-select";
@@ -7,11 +8,11 @@ import {RatesContext} from "../../common/price/PriceContext";
 import PriceBlock from "../../common/price/PriceBlock";
 import {ServiceContext} from "../../common/service/ServiceContext";
 import ServiceContainer from "../../common/service/serviceBlock/ServiceContainer";
-import React, {useState} from "react";
 import {useRefReducer, useRefSetter} from "../../../../utils/hooks";
 import axios from "axios";
 import {ADMIN_SERVER_URL} from "../../../../constants/URL";
 import {ShippingType} from "../../../../constants/unit";
+import {Link} from 'react-router-dom'
 
 const defaultRateMass = {
     range_from: 0,
@@ -156,7 +157,7 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
                 <div className={'upload-title'}>Расстояние и время</div>
                 <div className={'upload-inputs-wrapper'}>
                     <div className={'destination-wrapper'}>
-                        <label>Расстояние</label>
+                        <label>Расстояние (км)</label>
                         <input
                             value={distance}
                             onChange={e => setDistance(e.target.value)}
@@ -239,7 +240,9 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
                     <ServiceContainer/>
                 </ServiceContext.Provider>
             </div>
-            <button onClick={submit} className={'create-hub-button'}>Сохранить</button>
+            <Link to={'/admin/hub-routes'}>
+                <button onClick={submit} className={'create-hub-button'}>Сохранить</button>
+            </Link>
         </div>
     )
 }

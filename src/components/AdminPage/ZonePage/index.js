@@ -29,6 +29,10 @@ const ZonePage = () => {
 
     return (
       <div className={'zone-page-wrapper'}>
+          <div className={'zone-title'}>
+              <div>Зоны и регионы</div>
+              <button className={'create-zone-button'}>Создать зону</button>
+          </div>
           {
               loading ?
                 <div className={'zone-wrapper'}>

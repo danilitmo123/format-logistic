@@ -28,10 +28,10 @@ const AdminOrderPage = () => {
   return (
     <section className={'admin-order-page-wrapper'}>
       <div className={'admin-order-page-title'}>Страница заказов</div>
-      <div className={'find-order-wrapper'}>
-        <label htmlFor="">Найти заказ</label>
-        <input type="text" placeholder={'Уникальный номер'}/>
-      </div>
+      {/*<div className={'find-order-wrapper'}>*/}
+      {/*  <label htmlFor="">Найти заказ</label>*/}
+      {/*  <input type="text" placeholder={'Уникальный номер'}/>*/}
+      {/*</div>*/}
       <div>
         {
           orders[0] !== undefined ? orders[0].map(order => <AdminOrderItem order={order}/>) : <div className={'loader-wrapper'}><img src={loader} alt=""/><div>Загрузка...</div></div>

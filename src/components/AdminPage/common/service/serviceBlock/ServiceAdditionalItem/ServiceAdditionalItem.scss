@@ -18,15 +18,17 @@
     outline: none;
     position: relative;
     transition: all 100ms;
-
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
     &:focus {
       border-color: $light-blue;
       box-shadow: 0 0 0 1px $light-blue;
     }
 
     &::placeholder {
-      color: black;
+      color: hsl(0, 0%, 50%);
       font-family: "Montserrat", sans-serif;
+      font-size: 16px;
     }
   }
   img {
