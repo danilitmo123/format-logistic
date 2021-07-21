@@ -4,6 +4,7 @@ import FirstStepForm from "./FirstStepForm";
 import PathContainerPage from "./PathContainerPage";
 
 import axios from "axios";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 import './OrderPage.scss'
 import ConfirmOrderPage from "./ConfirmOrderPage";
@@ -11,12 +12,11 @@ import {ROUTES_SERVER_URL} from "../../constants/URL";
 import {PlaceType} from "../../constants/unit";
 
 
-const OrderPage = () => {
+const OrderPage = ({firstActivePage, setActive}) => {
     const [chosenPath, setChosenPath] = useState([])
     const [selectedCityIdFrom, setSelectedCityIdFrom] = useState()
     const [selectedCityIdTo, setSelectedCityIdTo] = useState()
     const [paths, setPaths] = useState([])
-    const [firstActivePage, setFirstActivePage] = useState(true)
     const [secondActivePage, setSecondActivePage] = useState(false)
     const [cityWarningTo, setCityWarningTo] = useState(false)
     const [cityWarningFrom, setCityWarningFrom] = useState(false)
@@ -78,7 +78,7 @@ const OrderPage = () => {
 
     const secondPageActiveHandler = () => {
         setSecondActivePage(false)
-        setFirstActivePage(true)
+        setActive(true)
     }
 
     const returnSecondPagHandler = () => {
@@ -98,10 +98,10 @@ const OrderPage = () => {
         }
         if (selectedCityIdFrom && selectedCityIdTo) {
             getPaths()
-            setFirstActivePage(false)
+            setActive(false)
             setSecondActivePage(true)
         } else {
-            setFirstActivePage(true)
+            setActive(true)
             setSecondActivePage(false)
         }
     }

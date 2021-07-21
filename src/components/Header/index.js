@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 
 import {Link} from "react-router-dom";
 
@@ -7,10 +7,16 @@ import logo from '../../img/logo.svg'
 
 import './header.scss'
 
-const Header = () => {
+const Header = ({firstActivePage, setActive}) => {
+
+  const firstActivePageHandler = () => {
+    setActive(true)
+  }
+
+
   return (
       <header className={'header'}>
-        <div className={'logo'}>
+        <div className={'logo'} onClick={firstActivePageHandler}>
          <Link to={'/'}>
            <img src={logo} alt="logo"/>
          </Link>

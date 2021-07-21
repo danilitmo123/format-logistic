@@ -247,78 +247,82 @@ const CargoForm = () => {
                               item.cargo === 'Коробки' ?
                                   <>
                                     <label htmlFor={'sizeof-cargo'}>Габариты</label>
-                                    <div className={'sizeof-cargo-wrapper'}>
-                                      <input
-                                          type="number"
-                                          id={'sizeof-cargo'}
-                                          value={item.length || ''}
-                                          onChange={(e) => updateItem('length', e.target.value)}
-                                          min={1}
-                                          step={1}
-                                          placeholder={'Длина'}
-                                      />
-                                      <input
-                                          type="number"
-                                          id={'sizeof-cargo'}
-                                          value={item.width || ''}
-                                          onChange={(e) => updateItem('width', e.target.value)}
-                                          min={1}
-                                          step={1}
-                                          placeholder={'Ширина'}
-                                      />
-                                      <input
-                                          type="number"
-                                          id={'sizeof-cargo'}
-                                          value={item.height || ''}
-                                          onChange={(e) => updateItem('height', e.target.value)}
-                                          min={1}
-                                          step={1}
-                                          placeholder={'Высота'}
-                                      />
-                                      <div className={'units-select'}>
-                                        <Select
-                                            classNamePrefix="units-select-select"
-                                            theme={customTheme}
-                                            options={typeOfVolumeUnits}
-                                            defaultValue={{value: 'M', label: 'M'}}
-                                            onChange={(e) => updateItem('volumeUnits', e.value)}
-                                            noOptionsMessage={() => `Не найдено`}
-                                            placeholder={'СМ'}
-                                        />
-                                      </div>
-                                    </div>
+                                   <div className={'size-wrapper'}>
+                                     <div className={'sizeof-cargo-wrapper'}>
+                                       <input
+                                         type="number"
+                                         id={'sizeof-cargo'}
+                                         value={item.length || ''}
+                                         onChange={(e) => updateItem('length', e.target.value)}
+                                         min={1}
+                                         step={1}
+                                         placeholder={'Длина'}
+                                       />
+                                       <input
+                                         type="number"
+                                         id={'sizeof-cargo'}
+                                         value={item.width || ''}
+                                         onChange={(e) => updateItem('width', e.target.value)}
+                                         min={1}
+                                         step={1}
+                                         placeholder={'Ширина'}
+                                       />
+                                       <input
+                                         type="number"
+                                         id={'sizeof-cargo'}
+                                         value={item.height || ''}
+                                         onChange={(e) => updateItem('height', e.target.value)}
+                                         min={1}
+                                         step={1}
+                                         placeholder={'Высота'}
+                                       />
+                                     </div>
+                                     <div className={'units-select'}>
+                                       <Select
+                                         classNamePrefix="units-select-select"
+                                         theme={customTheme}
+                                         options={typeOfVolumeUnits}
+                                         defaultValue={{value: 'CM', label: 'CM'}}
+                                         onChange={(e) => updateItem('volumeUnits', e.value)}
+                                         noOptionsMessage={() => `Не найдено`}
+                                         placeholder={'СМ'}
+                                       />
+                                     </div>
+                                   </div>
                                   </>
                                   :
                                   <div className={'sizeof-pallet-wrapper'}>
                                     <label htmlFor={'sizeof-pallet'}>Паллет</label>
-                                    <div className={'pallet-select-wrapper'}>
-                                      <div className={'pallet-length'}>120</div>
-                                      <div className={'units-select-pallet'}>
-                                        <Select
-                                            classNamePrefix="units-select-pallet-select"
-                                            theme={customTheme}
-                                            options={typeOfWidthPalletUnits}
-                                            defaultValue={{value: '100', label: '100'}}
-                                            onChange={e => updateItem('widthPallet', e.value)}
-                                            noOptionsMessage={() => `Не найдено`}
-                                            placeholder={'100'}
-                                        />
-                                      </div>
-                                      <input
+                                    <div className={'select-input-wrapper'}>
+                                      <div className={'pallet-select-wrapper'}>
+                                        <div className={'pallet-length'}>120</div>
+                                        <input
                                           type='number'
                                           placeholder={'Высота'}
                                           value={item.heightPallet || ''}
                                           onChange={e => updateItem('heightPallet', e.target.value)}/>
+                                      </div>
+                                      <div className={'units-width-pallet'}>
+                                        <Select
+                                          classNamePrefix="units-select-pallet-select"
+                                          theme={customTheme}
+                                          options={typeOfWidthPalletUnits}
+                                          defaultValue={{value: '100', label: '100'}}
+                                          onChange={e => updateItem('widthPallet', e.value)}
+                                          noOptionsMessage={() => `Не найдено`}
+                                          placeholder={'100'}
+                                        />
+                                      </div>
                                       <div className={'units-select-pallet'}>
-                                      <Select
+                                        <Select
                                           classNamePrefix="units-select-pallet-select"
                                           theme={customTheme}
                                           options={typeOfVolumeUnits}
                                           defaultValue={{value: 'M', label: 'M'}}
                                           onChange={(e) => updateItem('volumeUnits', e.value)}
-                                          noOptionsMessage={() => `Не найдено 🖕`}
+                                          noOptionsMessage={() => `Не найдено`}
                                           placeholder={'СМ'}
-                                      />
+                                        />
                                       </div>
                                     </div>
                                   </div>
@@ -327,28 +331,30 @@ const CargoForm = () => {
                         </div>
                         <div className={'weight-cargo'}>
                           <label htmlFor={'weight-cargo'}>Вес</label>
-                          <div className={'weight-cargo-input'}>
-                            <input
-                                type="number"
-                                id={'weight-cargo'}
-                                value={item.weight || ''}
-                                onChange={(e) => updateItem('weight', e.target.value)}
-                                min={1}
-                                step={1}
-                                placeholder={item.weightBoxSelect === 'КГ' ? 'КГ' : 'Фунты'}
-                            />
-                            <div className={'units-select-weight'}>
-                            <Select
-                                classNamePrefix="units-select-weigh-select"
-                                theme={customTheme}
-                                options={typeOfWeightUnits}
-                                defaultValue={{value: 'КГ', label: 'КГ'}}
-                                onChange={(e) => updateItem('weightUnits', e.value)}
-                                noOptionsMessage={() => `Не найдено`}
-                                placeholder={'КГ'}
-                            />
-                            </div>
-                          </div>
+                         <div className={'weight-cargo-wrapper'}>
+                           <div className={'weight-cargo-input'}>
+                             <input
+                               type="number"
+                               id={'weight-cargo'}
+                               value={item.weight || ''}
+                               onChange={(e) => updateItem('weight', e.target.value)}
+                               min={1}
+                               step={1}
+                               placeholder={item.weightBoxSelect === 'КГ' ? 'КГ' : 'Фунты'}
+                             />
+                           </div>
+                           <div className={'units-select-weight'}>
+                             <Select
+                               classNamePrefix="units-select-weigh-select"
+                               theme={customTheme}
+                               options={typeOfWeightUnits}
+                               defaultValue={{value: 'КГ', label: 'КГ'}}
+                               onChange={(e) => updateItem('weightUnits', e.value)}
+                               noOptionsMessage={() => `Не найдено`}
+                               placeholder={'КГ'}
+                             />
+                           </div>
+                         </div>
                         </div>
                         <img
                             src={trash}

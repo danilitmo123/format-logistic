@@ -204,6 +204,20 @@
           }
 
           .sizeof-cargo {
+            .size-wrapper {
+              display: flex;
+              .units-select {
+                width: 100px;
+                .css-2b097c-container {
+                  .css-yk16xz-control {
+                    border-radius: 0 4px 4px 0;
+                  }
+                  .units-select-select__value-container{
+                    height: 38px;
+                  }
+                }
+              }
+            }
             .sizeof-cargo-input {
               display: flex;
               justify-content: flex-start;
@@ -219,19 +233,6 @@
 
               .sizeof-cargo-wrapper {
                 display: flex;
-                .units-select {
-                  width: 100px;
-                  height: 38px;
-                  border-radius: 0;
-                  .css-2b097c-container {
-                    .css-yk16xz-control {
-                      border-radius: 0 4px 4px 0;
-                    }
-                  }
-                  .units-select-select__value-container{
-                    height: 38px;
-                  }
-                }
                 input {
                   width: 100px;
                   padding: 2px 8px;
@@ -269,24 +270,8 @@
                 display: flex;
                 justify-content: flex-start;
                 flex-direction: column;
-
-                .pallet-select-wrapper {
+                .select-input-wrapper {
                   display: flex;
-                  flex-direction: row;
-
-                  .units-select-pallet{
-                    height: 38px;
-                    width: 109px;
-                    .css-2b097c-container {
-                      .css-yk16xz-control {
-                        border-radius: 0;
-                      }
-                    }
-                    .units-select-pallet-select__value-container{
-                      width: 100px;
-                      height: 38px;
-                    }
-                  }
                   .pallet-length {
                     width: 100px;
                     padding: 2px 8px;
@@ -304,6 +289,53 @@
                     border-radius: 4px 0 0 4px;
                   }
 
+                  .units-select-pallet{
+                    height: 38px;
+                    width: 109px;
+                    .css-2b097c-container {
+                      .css-yk16xz-control {
+                        border-radius: 0 4px 4px 0;
+                      }
+                    }
+                    .units-select-pallet-select__value-container{
+                      width: 100px;
+                      height: 38px;
+                    }
+                  }
+                  .units-width-pallet {
+                    width: 109px;
+                    height: 38px;
+                    .css-2b097c-container {
+                      .css-yk16xz-control {
+                        border-radius: 0;
+                      }
+                    }
+                    .units-select-pallet-select__value-container{
+                      width: 100px;
+                      height: 38px;
+                    }
+                  }
+                }
+
+                .pallet-select-wrapper {
+                  display: flex;
+                  flex-direction: row;
+                  .pallet-length {
+                    width: 100px;
+                    padding: 2px 8px;
+                    align-items: center;
+                    background-color: hsl(0, 0%, 100%);
+                    border-color: hsl(0, 0%, 80%);
+                    border-style: solid;
+                    border-width: 1px;
+                    cursor: default;
+                    display: flex;
+                    height: 34px;
+                    outline: none;
+                    position: relative;
+                    transition: all 100ms;
+                    border-radius: 4px 0 0 4px;
+                  }
                   input {
                     width: 118px;
                     height: 40px;
@@ -337,7 +369,6 @@
                       font-size: 16px;
                     }
                   }
-
                 }
               }
             }
@@ -347,6 +378,21 @@
             display: flex;
             justify-content: flex-start;
             flex-direction: column;
+            .weight-cargo-wrapper {
+              display: flex;
+              .units-select-weight {
+                width: 80px;
+                height: 38px;
+                .css-2b097c-container {
+                  .css-yk16xz-control {
+                    border-radius: 0 4px 4px 0;
+                  }
+                }
+                .units-select-weigh-select__value-container{
+                  height: 38px;
+                }
+              }
+            }
 
             label {
               color: black;
@@ -359,7 +405,7 @@
             .weight-cargo-input {
               display: flex;
               input {
-                width: 100px;
+                width: 80px;
                 height: 40px;
                 padding: 2px 8px;
                 align-items: center;
@@ -393,18 +439,7 @@
                   color: hsl(0, 0%, 50%);
                 }
               }
-              .units-select-weight {
-                width: 100px;
-                height: 38px;
-                .css-2b097c-container {
-                  .css-yk16xz-control {
-                    border-radius: 0 4px 4px 0;
-                  }
-                }
-                .units-select-weigh-select__value-container{
-                  height: 38px;
-                }
-              }
+
 
 
               select {
@@ -429,6 +464,7 @@
           .trash-icon {
             margin-top: 25px;
             height: 20px;
+            cursor: pointer;
           }
 
           .countof-pallet-wrapper {
