@@ -32,7 +32,7 @@ const AdminOrderPage = () => {
       {/*  <label htmlFor="">Найти заказ</label>*/}
       {/*  <input type="text" placeholder={'Уникальный номер'}/>*/}
       {/*</div>*/}
-      <div>
+      <div className={'all-orders-wrapper'}>
         {
           orders[0] !== undefined ? orders[0].map(order => <AdminOrderItem order={order}/>) : <div className={'loader-wrapper'}><img src={loader} alt=""/><div>Загрузка...</div></div>
         }

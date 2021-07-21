@@ -54,6 +54,10 @@
       }
     }
   }
+  .all-orders-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 .loader-wrapper {
   display: flex;
