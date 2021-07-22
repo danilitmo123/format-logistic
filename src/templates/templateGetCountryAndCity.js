@@ -9,8 +9,6 @@ export const getCountries = (setAllCountries) => {
 }
 
 export const getCitiesFrom = (prevCountryFrom, optionCountryFromValue, setAllCitiesFrom, sourceType) => {
-
-    console.log({sourceType})
     axios.get(`${GEO_SERVER_URL}cities/short?country=${optionCountryFromValue.value}&type=${sourceType}`)
         .then(res => {
             setAllCitiesFrom([...res.data])
@@ -19,7 +17,6 @@ export const getCitiesFrom = (prevCountryFrom, optionCountryFromValue, setAllCit
 }
 
 export const getCitiesTo = (prevCountryTo, optionCountryToValue, setAllCitiesTo, destinationType) => {
-    console.log({destinationType})
     axios.get(`${GEO_SERVER_URL}cities/short?country=${optionCountryToValue.value}&type=${destinationType}`)
         .then(res => {
             setAllCitiesTo([...res.data])

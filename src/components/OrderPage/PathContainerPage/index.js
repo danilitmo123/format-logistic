@@ -4,7 +4,7 @@ import loader from '../../../img/loader.svg'
 
 import './PathContainerPage.scss'
 
-const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler, pointsOfPath, setPointsOfPath, isIdChanged}) => {
+const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler}) => {
   const [index, setIndex] = useState('')
   useEffect(() => {
     if(paths.paths !== undefined && index !== '') {

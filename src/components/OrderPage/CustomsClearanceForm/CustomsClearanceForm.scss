@@ -77,3 +77,16 @@
     width: 890px;
   }
 }
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .customs-clearance-wrapper {
+    width: 630px;
+    margin-top: 30px;
+  }
+}
+@media (max-width: 767px) {
+  .customs-clearance-wrapper {
+    width: 400px;
+    margin-top: 30px;
+  }
+}

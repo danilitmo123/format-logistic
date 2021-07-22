@@ -326,6 +326,7 @@
 
 @media (min-width: 992px) and (max-width: 1199px) {
   .country-form-wrapper {
+    width: 962px;
     .from-form-wrapper {
       width: 400px;
       .place-select-to {
@@ -362,6 +363,66 @@
           font-size: 12px;
         }
         .active-air-button {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .country-form-wrapper {
+    flex-direction: column;
+    margin-top: 30px;
+    .from-form-wrapper {
+      width: 630px;
+      margin-bottom: 20px;
+    }
+    .where-form-wrapper {
+      width: 630px;
+    }
+  }
+}
+@media (max-width: 767px) {
+  .country-form-wrapper {
+    flex-direction: column;
+    margin-top: 30px;
+    .from-form-wrapper {
+      width: 400px;
+      margin-bottom: 20px;
+      .place-select-to {
+        .place-button {
+          font-size: 12px;
+        }
+        .active-city-button {
+          font-size: 12px;
+        }
+        .active-air-button {
+          font-size: 12px;
+        }
+        .active-train-button {
+          font-size: 12px;
+        }
+        .active-sea-button {
+          font-size: 12px;
+        }
+      }
+    }
+    .where-form-wrapper {
+      width: 400px;
+      .place-select-where {
+        .place-button {
+          font-size: 12px;
+        }
+        .active-city-button {
+          font-size: 12px;
+        }
+        .active-air-button {
+          font-size: 12px;
+        }
+        .active-train-button {
+          font-size: 12px;
+        }
+        .active-sea-button {
           font-size: 12px;
         }
       }

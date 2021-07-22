@@ -80,6 +80,7 @@
 
 @media (min-width: 768px) and (max-width: 991px) {
   .header {
+    padding: 0 2%;
     .logo {
       .logo-img {
         width: 78px;
@@ -106,6 +107,29 @@
 
       .number {
         margin-right: 35px;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .header {
+    padding: 0 2%;
+    .contacts {
+      font-size: 10px;
+      color: $white;
+      .admin-button {
+        font-size: 10px;
+        width: 80px;
+        height: 20px;
+      }
+
+      .number {
+        display: none;
+        margin-right: 35px;
+      }
+      .mail {
+        display: none;
       }
     }
   }

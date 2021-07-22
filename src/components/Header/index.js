@@ -7,12 +7,11 @@ import logo from '../../img/logo.svg'
 
 import './header.scss'
 
-const Header = ({firstActivePage, setActive}) => {
+const Header = ({setActive}) => {
 
   const firstActivePageHandler = () => {
     setActive(true)
   }
-
 
   return (
       <header className={'header'}>
