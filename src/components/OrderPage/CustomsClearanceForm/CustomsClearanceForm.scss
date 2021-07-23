@@ -90,3 +90,27 @@
     margin-top: 30px;
   }
 }
+
+@media (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
+  .customs-clearance-wrapper {
+    width: 340px;
+    margin-top: 30px;
+    .title-wrapper {
+      .title {
+        font-size: 20px;
+      }
+    }
+  }
+}
+@media (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+  .customs-clearance-wrapper {
+    width: 300px;
+    margin-top: 30px;
+    .title-wrapper {
+      .title {
+        font-size: 18px;
+      }
+    }
+  }
+}
+

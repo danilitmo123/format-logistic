@@ -429,3 +429,98 @@
     }
   }
 }
+@media (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
+  .country-form-wrapper {
+    flex-direction: column;
+    margin-top: 30px;
+    .from-form-wrapper {
+      width: 340px;
+      margin-bottom: 20px;
+      .place-select-to {
+        .place-button {
+          font-size: 12px;
+        }
+        .active-city-button {
+          font-size: 12px;
+        }
+        .active-air-button {
+          font-size: 12px;
+        }
+        .active-train-button {
+          font-size: 12px;
+        }
+        .active-sea-button {
+          font-size: 12px;
+        }
+      }
+    }
+    .where-form-wrapper {
+      width: 340px;
+      .place-select-where {
+        .place-button {
+          font-size: 12px;
+        }
+        .active-city-button {
+          font-size: 12px;
+        }
+        .active-air-button {
+          font-size: 12px;
+        }
+        .active-train-button {
+          font-size: 12px;
+        }
+        .active-sea-button {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+@media (device-width: 375px)  and (device-height: 812px)  and (-webkit-device-pixel-ratio: 3) {
+  .country-form-wrapper {
+    flex-direction: column;
+    margin-top: 30px;
+    .from-form-wrapper {
+      width: 300px;
+      margin-bottom: 20px;
+      .place-select-to {
+        .place-button {
+          font-size: 12px;
+        }
+        .active-city-button {
+          font-size: 12px;
+        }
+        .active-air-button {
+          font-size: 12px;
+        }
+        .active-train-button {
+          font-size: 12px;
+        }
+        .active-sea-button {
+          font-size: 12px;
+        }
+      }
+    }
+    .where-form-wrapper {
+      width: 300px;
+      .place-select-where {
+        .place-button {
+          font-size: 12px;
+        }
+        .active-city-button {
+          font-size: 12px;
+        }
+        .active-air-button {
+          font-size: 12px;
+        }
+        .active-train-button {
+          font-size: 12px;
+        }
+        .active-sea-button {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
