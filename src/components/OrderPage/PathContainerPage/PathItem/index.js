@@ -37,8 +37,6 @@ const PathItem = ({path, setIndex, index}) => {
      )
   }
 
-  console.log(path)
-
   const Map = ({points}) => {
     return (
         <HPlatform

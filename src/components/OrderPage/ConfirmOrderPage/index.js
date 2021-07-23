@@ -122,9 +122,7 @@ const ConfirmOrderPage = ({chosenPath}) => {
                placeholder={'email@gmail.com'}/>
            </div>
          </div>
-         <div className={'button-wrapper'}>
-           <button className={'send-order-button'}>Отправить</button>
-         </div>
+         <button className={'send-order-button'}>Отправить</button>
        </div>
       </div>
   );

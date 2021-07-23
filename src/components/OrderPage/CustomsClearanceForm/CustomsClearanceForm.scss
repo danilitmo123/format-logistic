@@ -84,9 +84,9 @@
     margin-top: 30px;
   }
 }
-@media (max-width: 767px) {
+@media (min-width: 300px) and (max-width: 767px) {
   .customs-clearance-wrapper {
-    width: 400px;
+    width: 80%;
     margin-top: 30px;
   }
 }
