@@ -102,7 +102,7 @@
     display: flex;
     flex-direction: column;
     width: 1000px;
-    height: 270px;
+    height: max-content;
     border-radius: 20px;
     background-color: $white;
     padding: 40px 30px;
@@ -166,31 +166,23 @@
         }
       }
     }
-    .button-wrapper {
-      width: 1060px;
+    .send-order-button {
       display: flex;
       justify-content: center;
-      .send-order-button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        color: $white;
-        border: none;
-        padding: 8px;
-        width: 170px;
-        height: 40px;
-        border-radius: 8px;
-        background: $light-blue;
-        outline: none;
-        margin-top: 20px;
-        cursor: pointer;
-        margin-left: -80px;
-        margin-bottom: 20px;
-      }
+      align-items: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      color: $white;
+      border: none;
+      padding: 8px;
+      width: 170px;
+      height: 40px;
+      border-radius: 8px;
+      background: $light-blue;
+      outline: none;
+      margin-top: 20px;
+      cursor: pointer;
     }
-
   }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -204,6 +196,52 @@
     }
     .final-form-wrapper {
       width: 890px;
+    }
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .final-order-page-wrapper {
+    width: 100%;
+    .final-map-wrapper {
+      width: 740px;
+      .route {
+        width: 300px;
+      }
+      #HERE_MAP_CONTAINER.here-map-container {
+        width: 400px;
+      }
+    }
+    .all-info-route {
+      width: 680px;
+    }
+    .final-form-wrapper {
+      height: max-content;
+      width: 680px;
+    }
+  }
+}
+@media (min-width: 300px) and (max-width: 767px) {
+  .final-order-page-wrapper {
+    width: 100%;
+    .final-map-wrapper {
+      width: 100%;
+      flex-wrap: wrap;
+      .route {
+        border-radius: 20px 20px 0 0;
+        width: 100%;
+      }
+      #HERE_MAP_CONTAINER.here-map-container {
+        width: 100%;
+      }
+    }
+    .all-info-route {
+      flex-direction: column;
+      width: 81%;
+    }
+    .final-form-wrapper {
+      flex-direction: column;
+      width: 81%;
+      height: max-content;
     }
   }
 }

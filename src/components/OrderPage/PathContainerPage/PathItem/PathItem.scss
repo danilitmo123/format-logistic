@@ -117,4 +117,27 @@
     width: 950px;
   }
 }
+@media (min-width: 768px) and (max-width: 991px) {
+  .path-item-wrapper {
+    width: 730px;
+  }
+}
+@media (min-width: 300px) and (max-width: 767px) {
+  .path-item-wrapper {
+    width: 100%;
+    flex-wrap: wrap;
+    .info-routes-wrapper {
+      border-radius: 20px 20px 0 0;
+      width: 85%;
+      .choose-button {
+        z-index: 100;
+      }
+    }
+    #HERE_MAP_CONTAINER.here-map-container {
+      border-radius: 0 20px 20px 0;
+      min-height: 400px;
+      width: 94%;
+    }
+  }
+}
 
