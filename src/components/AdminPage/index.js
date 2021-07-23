@@ -10,6 +10,7 @@ import ZonePage from "./ZonePage";
 import EditHubRoutePage from "./hub-route/EditHubRoutePage";
 import AdminOrderPage from "./AdminOrdersPage";
 import ServicesPage from "./ServicesPage";
+import AuthPage from "../AuthPage";
 
 import './AdminPage.scss'
 
@@ -39,6 +40,9 @@ const AdminPage = () => {
                 </Route>
                 <Route path={'/admin/services'}>
                     <ServicesPage/>
+                </Route>
+                <Route path={'/admin/auth'}>
+                    <AuthPage/>
                 </Route>
             </Switch>
         </Router>

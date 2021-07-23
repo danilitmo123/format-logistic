@@ -1,0 +1,90 @@
+@import '../../global';
+.auth-page-wrapper {
+  background: #028090;
+  height: 800px;
+  display: flex;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  .auth-form-wrapper {
+    border-radius: 20px;
+    background: $white;
+    width: 400px;
+    height: max-content;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 150px;
+    .auth-title {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+    .auth-inputs-wrapper {
+      display: flex;
+      flex-direction: column;
+      .input-wrapper {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        margin-bottom: 30px;
+        label {
+          color: black;
+          opacity: .4;
+          margin-bottom: 5px;
+        }
+        input {
+          width: 320px;
+          height: 38px;
+          padding: 2px 8px;
+          align-items: center;
+          background-color: hsl(0, 0%, 100%);
+          border-color: hsl(0, 0%, 80%);
+          border-radius: 4px;
+          border-style: solid;
+          border-width: 1px;
+          cursor: default;
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          min-height: 38px;
+          outline: none;
+          position: relative;
+          transition: all 100ms;
+          box-sizing: border-box;
+          font-family: 'Montserrat', sans-serif;
+          font-size: 16px;
+          &:focus {
+            border-color: $light-blue;
+            box-shadow: 0 0 0 1px $light-blue;
+          }
+
+          &::placeholder {
+            color: hsl(0, 0%, 50%);
+            font-family: "Montserrat", sans-serif;
+            font-size: 16px;
+          }
+        }
+      }
+      .login-input {
+        margin-bottom: 15px;
+      }
+    }
+    .login-button {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      border-radius: 4px;
+      width: 140px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid $light-blue;
+      background: none;
+      cursor: pointer;
+    }
+  }
+}
