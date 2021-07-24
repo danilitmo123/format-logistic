@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 
-import HubsItem from "./HubsItem";
-
 import axios from "axios";
 import {Link} from "react-router-dom";
+import {ADMIN_SERVER_URL} from "../../../../constants/URL";
+
+import HubsItem from "./HubsItem";
 
 import loader from '../../../../img/loader.svg'
 
 import './AllHubsPage.scss'
-import {ADMIN_SERVER_URL} from "../../../../constants/URL";
 
 const AllHubsPage = () => {
 

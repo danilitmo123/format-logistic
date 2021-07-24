@@ -1,8 +1,7 @@
 import React,{useState, useEffect} from 'react';
 
-import {ADMIN_SERVER_URL} from "../../../constants/URL";
-
 import axios from 'axios'
+import {ADMIN_SERVER_URL} from "../../../constants/URL";
 
 import AdminOrderItem from "./AdminOrderItem";
 

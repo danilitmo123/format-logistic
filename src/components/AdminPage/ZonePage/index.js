@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 
 import axios from "axios";
+import {ADMIN_SERVER_URL} from "../../../constants/URL";
 
-import {ADMIN_SERVER_URL, GEO_SERVER_URL} from "../../../constants/URL";
 import ZoneItem from "./ZoneItem";
 
 import loader from '../../../img/loader.svg'
@@ -11,7 +11,6 @@ import './ZonePage.scss'
 
 const ZONE_SUMMARY_URL = `${ADMIN_SERVER_URL}admin-zones/summary`
 const ZONE_CREATE_URL = `${ADMIN_SERVER_URL}zones/create/`
-
 
 const ZonePage = () => {
     const [zoneSummaryData, setZoneSummaryData] = useState([])

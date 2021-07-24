@@ -1,8 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
 
-import Select from 'react-select';
-import AsyncSelect from 'react-select/async';
-
 import {customTheme} from "../../../templates/templatesOfOptions";
 import {
     getCountries,
@@ -10,9 +7,12 @@ import {
     createModifyCountries,
     createModifyCities
 } from "../../../templates/templateGetCountryAndCity";
+import {PlaceType} from "../../../constants/unit";
+
+import Select from 'react-select';
+import AsyncSelect from 'react-select/async';
 
 import './CountryForm.scss'
-import {PlaceType} from "../../../constants/unit";
 
 const filterCandidate = (candidate, inputValue) => {
     let alias = candidate.data ? candidate.data.alias: candidate.alias

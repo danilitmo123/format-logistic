@@ -1,14 +1,14 @@
  import React from 'react';
 
 import {Link} from 'react-router-dom';
-
-import './HubsPage.scss'
-
-import {HubRouteBlock} from "../HubRouteBlock";
 import axios from "axios";
 import {ADMIN_SERVER_URL} from "../../../../constants/URL";
 
-const CreateHubRoutePage = ({}) => {
+ import {HubRouteBlock} from "../HubRouteBlock";
+
+import './HubsPage.scss'
+
+ const CreateHubRoutePage = ({}) => {
 
     const toAdminPage = () => {
         window.location = '/admin/hub-routes/'

@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
+
 import PathItem from "./PathItem";
+
 import loader from '../../../img/loader.svg'
 
 import './PathContainerPage.scss'

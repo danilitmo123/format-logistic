@@ -1,8 +1,7 @@
-import React,{useState} from 'react';
+import React from 'react';
 
 import {Link} from "react-router-dom";
 
-import userIcon from '../../img/user-icon.svg'
 import logo from '../../img/logo.svg'
 
 import './header.scss'
