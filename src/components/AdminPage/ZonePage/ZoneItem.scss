@@ -10,7 +10,34 @@
   margin-right: 10px;
   margin-left: 50px;
   cursor: pointer;
-  h2 {
+  .add-region-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 10px;
+    .css-2b097c-container {
+      width: 190px;
+      .add-region__placeholder {
+        font-size: 14px;
+      }
+    }
+    .add-region-button {
+      width: 80px;
+      height: 30px;
+      background: none;
+      border: 1px solid $light-blue;
+      font-weight: 400;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: black;
+      font-family: 'Montserrat', sans-serif;
+      cursor: pointer;
+    }
   }
+    h2 {
+      margin-bottom: 10px;
+    }
 }
