@@ -48,7 +48,7 @@ const ZoneItem = ({data}) => {
     }
 
     return (
-        <div onClick={onClick} className={'zone-item-wrapper'}>
+        <div  className={'zone-item-wrapper'}>
             <div>
                 <h2>{data.zone.name}</h2>
             </div>
@@ -62,8 +62,10 @@ const ZoneItem = ({data}) => {
                     />
                     <button className={'add-region-button'}>Добавить</button>
                 </div>
-                <div className={'count-of-cities'}>Количество городов: {data.city_count}</div>
-                <div className={'count-of-zones'}>Количество регионов: {data.state_count}</div>
+                <div onClick={onClick}>
+                    <div className={'count-of-cities'}>Количество городов: {data.city_count}</div>
+                    <div className={'count-of-zones'}>Количество регионов: {data.state_count}</div>
+                </div>
             </div>
             { open ? (loadedStates ? <StateList states={states}/> : "") : ""}
         </div>

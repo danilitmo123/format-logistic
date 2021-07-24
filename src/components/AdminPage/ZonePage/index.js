@@ -12,39 +12,57 @@ import './ZonePage.scss'
 const ZONE_SUMMARY_URL = `${ADMIN_SERVER_URL}admin-zones/summary`
 
 const ZonePage = () => {
-    const [zoneSummaryData, setZoneSummaryData] = useState([])
-    const [loading, setLoading] = useState(false)
+  const [zoneSummaryData, setZoneSummaryData] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [showCreateZone, setShowCreateZone] = useState(false)
+  const [zoneName, setZoneName] = useState('')
 
+  const createZoneHandler = () => {
+    setShowCreateZone(!showCreateZone)
+  }
 
-    const loadZoneSummaryData = () => {
-        axios.get(ZONE_SUMMARY_URL).then(res => {
-            setZoneSummaryData(res.data)
-            setLoading(true)
-        })
-    }
+  const zoneNameHandler = (e) => {
+    setZoneName(e.target.value)
+  }
 
-    useEffect(() => {
-        loadZoneSummaryData()
-    }, [])
+  const loadZoneSummaryData = () => {
+    axios.get(ZONE_SUMMARY_URL).then(res => {
+      setZoneSummaryData(res.data)
+      setLoading(true)
+    })
+  }
 
-    return (
+  useEffect(() => {
+    loadZoneSummaryData()
+  }, [])
+
+  return (
       <div className={'zone-page-wrapper'}>
-          <div className={'zone-title'}>
-              <div>Зоны и регионы</div>
-              <button className={'create-zone-button'}>Создать зону</button>
-          </div>
+        <div className={'zone-title'}>
+          <div>Зоны и регионы</div>
+          <button className={'create-zone-button'} onClick={createZoneHandler}>Создать зону</button>
           {
-              loading ?
-                <div className={'zone-wrapper'}>
-                    {zoneSummaryData.map(item => {
-                        return (<ZoneItem data={item}/>)
-                    })}
+            showCreateZone ?
+                <div className={'create-zone'}>
+                  <input type="text" value={zoneName} onChange={zoneNameHandler} />
+                  <button onClick={createZoneHandler} className={'create-zone-button'}>Создать</button>
                 </div>
                 :
-                <div className={'loader-wrapper'}><img src={loader} alt=""/><div>Загрузка...</div></div>
+                ''
           }
+        </div>
+        {
+          loading ?
+              <div className={'zone-wrapper'}>
+                {zoneSummaryData.map(item => {
+                  return (<ZoneItem data={item}/>)
+                })}
+              </div>
+              :
+              <div className={'loader-wrapper'}><img src={loader} alt=""/><div>Загрузка...</div></div>
+        }
       </div>
-    )
+  )
 }
 
 export default ZonePage
