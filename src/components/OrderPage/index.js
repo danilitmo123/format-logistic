@@ -41,6 +41,7 @@ const OrderPage = ({firstActivePage, setActive}) => {
     if (selectedCityIdFrom !== '' && selectedCityIdTo !== '') {
       let cargos = JSON.parse(localStorage.getItem('cargo'))
       let data_cargos = []
+      console.log({cargos})
       cargos.forEach((cargo) => {
         let _cargo = {}
         let isBox = cargo.cargo === "Коробки"
