@@ -202,7 +202,7 @@ const CargoForm = () => {
         </div>
         <div className={'cargo-choice'}>
           <div className={activeBoxButton ? 'active-box-button' : 'box'}
-               onClick={ActiveBoxButtonHandler}>Коробки/Паллеты
+               onClick={ActiveBoxButtonHandler}>Коробки / Паллеты
           </div>
           {/*<div className={activeContainerButton ? 'active-container-button' : 'container'}*/}
           {/*     onClick={ActiveContainerButtonHandler}>Контейнеры*/}
