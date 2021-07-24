@@ -76,7 +76,8 @@ const ZonePage = () => {
                         })}
                     </div>
                     :
-                    <div className={'loader-wrapper'}><img src={loader} alt=""/>
+                    <div className={'loader-wrapper'}>
+                        <img src={loader} alt=""/>
                         <div>Загрузка...</div>
                     </div>
             }
