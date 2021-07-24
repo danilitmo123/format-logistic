@@ -6,9 +6,11 @@ import './PathContainerPage.scss'
 
 const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler}) => {
   const [index, setIndex] = useState('')
+
   useEffect(() => {
     if(paths.paths !== undefined && index !== '') {
       setChosenPath([paths.paths[index]])
+      localStorage.setItem('path', JSON.stringify(paths.paths[index]))
       thirdPageActiveHandler(false)
     }
   }, [index])

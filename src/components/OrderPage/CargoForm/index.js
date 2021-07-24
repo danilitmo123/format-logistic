@@ -53,7 +53,7 @@ const CargoForm = () => {
         heightPallet: 0,
         length: 0,
         lengthPallet: 120,
-        volumeUnits: "M",
+        volumeUnits: "CM",
         weight: 0,
         weightBoxSelect: "КГ",
         weightUnits: "КГ",
@@ -118,7 +118,6 @@ const CargoForm = () => {
     let totalVolumeM = 0
     let totalVolumeCM = 0
     newData.forEach(item => {
-      console.log(item.volumeUnits)
       switch (item.volumeUnits) {
         case 'M':
           if(item.cargo === 'Паллеты') {
@@ -318,7 +317,7 @@ const CargoForm = () => {
                                           classNamePrefix="units-select-pallet-select"
                                           theme={customTheme}
                                           options={typeOfVolumeUnits}
-                                          defaultValue={{value: 'M', label: 'M'}}
+                                          defaultValue={{value: 'CM', label: 'CM'}}
                                           onChange={(e) => updateItem('volumeUnits', e.value)}
                                           noOptionsMessage={() => `Не найдено`}
                                           placeholder={'СМ'}

@@ -41,24 +41,24 @@ const OrderPage = ({firstActivePage, setActive}) => {
     if (selectedCityIdFrom !== '' && selectedCityIdTo !== '') {
       let cargos = JSON.parse(localStorage.getItem('cargo'))
       let data_cargos = []
-      console.log({cargos})
       cargos.forEach((cargo) => {
         let _cargo = {}
         let isBox = cargo.cargo === "Коробки"
-        let isCm = cargo.volumeUnits === "CM"
+        let isCM = cargo.volumeUnits === "CM"
         let isKg = cargo.weightUnits === "КГ"
         if (isBox) {
           _cargo["type"] = "BOX"
         } else {
           _cargo["type"] = "PALLET"
         }
-        _cargo["length"] = (isBox ? cargo.length : cargo.lengthPallet) * (isCm || !isBox ? 1 : 2.54)
-        _cargo["height"] = (isBox ? cargo.height : cargo.heightPallet) * (isCm ? 1 : 2.54)
-        _cargo["width"] = (isBox ? cargo.width : cargo.widthPallet) * (isCm || !isBox ? 1 : 2.54)
-        _cargo["mass"] = cargo.weight * (isKg ? 1 : 2.2)
+        _cargo["length"] = (isBox ? cargo.length : cargo.lengthPallet) * (isCM || !isBox ?  1/100 : 1)
+        _cargo["height"] = (isBox ? cargo.height : cargo.heightPallet) * (isCM ? 1/100 : 1)
+        _cargo["width"] = (isBox ? cargo.width : cargo.widthPallet) * (isCM || !isBox ?  1/100 : 1)
+        _cargo["mass"] = cargo.weight * (isKg ? 1 : 1 / 2.2)
         _cargo["amount"] = cargo.count
         data_cargos.push(_cargo)
       })
+      localStorage.setItem('good', JSON.stringify(data_cargos))
       let data = {
         source:
           {id: selectedCityIdFrom},
