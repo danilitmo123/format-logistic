@@ -11,7 +11,7 @@
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
-    width: 1200px;
+    width: 100%;
     .back-to-hubs-button {
       font-family: 'Montserrat', sans-serif;
       color: $white;
@@ -38,6 +38,7 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: space-between;
     margin-bottom: 20px;
   }
   .refresh-price-button {
