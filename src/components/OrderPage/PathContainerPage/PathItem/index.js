@@ -29,7 +29,7 @@ const PathItem = ({path, setIndex, index}) => {
               <div className={'route-info'}>
                 <div className={'type'}>{route.type === 'TRUCK' ? <img className={'truck'} src={truck} alt="truck"/> :
                     <img className={'airplane'} src={airplane} alt="airplane"/>}</div>
-                <div className={'route-distance'}>{(route.distance / 1000).toFixed(0)}км {route.total_cost}</div>
+                <div className={'route-distance'}>{(route.distance).toFixed(0)}км {route.total_cost}</div>
               </div>
               <div className={'destination'}>{route.destination.name}</div>
            </div>
