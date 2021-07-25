@@ -31,17 +31,61 @@ const getAuthStatus = () => {
     return JSON.parse(localStorage.getItem(authStatusKey))
 }
 const setAuthToken = (token) => {
-    localStorage.setItem(accessTokenKey, JSON.stringify(token))
-    adminInstance.defaults.headers.common['Authorization'] = `${AUTH_HEADER_TYPE} ${token}`;
+    console.log({token})
+    if (token) {
+        localStorage.setItem(accessTokenKey, JSON.stringify(token))
+        adminInstance.defaults.headers.common['Authorization'] = `${AUTH_HEADER_TYPE} ${token}`;
+    }else{
+        localStorage.removeItem(accessTokenKey)
+    }
 }
 const setRefreshToken = (token) => {
-    localStorage.setItem(refreshTokenKey, JSON.stringify(token))
+    console.log({token})
+    if (token) {
+        localStorage.setItem(refreshTokenKey, JSON.stringify(token))
+    } else{
+        localStorage.removeItem(refreshTokenKey)
+    }
 }
 const setAuthStatus = (status) => {
     localStorage.setItem(authStatusKey, JSON.stringify(status))
 }
 
-setAuthHeader()
+
+const pingAuth = async () => {
+    const options = {
+        Authorization: `${AUTH_HEADER_TYPE} ${getAuthToken()}`
+    }
+    try{
+        let res = await axios.post(AUTH_PING_URL, options)
+        if (res.status === 200)
+            return ResponseStatus.CORRECT
+    } catch (err){
+        return ResponseStatus.INCORRECT
+    }
+}
+
+const initAuth = () => {
+    let access = getAuthToken()
+    let status = getAuthStatus()
+    if (access && status && status === AuthStatus.AUTHENTICATED){
+        pingAuth().then(status => {
+            if (status === ResponseStatus.CORRECT){
+                setAuthHeader()
+            } else{
+                setAuthStatus(AuthStatus.UNAUTHENTICATED)
+                setAuthToken(null)
+                setRefreshToken(null)
+            }
+        })
+    } else {
+        setAuthStatus(AuthStatus.UNAUTHENTICATED)
+        setAuthToken(null)
+        setRefreshToken(null)
+    }
+}
+
+initAuth()
 
 const auth = async (username, password) => {
     let body = {username, password}
@@ -60,8 +104,8 @@ const auth = async (username, password) => {
     } catch (err) {
         let res = err.response
         setAuthStatus(AuthStatus.UNAUTHENTICATED)
-        setAuthToken(undefined)
-        setRefreshToken(undefined)
+        setAuthToken(null)
+        setRefreshToken(null)
         console.log('auth error', {err})
         console.log({access: getAuthToken()})
         console.log({refresh: getRefreshToken()})
@@ -105,8 +149,8 @@ const refresh = async () => {
         }
         catch (err){
             console.log('error')
-            setRefreshToken(undefined)
-            setAuthToken(undefined)
+            setRefreshToken(null)
+            setAuthToken(null)
             setAuthStatus(AuthStatus.UNAUTHENTICATED)
             console.log({access: getAuthToken()})
             console.log({refresh: getRefreshToken()})
@@ -132,8 +176,8 @@ adminInstance.interceptors.response.use(res => res, err => {
             }
             else {
                 console.log('Incorrect, go to login page')
-                setAuthToken(undefined)
-                setRefreshToken(undefined)
+                setAuthToken(null)
+                setRefreshToken(null)
                 setAuthStatus(AuthStatus.UNAUTHENTICATED)
                 console.log({access: getAuthToken()})
                 console.log({refresh: getRefreshToken()})

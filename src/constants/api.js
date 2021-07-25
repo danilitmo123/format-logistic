@@ -5,7 +5,7 @@ const ResponseStatus = Object.freeze({
 
 const AuthStatus = Object.freeze({
     AUTHENTICATED: 'AUTHENTICATED',
-    UNAUTHENTICATED: 'AUTHENTICATED',
+    UNAUTHENTICATED: 'UNAUTHENTICATED',
     EXPIRED: 'EXPIRED'
 })
 
