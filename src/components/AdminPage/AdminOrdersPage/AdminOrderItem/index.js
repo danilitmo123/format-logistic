@@ -90,7 +90,7 @@ const AdminOrderItem = ({order}) => {
                   })
                 }
               </div>
-              <div className={'all-cargo-info'}>Общая информация: {order.path.total_cost} € {(order.path.total_distance / 1000).toFixed(0)} км {(order.path.total_duration.min).toFixed(0)}-{(order.path.total_duration.max).toFixed(0)} дней</div>
+              <div className={'all-cargo-info'}>Общая информация: {order.path.total_cost} € {(order.path.total_distance).toFixed(0)} км {(order.path.total_duration.min).toFixed(0)}-{(order.path.total_duration.max).toFixed(0)} дней</div>
             </div>
             <div className={'customs'}>Таможенное офоромление: {order.customs ? 'Да' : 'Нет'}</div>
             <button onClick={showFullOrderHandler} className={'close-button'}>Свернуть</button>
