@@ -104,8 +104,8 @@ const auth = async (username, password) => {
     } catch (err) {
         let res = err.response
         setAuthStatus(AuthStatus.UNAUTHENTICATED)
-        setAuthToken(undefined)
-        setRefreshToken(undefined)
+        setAuthToken(null)
+        setRefreshToken(null)
         console.log('auth error', {err})
         console.log({access: getAuthToken()})
         console.log({refresh: getRefreshToken()})
@@ -149,8 +149,8 @@ const refresh = async () => {
         }
         catch (err){
             console.log('error')
-            setRefreshToken(undefined)
-            setAuthToken(undefined)
+            setRefreshToken(null)
+            setAuthToken(null)
             setAuthStatus(AuthStatus.UNAUTHENTICATED)
             console.log({access: getAuthToken()})
             console.log({refresh: getRefreshToken()})
@@ -176,8 +176,8 @@ adminInstance.interceptors.response.use(res => res, err => {
             }
             else {
                 console.log('Incorrect, go to login page')
-                setAuthToken(undefined)
-                setRefreshToken(undefined)
+                setAuthToken(null)
+                setRefreshToken(null)
                 setAuthStatus(AuthStatus.UNAUTHENTICATED)
                 console.log({access: getAuthToken()})
                 console.log({refresh: getRefreshToken()})
