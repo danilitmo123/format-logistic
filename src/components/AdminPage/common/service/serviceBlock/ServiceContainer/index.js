@@ -6,8 +6,8 @@ import ServiceRankedItem from "../ServiceRankedItem";
 import './ServiceContainer.scss'
 import {useServiceContext} from "../../ServiceContext";
 
-const defaultAdditionalServiceData = {name: "blya", price: 0.0}
-const defaultRankedServiceData = {name: "huy", rank_type: "MASS", price_per_unit: 0.0}
+const defaultAdditionalServiceData = {name: "", price: 0.0}
+const defaultRankedServiceData = {name: "", rank_type: "MASS", price_per_unit: 0.0}
 
 const ServiceContainer = () => {
 

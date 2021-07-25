@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import HPlatform, {HMap, HMapPolyLine} from "react-here-map";
-import {ADMIN_SERVER_URL} from "../../../constants/URL";
+import {ADMIN_SERVER_URL, ORDER_SERVER_URL} from "../../../constants/URL";
 import axios from "axios";
 
 import airplane from '../../../img/black-airplane-icon.svg'
@@ -9,7 +9,7 @@ import truck from '../../../img/black-truck-icon.svg'
 
 import './ConfirmOrderPage.scss'
 
-const CREATE_ORDER_URL = `${ADMIN_SERVER_URL}admin-orders/`
+const CREATE_ORDER_URL = `${ORDER_SERVER_URL}orders/`
 
 const ConfirmOrderPage = ({chosenPath}) => {
 

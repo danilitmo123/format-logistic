@@ -19,7 +19,7 @@ const ServiceAdditionalItem = ({initData, setData, onDelete}) => {
 
     return (
         <div className={'service-additional-item-wrapper'}>
-            <input type="text" onChange={setName} placeholder={'Услуга'}/>
+            <input type="text" onChange={setName} value={name} placeholder={'Услуга'}/>
             <input type="text" onChange={setPrice} value={price}/>
             <img src={trash} onClick={onDelete} alt="trash"/>
         </div>

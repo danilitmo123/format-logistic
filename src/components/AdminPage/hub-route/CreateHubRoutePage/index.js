@@ -7,6 +7,7 @@ import {ADMIN_SERVER_URL} from "../../../../constants/URL";
  import {HubRouteBlock} from "../HubRouteBlock";
 
 import './HubsPage.scss'
+ import {adminInstance} from "../../../../api/admin";
 
  const CreateHubRoutePage = ({}) => {
 
@@ -27,9 +28,7 @@ import './HubsPage.scss'
                              prepareDays,
                              activeTimetable
                          }) => {
-        const options = {
-            headers: {'Content-Type': 'application/json'}
-        }
+
         let body = {
             source: {
                 id: sourceId,
@@ -39,7 +38,7 @@ import './HubsPage.scss'
             },
             type: typeOfShipping,
             distance: distance,
-            duration: duration * 60 * 24,
+            duration: duration,
             rates: rates,
             additional_services: additionalServices,
             ranked_services: rankedServices
@@ -51,11 +50,10 @@ import './HubsPage.scss'
             }
         }
 
-        console.log({body})
-        axios.post(`${ADMIN_SERVER_URL}admin-routes/`, body, options)
+        adminInstance.post(`${ADMIN_SERVER_URL}admin-routes/`, body)
             .then(res => {
-                toAdminPage()
                 console.log(res)
+                toAdminPage()
             })
 
     }
