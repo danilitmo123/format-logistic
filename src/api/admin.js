@@ -94,7 +94,7 @@ const refresh = async () => {
 
 adminInstance.interceptors.response.use(res => res, err => {
     if (err.config && err.response && err.response.status === 401) {
-        let r = refresh().then(status => {
+        return refresh().then(status => {
             if (status === ResponseStatus.CORRECT) {
                 err.config.headers['Authorization'] = `${AUTH_HEADER_TYPE} ${getAuthToken()}`
                 return axios.request(err.config);
@@ -103,7 +103,6 @@ adminInstance.interceptors.response.use(res => res, err => {
                 window.location = '/admin/auth'
             }
         });
-        return r
     }
     return Promise.reject(err);
 })

@@ -73,7 +73,7 @@ const AdminOrderItem = ({order}) => {
                   })
                 }
               </div>
-              <div className={'all-weight-info'}>Общая информация: {order.good.total_ldm} LDM {order.good.total_mass} КГ {order.good.total_volume / 1000000} м³</div>
+              <div className={'all-weight-info'}>Общая информация: {order.good.total_ldm} LDM {order.good.total_mass} КГ {order.good.total_volume} м³</div>
             </div>
             <div className={'delivery-cargo-wrapper'}>
               <div className={'delivery-title'}>Информация о маршруте</div>
