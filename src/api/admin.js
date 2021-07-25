@@ -31,11 +31,21 @@ const getAuthStatus = () => {
     return JSON.parse(localStorage.getItem(authStatusKey))
 }
 const setAuthToken = (token) => {
-    localStorage.setItem(accessTokenKey, JSON.stringify(token))
-    adminInstance.defaults.headers.common['Authorization'] = `${AUTH_HEADER_TYPE} ${token}`;
+    console.log({token})
+    if (token) {
+        localStorage.setItem(accessTokenKey, JSON.stringify(token))
+        adminInstance.defaults.headers.common['Authorization'] = `${AUTH_HEADER_TYPE} ${token}`;
+    }else{
+        localStorage.removeItem(accessTokenKey)
+    }
 }
 const setRefreshToken = (token) => {
-    localStorage.setItem(refreshTokenKey, JSON.stringify(token))
+    console.log({token})
+    if (token) {
+        localStorage.setItem(refreshTokenKey, JSON.stringify(token))
+    } else{
+        localStorage.removeItem(refreshTokenKey)
+    }
 }
 const setAuthStatus = (status) => {
     localStorage.setItem(authStatusKey, JSON.stringify(status))
