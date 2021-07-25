@@ -18,7 +18,10 @@ const EditHubRoutePage = () => {
         adminInstance.get(`${ADMIN_SERVER_URL}admin-routes/${id}`).then(res => {
             setInitData(res.data)
             setLoading(false)
-        })
+        }).catch (err => {
+                console.log({err})
+            }
+        )
     }, [])
 
     const sendRequest = ({

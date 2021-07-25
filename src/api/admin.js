@@ -57,7 +57,7 @@ const pingAuth = async () => {
         Authorization: `${AUTH_HEADER_TYPE} ${getAuthToken()}`
     }
     try{
-        let res = await axios.post(AUTH_PING_URL, options)
+        let res = await axios.get(AUTH_PING_URL, options)
         if (res.status === 200)
             return ResponseStatus.CORRECT
     } catch (err){
