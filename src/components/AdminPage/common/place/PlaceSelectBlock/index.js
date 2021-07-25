@@ -9,14 +9,15 @@ import axios from "axios";
 import {usePlaceDispatcherContext} from "../placeContext";
 
 import './PlaceSelectBlock.scss'
+import {adminInstance} from "../../../../../api/admin";
 
 const loadCountries = async () => {
-    let response = await axios.get(`${GEO_SERVER_URL}countries`)
+    let response = await adminInstance.get(`${GEO_SERVER_URL}countries`)
     return response.data
 }
 
 const loadCities = async (countryName) => {
-    let response = await axios.get(`${GEO_SERVER_URL}cities?country=${countryName}`)
+    let response = await adminInstance.get(`${GEO_SERVER_URL}cities?country=${countryName}`)
 
     return response.data
 }

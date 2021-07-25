@@ -2,49 +2,37 @@ import axios from "axios";
 import {GEO_SERVER_URL} from "../constants/URL";
 
 export const getCountries = (setAllCountries) => {
-    axios.get(`${GEO_SERVER_URL}countries/`)
+    axios.get(`${GEO_SERVER_URL}countries/?alias=ru`)
         .then(res => {
-            setAllCountries([...res.data])
+            setAllCountries(res.data)
         })
 }
 
-export const getCitiesFrom = (prevCountryFrom, optionCountryFromValue, setAllCitiesFrom, sourceType) => {
-    axios.get(`${GEO_SERVER_URL}cities/short?country=${optionCountryFromValue.value}&type=${sourceType}`)
+export const getCities = (countryOption, setAllCities, destinationType) => {
+    axios.get(`${GEO_SERVER_URL}cities/short?country=${countryOption.value}&type=${destinationType}&alias=ru`)
         .then(res => {
-            setAllCitiesFrom([...res.data])
+            setAllCities(res.data)
         })
-
 }
 
-export const getCitiesTo = (prevCountryTo, optionCountryToValue, setAllCitiesTo, destinationType) => {
-    axios.get(`${GEO_SERVER_URL}cities/short?country=${optionCountryToValue.value}&type=${destinationType}`)
-        .then(res => {
-            setAllCitiesTo([...res.data])
-        })
-
-}
-
-export const createModifyCountryObj = (allCountries, setModifyCountryObj) => {
+export const createModifyCountries = (allCountries, setModifyCountryObj) => {
     const countryOptions = []
     allCountries.map(item => {
-        countryOptions.push({value: item.name, label: item.name})
+        let al = item.alias_ru ? ` \\ ${item.alias_ru}` : ''
+        let label = item.name + al
+        countryOptions.push({value: item.name, label: label, alias: item.alias_ru})
     })
     setModifyCountryObj(countryOptions)
 }
 
-export const createModifyCitiesFromObj = (allCitiesFrom, setModifyCitiesFromObj) => {
+export const createModifyCities = (allCities, setModifyCities) => {
     const citiesFromOptions = []
-    allCitiesFrom.map(item => {
-        citiesFromOptions.push({value: item.name, label: item.name, id: item.id})
+    allCities.map(item => {
+        let al = item.alias_ru ? ` \\ ${item.alias_ru}` : ''
+        let label = item.name + al
+        citiesFromOptions.push({value: item.name, label: label, id: item.id, alias: item.alias_ru})
     })
-    setModifyCitiesFromObj(citiesFromOptions)
+    setModifyCities(citiesFromOptions)
 }
 
-export const createModifyCitiesToObj = (allCitiesTo, setModifyCitiesToObj) => {
-    const citiesToOptions = []
-    allCitiesTo.map(item => {
-        citiesToOptions.push({value: item.name, label: item.name, id: item.id})
-    })
-    setModifyCitiesToObj(citiesToOptions)
-}
 

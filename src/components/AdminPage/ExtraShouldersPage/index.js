@@ -2,15 +2,14 @@ import React, {useState, useEffect} from 'react';
 
 import {Link} from "react-router-dom";
 import axios from "axios";
+import {ADMIN_SERVER_URL} from "../../../constants/URL";
 
 import ExtraShoulderItem from "./ExtraShoulderItem";
 
-import {ADMIN_SERVER_URL} from "../../../constants/URL";
-
 import './ExtraShouldersPage.scss'
+import {adminInstance} from "../../../api/admin";
 
 const ZONE_URL = `${ADMIN_SERVER_URL}admin-zones/`
-
 
 const ExtraShouldersPage = () => {
 
@@ -18,7 +17,7 @@ const ExtraShouldersPage = () => {
     const [zonesLoaded, setLoadedZones] = useState(false)
 
     const getZones = () => {
-        axios.get(ZONE_URL).then(res => {
+        adminInstance.get(ZONE_URL).then(res => {
             setZones(res.data)
             setLoadedZones(true)
         })

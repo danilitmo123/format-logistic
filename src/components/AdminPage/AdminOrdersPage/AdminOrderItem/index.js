@@ -1,9 +1,9 @@
 import React,{useState} from 'react';
 
-import './AdminOrderItem.scss'
-
 import air from '../../../../img/black-airplane-icon.svg'
 import truck from '../../../../img/black-truck-icon.svg'
+
+import './AdminOrderItem.scss'
 
 const AdminOrderItem = ({order}) => {
 
@@ -73,7 +73,7 @@ const AdminOrderItem = ({order}) => {
                   })
                 }
               </div>
-              <div className={'all-weight-info'}>Общая информация: {order.good.total_ldm} LDM {order.good.total_mass} КГ {order.good.total_volume / 1000000} м³</div>
+              <div className={'all-weight-info'}>Общая информация: {order.good.total_ldm} LDM {order.good.total_mass} КГ {order.good.total_volume} м³</div>
             </div>
             <div className={'delivery-cargo-wrapper'}>
               <div className={'delivery-title'}>Информация о маршруте</div>
@@ -90,7 +90,7 @@ const AdminOrderItem = ({order}) => {
                   })
                 }
               </div>
-              <div className={'all-cargo-info'}>Общая информация: {order.path.total_cost} € {(order.path.total_distance / 1000).toFixed(0)} км {order.path.total_duration.min}-{order.path.total_duration.max} дней</div>
+              <div className={'all-cargo-info'}>Общая информация: {order.path.total_cost} € {(order.path.total_distance).toFixed(0)} км {(order.path.total_duration.min).toFixed(0)}-{(order.path.total_duration.max).toFixed(0)} дней</div>
             </div>
             <div className={'customs'}>Таможенное офоромление: {order.customs ? 'Да' : 'Нет'}</div>
             <button onClick={showFullOrderHandler} className={'close-button'}>Свернуть</button>
@@ -120,7 +120,7 @@ const AdminOrderItem = ({order}) => {
                   })
                 }
               </div>
-              <div className={'all-cargo-info'}>Общая информация: {order.path.total_cost} € {(order.path.total_distance / 1000).toFixed(0)} км {order.path.total_duration.min}-{order.path.total_duration.max} дней</div>
+              <div className={'all-cargo-info'}>Общая информация: {order.path.total_cost} € {(order.path.total_distance / 1000).toFixed(0)} км {(order.path.total_duration.min).toFixed(0)}-{(order.path.total_duration.max).toFixed(0)} дней</div>
             </div>
           </div>
       }

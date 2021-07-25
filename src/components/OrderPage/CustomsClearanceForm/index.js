@@ -1,11 +1,15 @@
-import React,{useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import './CustomsClearanceForm.scss'
 
 const CustomsClearanceForm = () => {
 
   const [showInfo, setShowInfo] = useState(false)
-  console.log(showInfo)
+
+    useEffect(() => {
+        localStorage.setItem('customs', JSON.stringify(showInfo))
+    }, [showInfo])
+
   return (
       <div className={'customs-clearance-wrapper'}>
         <div className={'title-wrapper'}>

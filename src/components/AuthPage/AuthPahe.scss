@@ -1,7 +1,8 @@
 @import '../../global';
 .auth-page-wrapper {
   background: #028090;
-  height: 800px;
+  min-height: 850px;
+  height: 100%;
   display: flex;
   justify-content: center;
   font-family: 'Montserrat', sans-serif;

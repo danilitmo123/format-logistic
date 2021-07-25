@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React,{useState, useEffect} from 'react';
 
 import {
   typeOfCargoOptions,
@@ -19,7 +19,7 @@ const objectTemplate = {
   width: 0,
   height: 0,
   weight: 0,
-  volumeUnits: 'M',
+  volumeUnits: 'CM',
   weightUnits: 'КГ',
   lengthPallet: 120,
   widthPallet: 100,
@@ -53,7 +53,7 @@ const CargoForm = () => {
         heightPallet: 0,
         length: 0,
         lengthPallet: 120,
-        volumeUnits: "M",
+        volumeUnits: "CM",
         weight: 0,
         weightBoxSelect: "КГ",
         weightUnits: "КГ",
@@ -118,7 +118,6 @@ const CargoForm = () => {
     let totalVolumeM = 0
     let totalVolumeCM = 0
     newData.forEach(item => {
-      console.log(item.volumeUnits)
       switch (item.volumeUnits) {
         case 'M':
           if(item.cargo === 'Паллеты') {
@@ -225,7 +224,7 @@ const CargoForm = () => {
                               theme={customTheme}
                               options={typeOfCargoOptions}
                               onChange={(e) => updateItem('cargo', e.value)}
-                              noOptionsMessage={() => `Не найдено 🖕`}
+                              noOptionsMessage={() => `Не найдено`}
                               placeholder={'Коробки'}
                           />
                         </div>
@@ -318,7 +317,7 @@ const CargoForm = () => {
                                           classNamePrefix="units-select-pallet-select"
                                           theme={customTheme}
                                           options={typeOfVolumeUnits}
-                                          defaultValue={{value: 'M', label: 'M'}}
+                                          defaultValue={{value: 'CM', label: 'CM'}}
                                           onChange={(e) => updateItem('volumeUnits', e.value)}
                                           noOptionsMessage={() => `Не найдено`}
                                           placeholder={'СМ'}

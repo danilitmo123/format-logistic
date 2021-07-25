@@ -1,9 +1,13 @@
-import {Link, useParams} from "react-router-dom";
-import {HubRouteBlock} from "../HubRouteBlock";
 import React, {useState, useEffect} from "react";
+
 import axios from "axios";
 import {ADMIN_SERVER_URL} from "../../../../constants/URL";
+import {Link, useParams} from "react-router-dom";
+
+import {HubRouteBlock} from "../HubRouteBlock";
+
 import loader from '../../../../img/loader.svg'
+import {adminInstance} from "../../../../api/admin";
 
 const EditHubRoutePage = () => {
     const { id } = useParams();
@@ -11,7 +15,7 @@ const EditHubRoutePage = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        axios.get(`${ADMIN_SERVER_URL}admin-routes/${id}`).then(res => {
+        adminInstance.get(`${ADMIN_SERVER_URL}admin-routes/${id}`).then(res => {
             setInitData(res.data)
             setLoading(false)
         })
@@ -42,7 +46,7 @@ const EditHubRoutePage = () => {
             },
             type: typeOfShipping,
             distance: distance,
-            duration: duration * 60 * 24,
+            duration: duration,
             rates: rates,
             additional_services: additionalServices,
             ranked_services: rankedServices
@@ -55,7 +59,7 @@ const EditHubRoutePage = () => {
         }
 
         console.log({body})
-        axios.put(`${ADMIN_SERVER_URL}admin-routes/${id}/`, body, options)
+        adminInstance.put(`${ADMIN_SERVER_URL}admin-routes/${id}/`, body, options)
             .then(res => {
                 console.log(res.data)
             }).catch(error => console.log({error}))

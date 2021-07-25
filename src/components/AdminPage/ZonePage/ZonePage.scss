@@ -81,10 +81,9 @@
   }
   .zone-wrapper {
     min-height: 750px;
+    width: 100%;
     display: flex;
-    justify-content: flex-start;
     flex-wrap: wrap;
-    flex-direction: row;
   }
   .loader-wrapper {
     display: flex;

@@ -1,18 +1,18 @@
 import React, {useState} from "react";
+
 import {PlaceDispatcherContext} from "../../common/place/placeContext";
-import {PlaceSelectBlock} from "../../common/place/PlaceSelectBlock";
 import Select, {createFilter} from "react-select";
 import {customTheme} from "../../../../templates/templatesOfOptions";
 import {filterConfig} from "../../../../templates/filterSelectTemplate";
 import {RatesContext} from "../../common/price/PriceContext";
-import PriceBlock from "../../common/price/PriceBlock";
 import {ServiceContext} from "../../common/service/ServiceContext";
-import ServiceContainer from "../../common/service/serviceBlock/ServiceContainer";
 import {useRefReducer, useRefSetter} from "../../../../utils/hooks";
-import axios from "axios";
-import {ADMIN_SERVER_URL} from "../../../../constants/URL";
 import {ShippingType} from "../../../../constants/unit";
 import {Link} from 'react-router-dom'
+
+import PriceBlock from "../../common/price/PriceBlock";
+import {PlaceSelectBlock} from "../../common/place/PlaceSelectBlock";
+import ServiceContainer from "../../common/service/serviceBlock/ServiceContainer";
 
 const defaultRateMass = {
     range_from: 0,

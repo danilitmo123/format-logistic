@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 
-import './ExtraShoulderItem.scss'
-import trash from "../../../../img/trash-icon.svg";
 import {ADMIN_SERVER_URL} from "../../../../constants/URL";
 import axios from "axios";
+
+import trash from "../../../../img/trash-icon.svg";
+
+import './ExtraShoulderItem.scss'
 
 const defaultMassRate = {
     range_from: 0,

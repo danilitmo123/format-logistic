@@ -25,7 +25,7 @@ const ServiceRankedItem = ({initData, setData, onDelete}) => {
 
     return (
         <div className={'service-ranked-wrapper'}>
-            <input type="text" onChange={setName} placeholder={'Услуга'}/>
+            <input type="text" onChange={setName} value={name} placeholder={'Услуга'}/>
             <input type="text" onChange={setPpu} value={ppu}/>
             <select name="rank_type" id="rank_type" onChange={setType} value={rank_type}>
                 <option value="MASS">за кг</option>

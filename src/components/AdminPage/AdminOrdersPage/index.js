@@ -1,14 +1,14 @@
 import React,{useState, useEffect} from 'react';
 
-import {ADMIN_SERVER_URL} from "../../../constants/URL";
-
 import axios from 'axios'
+import {ADMIN_SERVER_URL} from "../../../constants/URL";
 
 import AdminOrderItem from "./AdminOrderItem";
 
 import loader from '../../../img/loader.svg'
 
 import './OrdersPage.scss'
+import {adminInstance} from "../../../api/admin";
 
 const AdminOrderPage = () => {
 
@@ -17,7 +17,7 @@ const AdminOrderPage = () => {
 
   const getOrders = () => {
     const ORDER_URL = `${ADMIN_SERVER_URL}admin-orders/`
-    axios.get(ORDER_URL).then(res => setOrders([res.data]))
+    adminInstance.get(ORDER_URL).then(res => setOrders([res.data]))
     setLoading(true)
   }
 
