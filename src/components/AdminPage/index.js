@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 
 import CreateHubRoutePage from "./hub-route/CreateHubRoutePage";
 import AllHubsPage from "./hub-route/AllHubsPage";
@@ -11,8 +11,21 @@ import EditHubRoutePage from "./hub-route/EditHubRoutePage";
 import AdminOrderPage from "./AdminOrdersPage";
 import ServicesPage from "./ServicesPage";
 import AuthPage from "../AuthPage";
-
 import './AdminPage.scss'
+import {checkAuth} from "../../api/admin";
+import {AuthStatus} from "../../constants/api";
+
+const PrivateRoute = ({component: Component, ...rest}) => {
+    let logged = checkAuth() === AuthStatus.AUTHENTICATED
+    return (
+        <Route {...rest} render={props => (
+            logged ?
+                <Component {...props} />
+                : <Redirect to="/admin/auth" />
+        )} />
+    );
+};
+
 
 const AdminPage = () => {
 
@@ -20,27 +33,13 @@ const AdminPage = () => {
         <Router>
             <SideBar/>
             <Switch>
-                <Route path={'/admin/hub-routes'} exact={true}>
-                    <AllHubsPage/>
-                </Route>
-                <Route path={'/admin/hub-routes/create'}>
-                    <CreateHubRoutePage/>
-                </Route>
-                <Route path={'/admin/hub-routes/edit/:id'}>
-                    <EditHubRoutePage/>
-                </Route>
-                <Route path={'/admin/zones/rates'}>
-                    <ExtraShouldersPage/>
-                </Route>
-                <Route path={'/admin/zones'}>
-                    <ZonePage/>
-                </Route>
-                <Route path={'/admin/orders'}>
-                    <AdminOrderPage/>
-                </Route>
-                <Route path={'/admin/services'}>
-                    <ServicesPage/>
-                </Route>
+                <PrivateRoute path={'/admin/hub-routes'} exact={true} component={AllHubsPage}/>
+                <PrivateRoute path={'/admin/hub-routes/create'} component={CreateHubRoutePage} exact/>
+                <PrivateRoute path={'/admin/hub-routes/edit/:id'} component={EditHubRoutePage}/>
+                <PrivateRoute path={'/admin/zones/rates'} component={ExtraShouldersPage}/>
+                <PrivateRoute path={'/admin/zones'} component={ZonePage}/>
+                <PrivateRoute path={'/admin/orders'} component={AdminOrderPage}/>
+                <PrivateRoute path={'/admin/services'} component={ServicesPage}/>
                 <Route path={'/admin/auth'}>
                     <AuthPage/>
                 </Route>

@@ -8,6 +8,7 @@ import ZoneItem from "./ZoneItem";
 import loader from '../../../img/loader.svg'
 
 import './ZonePage.scss'
+import {adminInstance} from "../../../api/admin";
 
 const ZONE_SUMMARY_URL = `${ADMIN_SERVER_URL}admin-zones/summary`
 const ZONE_CREATE_URL = `${ADMIN_SERVER_URL}zones/create/`
@@ -24,7 +25,7 @@ const ZonePage = () => {
         let options = {
             headers: {'Content-Type': 'application/json'}
         }
-        axios.post(ZONE_CREATE_URL, body, options).then(res => {
+        adminInstance.post(ZONE_CREATE_URL, body, options).then(res => {
                 loadZoneSummaryData()
             }
         )
@@ -43,7 +44,7 @@ const ZonePage = () => {
     }
 
     const loadZoneSummaryData = () => {
-        axios.get(ZONE_SUMMARY_URL).then(res => {
+        adminInstance.get(ZONE_SUMMARY_URL).then(res => {
             setZoneSummaryData(res.data)
             setLoading(true)
         })

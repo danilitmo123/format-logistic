@@ -9,6 +9,7 @@ import loader from '../../../img/loader.svg'
 
 import './AllHubsPage.scss'
 import {ADMIN_SERVER_URL} from "../../../constants/URL";
+import {adminInstance} from "../../../api/admin";
 
 const AllHubsPage = ({setEditing, setId, hubId}) => {
 
@@ -17,7 +18,7 @@ const AllHubsPage = ({setEditing, setId, hubId}) => {
 
     const getHubs = () => {
         setLoading(true)
-        axios.get(`${ADMIN_SERVER_URL}admin-routes/?short`)
+        adminInstance.get(`${ADMIN_SERVER_URL}admin-routes/?short`)
             .then(res => {
                 setAllHubs([res.data])
             })
@@ -29,7 +30,7 @@ const AllHubsPage = ({setEditing, setId, hubId}) => {
     }
 
     const deleteHubHandler = (i) => {
-        axios.delete(`${ADMIN_SERVER_URL}admin-routes/${i}/`)
+        adminInstance.delete(`${ADMIN_SERVER_URL}admin-routes/${i}/`)
             .then(res => {
                 console.log(res)
                 getHubs()

@@ -6,6 +6,7 @@ import {customTheme} from "../../../templates/templatesOfOptions";
 
 import './ZoneItem.scss'
 import Select from "react-select";
+import {adminInstance} from "../../../api/admin";
 
 const STATES_BY_ZONE_URL = `${GEO_SERVER_URL}states`
 const ADMIN_ZONE_URL = `${ADMIN_SERVER_URL}admin-zones`
@@ -19,13 +20,13 @@ const ZoneItem = ({data}) => {
     const [chosenState, setChosenState] = useState(null)
 
     const loadListStates = () => {
-        axios.get(`${STATES_BY_ZONE_URL}?zone=${data.zone.name}`).then(res => {
+        adminInstance.get(`${STATES_BY_ZONE_URL}?zone=${data.zone.name}`).then(res => {
             setStates(res.data)
             setLoadedStates(true)
         })
     }
     const loadStateOptions = () => {
-        axios.get(`${STATES_BY_ZONE_URL}?empty=true`).then(res => {
+        adminInstance.get(`${STATES_BY_ZONE_URL}?empty=true`).then(res => {
             let options = []
             res.data.map(state => {
                 options.push({value: state.id, label: state.name, id: state.id})

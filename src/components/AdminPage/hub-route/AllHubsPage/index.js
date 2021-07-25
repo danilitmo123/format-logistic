@@ -9,6 +9,7 @@ import loader from '../../../../img/loader.svg'
 
 import './AllHubsPage.scss'
 import {ADMIN_SERVER_URL} from "../../../../constants/URL";
+import {adminInstance} from "../../../../api/admin";
 
 const AllHubsPage = () => {
 
@@ -16,7 +17,7 @@ const AllHubsPage = () => {
     const [routes, setRoutes] = useState([])
 
     const getHubs = () => {
-        axios.get(`${ADMIN_SERVER_URL}admin-routes/?short`)
+        adminInstance.get(`${ADMIN_SERVER_URL}admin-routes/?short`)
             .then(res => {
                 setRoutes(res.data)
                 setLoading(false)

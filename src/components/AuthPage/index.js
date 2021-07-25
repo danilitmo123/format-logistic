@@ -1,8 +1,13 @@
 import React,{useState} from 'react';
 
 import './AuthPahe.scss'
+import {auth} from "../../api/admin";
+import {AuthStatus, ResponseStatus} from "../../constants/api";
+import {useHistory} from "react-router-dom";
 
 const AuthPage = () => {
+
+  const history = useHistory();
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -13,6 +18,16 @@ const AuthPage = () => {
 
   const passwordHandler = (e) => {
     setPassword(e.target.value)
+  }
+
+  const login = () => {
+    auth(email, password).then(r => {
+      if (r.status === ResponseStatus.CORRECT) {
+        history.push('/admin/hub-routes')
+      } else{
+        console.log("wring password")
+      }
+    })
   }
 
   return (
@@ -29,7 +44,7 @@ const AuthPage = () => {
             <input type="password" value={password} onChange={passwordHandler}/>
           </div>
         </div>
-        <button className={'login-button'}>Войти</button>
+        <button className={'login-button'} onClick={login}>Войти</button>
       </div>
     </section>
   );
