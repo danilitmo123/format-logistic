@@ -1,12 +1,13 @@
-import {useState, useEffect} from 'react';
+import React,{useState, useEffect} from 'react';
+
 import {ADMIN_SERVER_URL, GEO_SERVER_URL} from "../../../constants/URL";
 import axios from "axios";
-import AsyncSelect from 'react-select/async';
 import {customTheme} from "../../../templates/templatesOfOptions";
 
-import './ZoneItem.scss'
 import Select from "react-select";
 import {adminInstance} from "../../../api/admin";
+
+import './ZoneItem.scss'
 
 const STATES_BY_ZONE_URL = `${GEO_SERVER_URL}states`
 const ADMIN_ZONE_URL = `${ADMIN_SERVER_URL}admin-zones`
@@ -77,6 +78,8 @@ const ZoneItem = ({data}) => {
             </div>
         )
     }
+
+    console.log(data)
 
     return (
         <div  className={'zone-item-wrapper'}>

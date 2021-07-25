@@ -1,19 +1,18 @@
 import React from 'react';
 
-import {Link, useHistory} from 'react-router-dom'
-
-import './HubsItem.scss'
 import axios from "axios";
 import {ADMIN_SERVER_URL} from "../../../../../constants/URL";
 import {adminInstance} from "../../../../../api/admin";
 
+import {Link} from 'react-router-dom'
+
+import './HubsItem.scss'
 
 const HubsItem = ({hub}) => {
 
   const deleteHub = (id) => {
       adminInstance.delete(`${ADMIN_SERVER_URL}admin-routes/${id}`)
         .then(r => {
-          console.log("deleted " + id)
           window.location.reload();
         })
         .catch(err => {console.log(err)})

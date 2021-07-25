@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
-import HPlatform, {HMap, HMapPolyLine} from "react-here-map";
 
-import './ConfirmOrderPage.scss'
+import HPlatform, {HMap, HMapPolyLine} from "react-here-map";
+import {ADMIN_SERVER_URL} from "../../../constants/URL";
+import axios from "axios";
 
 import airplane from '../../../img/black-airplane-icon.svg'
 import truck from '../../../img/black-truck-icon.svg'
-import {ADMIN_SERVER_URL} from "../../../constants/URL";
-import axios from "axios";
+
+import './ConfirmOrderPage.scss'
 
 const CREATE_ORDER_URL = `${ADMIN_SERVER_URL}admin-orders/`
 
@@ -117,7 +118,7 @@ const ConfirmOrderPage = ({chosenPath}) => {
                 <div className={'title'}>Итого:</div>
                 <div>Расстояние: {(chosenPath[0].total_distance).toFixed(0)} км</div>
                 <div>Цена: {(chosenPath[0].total_cost)}€/{(chosenPath[0].total_cost * 1.18).toFixed(2)}$</div>
-                <div>Время в пути: {(chosenPath[0].total_duration.min)} - {chosenPath[0].total_duration.max} дней</div>
+                <div>Время в пути: {(chosenPath[0].total_duration.min).toFixed(0)} - {(chosenPath[0].total_duration.max).toFixed(0)} дней</div>
             </div>
             <div className={'final-form-wrapper'}>
                 <div className={'shipper-title'}>Грузоотправитель</div>

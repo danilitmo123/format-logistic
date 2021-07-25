@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React,{useState, useEffect} from 'react';
 
 import {
   typeOfCargoOptions,
@@ -19,7 +19,7 @@ const objectTemplate = {
   width: 0,
   height: 0,
   weight: 0,
-  volumeUnits: 'M',
+  volumeUnits: 'CM',
   weightUnits: 'КГ',
   lengthPallet: 120,
   widthPallet: 100,
@@ -224,7 +224,7 @@ const CargoForm = () => {
                               theme={customTheme}
                               options={typeOfCargoOptions}
                               onChange={(e) => updateItem('cargo', e.value)}
-                              noOptionsMessage={() => `Не найдено 🖕`}
+                              noOptionsMessage={() => `Не найдено`}
                               placeholder={'Коробки'}
                           />
                         </div>

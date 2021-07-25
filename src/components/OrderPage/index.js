@@ -1,16 +1,15 @@
 import React, {useState, useEffect, useRef} from 'react';
 
-import FirstStepForm from "./FirstStepForm";
-import PathContainerPage from "./PathContainerPage";
-
 import axios from "axios";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
-import './OrderPage.scss'
-import ConfirmOrderPage from "./ConfirmOrderPage";
 import {ROUTES_SERVER_URL} from "../../constants/URL";
 import {PlaceType} from "../../constants/unit";
 
+import FirstStepForm from "./FirstStepForm";
+import PathContainerPage from "./PathContainerPage";
+import ConfirmOrderPage from "./ConfirmOrderPage";
+
+import './OrderPage.scss'
 
 const OrderPage = ({firstActivePage, setActive}) => {
   const [chosenPath, setChosenPath] = useState([])
