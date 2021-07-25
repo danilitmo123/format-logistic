@@ -51,7 +51,41 @@ const setAuthStatus = (status) => {
     localStorage.setItem(authStatusKey, JSON.stringify(status))
 }
 
-setAuthHeader()
+
+const pingAuth = async () => {
+    const options = {
+        Authorization: `${AUTH_HEADER_TYPE} ${getAuthToken()}`
+    }
+    try{
+        let res = await axios.post(AUTH_PING_URL, options)
+        if (res.status === 200)
+            return ResponseStatus.CORRECT
+    } catch (err){
+        return ResponseStatus.INCORRECT
+    }
+}
+
+const initAuth = () => {
+    let access = getAuthToken()
+    let status = getAuthStatus()
+    if (access && status && status === AuthStatus.AUTHENTICATED){
+        pingAuth().then(status => {
+            if (status === ResponseStatus.CORRECT){
+                setAuthHeader()
+            } else{
+                setAuthStatus(AuthStatus.UNAUTHENTICATED)
+                setAuthToken(null)
+                setRefreshToken(null)
+            }
+        })
+    } else {
+        setAuthStatus(AuthStatus.UNAUTHENTICATED)
+        setAuthToken(null)
+        setRefreshToken(null)
+    }
+}
+
+initAuth()
 
 const auth = async (username, password) => {
     let body = {username, password}
