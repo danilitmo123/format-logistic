@@ -27,20 +27,17 @@ const objectTemplate = {
   weightBoxSelect: 'КГ',
 }
 
-const CargoForm = () => {
+const CargoForm = ({volume, setVolume, weight, setWeight}) => {
 
   const [activeContainerButton, setActiveContainerButton] = useState(false)
   const [activeBoxButton, setActiveBoxButton] = useState(true)
   const [firstContainerButton, setActiveFirstContainerButton] = useState(true)
   const [secondContainerButton, setActiveSecondContainerButton] = useState(false)
   const [thirdContainerButton, setActiveThirdContainerButton] = useState(false)
-  const [volume, setVolume] = useState(0)
-  const [weight, setWeight] = useState(0)
   const [data, setDataRaw] = useState([])
 
   const setData = (data) => {
     localStorage.setItem('cargo', JSON.stringify(data))
-    console.log("setData " + localStorage.getItem('cargo'))
     setDataRaw(data)
   }
 
@@ -77,7 +74,6 @@ const CargoForm = () => {
 
   const addItem = () => {
     const newData = [...data, {...objectTemplate}]
-
     setData(newData)
   }
 

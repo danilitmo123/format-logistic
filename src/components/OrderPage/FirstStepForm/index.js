@@ -6,22 +6,11 @@ import CargoForm from "../CargoForm";
 import CountryForm from "../CountryForm";
 import CustomsClearanceForm from "../CustomsClearanceForm";
 
-const FirstStepForm = ({
-                           setIdFrom,
-                           setIdTo,
-                           cityWarningTo,
-                           setWarningTo,
-                           cityWarningFrom,
-                           setWarningFrom,
-                           setSourceType,
-                           setDestinationType,
-                           destinationType,
-                           sourceType
-                       }) => {
+const FirstStepForm = ({setIdFrom, setIdTo, cityWarningTo, setWarningTo, cityWarningFrom, setWarningFrom, setSourceType, setDestinationType, destinationType, sourceType, volume, setVolume, weight, setWeight}) => {
 
     return (
         <div>
-            <CargoForm/>
+            <CargoForm volume={volume} setVolume={setVolume} weight={weight} setWeight={setWeight}/>
             <CountryForm
                 setWarningFrom={setWarningFrom}
                 cityWarningFrom={cityWarningFrom}

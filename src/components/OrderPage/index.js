@@ -23,6 +23,8 @@ const OrderPage = ({firstActivePage, setActive}) => {
   const [isIdChanged, setIdChanged] = useState(false)
   const [sourceType, setSourceType] = useState(PlaceType.CITY)
   const [destinationType, setDestinationType] = useState(PlaceType.CITY)
+  const [volume, setVolume] = useState(0)
+  const [weight, setWeight] = useState(0)
   const prevIdToCount = useRef()
   const prevIdFromCount = useRef()
 
@@ -113,6 +115,10 @@ const OrderPage = ({firstActivePage, setActive}) => {
         {firstActivePage ?
           <>
             <FirstStepForm
+              volume={volume}
+              setVolume={setVolume}
+              weight={weight}
+              setWeight={setWeight}
               setWarningFrom={setCityWarningFrom}
               cityWarningFrom={cityWarningFrom}
               setWarningTo={setCityWarningTo}
@@ -133,6 +139,8 @@ const OrderPage = ({firstActivePage, setActive}) => {
           : secondActivePage ?
             <>
               <PathContainerPage
+                volume={volume}
+                weight={weight}
                 isIdChanged={isIdChanged}
                 pointsOfPath={pointsOfPath}
                 setPointsOfPath={setPointsOfPath}

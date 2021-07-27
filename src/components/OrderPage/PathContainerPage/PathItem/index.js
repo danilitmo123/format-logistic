@@ -7,7 +7,7 @@ import truck from '../../../../img/black-truck-icon.svg'
 
 import './PathItem.scss'
 
-const PathItem = ({path, setIndex, index}) => {
+const PathItem = ({path, setIndex, index, volume, weight}) => {
 
   console.log(path)
 
@@ -59,6 +59,7 @@ const PathItem = ({path, setIndex, index}) => {
           <div className={'route-time-and-cost-wrapper'}>
             <div className={'route-total-cost'}>Цена: {path.total_cost}€/{(path.total_cost * 1.18).toFixed(2)}$</div>
             <div className={'route-total-duration'}>Время прибытия: {(path.total_duration.min).toFixed(0)} - {(path.total_duration.max).toFixed(0)} дней</div>
+            <div>Вес-{weight} кг, Объем-{volume} м³</div>
           </div>
           <button className={'choose-button'} onClick={() => setIndex(index)}>Выбрать</button>
         </div>
