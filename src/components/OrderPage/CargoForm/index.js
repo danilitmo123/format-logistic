@@ -412,6 +412,7 @@ const CargoForm = ({cargoWarning, data, setDataRaw, volume, setVolume, weight, s
               </div>
           )})}
         <button className={'add-cargo-btn'} onClick={addItem}>+ Добавить</button>
+        {cargoWarning ? <div className={'cargo-warning'}>Все поля должны быть заполнены</div> : ''}
       </div>
   );
 };

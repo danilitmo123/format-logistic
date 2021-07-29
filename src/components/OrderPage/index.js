@@ -26,14 +26,7 @@ const OrderPage = ({firstActivePage, setActive}) => {
   const [volume, setVolume] = useState(0)
   const [weight, setWeight] = useState(0)
   const [data, setDataRaw] = useState([])
-  const [cargoWarning, setCargoWarning] = useState({
-    cargoWidth: false,
-    cargoLength: false,
-    cargoHeight: false,
-    weight: false,
-    palletHeight: false,
-    palletWidth: false
-  })
+  const [cargoWarning, setCargoWarning] = useState(false)
   const prevIdToCount = useRef()
   const prevIdFromCount = useRef()
 
@@ -46,32 +39,20 @@ const OrderPage = ({firstActivePage, setActive}) => {
     }
   }, [selectedCityIdTo, selectedCityIdFrom])
 
-  // const cargoWarningHandler = () => {
-  //   data.map(item => {
-  //     if (item.width === 0) {
-  //       console.log(1)
-  //       setCargoWarning({...cargoWarning, cargoWidth: true})
-  //     } else {
-  //       setCargoWarning({...cargoWarning, cargoWidth: false})
-  //     }
-  //     if (item.height === 0) {
-  //       console.log(1)
-  //       setCargoWarning({...cargoWarning, cargoHeight: true})
-  //     } else {
-  //       setCargoWarning({...cargoWarning, cargoHeight: false})
-  //     }
-  //     if (item.length === 0) {
-  //       console.log()
-  //       setCargoWarning({...cargoWarning, cargoLength: true})
-  //     } else {
-  //       setCargoWarning({...cargoWarning, cargoLength: false})
-  //     }
-  //   })
-  // }
-  //
-  // useEffect(() => {
-  //  cargoWarningHandler()
-  // }, [data])
+  const cargoWarningHandler = () => {
+    data.map(item => {
+      if((item.weight !== 0 && item.width !== 0 && item.height !== 0 && item.length !== 0)
+          || (item.heightPallet !== 0 && item.widthPallet !== 0 && item.weight)) {
+        setCargoWarning(false)
+      } else {
+        setCargoWarning(true)
+      }
+    })
+  }
+
+  useEffect(() => {
+
+  }, [data])
 
   const getPaths = () => {
     if (selectedCityIdFrom !== '' && selectedCityIdTo !== '') {
@@ -123,6 +104,7 @@ const OrderPage = ({firstActivePage, setActive}) => {
   }
 
   const disabledButtonHandler = () => {
+    cargoWarningHandler()
     if (selectedCityIdTo) {
       setCityWarningTo(false)
     } else {
@@ -133,7 +115,7 @@ const OrderPage = ({firstActivePage, setActive}) => {
     } else {
       setCityWarningFrom(true)
     }
-    if (selectedCityIdFrom && selectedCityIdTo) {
+    if (selectedCityIdFrom && selectedCityIdTo && cargoWarning) {
       getPaths()
       setActive(false)
       setSecondActivePage(true)
