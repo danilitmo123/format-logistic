@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 import PathItem from "./PathItem";
+import Loader from "../../AdminPage/common/loader";
 
 import loader from '../../../img/loader.svg'
 
@@ -24,7 +25,7 @@ const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler, weight
             index={index}
             setIndex={setIndex}
             path={item}/>)}
-        </div> : <div className={'loader'}><img src={loader} alt=""/><div>Загрузка...</div></div>}
+        </div> : <Loader/>}
       </div>
   );
 };

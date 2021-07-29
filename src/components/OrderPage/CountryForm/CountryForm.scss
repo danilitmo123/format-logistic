@@ -14,6 +14,13 @@
     border: 1px solid gray;
     box-shadow: 0 5px 5px -5px #333;
 
+    .warning-country-text {
+      color: red;
+      font-size: 10px;
+      margin-top: -10px;
+      margin-bottom: 20px;
+    }
+
     .from-form-title-wrapper {
       display: flex;
       justify-content: space-between;
@@ -39,6 +46,10 @@
       justify-content: flex-start;
       flex-direction: column;
       margin-bottom: 20px;
+
+      .react-select__control {
+        border-color: red;
+      }
 
       label {
         color: black;
@@ -94,7 +105,7 @@
       .place-button {
         font-family: 'Montserrat', sans-serif;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 12px;
         width: 117px;
         height: 35px;
         background: white;
@@ -106,7 +117,7 @@
           border-radius: 8px 0 0 8px;
         }
 
-        &:nth-child(4) {
+        &:nth-child(5) {
           border-radius: 0 8px 8px 0;
         }
       }
@@ -114,7 +125,7 @@
       .active-city-button {
         font-family: 'Montserrat', sans-serif;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 12px;
         width: 117px;
         height: 35px;
         background: $light-blue;
@@ -131,7 +142,7 @@
       .active-sea-button {
         font-family: 'Montserrat', sans-serif;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 12px;
         width: 117px;
         height: 35px;
         background: $light-blue;
@@ -141,10 +152,26 @@
         outline: none;
       }
 
+      .active-storage-button {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        width: 117px;
+        height: 35px;
+        background: $light-blue;
+        border: none;
+        cursor: pointer;
+        color: $white;
+        outline: none;
+        &:nth-child(5) {
+          border-radius: 0 8px 8px 0;
+        }
+      }
+
       .active-air-button {
         font-family: 'Montserrat', sans-serif;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 12px;
         width: 117px;
         height: 35px;
         background: $light-blue;
@@ -157,7 +184,7 @@
       .active-train-button {
         font-family: 'Montserrat', sans-serif;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 12px;
         width: 117px;
         height: 35px;
         background: $light-blue;
@@ -165,10 +192,6 @@
         cursor: pointer;
         color: $white;
         outline: none;
-
-        &:nth-child(4) {
-          border-radius: 0 8px 8px 0;
-        }
       }
     }
   }
@@ -180,6 +203,13 @@
     border-radius: 20px;
     border: 1px solid gray;
     box-shadow: 0 5px 5px -5px #333;
+
+    .warning-country-text {
+      color: red;
+      font-size: 10px;
+      margin-top: -10px;
+      margin-bottom: 20px;
+    }
     .where-form-title-wrapper {
       display: flex;
       justify-content: space-between;
@@ -202,6 +232,9 @@
       justify-content: flex-start;
       flex-direction: column;
       margin-bottom: 20px;
+      .react-select__control {
+        border-color: red;
+      }
       label {
         color: black;
         font-size: 12px;
@@ -227,7 +260,7 @@
       .place-button {
         font-family: 'Montserrat', sans-serif;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 12px;
         width: 117px;
         height: 35px;
         background: white;
@@ -238,14 +271,14 @@
         &:nth-child(1) {
           border-radius: 8px 0 0 8px;
         }
-        &:nth-child(4) {
+        &:nth-child(5) {
           border-radius: 0 8px 8px 0;
         }
       }
       .active-city-button {
         font-family: 'Montserrat', sans-serif;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 12px;
         width: 117px;
         height: 35px;
         background: $light-blue;
@@ -260,7 +293,7 @@
       .active-sea-button {
         font-family: 'Montserrat', sans-serif;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 12px;
         width: 117px;
         height: 35px;
         background: $light-blue;
@@ -269,10 +302,28 @@
         color: $white;
         outline: none;
       }
+
+      .active-storage-button {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        width: 117px;
+        height: 35px;
+        background: $light-blue;
+        border: none;
+        cursor: pointer;
+        color: $white;
+        outline: none;
+        &:nth-child(5) {
+          border-radius: 0 8px 8px 0;
+          }
+        }
+      }
+
       .active-air-button {
         font-family: 'Montserrat', sans-serif;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 12px;
         width: 117px;
         height: 35px;
         background: $light-blue;
@@ -284,7 +335,7 @@
       .active-train-button {
         font-family: 'Montserrat', sans-serif;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 12px;
         width: 117px;
         height: 35px;
         background: $light-blue;
@@ -292,10 +343,6 @@
         cursor: pointer;
         color: $white;
         outline: none;
-        &:nth-child(4) {
-          border-radius: 0 8px 8px 0;
-        }
-      }
     }
     .city-select-where {
       display: flex;

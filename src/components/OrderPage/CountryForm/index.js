@@ -14,22 +14,6 @@ import AsyncSelect from 'react-select/async';
 
 import './CountryForm.scss'
 
-const filterCandidate = (candidate, inputValue) => {
-  let alias = candidate.data ? candidate.data.alias : candidate.alias
-  if (alias)
-    return candidate.label.toLowerCase().startsWith(inputValue.toLowerCase())
-        || alias.toLowerCase().startsWith(inputValue.toLowerCase())
-  else
-    return candidate.label.toLowerCase().startsWith(inputValue.toLowerCase())
-}
-
-const filterOptions = (candidate, input) => {
-  if (input) {
-    return filterCandidate(candidate, input)
-  }
-  return true;
-};
-
 const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, sourceType, destinationType, setDestinationType, setSourceType}) => {
 
   const [allCountries, setAllCountries] = useState([])
@@ -40,11 +24,9 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
   const [modifyCitiesToObj, setModifyCitiesToObj] = useState([])
   const [optionCountryFromValue, setOptionCountryFromValue] = useState({})
   const [optionCountryToValue, setOptionCountryToValue] = useState({})
-  const [activePlaceTo, setActivePlaceTo] = useState({cityButton: true, seaButton: false, airButton: false, trainButton: false})
-  const [activePlaceFrom, setActivePlaceFrom] = useState({cityButton: true, seaButton: false, airButton: false, trainButton: false})
-
-  const prevCountryFromValue = useRef()
-  const prevCountryToValue = useRef()
+  const [countryWarning, setCountryWarning] = useState(false)
+  const [activePlaceTo, setActivePlaceTo] = useState({cityButton: true, seaButton: false, airButton: false, trainButton: false, storageButton: false})
+  const [activePlaceFrom, setActivePlaceFrom] = useState({cityButton: true, seaButton: false, airButton: false, trainButton: false, storageButton: false})
 
   const activePlaceButtonHandler = (e) => {
     const buttonId = e.target.getAttribute('id')
@@ -52,44 +34,67 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
     switch (value) {
       case 'Город':
         if (buttonId === 'from-place') {
-          setActivePlaceFrom({cityButton: true, seaButton: false, airButton: false, trainButton: false})
+          setActivePlaceFrom({cityButton: true, seaButton: false, airButton: false, trainButton: false, storageButton: false})
           setSourceType(PlaceType.CITY)
         } else {
-          setActivePlaceTo({cityButton: true, seaButton: false, airButton: false, trainButton: false})
+          setActivePlaceTo({cityButton: true, seaButton: false, airButton: false, trainButton: false, storageButton: false})
           setDestinationType(PlaceType.CITY)
         }
         break
       case 'Морской порт':
         if (buttonId === 'from-place') {
-          setActivePlaceFrom({cityButton: false, seaButton: true, airButton: false, trainButton: false})
+          setActivePlaceFrom({cityButton: false, seaButton: true, airButton: false, trainButton: false, storageButton: false})
           setSourceType(PlaceType.SEAPORT)
         } else {
-          setActivePlaceTo({cityButton: false, seaButton: true, airButton: false, trainButton: false})
+          setActivePlaceTo({cityButton: false, seaButton: true, airButton: false, trainButton: false, storageButton: false})
           setDestinationType(PlaceType.SEAPORT)
         }
         break
       case 'Аэропорт':
         if (buttonId === 'from-place') {
-          setActivePlaceFrom({cityButton: false, seaButton: false, airButton: true, trainButton: false})
+          setActivePlaceFrom({cityButton: false, seaButton: false, airButton: true, trainButton: false, storageButton: false})
           setSourceType(PlaceType.AIRPORT)
         } else {
-          setActivePlaceTo({cityButton: false, seaButton: false, airButton: true, trainButton: false})
+          setActivePlaceTo({cityButton: false, seaButton: false, airButton: true, trainButton: false, storageButton: false})
           setDestinationType(PlaceType.AIRPORT)
         }
         break
       case 'Ж/Д станция':
         if (buttonId === 'from-place') {
-          setActivePlaceFrom({cityButton: false, seaButton: false, airButton: false, trainButton: true})
+          setActivePlaceFrom({cityButton: false, seaButton: false, airButton: false, trainButton: true, storageButton: false})
           setSourceType(PlaceType.RAILWAY_STATION)
         } else {
-          setActivePlaceTo({cityButton: false, seaButton: false, airButton: false, trainButton: true})
+          setActivePlaceTo({cityButton: false, seaButton: false, airButton: false, trainButton: true, storageButton: false})
           setDestinationType(PlaceType.RAILWAY_STATION)
+        }
+        break
+      case 'Наш склад':
+        if (buttonId === 'from-place') {
+          setActivePlaceFrom({cityButton: false, seaButton: false, airButton: false, trainButton: false, storageButton: true})
+        } else {
+          setActivePlaceTo({cityButton: false, seaButton: false, airButton: false, trainButton: false, storageButton: true})
         }
         break
       default:
         return activePlaceTo 
     }
   }
+
+  const filterCandidate = (candidate, inputValue) => {
+    let alias = candidate.data ? candidate.data.alias : candidate.alias
+    if (alias)
+      return candidate.label.toLowerCase().startsWith(inputValue.toLowerCase())
+          || alias.toLowerCase().startsWith(inputValue.toLowerCase())
+    else
+      return candidate.label.toLowerCase().startsWith(inputValue.toLowerCase())
+  }
+
+  const filterOptions = (candidate, input) => {
+    if (input) {
+      return filterCandidate(candidate, input)
+    }
+    return true;
+  };
 
   const filterCitiesOptions = (inputValue, modifyObject) => {
     return modifyObject.filter(candidate => {
@@ -124,12 +129,13 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
   }
 
   useEffect(() => {
-    prevCountryFromValue.current = optionCountryFromValue.value;
-  }, [optionCountryFromValue.value]);
-
-  useEffect(() => {
-    prevCountryToValue.current = optionCountryToValue.value;
-  }, [optionCountryToValue.value]);
+    if((optionCountryFromValue.value && optionCountryToValue.value)
+        && (optionCountryFromValue.value === optionCountryToValue.value) ) {
+      setCountryWarning(true)
+    } else {
+      setCountryWarning(false)
+    }
+  }, [optionCountryFromValue.value, optionCountryToValue.value])
 
   useEffect(() => {
     createModifyCountries(allCountries, setModifyCountryObj)
@@ -167,6 +173,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
           <div className={'country-select-from'}>
             <label htmlFor="country">Страна</label>
             <Select
+                classNamePrefix={countryWarning ? 'react-select' : ''}
                 theme={customTheme}
                 options={modifyCountryObj}
                 onChange={setOptionCountryFromValue}
@@ -175,6 +182,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
                 filterOption={filterOptions}
             />
           </div>
+          {countryWarning ? <div className={'warning-country-text'}>Названия стран должны отличаться</div> : ''}
           <div className={'place-select-to'}>
             <button
                 id={'from-place'}
@@ -196,6 +204,10 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
                 onClick={activePlaceButtonHandler}
                 className={activePlaceFrom.trainButton ? 'active-train-button' : 'place-button'}>Ж/Д станция
             </button>
+            <button
+                id={'from-place'}
+                onClick={activePlaceButtonHandler}
+                className={activePlaceFrom.storageButton ? 'active-storage-button' : 'place-button'}>Наш склад</button>
           </div>
           <div className={'city-select-from'}>
             <label htmlFor="country">Город</label>
@@ -219,6 +231,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
           <div className={'country-select-where'}>
             <label htmlFor="country">Страна</label>
             <Select
+                classNamePrefix={countryWarning ? 'react-select' : ''}
                 theme={customTheme}
                 options={modifyCountryObj}
                 onChange={setOptionCountryToValue}
@@ -227,6 +240,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
                 filterOption={filterOptions}
             />
           </div>
+          {countryWarning ? <div className={'warning-country-text'}>Названия стран должны отличаться</div> : ''}
           <div className={'place-select-where'}>
             <button
                 onClick={activePlaceButtonHandler}
@@ -247,6 +261,10 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
                 onClick={activePlaceButtonHandler}
                 className={activePlaceTo.trainButton ? 'active-train-button' : 'place-button'}>Ж/Д станция
             </button>
+            <button
+                disabled={activePlaceFrom.airButton || activePlaceFrom.trainButton || activePlaceFrom.seaButton}
+                onClick={activePlaceButtonHandler}
+                className={activePlaceTo.storageButton ? 'active-storage-button' : 'place-button'}>Наш склад</button>
           </div>
           <div className={'city-select-where'}>
             <label htmlFor="country">Город</label>

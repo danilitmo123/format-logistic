@@ -5,9 +5,11 @@ import axios from "axios";
 import {ADMIN_SERVER_URL} from "../../../constants/URL";
 
 import ExtraShoulderItem from "./ExtraShoulderItem";
+import Loader from "../common/loader";
 
 import './ExtraShouldersPage.scss'
 import {adminInstance} from "../../../api/admin";
+
 
 const ZONE_URL = `${ADMIN_SERVER_URL}admin-zones/`
 
@@ -36,7 +38,7 @@ const ExtraShouldersPage = () => {
                 </Link>
             </div>
             <div className={'items-wrapper'}>
-                {zonesLoaded ? zones.map(item => <ExtraShoulderItem item={item}/>) : ''}
+                {zonesLoaded ? zones.map(item => <ExtraShoulderItem item={item}/>) : <Loader/>}
             </div>
         </div>
     );

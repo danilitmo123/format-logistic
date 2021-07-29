@@ -55,11 +55,17 @@ const PathItem = ({path, setIndex, index, volume, weight}) => {
   return (
       <div className={'path-item-wrapper'}>
         <div className={'info-routes-wrapper'}>
-          {path.routes.map((route, index) => <TypeOfRoutes step={index} route={route}/>)}
-          <div className={'route-time-and-cost-wrapper'}>
-            <div className={'route-total-cost'}>Цена: {path.total_cost}€/{(path.total_cost * 1.18).toFixed(2)}$</div>
-            <div className={'route-total-duration'}>Время прибытия: {(path.total_duration.min).toFixed(0)} - {(path.total_duration.max).toFixed(0)} дней</div>
-            <div>Вес-{weight} кг, Объем-{volume} м³</div>
+         <div>
+           {path.routes.map((route, index) => <TypeOfRoutes step={index} route={route}/>)}
+         </div>
+          <div>
+            <div className={'route-info-title'}>Информация о грузе</div>
+            <div className={'route-time-and-cost-wrapper'}>
+              <div className={'route-total-cost'}>Цена: {path.total_cost}€/{(path.total_cost * 1.18).toFixed(2)}$</div>
+              <div className={'route-total-duration'}>Время прибытия: {(path.total_duration.min).toFixed(0)} - {(path.total_duration.max).toFixed(0)} дней</div>
+              <div className={'route-total-weight'}>Вес: {weight} кг</div>
+              <div>Объем: {volume} м³</div>
+            </div>
           </div>
           <button className={'choose-button'} onClick={() => setIndex(index)}>Выбрать</button>
         </div>

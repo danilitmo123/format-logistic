@@ -25,6 +25,15 @@ const OrderPage = ({firstActivePage, setActive}) => {
   const [destinationType, setDestinationType] = useState(PlaceType.CITY)
   const [volume, setVolume] = useState(0)
   const [weight, setWeight] = useState(0)
+  const [data, setDataRaw] = useState([])
+  const [cargoWarning, setCargoWarning] = useState({
+    cargoWidth: false,
+    cargoLength: false,
+    cargoHeight: false,
+    weight: false,
+    palletHeight: false,
+    palletWidth: false
+  })
   const prevIdToCount = useRef()
   const prevIdFromCount = useRef()
 
@@ -37,6 +46,32 @@ const OrderPage = ({firstActivePage, setActive}) => {
     }
   }, [selectedCityIdTo, selectedCityIdFrom])
 
+  // const cargoWarningHandler = () => {
+  //   data.map(item => {
+  //     if (item.width === 0) {
+  //       console.log(1)
+  //       setCargoWarning({...cargoWarning, cargoWidth: true})
+  //     } else {
+  //       setCargoWarning({...cargoWarning, cargoWidth: false})
+  //     }
+  //     if (item.height === 0) {
+  //       console.log(1)
+  //       setCargoWarning({...cargoWarning, cargoHeight: true})
+  //     } else {
+  //       setCargoWarning({...cargoWarning, cargoHeight: false})
+  //     }
+  //     if (item.length === 0) {
+  //       console.log()
+  //       setCargoWarning({...cargoWarning, cargoLength: true})
+  //     } else {
+  //       setCargoWarning({...cargoWarning, cargoLength: false})
+  //     }
+  //   })
+  // }
+  //
+  // useEffect(() => {
+  //  cargoWarningHandler()
+  // }, [data])
 
   const getPaths = () => {
     if (selectedCityIdFrom !== '' && selectedCityIdTo !== '') {
@@ -115,13 +150,14 @@ const OrderPage = ({firstActivePage, setActive}) => {
         {firstActivePage ?
           <>
             <FirstStepForm
+              data={data}
+              setDataRaw={setDataRaw}
+              cargoWarning={cargoWarning}
               volume={volume}
               setVolume={setVolume}
               weight={weight}
               setWeight={setWeight}
-              setWarningFrom={setCityWarningFrom}
               cityWarningFrom={cityWarningFrom}
-              setWarningTo={setCityWarningTo}
               cityWarningTo={cityWarningTo}
               setIdTo={setSelectedCityIdTo}
               setIdFrom={setSelectedCityIdFrom}
@@ -155,7 +191,7 @@ const OrderPage = ({firstActivePage, setActive}) => {
             </>
             :
             <>
-              <ConfirmOrderPage chosenPath={chosenPath}/>
+              <ConfirmOrderPage chosenPath={chosenPath} volume={volume} weight={weight}/>
                 <button
                   className={'continue-button-first-page'}
                   onClick={returnSecondPagHandler}
