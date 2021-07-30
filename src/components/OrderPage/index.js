@@ -23,6 +23,10 @@ const OrderPage = ({firstActivePage, setActive}) => {
   const [isIdChanged, setIdChanged] = useState(false)
   const [sourceType, setSourceType] = useState(PlaceType.CITY)
   const [destinationType, setDestinationType] = useState(PlaceType.CITY)
+  const [volume, setVolume] = useState(0)
+  const [weight, setWeight] = useState(0)
+  const [data, setDataRaw] = useState([])
+  const [cargoWarning, setCargoWarning] = useState(false)
   const prevIdToCount = useRef()
   const prevIdFromCount = useRef()
 
@@ -35,6 +39,20 @@ const OrderPage = ({firstActivePage, setActive}) => {
     }
   }, [selectedCityIdTo, selectedCityIdFrom])
 
+  const cargoWarningHandler = () => {
+    data.map(item => {
+      if((item.weight !== 0 && item.width !== 0 && item.height !== 0 && item.length !== 0)
+          || (item.heightPallet !== 0 && item.widthPallet !== 0 && item.weight)) {
+        setCargoWarning(false)
+      } else {
+        setCargoWarning(true)
+      }
+    })
+  }
+
+  useEffect(() => {
+
+  }, [data])
 
   const getPaths = () => {
     if (selectedCityIdFrom !== '' && selectedCityIdTo !== '') {
@@ -86,6 +104,7 @@ const OrderPage = ({firstActivePage, setActive}) => {
   }
 
   const disabledButtonHandler = () => {
+    cargoWarningHandler()
     if (selectedCityIdTo) {
       setCityWarningTo(false)
     } else {
@@ -96,7 +115,7 @@ const OrderPage = ({firstActivePage, setActive}) => {
     } else {
       setCityWarningFrom(true)
     }
-    if (selectedCityIdFrom && selectedCityIdTo) {
+    if (selectedCityIdFrom && selectedCityIdTo && cargoWarning) {
       getPaths()
       setActive(false)
       setSecondActivePage(true)
@@ -113,9 +132,14 @@ const OrderPage = ({firstActivePage, setActive}) => {
         {firstActivePage ?
           <>
             <FirstStepForm
-              setWarningFrom={setCityWarningFrom}
+              data={data}
+              setDataRaw={setDataRaw}
+              cargoWarning={cargoWarning}
+              volume={volume}
+              setVolume={setVolume}
+              weight={weight}
+              setWeight={setWeight}
               cityWarningFrom={cityWarningFrom}
-              setWarningTo={setCityWarningTo}
               cityWarningTo={cityWarningTo}
               setIdTo={setSelectedCityIdTo}
               setIdFrom={setSelectedCityIdFrom}
@@ -133,6 +157,8 @@ const OrderPage = ({firstActivePage, setActive}) => {
           : secondActivePage ?
             <>
               <PathContainerPage
+                volume={volume}
+                weight={weight}
                 isIdChanged={isIdChanged}
                 pointsOfPath={pointsOfPath}
                 setPointsOfPath={setPointsOfPath}
@@ -147,7 +173,7 @@ const OrderPage = ({firstActivePage, setActive}) => {
             </>
             :
             <>
-              <ConfirmOrderPage chosenPath={chosenPath}/>
+              <ConfirmOrderPage chosenPath={chosenPath} volume={volume} weight={weight}/>
                 <button
                   className={'continue-button-first-page'}
                   onClick={returnSecondPagHandler}

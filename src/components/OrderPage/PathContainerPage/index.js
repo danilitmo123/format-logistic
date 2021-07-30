@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
 
 import PathItem from "./PathItem";
+import Loader from "../../AdminPage/common/loader";
 
 import loader from '../../../img/loader.svg'
 
 import './PathContainerPage.scss'
 
-const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler}) => {
+const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler, weight, volume}) => {
   const [index, setIndex] = useState('')
 
   useEffect(() => {
@@ -19,10 +20,12 @@ const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler}) => {
   return (
       <div className={'path-container-page'}>
         {paths.paths ? <div>{paths.paths.map((item, index) => <PathItem
+            weight={weight}
+            volume={volume}
             index={index}
             setIndex={setIndex}
             path={item}/>)}
-        </div> : <div className={'loader'}><img src={loader} alt=""/><div>Загрузка...</div></div>}
+        </div> : <Loader/>}
       </div>
   );
 };
