@@ -104,6 +104,8 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
     const [additionalServices, setAdditionalServices] = useState(initData.additional_services ? initData.additional_services: [])
     const [rankedServices, setRankedServices] = useState(initData.ranked_services ? initData.ranked_services : [])
 
+    const [minimalPrice, setMinimalPrice] = useState(initData.minimal_price ? initData.minimal_price : 0)
+
     const activateWeekday = (dayInd) => {
         timetableDays[dayInd] = timetableDays[dayInd] ? 0 : 1
         setTimetableDays([...timetableDays])
@@ -121,7 +123,8 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
             rankedServices: rankedServices.filter(service => {return !!service}),
             timetableDays,
             prepareDays,
-            activeTimetable
+            activeTimetable,
+            minimalPrice
         })
     }
 
@@ -177,6 +180,9 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
             <RatesContext.Provider value={{rates, setRates}}>
                 <PriceBlock/>
             </RatesContext.Provider>
+            <div>
+                <input type="number" value={minimalPrice} onChange={e => setMinimalPrice(e.target.value)}/>
+            </div>
             <div className={'timetable-wrapper'}>
                 <div className={'timetable-title-wrapper'}>
                     <div className={'timetable-title'}>Расписание</div>

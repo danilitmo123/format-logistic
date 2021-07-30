@@ -33,7 +33,8 @@ const EditHubRoutePage = () => {
                              rankedServices,
                              timetableDays,
                              prepareDays,
-                             activeTimetable
+                             activeTimetable,
+                             minimalPrice
                          }) => {
         const options = {
             headers: {'Content-Type': 'application/json'}
@@ -50,7 +51,8 @@ const EditHubRoutePage = () => {
             duration: duration,
             rates: rates,
             additional_services: additionalServices,
-            ranked_services: rankedServices
+            ranked_services: rankedServices,
+            minimal_price: minimalPrice
         }
         if (activeTimetable) {
             body.timetable = {
