@@ -16,6 +16,7 @@
     "react-here-map": "^4.0.0-0",
     "react-here-maps": "^0.4.0",
     "react-hook-form": "^7.8.4",
+    "react-imask": "^6.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-select": "^4.3.1",

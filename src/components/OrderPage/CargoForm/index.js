@@ -40,8 +40,6 @@ const CargoForm = ({cargoWarning, data, setDataRaw, volume, setVolume, weight, s
     setDataRaw(data)
   }
 
-  console.log(cargoWarning.cargoLength, cargoWarning.cargoWidth, cargoWarning.cargoHeight)
-
   useEffect(() => {
     if (data.length === 0) {
       let init_data = [{
@@ -412,7 +410,7 @@ const CargoForm = ({cargoWarning, data, setDataRaw, volume, setVolume, weight, s
               </div>
           )})}
         <button className={'add-cargo-btn'} onClick={addItem}>+ Добавить</button>
-        {cargoWarning ? <div className={'cargo-warning'}>Все поля должны быть заполнены</div> : ''}
+        {!cargoWarning ? <div className={'cargo-warning'}>Все поля должны быть заполнены</div> : ''}
       </div>
   );
 };

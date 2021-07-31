@@ -26,7 +26,7 @@ const OrderPage = ({firstActivePage, setActive}) => {
   const [volume, setVolume] = useState(0)
   const [weight, setWeight] = useState(0)
   const [data, setDataRaw] = useState([])
-  const [cargoWarning, setCargoWarning] = useState(false)
+  const [cargoWarning, setCargoWarning] = useState(true)
   const prevIdToCount = useRef()
   const prevIdFromCount = useRef()
 
@@ -43,9 +43,13 @@ const OrderPage = ({firstActivePage, setActive}) => {
     data.map(item => {
       if((item.weight !== 0 && item.width !== 0 && item.height !== 0 && item.length !== 0)
           || (item.heightPallet !== 0 && item.widthPallet !== 0 && item.weight)) {
+        console.log(1)
         setCargoWarning(false)
+        console.log(cargoWarning)
       } else {
+        console.log(2)
         setCargoWarning(true)
+
       }
     })
   }
@@ -104,7 +108,7 @@ const OrderPage = ({firstActivePage, setActive}) => {
   }
 
   const disabledButtonHandler = () => {
-    cargoWarningHandler()
+    // cargoWarningHandler()
     if (selectedCityIdTo) {
       setCityWarningTo(false)
     } else {
@@ -115,7 +119,7 @@ const OrderPage = ({firstActivePage, setActive}) => {
     } else {
       setCityWarningFrom(true)
     }
-    if (selectedCityIdFrom && selectedCityIdTo && cargoWarning) {
+    if (selectedCityIdFrom && selectedCityIdTo) {
       getPaths()
       setActive(false)
       setSecondActivePage(true)

@@ -4,7 +4,7 @@ import {ADMIN_SERVER_URL} from "../../../constants/URL";
 import {adminInstance} from "../../../api/admin";
 
 import ZoneItem from "./ZoneItem";
-import Loader from "../common/loader";
+import Loader from "../../Common/Loader";
 
 import './ZonePage.scss'
 

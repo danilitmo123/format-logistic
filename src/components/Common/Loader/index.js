@@ -1,6 +1,6 @@
 import React from 'react';
 
-import loader from '../../../../img/loader.svg'
+import loader from '../../../img/loader.svg'
 
 import './Loader.scss'
 

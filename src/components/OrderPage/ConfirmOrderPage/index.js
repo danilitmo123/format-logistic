@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 
 import HPlatform, {HMap, HMapPolyLine} from "react-here-map";
 import {ORDER_SERVER_URL} from "../../../constants/URL";
 import axios from "axios";
+
+import {IMaskInput} from 'react-imask'
 
 import airplane from '../../../img/black-airplane-icon.svg'
 import truck from '../../../img/black-truck-icon.svg'
@@ -28,6 +30,7 @@ const ConfirmOrderPage = ({chosenPath, volume, weight}) => {
         return pointsOfPath
     }
 
+
     const Map = ({points}) => {
         return (<HPlatform
                 apikey={"lDfJOpVUkj3EiYJMC1Za_oSkIvvY2pL2i6R5801iSoo"}
@@ -45,24 +48,10 @@ const ConfirmOrderPage = ({chosenPath, volume, weight}) => {
         )
     }
 
-    const companyInputHandler = (e) => {
-        setCompany(e.target.value)
-    }
+    const memoizedMap = useMemo(() => <Map points={getPoints(chosenPath)}/>, [chosenPath.routes])
 
-    const addressInputHandler = (e) => {
-        setAddress(e.target.value)
-    }
-
-    const contactNameInputHandler = (e) => {
-        setContactName(e.target.value)
-    }
-
-    const phoneInputHandler = (e) => {
-        setPhone(e.target.value)
-    }
-
-    const emailInputHandler = (e) => {
-        setEmail(e.target.value)
+    const handleInputChange = (setInput, e) => {
+        setInput(e.target.value)
     }
 
     const createOrder = () => {
@@ -82,12 +71,9 @@ const ConfirmOrderPage = ({chosenPath, volume, weight}) => {
         const options = {
             headers: {'Content-Type': 'application/json'}
         }
-        axios.post(CREATE_ORDER_URL, body, options).then(res => {
-            // вот тут кидает на главную страницу
-            window.location.href = "/"             }
-
-        ).catch(err=>
-        console.log({err}))
+        axios.post(CREATE_ORDER_URL, body, options)
+            .then(res => window.location.href = "/")
+            .catch(err=> console.log({err}))
     }
 
     return (
@@ -112,7 +98,7 @@ const ConfirmOrderPage = ({chosenPath, volume, weight}) => {
                         ''
                     }
                 </div>
-                <Map points={getPoints(chosenPath)}/>
+                {memoizedMap}
             </div>
             <div className={'all-info-route'}>
                 <div className={'title'}>Итого:</div>
@@ -127,32 +113,26 @@ const ConfirmOrderPage = ({chosenPath, volume, weight}) => {
                 <div className="shipper">
                     <div className={'input-example'}>
                         <label htmlFor="">Компания</label>
-                        <input type="text" value={company} onChange={companyInputHandler}/>
+                        <input type="text" value={company} onChange={e => handleInputChange(setCompany, e)}/>
                     </div>
                     <div className={'input-example'}>
                         <label htmlFor="">Адрес</label>
-                        <input type="text" value={address} onChange={addressInputHandler}/>
+                        <input type="text" value={address} onChange={e => handleInputChange(setAddress, e)}/>
                     </div>
                     <div className={'input-example'}>
                         <label htmlFor="">Контактное лицо</label>
-                        <input type="text" value={contactName} onChange={contactNameInputHandler}/>
+                        <input type="text" value={contactName} onChange={e => handleInputChange(setContactName, e)}/>
                     </div>
                     <div className={'input-example'}>
                         <label htmlFor="">Телефон</label>
-                        <input
-                            value={phone}
-                            onChange={phoneInputHandler}
-                            type="tel"
-                            pattern={'+7([0-9]){3}-[0-9]{3}-[0-9]{2}-[0-9]{2}'}
-                            placeholder={'+7(999)-999-99-99'}/>
+                        <IMaskInput
+                            mask={'+7(000)000-00-00'}
+                            onAccept={(value) => setPhone(value)}
+                        />
                     </div>
                     <div className={'input-example'}>
                         <label htmlFor="">Email</label>
-                        <input
-                            value={email}
-                            onChange={emailInputHandler}
-                            type="email"
-                            placeholder={'email@gmail.com'}/>
+                        <input type="email" value={email} onChange={e => handleInputChange(setEmail, e)} />
                     </div>
                 </div>
                 <button className={'send-order-button'} onClick={createOrder}>Отправить</button>

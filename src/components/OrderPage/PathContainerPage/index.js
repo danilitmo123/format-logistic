@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 import PathItem from "./PathItem";
-import Loader from "../../AdminPage/common/loader";
+import Loader from "../../Common/Loader";
 
 import loader from '../../../img/loader.svg'
 

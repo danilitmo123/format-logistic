@@ -5,7 +5,7 @@ import axios from "axios";
 import {ADMIN_SERVER_URL} from "../../../constants/URL";
 
 import ExtraShoulderItem from "./ExtraShoulderItem";
-import Loader from "../common/loader";
+import Loader from "../../Common/Loader";
 
 import './ExtraShouldersPage.scss'
 import {adminInstance} from "../../../api/admin";

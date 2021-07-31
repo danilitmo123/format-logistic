@@ -4,7 +4,7 @@ import axios from 'axios'
 import {ADMIN_SERVER_URL} from "../../../constants/URL";
 
 import AdminOrderItem from "./AdminOrderItem";
-import Loader from "../common/loader";
+import Loader from "../../Common/Loader";
 
 import loader from '../../../img/loader.svg'
 

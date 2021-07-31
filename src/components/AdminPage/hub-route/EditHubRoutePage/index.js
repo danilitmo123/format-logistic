@@ -4,7 +4,7 @@ import {ADMIN_SERVER_URL} from "../../../../constants/URL";
 import {Link, useParams} from "react-router-dom";
 import {adminInstance} from "../../../../api/admin";
 
-import Loader from "../../common/loader"
+import Loader from "../../../Common/Loader"
 import {HubRouteBlock} from "../HubRouteBlock";
 
 const EditHubRoutePage = () => {
