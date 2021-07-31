@@ -9,6 +9,48 @@
   padding: 20px;
   margin-bottom: 20px;
   margin-right: 10px;
+  .minimal-price {
+    display: flex;
+    flex-direction: column;
+    label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    input {
+      width: 250px;
+      height: 38px;
+      padding: 2px 8px;
+      align-items: center;
+      background-color: hsl(0, 0%, 100%);
+      border-color: hsl(0, 0%, 80%);
+      border-radius: 4px;
+      border-style: solid;
+      border-width: 1px;
+      cursor: default;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      min-height: 38px;
+      outline: none;
+      position: relative;
+      transition: all 100ms;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      margin-bottom: 20px;
+      &:focus {
+        border-color: $light-blue;
+        box-shadow: 0 0 0 1px $light-blue;
+      }
+      &::placeholder {
+        color: hsl(0, 0%, 50%);
+        font-family: "Montserrat", sans-serif;
+        font-size: 16px;
+      }
+    }
+  }
   .zone-title {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;

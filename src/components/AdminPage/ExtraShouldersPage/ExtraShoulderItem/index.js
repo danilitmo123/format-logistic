@@ -294,7 +294,10 @@ const ExtraShoulderItem = ({item}) => {
                         </div>
                 }
             </div>
-            <input type="number" value={minimalPrice} onChange={e => setMinimalPrice(e.target.value)}/>
+            <div className={'minimal-price'}>
+                <label>Минимальная ставка</label>
+                <input type="number" value={minimalPrice} onChange={e => setMinimalPrice(e.target.value)}/>
+            </div>
             <button onClick={sendRatesData} className={'save-button'}>Сохранить</button>
         </div>
     );
