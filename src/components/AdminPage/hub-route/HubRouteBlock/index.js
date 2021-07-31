@@ -73,7 +73,6 @@ const typeOfShippingOptions = [
     {value: ShippingType.TRAIN, label: labelTypeOfShipping[ShippingType.TRAIN], id: ShippingType.TRAIN},
 ]
 const placeObjectFromInitData = (initData) => {
-    console.log("place OFID", initData)
     if (initData.source && initData.destination) {
         return {
             cityFrom: {id: initData.source.id, name: initData.source.name},
@@ -180,7 +179,8 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
             <RatesContext.Provider value={{rates, setRates}}>
                 <PriceBlock/>
             </RatesContext.Provider>
-            <div>
+            <div className={'minimal-price-wrapper'}>
+                <label>Минимальная ставка</label>
                 <input type="number" value={minimalPrice} onChange={e => setMinimalPrice(e.target.value)}/>
             </div>
             <div className={'timetable-wrapper'}>
