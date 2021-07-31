@@ -10,8 +10,9 @@ import PathContainerPage from "./PathContainerPage";
 import ConfirmOrderPage from "./ConfirmOrderPage";
 
 import './OrderPage.scss'
+import Alert from "../Common/Alert";
 
-const OrderPage = ({firstActivePage, setActive}) => {
+const OrderPage = ({setFirstPageActive ,firstActivePage, setActive}) => {
   const [chosenPath, setChosenPath] = useState([])
   const [selectedCityIdFrom, setSelectedCityIdFrom] = useState()
   const [selectedCityIdTo, setSelectedCityIdTo] = useState()
@@ -27,6 +28,7 @@ const OrderPage = ({firstActivePage, setActive}) => {
   const [weight, setWeight] = useState(0)
   const [data, setDataRaw] = useState([])
   const [cargoWarning, setCargoWarning] = useState(false)
+  const [showAlert, setShowAlert]  = useState(false)
   const prevIdToCount = useRef()
   const prevIdFromCount = useRef()
 
@@ -135,6 +137,8 @@ const OrderPage = ({firstActivePage, setActive}) => {
     setSecondActivePage(true)
   }
 
+  console.log(showAlert)
+
   return (
       <section className={'order-page-wrapper'}>
         <div className={'order-title'}>{secondActivePage || firstActivePage ? 'Рассчитать перевозку' : 'Офоромление заявки на перевозку' }</div>
@@ -142,6 +146,9 @@ const OrderPage = ({firstActivePage, setActive}) => {
           {firstActivePage ?
               <>
                 <FirstStepForm
+                    firstActivePage={firstActivePage}
+                    showAlert={showAlert}
+                    setAlert={setShowAlert}
                     data={data}
                     setDataRaw={setDataRaw}
                     cargoWarning={cargoWarning}
@@ -183,7 +190,12 @@ const OrderPage = ({firstActivePage, setActive}) => {
                   </>
                   :
                   <>
-                    <ConfirmOrderPage chosenPath={chosenPath} volume={volume} weight={weight}/>
+                    <ConfirmOrderPage
+                        setFirstPageActive={setFirstPageActive}
+                        setAlert={setShowAlert}
+                        chosenPath={chosenPath}
+                        volume={volume}
+                        weight={weight}/>
                     <button
                         className={'continue-button-first-page'}
                         onClick={returnSecondPagHandler}
@@ -192,6 +204,7 @@ const OrderPage = ({firstActivePage, setActive}) => {
                   </>
           }
         </div>
+        {showAlert ? <Alert showAlert={showAlert} setAlert={setShowAlert}/> : ''}
       </section>
   );
 };

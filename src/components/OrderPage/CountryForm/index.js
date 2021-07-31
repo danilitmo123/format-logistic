@@ -25,8 +25,8 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
   const [optionCountryFromValue, setOptionCountryFromValue] = useState({})
   const [optionCountryToValue, setOptionCountryToValue] = useState({})
   const [countryWarning, setCountryWarning] = useState(false)
-  const [placeholderFrom, setPlaceholderFrom] = useState('Введите город/населенный пункт')
-  const [placeholderTo, setPlaceholderTo] = useState('Введите город/населенный пункт')
+  const [placeholderFrom, setPlaceholderFrom] = useState('Введите город / населенный пункт')
+  const [placeholderTo, setPlaceholderTo] = useState('Введите город / населенный пункт')
   const [activePlaceTo, setActivePlaceTo] = useState({cityButton: true, seaButton: false, airButton: false, trainButton: false, storageButton: false})
   const [activePlaceFrom, setActivePlaceFrom] = useState({cityButton: true, seaButton: false, airButton: false, trainButton: false, storageButton: false})
 

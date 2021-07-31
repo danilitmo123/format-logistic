@@ -13,7 +13,7 @@ import './ConfirmOrderPage.scss'
 
 const CREATE_ORDER_URL = `${ORDER_SERVER_URL}orders/`
 
-const ConfirmOrderPage = ({chosenPath, volume, weight}) => {
+const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAlert}) => {
 
     const [company, setCompany] = useState('')
     const [address, setAddress] = useState('')
@@ -32,7 +32,8 @@ const ConfirmOrderPage = ({chosenPath, volume, weight}) => {
     }
 
     const validateFormHandler = () => {
-        if(company && address && phone && email && contactName) {
+        if(company !== '' && phone !== '' && email !== '') {
+            createOrder()
             setFormWarning(false)
         } else {
             setFormWarning(true)
@@ -64,6 +65,7 @@ const ConfirmOrderPage = ({chosenPath, volume, weight}) => {
     }
 
     const createOrder = () => {
+        setAlert(true)
         let good = JSON.parse(localStorage.getItem('good'))
         let path = JSON.parse(localStorage.getItem('path'))
         let customs = JSON.parse(localStorage.getItem('customs'))
@@ -81,7 +83,7 @@ const ConfirmOrderPage = ({chosenPath, volume, weight}) => {
             headers: {'Content-Type': 'application/json'}
         }
         axios.post(CREATE_ORDER_URL, body, options)
-            .then(res => window.location.href = "/")
+            .then(res => setFirstPageActive(true))
             .catch(err=> console.log({err}))
     }
 
@@ -118,7 +120,7 @@ const ConfirmOrderPage = ({chosenPath, volume, weight}) => {
                 <div>Объем: {volume} м³</div>
             </div>
             <div className={'final-form-wrapper'}>
-                <div className={'shipper-title'}>Грузоотправитель</div>
+                <div className={'shipper-title'}>Оформление заказа на перевозку</div>
                 <div className="shipper">
                     <div className={'input-example'}>
                         <label htmlFor="">Компания</label>
@@ -144,8 +146,8 @@ const ConfirmOrderPage = ({chosenPath, volume, weight}) => {
                         <input type="email" value={email} onChange={e => handleInputChange(setEmail, e)} />
                     </div>
                 </div>
-                <button className={'send-order-button'} onClick={createOrder} disabled={formWarning}>Отправить</button>
-                {formWarning ? <div>Все поля обязательны к заполнению</div> : ''}
+                <button className={'send-order-button'} onClick={validateFormHandler} disabled={formWarning}>Отправить</button>
+                {formWarning ? <div className={'form-warning'}>Все поля обязательны к заполнению</div> : ''}
             </div>
         </div>
     );
