@@ -20,6 +20,7 @@ const ConfirmOrderPage = ({chosenPath, volume, weight}) => {
     const [contactName, setContactName] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
+    const [formWarning, setFormWarning] = useState(false)
 
     const getPoints = (pathOfItem) => {
         let pointsOfPath = []
@@ -28,6 +29,14 @@ const ConfirmOrderPage = ({chosenPath, volume, weight}) => {
             pointsOfPath.push({lat: item.destination.location.latitude, lng: item.destination.location.longitude})
         })
         return pointsOfPath
+    }
+
+    const validateFormHandler = () => {
+        if(company && address && phone && email && contactName) {
+            setFormWarning(false)
+        } else {
+            setFormWarning(true)
+        }
     }
 
 
@@ -135,7 +144,8 @@ const ConfirmOrderPage = ({chosenPath, volume, weight}) => {
                         <input type="email" value={email} onChange={e => handleInputChange(setEmail, e)} />
                     </div>
                 </div>
-                <button className={'send-order-button'} onClick={createOrder}>Отправить</button>
+                <button className={'send-order-button'} onClick={createOrder} disabled={formWarning}>Отправить</button>
+                {formWarning ? <div>Все поля обязательны к заполнению</div> : ''}
             </div>
         </div>
     );

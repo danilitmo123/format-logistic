@@ -22,6 +22,7 @@ const ExtraShouldersPage = () => {
         adminInstance.get(ZONE_URL).then(res => {
             setZones(res.data)
             setLoadedZones(true)
+            console.log(res.data)
         })
     }
 

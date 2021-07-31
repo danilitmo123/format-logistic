@@ -1,15 +1,15 @@
- import React from 'react';
+import React from 'react';
 
 import {Link} from 'react-router-dom';
 import axios from "axios";
 import {ADMIN_SERVER_URL} from "../../../../constants/URL";
 
- import {HubRouteBlock} from "../HubRouteBlock";
+import {HubRouteBlock} from "../HubRouteBlock";
 
 import './HubsPage.scss'
- import {adminInstance} from "../../../../api/admin";
+import {adminInstance} from "../../../../api/admin";
 
- const CreateHubRoutePage = ({}) => {
+const CreateHubRoutePage = ({}) => {
 
     const toAdminPage = () => {
         window.location = '/admin/hub-routes/'
@@ -26,7 +26,8 @@ import './HubsPage.scss'
                              rankedServices,
                              timetableDays,
                              prepareDays,
-                             activeTimetable
+                             activeTimetable,
+                             minimalPrice
                          }) => {
 
         let body = {
@@ -41,7 +42,8 @@ import './HubsPage.scss'
             duration: duration,
             rates: rates,
             additional_services: additionalServices,
-            ranked_services: rankedServices
+            ranked_services: rankedServices,
+            minimal_price: minimalPrice
         }
         if (activeTimetable) {
             body.timetable = {

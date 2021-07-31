@@ -16,7 +16,10 @@ const EditHubRoutePage = () => {
         adminInstance.get(`${ADMIN_SERVER_URL}admin-routes/${id}`).then(res => {
             setInitData(res.data)
             setLoading(false)
-        })
+        }).catch (err => {
+                console.log({err})
+            }
+        )
     }, [])
 
     const sendRequest = ({
@@ -30,7 +33,8 @@ const EditHubRoutePage = () => {
                              rankedServices,
                              timetableDays,
                              prepareDays,
-                             activeTimetable
+                             activeTimetable,
+                             minimalPrice
                          }) => {
         const options = {
             headers: {'Content-Type': 'application/json'}
@@ -47,7 +51,8 @@ const EditHubRoutePage = () => {
             duration: duration,
             rates: rates,
             additional_services: additionalServices,
-            ranked_services: rankedServices
+            ranked_services: rankedServices,
+            minimal_price: minimalPrice
         }
         if (activeTimetable) {
             body.timetable = {

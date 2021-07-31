@@ -293,23 +293,23 @@ const CargoForm = ({cargoWarning, data, setDataRaw, volume, setVolume, weight, s
                                     <div className={'select-input-wrapper'}>
                                       <div className={'pallet-select-wrapper'}>
                                         <div className={'pallet-length'}>120</div>
-                                        <input
-                                            type='number'
-                                            placeholder={'Высота'}
-                                            value={item.heightPallet || ''}
-                                            onChange={e => updateItem('heightPallet', e.target.value)}/>
+                                        <div className={'units-width-pallet'}>
+                                          <Select
+                                              classNamePrefix="units-select-pallet-select"
+                                              theme={customTheme}
+                                              options={typeOfWidthPalletUnits}
+                                              defaultValue={{value: '100', label: '100'}}
+                                              onChange={e => updateItem('widthPallet', e.value)}
+                                              noOptionsMessage={() => `Не найдено`}
+                                              placeholder={'Ширина'}
+                                          />
+                                        </div>
                                       </div>
-                                      <div className={'units-width-pallet'}>
-                                        <Select
-                                            classNamePrefix="units-select-pallet-select"
-                                            theme={customTheme}
-                                            options={typeOfWidthPalletUnits}
-                                            defaultValue={{value: '100', label: '100'}}
-                                            onChange={e => updateItem('widthPallet', e.value)}
-                                            noOptionsMessage={() => `Не найдено`}
-                                            placeholder={'Ширина'}
-                                        />
-                                      </div>
+                                      <input
+                                          type='number'
+                                          placeholder={'Высота'}
+                                          value={item.heightPallet || ''}
+                                          onChange={e => updateItem('heightPallet', e.target.value)}/>
                                       <div className={'units-select-pallet'}>
                                         <Select
                                             classNamePrefix="units-select-pallet-select"
@@ -410,7 +410,7 @@ const CargoForm = ({cargoWarning, data, setDataRaw, volume, setVolume, weight, s
               </div>
           )})}
         <button className={'add-cargo-btn'} onClick={addItem}>+ Добавить</button>
-        {!cargoWarning ? <div className={'cargo-warning'}>Все поля должны быть заполнены</div> : ''}
+        {cargoWarning ? <div className={'cargo-warning'}>Все поля должны быть заполнены</div> : ''}
       </div>
   );
 };
