@@ -25,6 +25,8 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
   const [optionCountryFromValue, setOptionCountryFromValue] = useState({})
   const [optionCountryToValue, setOptionCountryToValue] = useState({})
   const [countryWarning, setCountryWarning] = useState(false)
+  const [placeholderFrom, setPlaceholderFrom] = useState('Введите город/населенный пункт')
+  const [placeholderTo, setPlaceholderTo] = useState('Введите город/населенный пункт')
   const [activePlaceTo, setActivePlaceTo] = useState({cityButton: true, seaButton: false, airButton: false, trainButton: false, storageButton: false})
   const [activePlaceFrom, setActivePlaceFrom] = useState({cityButton: true, seaButton: false, airButton: false, trainButton: false, storageButton: false})
 
@@ -36,43 +38,53 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
         if (buttonId === 'from-place') {
           setActivePlaceFrom({cityButton: true, seaButton: false, airButton: false, trainButton: false, storageButton: false})
           setSourceType(PlaceType.CITY)
+          setPlaceholderFrom('Введите город/населенный пункт')
         } else {
           setActivePlaceTo({cityButton: true, seaButton: false, airButton: false, trainButton: false, storageButton: false})
           setDestinationType(PlaceType.CITY)
+          setActivePlaceTo('Введите город/населенный пункт')
         }
         break
       case 'Морской порт':
         if (buttonId === 'from-place') {
           setActivePlaceFrom({cityButton: false, seaButton: true, airButton: false, trainButton: false, storageButton: false})
           setSourceType(PlaceType.SEAPORT)
+          setPlaceholderFrom('Выбрать морской порт')
         } else {
           setActivePlaceTo({cityButton: false, seaButton: true, airButton: false, trainButton: false, storageButton: false})
           setDestinationType(PlaceType.SEAPORT)
+          setPlaceholderTo('Выбрать морской порт')
         }
         break
       case 'Аэропорт':
         if (buttonId === 'from-place') {
           setActivePlaceFrom({cityButton: false, seaButton: false, airButton: true, trainButton: false, storageButton: false})
           setSourceType(PlaceType.AIRPORT)
+          setPlaceholderFrom('Выбрать аэропорт')
         } else {
           setActivePlaceTo({cityButton: false, seaButton: false, airButton: true, trainButton: false, storageButton: false})
           setDestinationType(PlaceType.AIRPORT)
+          setPlaceholderTo('Выбрать аэропорт')
         }
         break
       case 'Ж/Д станция':
         if (buttonId === 'from-place') {
           setActivePlaceFrom({cityButton: false, seaButton: false, airButton: false, trainButton: true, storageButton: false})
           setSourceType(PlaceType.RAILWAY_STATION)
+          setPlaceholderFrom('Выбрать станцию')
         } else {
           setActivePlaceTo({cityButton: false, seaButton: false, airButton: false, trainButton: true, storageButton: false})
           setDestinationType(PlaceType.RAILWAY_STATION)
+          setPlaceholderTo('Выбрать станцию')
         }
         break
       case 'Наш склад':
         if (buttonId === 'from-place') {
           setActivePlaceFrom({cityButton: false, seaButton: false, airButton: false, trainButton: false, storageButton: true})
+          setPlaceholderFrom('Выбрать склад')
         } else {
           setActivePlaceTo({cityButton: false, seaButton: false, airButton: false, trainButton: false, storageButton: true})
+          setPlaceholderFrom('Выбрать склад')
         }
         break
       default:
@@ -210,7 +222,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
                 className={activePlaceFrom.storageButton ? 'active-storage-button' : 'place-button'}>Наш склад</button>
           </div>
           <div className={'city-select-from'}>
-            <label htmlFor="country">Город</label>
+            <label htmlFor="country">{placeholderFrom}</label>
             <AsyncSelect
                 classNamePrefix={cityWarningFrom ? 'react-select' : ''}
                 theme={customTheme}
@@ -218,7 +230,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
                 options={modifyCitiesFromObj}
                 onChange={selectedCityIdFromHandler}
                 noOptionsMessage={() => 'Не найдено'}
-                placeholder={'Выберите точку отправления'}
+                placeholder={placeholderFrom}
                 filterOption={filterOptions}
             />
           </div>
@@ -267,7 +279,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
                 className={activePlaceTo.storageButton ? 'active-storage-button' : 'place-button'}>Наш склад</button>
           </div>
           <div className={'city-select-where'}>
-            <label htmlFor="country">Город</label>
+            <label htmlFor="country">{placeholderTo}</label>
             <AsyncSelect
                 classNamePrefix={cityWarningTo ? 'react-select' : ''}
                 theme={customTheme}
@@ -275,7 +287,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
                 options={modifyCitiesToObj}
                 onChange={selectedCityIdToHandler}
                 noOptionsMessage={() => 'Не найдено'}
-                placeholder={'Выберите точку прибытия'}
+                placeholder={placeholderTo}
                 filterOption={filterOptions}
             />
           </div>

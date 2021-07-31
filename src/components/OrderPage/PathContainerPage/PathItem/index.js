@@ -3,13 +3,12 @@ import HPlatform, {HMap, HMapPolyLine} from "react-here-map";
 
 import airplane from '../../../../img/black-airplane-icon.svg'
 import truck from '../../../../img/black-truck-icon.svg'
+import train from '../../../../img/train-icon.svg'
 
 
 import './PathItem.scss'
 
 const PathItem = ({path, setIndex, index, volume, weight}) => {
-
-  console.log(path)
 
   const getPoints = (pathOfItem) => {
     let pointsOfPath = []
@@ -27,8 +26,13 @@ const PathItem = ({path, setIndex, index, volume, weight}) => {
            <div className={'step-wrapper'}>
               <div className={'source'}>{route.source.name}</div>
               <div className={'route-info'}>
-                <div className={'type'}>{route.type === 'TRUCK' ? <img className={'truck'} src={truck} alt="truck"/> :
-                    <img className={'airplane'} src={airplane} alt="airplane"/>}</div>
+                <div className={'type'}>{route.type === 'TRUCK' ?
+                    <img className={'truck'} src={truck} alt="truck"/>
+                    : route.type ===  'AIR' ?
+                    <img className={'airplane'} src={airplane} alt="airplane"/>
+                    : <img className={'train'} src={train} alt="train"/>
+                }
+                </div>
                 <div className={'route-distance'}>{(route.distance).toFixed(0)}км {route.total_cost}</div>
               </div>
               <div className={'destination'}>{route.destination.name}</div>

@@ -137,7 +137,7 @@ const OrderPage = ({firstActivePage, setActive}) => {
 
   return (
       <section className={'order-page-wrapper'}>
-        <div className={'order-title'}>Рассчитать перевозку</div>
+        <div className={'order-title'}>{secondActivePage || firstActivePage ? 'Рассчитать перевозку' : 'Офоромление заявки на перевозку' }</div>
         <div className={'form-wrapper'}>
           {firstActivePage ?
               <>
