@@ -16,7 +16,6 @@ const authStatusKey = 'authStatus'
 
 const adminInstance = axios.create();
 
-
 const setAuthHeader = () => {
     adminInstance.defaults.headers.common['Authorization'] = `${AUTH_HEADER_TYPE} ${getAuthToken()}`;
 }
