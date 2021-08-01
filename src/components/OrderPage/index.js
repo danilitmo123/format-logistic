@@ -10,8 +10,9 @@ import PathContainerPage from "./PathContainerPage";
 import ConfirmOrderPage from "./ConfirmOrderPage";
 
 import './OrderPage.scss'
+import Alert from "../Common/Alert";
 
-const OrderPage = ({firstActivePage, setActive}) => {
+const OrderPage = ({setFirstPageActive ,firstActivePage, setActive}) => {
   const [chosenPath, setChosenPath] = useState([])
   const [selectedCityIdFrom, setSelectedCityIdFrom] = useState()
   const [selectedCityIdTo, setSelectedCityIdTo] = useState()
@@ -23,6 +24,11 @@ const OrderPage = ({firstActivePage, setActive}) => {
   const [isIdChanged, setIdChanged] = useState(false)
   const [sourceType, setSourceType] = useState(PlaceType.CITY)
   const [destinationType, setDestinationType] = useState(PlaceType.CITY)
+  const [volume, setVolume] = useState(0)
+  const [weight, setWeight] = useState(0)
+  const [data, setDataRaw] = useState([])
+  const [cargoWarning, setCargoWarning] = useState(false)
+  const [showAlert, setShowAlert]  = useState(false)
   const prevIdToCount = useRef()
   const prevIdFromCount = useRef()
 
@@ -35,6 +41,52 @@ const OrderPage = ({firstActivePage, setActive}) => {
     }
   }, [selectedCityIdTo, selectedCityIdFrom])
 
+  const disabledButtonHandler = () => {
+    let warning = false
+    if (hasCargoError()) {
+      setCargoWarning(true)
+      warning = true
+    }else{
+      setCargoWarning(false)
+    }
+    if (selectedCityIdTo) {
+      setCityWarningTo(false)
+    } else {
+      setCityWarningTo(true)
+      warning = true
+    }
+    if (selectedCityIdFrom) {
+      setCityWarningFrom(false)
+    } else {
+      setCityWarningFrom(true)
+      warning = true
+    }
+    if (!warning) {
+      getPaths()
+      setActive(false)
+      setSecondActivePage(true)
+    } else {
+      setActive(true)
+      setSecondActivePage(false)
+    }
+  }
+
+  const hasBoxError = (item) => {
+    return item.width === 0 || item.height === 0 || item.length === 0 || item.weight === 0
+  }
+
+  const hasPalletError  = (item) => {
+    return item.heightPallet === 0 || item.widthPallet === 0 || item.lengthPallet === 0 || item.weight === 0
+  }
+  const hasCargoError = () => {
+    for (let i in data) {
+      let item = data[i]
+      if (hasBoxError(item) && hasPalletError(item)){
+        return true
+      }
+    }
+    return false
+  }
 
   const getPaths = () => {
     if (selectedCityIdFrom !== '' && selectedCityIdTo !== '') {
@@ -50,9 +102,9 @@ const OrderPage = ({firstActivePage, setActive}) => {
         } else {
           _cargo["type"] = "PALLET"
         }
-        _cargo["length"] = (isBox ? cargo.length : cargo.lengthPallet) * (isCM || !isBox ?  1/100 : 1)
-        _cargo["height"] = (isBox ? cargo.height : cargo.heightPallet) * (isCM ? 1/100 : 1)
-        _cargo["width"] = (isBox ? cargo.width : cargo.widthPallet) * (isCM || !isBox ?  1/100 : 1)
+        _cargo["length"] = (isBox ? cargo.length : cargo.lengthPallet) * (isCM || !isBox ? 1 / 100 : 1)
+        _cargo["height"] = (isBox ? cargo.height : cargo.heightPallet) * (isCM ? 1 / 100 : 1)
+        _cargo["width"] = (isBox ? cargo.width : cargo.widthPallet) * (isCM || !isBox ? 1 / 100 : 1)
         _cargo["mass"] = cargo.weight * (isKg ? 1 : 1 / 2.2)
         _cargo["amount"] = cargo.count
         data_cargos.push(_cargo)
@@ -60,9 +112,9 @@ const OrderPage = ({firstActivePage, setActive}) => {
       localStorage.setItem('good', JSON.stringify(data_cargos))
       let data = {
         source:
-          {id: selectedCityIdFrom},
+            {id: selectedCityIdFrom},
         destination:
-          {id: selectedCityIdTo},
+            {id: selectedCityIdTo},
         good: {
           boxes: data_cargos
         },
@@ -70,9 +122,9 @@ const OrderPage = ({firstActivePage, setActive}) => {
         destination_type: destinationType
       }
       axios.post(`${ROUTES_SERVER_URL}paths`, data)
-        .then((res => {
-          setPaths(res.data)
-        }))
+          .then((res => {
+            setPaths(res.data)
+          }))
     }
   }
 
@@ -85,78 +137,75 @@ const OrderPage = ({firstActivePage, setActive}) => {
     setSecondActivePage(true)
   }
 
-  const disabledButtonHandler = () => {
-    if (selectedCityIdTo) {
-      setCityWarningTo(false)
-    } else {
-      setCityWarningTo(true)
-    }
-    if (selectedCityIdFrom) {
-      setCityWarningFrom(false)
-    } else {
-      setCityWarningFrom(true)
-    }
-    if (selectedCityIdFrom && selectedCityIdTo) {
-      getPaths()
-      setActive(false)
-      setSecondActivePage(true)
-    } else {
-      setActive(true)
-      setSecondActivePage(false)
-    }
-  }
+  console.log(showAlert)
 
   return (
-    <section className={'order-page-wrapper'}>
-      <div className={'order-title'}>Рассчитать перевозку</div>
-      <div className={'form-wrapper'}>
-        {firstActivePage ?
-          <>
-            <FirstStepForm
-              setWarningFrom={setCityWarningFrom}
-              cityWarningFrom={cityWarningFrom}
-              setWarningTo={setCityWarningTo}
-              cityWarningTo={cityWarningTo}
-              setIdTo={setSelectedCityIdTo}
-              setIdFrom={setSelectedCityIdFrom}
-              sourceType={sourceType}
-              destinationType={destinationType}
-              setSourceType={setSourceType}
-              setDestinationType={setDestinationType}
-            />
-            <button
-              className={'continue-button-first-page'}
-              onClick={disabledButtonHandler}
-            >Продолжить
-            </button>
-          </>
-          : secondActivePage ?
-            <>
-              <PathContainerPage
-                isIdChanged={isIdChanged}
-                pointsOfPath={pointsOfPath}
-                setPointsOfPath={setPointsOfPath}
-                paths={paths}
-                setChosenPath={setChosenPath}
-                thirdPageActiveHandler={setSecondActivePage}/>
-              <button
-                onClick={secondPageActiveHandler}
-                className={'continue-button-first-page'}
-              >Назад
-              </button>
-            </>
-            :
-            <>
-              <ConfirmOrderPage chosenPath={chosenPath}/>
+      <section className={'order-page-wrapper'}>
+        <div className={'order-title'}>{secondActivePage || firstActivePage ? 'Рассчитать перевозку' : 'Офоромление заявки на перевозку' }</div>
+        <div className={'form-wrapper'}>
+          {firstActivePage ?
+              <>
+                <FirstStepForm
+                    firstActivePage={firstActivePage}
+                    showAlert={showAlert}
+                    setAlert={setShowAlert}
+                    data={data}
+                    setDataRaw={setDataRaw}
+                    cargoWarning={cargoWarning}
+                    volume={volume}
+                    setVolume={setVolume}
+                    weight={weight}
+                    setWeight={setWeight}
+                    cityWarningFrom={cityWarningFrom}
+                    cityWarningTo={cityWarningTo}
+                    setIdTo={setSelectedCityIdTo}
+                    setIdFrom={setSelectedCityIdFrom}
+                    sourceType={sourceType}
+                    destinationType={destinationType}
+                    setSourceType={setSourceType}
+                    setDestinationType={setDestinationType}
+                />
                 <button
-                  className={'continue-button-first-page'}
-                  onClick={returnSecondPagHandler}
-                >Назад
+                    className={'continue-button-first-page'}
+                    onClick={disabledButtonHandler}
+                >Продолжить
                 </button>
-            </>
-        }
-      </div>
-    </section>
+              </>
+              : secondActivePage ?
+                  <>
+                    <PathContainerPage
+                        volume={volume}
+                        weight={weight}
+                        isIdChanged={isIdChanged}
+                        pointsOfPath={pointsOfPath}
+                        setPointsOfPath={setPointsOfPath}
+                        paths={paths}
+                        setChosenPath={setChosenPath}
+                        thirdPageActiveHandler={setSecondActivePage}/>
+                    <button
+                        onClick={secondPageActiveHandler}
+                        className={'continue-button-first-page'}
+                    >Назад
+                    </button>
+                  </>
+                  :
+                  <>
+                    <ConfirmOrderPage
+                        setFirstPageActive={setFirstPageActive}
+                        setAlert={setShowAlert}
+                        chosenPath={chosenPath}
+                        volume={volume}
+                        weight={weight}/>
+                    <button
+                        className={'continue-button-first-page'}
+                        onClick={returnSecondPagHandler}
+                    >Назад
+                    </button>
+                  </>
+          }
+        </div>
+        {showAlert ? <Alert showAlert={showAlert} setAlert={setShowAlert}/> : ''}
+      </section>
   );
 };
 

@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 
 import HPlatform, {HMap, HMapPolyLine} from "react-here-map";
-import {ADMIN_SERVER_URL, ORDER_SERVER_URL} from "../../../constants/URL";
+import {ORDER_SERVER_URL} from "../../../constants/URL";
 import axios from "axios";
+
+import {IMaskInput} from 'react-imask'
 
 import airplane from '../../../img/black-airplane-icon.svg'
 import truck from '../../../img/black-truck-icon.svg'
@@ -11,13 +13,14 @@ import './ConfirmOrderPage.scss'
 
 const CREATE_ORDER_URL = `${ORDER_SERVER_URL}orders/`
 
-const ConfirmOrderPage = ({chosenPath}) => {
+const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAlert}) => {
 
     const [company, setCompany] = useState('')
     const [address, setAddress] = useState('')
     const [contactName, setContactName] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
+    const [formWarning, setFormWarning] = useState(false)
 
     const getPoints = (pathOfItem) => {
         let pointsOfPath = []
@@ -27,6 +30,16 @@ const ConfirmOrderPage = ({chosenPath}) => {
         })
         return pointsOfPath
     }
+
+    const validateFormHandler = () => {
+        if(company !== '' && phone !== '' && email !== '') {
+            createOrder()
+            setFormWarning(false)
+        } else {
+            setFormWarning(true)
+        }
+    }
+
 
     const Map = ({points}) => {
         return (<HPlatform
@@ -45,27 +58,14 @@ const ConfirmOrderPage = ({chosenPath}) => {
         )
     }
 
-    const companyInputHandler = (e) => {
-        setCompany(e.target.value)
-    }
+    const memoizedMap = useMemo(() => <Map points={getPoints(chosenPath)}/>, [chosenPath.routes])
 
-    const addressInputHandler = (e) => {
-        setAddress(e.target.value)
-    }
-
-    const contactNameInputHandler = (e) => {
-        setContactName(e.target.value)
-    }
-
-    const phoneInputHandler = (e) => {
-        setPhone(e.target.value)
-    }
-
-    const emailInputHandler = (e) => {
-        setEmail(e.target.value)
+    const handleInputChange = (setInput, e) => {
+        setInput(e.target.value)
     }
 
     const createOrder = () => {
+        setAlert(true)
         let good = JSON.parse(localStorage.getItem('good'))
         let path = JSON.parse(localStorage.getItem('path'))
         let customs = JSON.parse(localStorage.getItem('customs'))
@@ -82,12 +82,9 @@ const ConfirmOrderPage = ({chosenPath}) => {
         const options = {
             headers: {'Content-Type': 'application/json'}
         }
-        axios.post(CREATE_ORDER_URL, body, options).then(res => {
-            // вот тут кидает на главную страницу
-            window.location.href = "/"             }
-
-        ).catch(err=>
-        console.log({err}))
+        axios.post(CREATE_ORDER_URL, body, options)
+            .then(res => setFirstPageActive(true))
+            .catch(err=> console.log({err}))
     }
 
     return (
@@ -112,48 +109,45 @@ const ConfirmOrderPage = ({chosenPath}) => {
                         ''
                     }
                 </div>
-                <Map points={getPoints(chosenPath)}/>
+                {memoizedMap}
             </div>
             <div className={'all-info-route'}>
                 <div className={'title'}>Итого:</div>
                 <div>Расстояние: {(chosenPath[0].total_distance).toFixed(0)} км</div>
                 <div>Цена: {(chosenPath[0].total_cost)}€/{(chosenPath[0].total_cost * 1.18).toFixed(2)}$</div>
                 <div>Время в пути: {(chosenPath[0].total_duration.min).toFixed(0)} - {(chosenPath[0].total_duration.max).toFixed(0)} дней</div>
+                <div>Вес: {weight} кг</div>
+                <div>Объем: {volume} м³</div>
             </div>
             <div className={'final-form-wrapper'}>
-                <div className={'shipper-title'}>Грузоотправитель</div>
+                <div className={'shipper-title'}>Оформление заказа на перевозку</div>
                 <div className="shipper">
                     <div className={'input-example'}>
                         <label htmlFor="">Компания</label>
-                        <input type="text" value={company} onChange={companyInputHandler}/>
+                        <input type="text" value={company} onChange={e => handleInputChange(setCompany, e)}/>
                     </div>
                     <div className={'input-example'}>
                         <label htmlFor="">Адрес</label>
-                        <input type="text" value={address} onChange={addressInputHandler}/>
+                        <input type="text" value={address} onChange={e => handleInputChange(setAddress, e)}/>
                     </div>
                     <div className={'input-example'}>
                         <label htmlFor="">Контактное лицо</label>
-                        <input type="text" value={contactName} onChange={contactNameInputHandler}/>
+                        <input type="text" value={contactName} onChange={e => handleInputChange(setContactName, e)}/>
                     </div>
                     <div className={'input-example'}>
                         <label htmlFor="">Телефон</label>
-                        <input
-                            value={phone}
-                            onChange={phoneInputHandler}
-                            type="tel"
-                            pattern={'+7([0-9]){3}-[0-9]{3}-[0-9]{2}-[0-9]{2}'}
-                            placeholder={'+7(999)-999-99-99'}/>
+                        <IMaskInput
+                            mask={'+7(000)000-00-00'}
+                            onAccept={(value) => setPhone(value)}
+                        />
                     </div>
                     <div className={'input-example'}>
                         <label htmlFor="">Email</label>
-                        <input
-                            value={email}
-                            onChange={emailInputHandler}
-                            type="email"
-                            placeholder={'email@gmail.com'}/>
+                        <input type="email" value={email} onChange={e => handleInputChange(setEmail, e)} />
                     </div>
                 </div>
-                <button className={'send-order-button'} onClick={createOrder}>Отправить</button>
+                <button className={'send-order-button'} onClick={validateFormHandler} disabled={formWarning}>Отправить</button>
+                {formWarning ? <div className={'form-warning'}>Все поля обязательны к заполнению</div> : ''}
             </div>
         </div>
     );

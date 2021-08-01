@@ -56,17 +56,23 @@ const pingAuth = async () => {
         Authorization: `${AUTH_HEADER_TYPE} ${getAuthToken()}`
     }
     try{
-        let res = await axios.post(AUTH_PING_URL, options)
+        let res = await axios.get(AUTH_PING_URL, {headers: options})
         if (res.status === 200)
             return ResponseStatus.CORRECT
     } catch (err){
+        console.log({err})
         return ResponseStatus.INCORRECT
     }
 }
 
-const initAuth = () => {
+const initAuth = async () => {
+    await new Promise(r => setTimeout(r, 2000));
     let access = getAuthToken()
     let status = getAuthStatus()
+    console.group('iinit')
+    console.log({access})
+    console.log({status})
+    console.groupEnd()
     if (access && status && status === AuthStatus.AUTHENTICATED){
         pingAuth().then(status => {
             if (status === ResponseStatus.CORRECT){

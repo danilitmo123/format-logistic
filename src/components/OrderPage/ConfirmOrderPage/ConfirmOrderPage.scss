@@ -107,6 +107,10 @@
     background-color: $white;
     padding: 40px 30px;
     margin-bottom: 40px;
+    .form-warning {
+      margin-top: 30px;
+      color: red;
+    }
     .shipper-title {
       font-weight: 500;
       font-size: 20px;
@@ -164,24 +168,41 @@
             font-family: "Montserrat", sans-serif;
           }
         }
+        textarea {
+          width: 690px;
+          height: 400px;
+          outline: none;
+          padding: 5px;
+          background-color: hsl(0, 0%, 100%);
+          border-color: hsl(0, 0%, 80%);
+          border-radius: 4px;
+          border-style: solid;
+          border-width: 1px;
+          font-family: 'Montserrat', sans-serif;
+          resize: none;
+          &:focus {
+            border-color: $light-blue;
+            box-shadow: 0 0 0 1px $light-blue;
+          }
+        }
       }
     }
-    .send-order-button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 400;
-      color: $white;
-      border: none;
-      padding: 8px;
-      width: 170px;
-      height: 40px;
-      border-radius: 8px;
-      background: $light-blue;
-      outline: none;
-      margin-top: 20px;
-      cursor: pointer;
+      .send-order-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        color: $white;
+        border: none;
+        padding: 8px;
+        width: 170px;
+        height: 40px;
+        border-radius: 8px;
+        background: $light-blue;
+        outline: none;
+        margin-top: 20px;
+        cursor: pointer;
     }
   }
 }

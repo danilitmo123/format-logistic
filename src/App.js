@@ -20,7 +20,7 @@ const App = () => {
           <Header isAdmin={admin} setAdmin={setAdmin} firstActivePage={firstActivePage} setActive={setFirstActivePage}/>
           <Switch>
             <Route exact={true} path={'/'} >
-              <OrderPage firstActivePage={firstActivePage} setActive={setFirstActivePage}/>
+              <OrderPage setFirstPageActive={setFirstActivePage} firstActivePage={firstActivePage} setActive={setFirstActivePage}/>
             </Route>
             <Route path={'/admin'}>
               <AdminPage/>

@@ -1,13 +1,11 @@
 import React, {useState, useEffect} from "react";
 
-import axios from "axios";
 import {ADMIN_SERVER_URL} from "../../../../constants/URL";
 import {Link, useParams} from "react-router-dom";
-
-import {HubRouteBlock} from "../HubRouteBlock";
-
-import loader from '../../../../img/loader.svg'
 import {adminInstance} from "../../../../api/admin";
+
+import Loader from "../../../Common/Loader"
+import {HubRouteBlock} from "../HubRouteBlock";
 
 const EditHubRoutePage = () => {
     const { id } = useParams();
@@ -18,7 +16,10 @@ const EditHubRoutePage = () => {
         adminInstance.get(`${ADMIN_SERVER_URL}admin-routes/${id}`).then(res => {
             setInitData(res.data)
             setLoading(false)
-        })
+        }).catch (err => {
+                console.log({err})
+            }
+        )
     }, [])
 
     const sendRequest = ({
@@ -32,7 +33,8 @@ const EditHubRoutePage = () => {
                              rankedServices,
                              timetableDays,
                              prepareDays,
-                             activeTimetable
+                             activeTimetable,
+                             minimalPrice
                          }) => {
         const options = {
             headers: {'Content-Type': 'application/json'}
@@ -49,7 +51,8 @@ const EditHubRoutePage = () => {
             duration: duration,
             rates: rates,
             additional_services: additionalServices,
-            ranked_services: rankedServices
+            ranked_services: rankedServices,
+            minimal_price: minimalPrice
         }
         if (activeTimetable) {
             body.timetable = {
@@ -77,7 +80,7 @@ const EditHubRoutePage = () => {
                 </Link>
             </div>
             {!loading ?
-                <HubRouteBlock initData={initData} onSubmit={sendRequest}/> : <img src={loader} alt=""/>
+                <HubRouteBlock initData={initData} onSubmit={sendRequest}/> : <Loader/>
             }
 
         </section>

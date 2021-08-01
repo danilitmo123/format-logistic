@@ -8,21 +8,35 @@
   .info-routes-wrapper {
     background-color: $white;
     border-radius: 20px 0 0 20px;
-    width: 500px;
+    width: 420px;
     padding: 40px 30px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: flex-start;
     position: relative;
-
+    .route-info-title {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 10px;
+      margin-left: 50px;
+    }
     .route-time-and-cost-wrapper {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       font-family: 'Montserrat', sans-serif;
       font-weight: 400;
-      font-size: 14px;
+      font-size: 12px;
+      margin-left: 50px;
       .route-total-cost {
         margin-right: 15px;
+        margin-bottom: 5px;
+      }
+      .route-total-duration {
+        margin-right: 15px;
+        margin-bottom: 5px;
+      }
+      .route-total-weight {
+        margin-bottom: 5px;
       }
     }
 
@@ -83,6 +97,10 @@
            width: 40px;
          }
 
+         .train {
+           width: 40px;
+         }
+
          .route-distance {
            color: black;
            opacity: 0.4;
@@ -108,7 +126,7 @@
   #HERE_MAP_CONTAINER.here-map-container {
     border-radius: 0 20px 20px 0;
     min-height: 400px;
-    width: 500px;
+    width: 580px;
   }
 }
 

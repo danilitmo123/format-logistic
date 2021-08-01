@@ -1,6 +1,6 @@
 @import "../../../global";
 .admin-order-page-wrapper {
-  min-height: 750px;
+  min-height: 900px;
   background-color: #028090;
   padding: 0 5%;
   .admin-order-page-title {
@@ -57,6 +57,7 @@
   .all-orders-wrapper {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
   }
 }
 .loader-wrapper {

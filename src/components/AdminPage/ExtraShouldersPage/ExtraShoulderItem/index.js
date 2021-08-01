@@ -6,6 +6,7 @@ import axios from "axios";
 import trash from "../../../../img/trash-icon.svg";
 
 import './ExtraShoulderItem.scss'
+import {adminInstance} from "../../../../api/admin";
 
 const defaultMassRate = {
     range_from: 0,
@@ -68,6 +69,7 @@ const ExtraShoulderItem = ({item}) => {
     const [activeButtonForWeight, setActiveButtonForWeight] = useState(true)
     const [activeButtonForVolume, setActiveButtonForVolume] = useState(false)
     const [activeButtonForMeter, setActiveButtonForMeter] = useState(false)
+    const [minimalPrice, setMinimalPrice] = useState(item.minimal_price)
 
     const addWeightItem = () => {
         const newData = [...dataWeight, {...defaultMassRate}]
@@ -149,8 +151,8 @@ const ExtraShoulderItem = ({item}) => {
     }
 
     const sendRatesData = () => {
-        let body = {rates: flatRates()}
-        axios.patch(`${UPDATE_RATES_URL}/${item.id}/`, body).then()
+        let body = {rates: flatRates(), minimal_price: minimalPrice}
+        adminInstance.patch(`${UPDATE_RATES_URL}/${item.id}/`, body).then()
     }
 
     return (
@@ -291,6 +293,10 @@ const ExtraShoulderItem = ({item}) => {
                             <button className={'add-button'} onClick={addMeterItem}>Добавить промежуток</button>
                         </div>
                 }
+            </div>
+            <div className={'minimal-price'}>
+                <label>Минимальная ставка</label>
+                <input type="number" value={minimalPrice} onChange={e => setMinimalPrice(e.target.value)}/>
             </div>
             <button onClick={sendRatesData} className={'save-button'}>Сохранить</button>
         </div>

@@ -4,6 +4,7 @@ import axios from 'axios'
 import {ADMIN_SERVER_URL} from "../../../constants/URL";
 
 import AdminOrderItem from "./AdminOrderItem";
+import Loader from "../../Common/Loader";
 
 import loader from '../../../img/loader.svg'
 
@@ -13,12 +14,10 @@ import {adminInstance} from "../../../api/admin";
 const AdminOrderPage = () => {
 
   const [orders, setOrders] = useState([])
-  const [loading, setLoading] = useState(false)
 
   const getOrders = () => {
     const ORDER_URL = `${ADMIN_SERVER_URL}admin-orders/`
     adminInstance.get(ORDER_URL).then(res => setOrders([res.data]))
-    setLoading(true)
   }
 
   useEffect(() => {
@@ -34,7 +33,7 @@ const AdminOrderPage = () => {
       {/*</div>*/}
       <div className={'all-orders-wrapper'}>
         {
-          orders[0] !== undefined ? orders[0].map(order => <AdminOrderItem order={order}/>) : <div className={'loader-wrapper'}><img src={loader} alt=""/><div>Загрузка...</div></div>
+          orders[0] !== undefined ? orders[0].map(order => <AdminOrderItem order={order}/>) : <Loader/>
         }
       </div>
     </section>

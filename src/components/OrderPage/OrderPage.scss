@@ -9,6 +9,8 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
   .order-title {
     font-family: 'Montserrat', sans-serif;
     color: $white;
@@ -27,6 +29,10 @@
       padding: 40px 30px;
       border-radius: 20px;
       background-color: $white;
+      .cargo-warning {
+        margin-top: 30px;
+        color: red;
+      }
       .add-cargo-btn {
         font-family: 'Montserrat', sans-serif;
         font-size: 12px;
@@ -253,6 +259,37 @@
                     border-radius: 2px 0 0 2px;
                   }
                 }
+                .warning {
+                  width: 100px;
+                  padding: 2px 8px;
+                  align-items: center;
+                  background-color: hsl(0, 0%, 100%);
+                  border-color: red;
+                  border-style: solid;
+                  border-width: 1px;
+                  cursor: default;
+                  display: flex;
+                  height: 34px;
+                  outline: none;
+                  position: relative;
+                  transition: all 100ms;
+                  font-family: 'Montserrat', sans-serif;
+                  font-size: 16px;
+                  &:focus {
+                    border-color: $light-blue;
+                    box-shadow: 0 0 0 1px $light-blue;
+                  }
+
+                  &::placeholder {
+                    color: hsl(0, 0%, 50%);
+                    font-family: "Montserrat", sans-serif;
+                    font-size: 16px;
+                  }
+
+                  &:nth-child(1) {
+                    border-radius: 2px 0 0 2px;
+                  }
+                }
               }
 
               .sizeof-pallet-wrapper {
@@ -261,70 +298,6 @@
                 flex-direction: column;
                 .select-input-wrapper {
                   display: flex;
-                  .pallet-length {
-                    width: 100px;
-                    padding: 2px 8px;
-                    align-items: center;
-                    background-color: hsl(0, 0%, 100%);
-                    border-color: hsl(0, 0%, 80%);
-                    border-style: solid;
-                    border-width: 1px;
-                    cursor: default;
-                    display: flex;
-                    height: 34px;
-                    outline: none;
-                    position: relative;
-                    transition: all 100ms;
-                    border-radius: 4px 0 0 4px;
-                  }
-
-                  .units-select-pallet{
-                    height: 38px;
-                    width: 109px;
-                    .css-2b097c-container {
-                      .css-yk16xz-control {
-                        border-radius: 0 4px 4px 0;
-                      }
-                    }
-                    .units-select-pallet-select__value-container{
-                      width: 100px;
-                      height: 38px;
-                    }
-                  }
-                  .units-width-pallet {
-                    width: 109px;
-                    height: 38px;
-                    .css-2b097c-container {
-                      .css-yk16xz-control {
-                        border-radius: 0;
-                      }
-                    }
-                    .units-select-pallet-select__value-container{
-                      width: 100px;
-                      height: 38px;
-                    }
-                  }
-                }
-
-                .pallet-select-wrapper {
-                  display: flex;
-                  flex-direction: row;
-                  .pallet-length {
-                    width: 100px;
-                    padding: 2px 8px;
-                    align-items: center;
-                    background-color: hsl(0, 0%, 100%);
-                    border-color: hsl(0, 0%, 80%);
-                    border-style: solid;
-                    border-width: 1px;
-                    cursor: default;
-                    display: flex;
-                    height: 34px;
-                    outline: none;
-                    position: relative;
-                    transition: all 100ms;
-                    border-radius: 4px 0 0 4px;
-                  }
                   input {
                     width: 118px;
                     height: 40px;
@@ -356,6 +329,60 @@
                       color: hsl(0, 0%, 50%);
                       font-family: "Montserrat", sans-serif;
                       font-size: 16px;
+                    }
+                  }
+                  .units-select-pallet{
+                    height: 38px;
+                    width: 109px;
+                    .css-2b097c-container {
+                      .css-yk16xz-control {
+                        border-radius: 0 4px 4px 0;
+                        .css-g1d714-ValueContainer {
+                          position: static;
+                          .css-b8ldur-Input {
+                            visibility: hidden;
+                          }
+                        }
+                      }
+                    }
+                    .units-select-pallet-select__value-container{
+                      width: 100px;
+                      height: 38px;
+                    }
+
+                  }
+                }
+
+                .pallet-select-wrapper {
+                  display: flex;
+                  flex-direction: row;
+                  .pallet-length {
+                    width: 100px;
+                    padding: 2px 8px;
+                    align-items: center;
+                    background-color: hsl(0, 0%, 100%);
+                    border-color: hsl(0, 0%, 80%);
+                    border-style: solid;
+                    border-width: 1px;
+                    cursor: default;
+                    display: flex;
+                    height: 34px;
+                    outline: none;
+                    position: relative;
+                    transition: all 100ms;
+                    border-radius: 4px 0 0 4px;
+                  }
+                  .units-width-pallet {
+                    width: 109px;
+                    height: 38px;
+                    .css-2b097c-container {
+                      .css-yk16xz-control {
+                        border-radius: 0;
+                      }
+                    }
+                    .units-select-pallet-select__value-container{
+                      width: 100px;
+                      height: 38px;
                     }
                   }
                 }

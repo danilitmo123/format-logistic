@@ -58,7 +58,7 @@ const ZoneItem = ({data}) => {
             const options = {
                 headers: {'Content-Type': 'application/json'}
             }
-            axios.post(`${ADMIN_ZONE_URL}/${data.zone.id}/states/add/`, body, options).then( res => {
+            adminInstance.post(`${ADMIN_ZONE_URL}/${data.zone.id}/states/add/`, body, options).then( res => {
                     loadStateOptions()
                     loadListStates()
                 }
