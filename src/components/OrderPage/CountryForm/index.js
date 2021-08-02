@@ -14,7 +14,7 @@ import AsyncSelect from 'react-select/async';
 
 import './CountryForm.scss'
 
-const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, sourceType, destinationType, setDestinationType, setSourceType}) => {
+const CountryForm = ({setCityWarningFrom, setCityWarningTo,setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, sourceType, destinationType, setDestinationType, setSourceType}) => {
 
   const [allCountries, setAllCountries] = useState([])
   const [allCitiesFrom, setAllCitiesFrom] = useState([])
@@ -38,11 +38,12 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
         if (buttonId === 'from-place') {
           setActivePlaceFrom({cityButton: true, seaButton: false, airButton: false, trainButton: false, storageButton: false})
           setSourceType(PlaceType.CITY)
-          setPlaceholderFrom('Введите город/населенный пункт')
+          setPlaceholderFrom('Введите город / населенный пункт')
         } else {
           setActivePlaceTo({cityButton: true, seaButton: false, airButton: false, trainButton: false, storageButton: false})
+          console.log(activePlaceTo, placeholderFrom)
           setDestinationType(PlaceType.CITY)
-          setActivePlaceTo('Введите город/населенный пункт')
+          setActivePlaceTo('Введите город / населенный пункт')
         }
         break
       case 'Морской порт':
@@ -103,6 +104,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
 
   const filterOptions = (candidate, input) => {
     if (input) {
+      setCountryWarning(false)
       return filterCandidate(candidate, input)
     }
     return true;
@@ -110,10 +112,11 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
 
   const filterCitiesOptions = (inputValue, modifyObject) => {
     return modifyObject.filter(candidate => {
-          if (inputValue)
+          if (inputValue) {
             return filterCandidate(candidate, inputValue)
-          else
+          } else {
             return false
+          }
         }
     );
   };
@@ -132,11 +135,13 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
 
   const selectedCityIdFromHandler = (newValue) => {
     setIdFrom(newValue.id)
+    setCityWarningFrom(false)
     return newValue
   }
 
   const selectedCityIdToHandler = (newValue) => {
     setIdTo(newValue.id)
+    setCityWarningTo(false)
     return newValue
   }
 
@@ -174,6 +179,7 @@ const CountryForm = ({setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, source
     if (optionCountryToValue.value)
       getCities(optionCountryToValue, setAllCitiesTo, destinationType)
   }, [optionCountryToValue.value, destinationType])
+
 
   return (
       <div className={'country-form-wrapper'}>

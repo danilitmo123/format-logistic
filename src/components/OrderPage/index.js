@@ -41,6 +41,11 @@ const OrderPage = ({setFirstPageActive ,firstActivePage, setActive}) => {
     }
   }, [selectedCityIdTo, selectedCityIdFrom])
 
+  const scrollToTop = () => {
+
+  }
+
+
   const disabledButtonHandler = () => {
     let warning = false
     if (hasCargoError()) {
@@ -68,6 +73,7 @@ const OrderPage = ({setFirstPageActive ,firstActivePage, setActive}) => {
     } else {
       setActive(true)
       setSecondActivePage(false)
+      window.scroll(0,0)
     }
   }
 
@@ -78,6 +84,7 @@ const OrderPage = ({setFirstPageActive ,firstActivePage, setActive}) => {
   const hasPalletError  = (item) => {
     return item.heightPallet === 0 || item.widthPallet === 0 || item.lengthPallet === 0 || item.weight === 0
   }
+
   const hasCargoError = () => {
     for (let i in data) {
       let item = data[i]
@@ -137,8 +144,6 @@ const OrderPage = ({setFirstPageActive ,firstActivePage, setActive}) => {
     setSecondActivePage(true)
   }
 
-  console.log(showAlert)
-
   return (
       <section className={'order-page-wrapper'}>
         <div className={'order-title'}>{secondActivePage || firstActivePage ? 'Рассчитать перевозку' : 'Офоромление заявки на перевозку' }</div>
@@ -146,6 +151,8 @@ const OrderPage = ({setFirstPageActive ,firstActivePage, setActive}) => {
           {firstActivePage ?
               <>
                 <FirstStepForm
+                    setCityWarningTo={setCityWarningTo}
+                    setCityWarningFrom={setCityWarningFrom}
                     firstActivePage={firstActivePage}
                     showAlert={showAlert}
                     setAlert={setShowAlert}
