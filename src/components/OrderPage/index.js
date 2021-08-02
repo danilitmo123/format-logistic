@@ -41,11 +41,6 @@ const OrderPage = ({setFirstPageActive ,firstActivePage, setActive}) => {
     }
   }, [selectedCityIdTo, selectedCityIdFrom])
 
-  const scrollToTop = () => {
-
-  }
-
-
   const disabledButtonHandler = () => {
     let warning = false
     if (hasCargoError()) {

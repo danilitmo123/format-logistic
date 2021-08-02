@@ -3,12 +3,15 @@ import React, {useState, useEffect} from 'react';
 import PathItem from "./PathItem";
 import Loader from "../../Common/Loader";
 
-import loader from '../../../img/loader.svg'
-
 import './PathContainerPage.scss'
 
 const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler, weight, volume}) => {
+
   const [index, setIndex] = useState('')
+
+  useEffect(() => {
+    window.scroll(0,0)
+  }, [])
 
   useEffect(() => {
     if(paths.paths !== undefined && index !== '') {
