@@ -14,7 +14,8 @@ const PlaceType = Object.freeze({
     CITY: 'CITY',
     AIRPORT: 'AIRPORT',
     RAILWAY_STATION: 'RAILWAY_STATION',
-    SEAPORT: 'SEAPORT'
+    SEAPORT: 'SEAPORT',
+    WAREHOUSE: 'WAREHOUSE'
 })
 
 export {RateType, ShippingType, PlaceType}
