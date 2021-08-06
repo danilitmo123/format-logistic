@@ -7,7 +7,7 @@ import CountryForm from "../CountryForm";
 import CustomsClearanceForm from "../CustomsClearanceForm";
 import Alert from "../../Common/Alert";
 
-const FirstStepForm = ({setCityWarningFrom, setCityWarningTo,cargoWarning, data, setDataRaw, setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, setSourceType, setDestinationType, destinationType, sourceType, volume, setVolume, weight, setWeight}) => {
+const FirstStepForm = ({setChooseRussiaWarning,chooseRussiaWarning,setCityWarningFrom, setCityWarningTo,cargoWarning, data, setDataRaw, setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, setSourceType, setDestinationType, destinationType, sourceType, volume, setVolume, weight, setWeight}) => {
 
     return (
         <div>
@@ -20,6 +20,8 @@ const FirstStepForm = ({setCityWarningFrom, setCityWarningTo,cargoWarning, data,
                 weight={weight}
                 setWeight={setWeight}/>
             <CountryForm
+                setChooseRussiaWarning={setChooseRussiaWarning}
+                chooseRussiaWarning={chooseRussiaWarning}
                 setCityWarningTo={setCityWarningTo}
                 setCityWarningFrom={setCityWarningFrom}
                 cityWarningFrom={cityWarningFrom}

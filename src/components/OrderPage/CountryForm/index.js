@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {customTheme} from "../../../templates/templatesOfOptions";
 import {
@@ -13,7 +13,7 @@ import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
 
 import './CountryForm.scss'
-
+import Place from "react-here-map/dist/es/components/Places";
 
 const placeHolderFromType = type => {
     switch (type) {
@@ -40,7 +40,9 @@ const CountryForm = ({
                          sourceType,
                          destinationType,
                          setDestinationType,
-                         setSourceType
+                         setSourceType,
+                         setChooseRussiaWarning,
+                         chooseRussiaWarning
                      }) => {
 
     const [allCountries, setAllCountries] = useState([])
@@ -117,12 +119,23 @@ const CountryForm = ({
         return newValue
     }
 
+
     useEffect(() => {
         if ((optionCountryFromValue.value && optionCountryToValue.value)
             && (optionCountryFromValue.value === optionCountryToValue.value)) {
             setCountryWarning(true)
         } else {
             setCountryWarning(false)
+        }
+        if(optionCountryFromValue.value && optionCountryToValue.value) {
+            if((optionCountryFromValue.value !== `Russia`
+              && optionCountryToValue.value === `Russia`) ||
+              (optionCountryFromValue.value === `Russia`
+                && optionCountryToValue.value !== `Russia`)) {
+                setChooseRussiaWarning(false)
+            } else {
+                setChooseRussiaWarning(true)
+            }
         }
     }, [optionCountryFromValue.value, optionCountryToValue.value])
 
@@ -152,7 +165,6 @@ const CountryForm = ({
             getCities(optionCountryToValue, setAllCitiesTo, destinationType, 'd')
     }, [optionCountryToValue.value, destinationType])
 
-
     return (
         <div className={'country-form-wrapper'}>
             <div className={'from-form-wrapper'}>
@@ -173,14 +185,16 @@ const CountryForm = ({
                     />
                 </div>
                 {countryWarning ? <div className={'warning-country-text'}>Названия стран должны отличаться</div> : ''}
+                {chooseRussiaWarning ? <div className={'warning-country-text'}>Точка отправки/доставки обязательно должен быть регион России</div>: ''}
                 <div className={'place-select-to'}>
                     <button
                         onClick={() => handleSourceSwitcher(PlaceType.CITY)}
                         className={sourceType === PlaceType.CITY ? 'active-city-button' : 'place-button'}>Город
                     </button>
                     <button
-                        onClick={() => handleSourceSwitcher(PlaceType.SEAPORT)}
-                        className={sourceType === PlaceType.SEAPORT ? 'active-sea-button' : 'place-button'}>Морской порт
+                      onClick={() => handleSourceSwitcher(PlaceType.WAREHOUSE)}
+                      className={sourceType === PlaceType.WAREHOUSE ? 'active-storage-button' : 'place-button'}>Наш
+                        склад
                     </button>
                     <button
                         onClick={() => handleSourceSwitcher(PlaceType.AIRPORT)}
@@ -192,24 +206,40 @@ const CountryForm = ({
                         станция
                     </button>
                     <button
-                        onClick={() => handleSourceSwitcher(PlaceType.WAREHOUSE)}
-                        className={sourceType === PlaceType.WAREHOUSE ? 'active-storage-button' : 'place-button'}>Наш
-                        склад
+                      onClick={() => handleSourceSwitcher(PlaceType.SEAPORT)}
+                      className={sourceType === PlaceType.SEAPORT ? 'active-sea-button' : 'place-button'}>Морской порт
                     </button>
                 </div>
-                <div className={'city-select-from'}>
-                    <label htmlFor="country">{placeHolderFromType(sourceType)}</label>
-                    <AsyncSelect
-                        classNamePrefix={cityWarningFrom ? 'react-select' : ''}
-                        theme={customTheme}
-                        loadOptions={loadCitiesOptionsFrom}
-                        options={modifyCitiesFromObj}
-                        onChange={selectedCityIdFromHandler}
-                        noOptionsMessage={() => 'Не найдено'}
-                        placeholder={placeHolderFromType(sourceType)}
-                        filterOption={filterOptions}
-                    />
-                </div>
+                {
+                    sourceType === PlaceType.CITY ?
+                      <div className={'city-select-from'}>
+                          <label htmlFor="country">{placeHolderFromType(sourceType)}</label>
+                          <AsyncSelect
+                            classNamePrefix={cityWarningFrom ? 'react-select' : ''}
+                            theme={customTheme}
+                            loadOptions={loadCitiesOptionsFrom}
+                            options={modifyCitiesFromObj}
+                            onChange={selectedCityIdFromHandler}
+                            noOptionsMessage={() => 'Не найдено'}
+                            placeholder={placeHolderFromType(sourceType)}
+                            filterOption={filterOptions}
+                          />
+                      </div>
+                      :
+                      <div className={'city-select-from'}>
+                          <label htmlFor="country">{placeHolderFromType(sourceType)}</label>
+                          <Select
+                            classNamePrefix={cityWarningFrom ? 'react-select' : ''}
+                            theme={customTheme}
+                            options={modifyCitiesFromObj}
+                            onChange={selectedCityIdFromHandler}
+                            noOptionsMessage={() => 'Не найдено'}
+                            placeholder={placeHolderFromType(sourceType)}
+                            filterOption={filterOptions}
+                          />
+                      </div>
+                }
+                <div className={'prompt-block'}>* рекомендуем вводить названия городов на английском языке</div>
             </div>
             <div className={'where-form-wrapper'}>
                 <div className={'where-form-title-wrapper'}>
@@ -229,16 +259,17 @@ const CountryForm = ({
                     />
                 </div>
                 {countryWarning ? <div className={'warning-country-text'}>Названия стран должны отличаться</div> : ''}
-                <div className={'place-select-where'}>
+                {chooseRussiaWarning ? <div className={'warning-country-text'}>Точка отправки/доставки обязательно должен быть регион России</div>: ''}
+              <div className={'place-select-where'}>
                     <button
                         onClick={() => handleDestSwitcher(PlaceType.CITY)}
                         className={destinationType === PlaceType.CITY ? 'active-city-button' : 'place-button'}>Город
                     </button>
                     <button
-                        disabled={!(sourceType === PlaceType.CITY || sourceType === PlaceType.SEAPORT)}
-                        onClick={() => handleDestSwitcher(PlaceType.SEAPORT)}
-                        className={destinationType === PlaceType.SEAPORT ? 'active-sea-button' : 'place-button'}>Морской
-                        порт
+                      disabled={!(sourceType === PlaceType.CITY || sourceType === PlaceType.WAREHOUSE)}
+                      onClick={() => handleDestSwitcher(PlaceType.WAREHOUSE)}
+                      className={destinationType === PlaceType.WAREHOUSE ? 'active-storage-button' : 'place-button'}>Наш
+                        склад
                     </button>
                     <button
                         disabled={!(sourceType === PlaceType.CITY || sourceType === PlaceType.AIRPORT)}
@@ -252,25 +283,42 @@ const CountryForm = ({
                         станция
                     </button>
                     <button
-                        disabled={!(sourceType === PlaceType.CITY || sourceType === PlaceType.WAREHOUSE)}
-                        onClick={() => handleDestSwitcher(PlaceType.WAREHOUSE)}
-                        className={destinationType === PlaceType.WAREHOUSE ? 'active-storage-button' : 'place-button'}>Наш
-                        склад
+                      disabled={!(sourceType === PlaceType.CITY || sourceType === PlaceType.SEAPORT)}
+                      onClick={() => handleDestSwitcher(PlaceType.SEAPORT)}
+                      className={destinationType === PlaceType.SEAPORT ? 'active-sea-button' : 'place-button'}>Морской
+                        порт
                     </button>
                 </div>
-                <div className={'city-select-where'}>
-                    <label htmlFor="country">{placeHolderFromType(destinationType)}</label>
-                    <AsyncSelect
-                        classNamePrefix={cityWarningTo ? 'react-select' : ''}
-                        theme={customTheme}
-                        loadOptions={loadCitiesOptionsTo}
-                        options={modifyCitiesToObj}
-                        onChange={selectedCityIdToHandler}
-                        noOptionsMessage={() => 'Не найдено'}
-                        placeholder={placeHolderFromType(destinationType)}
-                        filterOption={filterOptions}
-                    />
-                </div>
+                {
+                    destinationType === PlaceType.CITY ?
+                      <div className={'city-select-where'}>
+                          <label htmlFor="country">{placeHolderFromType(destinationType)}</label>
+                          <AsyncSelect
+                            classNamePrefix={cityWarningTo ? 'react-select' : ''}
+                            theme={customTheme}
+                            loadOptions={loadCitiesOptionsTo}
+                            options={modifyCitiesToObj}
+                            onChange={selectedCityIdToHandler}
+                            noOptionsMessage={() => 'Не найдено'}
+                            placeholder={placeHolderFromType(destinationType)}
+                            filterOption={filterOptions}
+                          />
+                      </div>
+                      :
+                      <div className={'city-select-where'}>
+                          <label htmlFor="country">{placeHolderFromType(destinationType)}</label>
+                          <Select
+                            classNamePrefix={cityWarningTo ? 'react-select' : ''}
+                            theme={customTheme}
+                            options={modifyCitiesToObj}
+                            onChange={selectedCityIdToHandler}
+                            noOptionsMessage={() => 'Не найдено'}
+                            placeholder={placeHolderFromType(destinationType)}
+                            filterOption={filterOptions}
+                          />
+                      </div>
+                }
+                <div className={'prompt-block'}>* рекомендуем вводить названия городов на английском языке</div>
             </div>
         </div>
     );
