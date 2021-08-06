@@ -148,6 +148,8 @@ const OrderPage = ({setFirstPageActive ,firstActivePage, setActive}) => {
           {firstActivePage ?
               <>
                 <FirstStepForm
+                    chooseRussiaWarning={chooseRussiaWarning}
+                    setChooseRussiaWarning={setChooseRussiaWarning}
                     setCityWarningTo={setCityWarningTo}
                     setCityWarningFrom={setCityWarningFrom}
                     firstActivePage={firstActivePage}

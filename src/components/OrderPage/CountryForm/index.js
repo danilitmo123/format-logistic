@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {customTheme} from "../../../templates/templatesOfOptions";
 import {
@@ -13,7 +13,6 @@ import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
 
 import './CountryForm.scss'
-
 
 const placeHolderFromType = type => {
     switch (type) {
@@ -40,7 +39,9 @@ const CountryForm = ({
                          sourceType,
                          destinationType,
                          setDestinationType,
-                         setSourceType
+                         setSourceType,
+                         setChooseRussiaWarning,
+                         chooseRussiaWarning
                      }) => {
 
     const [allCountries, setAllCountries] = useState([])
@@ -124,6 +125,12 @@ const CountryForm = ({
         } else {
             setCountryWarning(false)
         }
+        if((optionCountryFromValue.value && optionCountryToValue.value) &&
+      (optionCountryToValue.value !== `Russia\\Российская Федерация` || optionCountryFromValue.value !== `Russia\\Российская Федерация`)) {
+          setChooseRussiaWarning(true)
+        } else {
+          setChooseRussiaWarning(false)
+        }
     }, [optionCountryFromValue.value, optionCountryToValue.value])
 
     useEffect(() => {
@@ -172,6 +179,7 @@ const CountryForm = ({
                     />
                 </div>
                 {countryWarning ? <div className={'warning-country-text'}>Названия стран должны отличаться</div> : ''}
+                {chooseRussiaWarning ? <div className={'warning-country-text'}>Точка отправки/доставки обязательно должен быть регион России</div>: ''}
                 <div className={'place-select-to'}>
                     <button
                         onClick={() => handleSourceSwitcher(PlaceType.CITY)}
@@ -229,7 +237,8 @@ const CountryForm = ({
                     />
                 </div>
                 {countryWarning ? <div className={'warning-country-text'}>Названия стран должны отличаться</div> : ''}
-                <div className={'place-select-where'}>
+                {chooseRussiaWarning ? <div className={'warning-country-text'}>Точка отправки/доставки обязательно должен быть регион России</div>: ''}
+              <div className={'place-select-where'}>
                     <button
                         onClick={() => handleDestSwitcher(PlaceType.CITY)}
                         className={destinationType === PlaceType.CITY ? 'active-city-button' : 'place-button'}>Город
