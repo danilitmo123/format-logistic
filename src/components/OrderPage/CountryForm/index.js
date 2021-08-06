@@ -179,8 +179,9 @@ const CountryForm = ({
                         className={sourceType === PlaceType.CITY ? 'active-city-button' : 'place-button'}>Город
                     </button>
                     <button
-                        onClick={() => handleSourceSwitcher(PlaceType.SEAPORT)}
-                        className={sourceType === PlaceType.SEAPORT ? 'active-sea-button' : 'place-button'}>Морской порт
+                      onClick={() => handleSourceSwitcher(PlaceType.WAREHOUSE)}
+                      className={sourceType === PlaceType.WAREHOUSE ? 'active-storage-button' : 'place-button'}>Наш
+                        склад
                     </button>
                     <button
                         onClick={() => handleSourceSwitcher(PlaceType.AIRPORT)}
@@ -192,9 +193,8 @@ const CountryForm = ({
                         станция
                     </button>
                     <button
-                        onClick={() => handleSourceSwitcher(PlaceType.WAREHOUSE)}
-                        className={sourceType === PlaceType.WAREHOUSE ? 'active-storage-button' : 'place-button'}>Наш
-                        склад
+                      onClick={() => handleSourceSwitcher(PlaceType.SEAPORT)}
+                      className={sourceType === PlaceType.SEAPORT ? 'active-sea-button' : 'place-button'}>Морской порт
                     </button>
                 </div>
                 <div className={'city-select-from'}>
@@ -210,6 +210,7 @@ const CountryForm = ({
                         filterOption={filterOptions}
                     />
                 </div>
+                <div className={'prompt-block'}>* рекомендуем вводить названия городов на английском языке</div>
             </div>
             <div className={'where-form-wrapper'}>
                 <div className={'where-form-title-wrapper'}>
@@ -235,10 +236,10 @@ const CountryForm = ({
                         className={destinationType === PlaceType.CITY ? 'active-city-button' : 'place-button'}>Город
                     </button>
                     <button
-                        disabled={!(sourceType === PlaceType.CITY || sourceType === PlaceType.SEAPORT)}
-                        onClick={() => handleDestSwitcher(PlaceType.SEAPORT)}
-                        className={destinationType === PlaceType.SEAPORT ? 'active-sea-button' : 'place-button'}>Морской
-                        порт
+                      disabled={!(sourceType === PlaceType.CITY || sourceType === PlaceType.WAREHOUSE)}
+                      onClick={() => handleDestSwitcher(PlaceType.WAREHOUSE)}
+                      className={destinationType === PlaceType.WAREHOUSE ? 'active-storage-button' : 'place-button'}>Наш
+                        склад
                     </button>
                     <button
                         disabled={!(sourceType === PlaceType.CITY || sourceType === PlaceType.AIRPORT)}
@@ -252,10 +253,10 @@ const CountryForm = ({
                         станция
                     </button>
                     <button
-                        disabled={!(sourceType === PlaceType.CITY || sourceType === PlaceType.WAREHOUSE)}
-                        onClick={() => handleDestSwitcher(PlaceType.WAREHOUSE)}
-                        className={destinationType === PlaceType.WAREHOUSE ? 'active-storage-button' : 'place-button'}>Наш
-                        склад
+                      disabled={!(sourceType === PlaceType.CITY || sourceType === PlaceType.SEAPORT)}
+                      onClick={() => handleDestSwitcher(PlaceType.SEAPORT)}
+                      className={destinationType === PlaceType.SEAPORT ? 'active-sea-button' : 'place-button'}>Морской
+                        порт
                     </button>
                 </div>
                 <div className={'city-select-where'}>
@@ -271,6 +272,7 @@ const CountryForm = ({
                         filterOption={filterOptions}
                     />
                 </div>
+                <div className={'prompt-block'}>* рекомендуем вводить названия городов на английском языке</div>
             </div>
         </div>
     );
