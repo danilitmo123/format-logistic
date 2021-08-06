@@ -13,6 +13,7 @@ import './OrderPage.scss'
 import Alert from "../Common/Alert";
 
 const OrderPage = ({setFirstPageActive ,firstActivePage, setActive}) => {
+
   const [chosenPath, setChosenPath] = useState([])
   const [selectedCityIdFrom, setSelectedCityIdFrom] = useState()
   const [selectedCityIdTo, setSelectedCityIdTo] = useState()
@@ -28,6 +29,7 @@ const OrderPage = ({setFirstPageActive ,firstActivePage, setActive}) => {
   const [weight, setWeight] = useState(0)
   const [data, setDataRaw] = useState([])
   const [cargoWarning, setCargoWarning] = useState(false)
+  const [chooseRussiaWarning, setChooseRussiaWarning] = useState(false)
   const [showAlert, setShowAlert]  = useState(false)
   const prevIdToCount = useRef()
   const prevIdFromCount = useRef()

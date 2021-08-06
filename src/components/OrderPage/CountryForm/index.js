@@ -152,7 +152,6 @@ const CountryForm = ({
             getCities(optionCountryToValue, setAllCitiesTo, destinationType)
     }, [optionCountryToValue.value, destinationType])
 
-
     return (
         <div className={'country-form-wrapper'}>
             <div className={'from-form-wrapper'}>
