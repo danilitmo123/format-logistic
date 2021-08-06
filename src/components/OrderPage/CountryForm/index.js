@@ -144,12 +144,12 @@ const CountryForm = ({
 
     useEffect(() => {
         if (optionCountryFromValue.value)
-            getCities(optionCountryFromValue, setAllCitiesFrom, sourceType)
+            getCities(optionCountryFromValue, setAllCitiesFrom, sourceType, 's')
     }, [optionCountryFromValue.value, sourceType])
 
     useEffect(() => {
         if (optionCountryToValue.value)
-            getCities(optionCountryToValue, setAllCitiesTo, destinationType)
+            getCities(optionCountryToValue, setAllCitiesTo, destinationType, 'd')
     }, [optionCountryToValue.value, destinationType])
 
 
