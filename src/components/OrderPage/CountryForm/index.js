@@ -13,6 +13,7 @@ import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
 
 import './CountryForm.scss'
+import Place from "react-here-map/dist/es/components/Places";
 
 const placeHolderFromType = type => {
     switch (type) {
@@ -118,6 +119,7 @@ const CountryForm = ({
         return newValue
     }
 
+
     useEffect(() => {
         if ((optionCountryFromValue.value && optionCountryToValue.value)
             && (optionCountryFromValue.value === optionCountryToValue.value)) {
@@ -125,11 +127,15 @@ const CountryForm = ({
         } else {
             setCountryWarning(false)
         }
-        if((optionCountryFromValue.value && optionCountryToValue.value) &&
-      (optionCountryToValue.value !== `Russia\\Российская Федерация` || optionCountryFromValue.value !== `Russia\\Российская Федерация`)) {
-          setChooseRussiaWarning(true)
-        } else {
-          setChooseRussiaWarning(false)
+        if(optionCountryFromValue.value && optionCountryToValue.value) {
+            if((optionCountryFromValue.value !== `Russia`
+              && optionCountryToValue.value === `Russia`) ||
+              (optionCountryFromValue.value === `Russia`
+                && optionCountryToValue.value !== `Russia`)) {
+                setChooseRussiaWarning(false)
+            } else {
+                setChooseRussiaWarning(true)
+            }
         }
     }, [optionCountryFromValue.value, optionCountryToValue.value])
 
@@ -204,19 +210,35 @@ const CountryForm = ({
                       className={sourceType === PlaceType.SEAPORT ? 'active-sea-button' : 'place-button'}>Морской порт
                     </button>
                 </div>
-                <div className={'city-select-from'}>
-                    <label htmlFor="country">{placeHolderFromType(sourceType)}</label>
-                    <AsyncSelect
-                        classNamePrefix={cityWarningFrom ? 'react-select' : ''}
-                        theme={customTheme}
-                        loadOptions={loadCitiesOptionsFrom}
-                        options={modifyCitiesFromObj}
-                        onChange={selectedCityIdFromHandler}
-                        noOptionsMessage={() => 'Не найдено'}
-                        placeholder={placeHolderFromType(sourceType)}
-                        filterOption={filterOptions}
-                    />
-                </div>
+                {
+                    sourceType === PlaceType.CITY ?
+                      <div className={'city-select-from'}>
+                          <label htmlFor="country">{placeHolderFromType(sourceType)}</label>
+                          <AsyncSelect
+                            classNamePrefix={cityWarningFrom ? 'react-select' : ''}
+                            theme={customTheme}
+                            loadOptions={loadCitiesOptionsFrom}
+                            options={modifyCitiesFromObj}
+                            onChange={selectedCityIdFromHandler}
+                            noOptionsMessage={() => 'Не найдено'}
+                            placeholder={placeHolderFromType(sourceType)}
+                            filterOption={filterOptions}
+                          />
+                      </div>
+                      :
+                      <div className={'city-select-from'}>
+                          <label htmlFor="country">{placeHolderFromType(sourceType)}</label>
+                          <Select
+                            classNamePrefix={cityWarningFrom ? 'react-select' : ''}
+                            theme={customTheme}
+                            options={modifyCitiesFromObj}
+                            onChange={selectedCityIdFromHandler}
+                            noOptionsMessage={() => 'Не найдено'}
+                            placeholder={placeHolderFromType(sourceType)}
+                            filterOption={filterOptions}
+                          />
+                      </div>
+                }
                 <div className={'prompt-block'}>* рекомендуем вводить названия городов на английском языке</div>
             </div>
             <div className={'where-form-wrapper'}>
@@ -267,19 +289,35 @@ const CountryForm = ({
                         порт
                     </button>
                 </div>
-                <div className={'city-select-where'}>
-                    <label htmlFor="country">{placeHolderFromType(destinationType)}</label>
-                    <AsyncSelect
-                        classNamePrefix={cityWarningTo ? 'react-select' : ''}
-                        theme={customTheme}
-                        loadOptions={loadCitiesOptionsTo}
-                        options={modifyCitiesToObj}
-                        onChange={selectedCityIdToHandler}
-                        noOptionsMessage={() => 'Не найдено'}
-                        placeholder={placeHolderFromType(destinationType)}
-                        filterOption={filterOptions}
-                    />
-                </div>
+                {
+                    destinationType === PlaceType.CITY ?
+                      <div className={'city-select-where'}>
+                          <label htmlFor="country">{placeHolderFromType(destinationType)}</label>
+                          <AsyncSelect
+                            classNamePrefix={cityWarningTo ? 'react-select' : ''}
+                            theme={customTheme}
+                            loadOptions={loadCitiesOptionsTo}
+                            options={modifyCitiesToObj}
+                            onChange={selectedCityIdToHandler}
+                            noOptionsMessage={() => 'Не найдено'}
+                            placeholder={placeHolderFromType(destinationType)}
+                            filterOption={filterOptions}
+                          />
+                      </div>
+                      :
+                      <div className={'city-select-where'}>
+                          <label htmlFor="country">{placeHolderFromType(destinationType)}</label>
+                          <Select
+                            classNamePrefix={cityWarningTo ? 'react-select' : ''}
+                            theme={customTheme}
+                            options={modifyCitiesToObj}
+                            onChange={selectedCityIdToHandler}
+                            noOptionsMessage={() => 'Не найдено'}
+                            placeholder={placeHolderFromType(destinationType)}
+                            filterOption={filterOptions}
+                          />
+                      </div>
+                }
                 <div className={'prompt-block'}>* рекомендуем вводить названия городов на английском языке</div>
             </div>
         </div>
