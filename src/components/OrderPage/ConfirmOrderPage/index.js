@@ -16,8 +16,7 @@ const CREATE_ORDER_URL = `${ORDER_SERVER_URL}orders/`
 const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAlert}) => {
 
     const [company, setCompany] = useState('')
-    const [address, setAddress] = useState('')
-    const [contactName, setContactName] = useState('')
+    const [comment, setComment] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
     const [formWarning, setFormWarning] = useState(false)
@@ -71,8 +70,6 @@ const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAl
         let customs = JSON.parse(localStorage.getItem('customs'))
         let agent = {
             company_name: company,
-            address: address,
-            contact_person: contactName,
             phone: phone,
             email: email
         }
@@ -127,14 +124,6 @@ const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAl
                         <input type="text" value={company} onChange={e => handleInputChange(setCompany, e)}/>
                     </div>
                     <div className={'input-example'}>
-                        <label htmlFor="">Адрес</label>
-                        <input type="text" value={address} onChange={e => handleInputChange(setAddress, e)}/>
-                    </div>
-                    <div className={'input-example'}>
-                        <label htmlFor="">Контактное лицо</label>
-                        <input type="text" value={contactName} onChange={e => handleInputChange(setContactName, e)}/>
-                    </div>
-                    <div className={'input-example'}>
                         <label htmlFor="">Телефон</label>
                         <IMaskInput
                             mask={'+7(000)000-00-00'}
@@ -145,8 +134,15 @@ const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAl
                         <label htmlFor="">Email</label>
                         <input type="email" value={email} onChange={e => handleInputChange(setEmail, e)} />
                     </div>
+                    <div className={'input-example'}>
+                        <label>Особые замечания</label>
+                        <textarea onChange={e => handleInputChange(setComment, e)}/>
+                    </div>
                 </div>
-                <button className={'send-order-button'} onClick={validateFormHandler} disabled={formWarning}>Отправить</button>
+                <div className={'buttons-order-wrapper'}>
+                    <button className={'send-order-button'} onClick={validateFormHandler} disabled={formWarning}>Оформить заявку</button>
+                    <button className={'send-email-button'}>Отправить на почту</button>
+                </div>
                 {formWarning ? <div className={'form-warning'}>Все поля обязательны к заполнению</div> : ''}
             </div>
         </div>
