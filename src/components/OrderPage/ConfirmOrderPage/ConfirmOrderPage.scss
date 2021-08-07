@@ -107,6 +107,47 @@
     background-color: $white;
     padding: 40px 30px;
     margin-bottom: 40px;
+    .buttons-order-wrapper {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-direction: row;
+      .send-order-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        color: $white;
+        border: none;
+        padding: 8px;
+        width: 170px;
+        height: 40px;
+        border-radius: 8px;
+        background: $light-blue;
+        outline: none;
+        margin-top: 20px;
+        cursor: pointer;
+        margin-right: 30px;
+      }
+      .send-email-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        color: black;
+        border: 1px solid $light-blue;
+        padding: 8px;
+        width: 170px;
+        height: 40px;
+        border-radius: 8px;
+        background: none;
+        outline: none;
+        margin-top: 20px;
+        cursor: pointer;
+      }
+    }
     .form-warning {
       margin-top: 30px;
       color: red;
@@ -170,7 +211,7 @@
         }
         textarea {
           width: 690px;
-          height: 400px;
+          height: 200px;
           outline: none;
           padding: 5px;
           background-color: hsl(0, 0%, 100%);
@@ -186,23 +227,6 @@
           }
         }
       }
-    }
-      .send-order-button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        color: $white;
-        border: none;
-        padding: 8px;
-        width: 170px;
-        height: 40px;
-        border-radius: 8px;
-        background: $light-blue;
-        outline: none;
-        margin-top: 20px;
-        cursor: pointer;
     }
   }
 }
