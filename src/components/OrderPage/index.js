@@ -31,6 +31,7 @@ const OrderPage = ({setFirstPageActive, firstActivePage, setActive}) => {
     const [showAlert, setShowAlert] = useState(false)
     const prevIdToCount = useRef()
     const prevIdFromCount = useRef()
+    const [chooseRussiaWarning, setChooseRussiaWarning] = useState(false)
 
     useEffect(() => {
         prevIdFromCount.current = selectedCityIdFrom
@@ -167,6 +168,8 @@ const OrderPage = ({setFirstPageActive, firstActivePage, setActive}) => {
                             destinationType={destinationType}
                             setSourceType={setSourceType}
                             setDestinationType={setDestinationType}
+                            chooseRussiaWarning={chooseRussiaWarning}
+                            setChooseRussiaWarning={setChooseRussiaWarning}
                         />
                         <button
                             className={'continue-button-first-page'}

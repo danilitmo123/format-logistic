@@ -13,7 +13,7 @@ import './ConfirmOrderPage.scss'
 
 const CREATE_ORDER_URL = `${ORDER_SERVER_URL}orders/`
 
-const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAlert}) => {
+const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAlert}) => {
 
     const [company, setCompany] = useState('')
     const [comment, setComment] = useState('')
@@ -30,9 +30,9 @@ const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAl
         return pointsOfPath
     }
 
-    const validateFormHandler = () => {
-        if(company !== '' && phone !== '' && email !== '') {
-            createOrder()
+    const validateFormHandler = (flg) => {
+        if (company !== '' && phone !== '' && email !== '') {
+            createOrder(flg)
             setFormWarning(false)
         } else {
             setFormWarning(true)
@@ -63,7 +63,7 @@ const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAl
         setInput(e.target.value)
     }
 
-    const createOrder = () => {
+    const createOrder = (send_mail) => {
         setAlert(true)
         let good = JSON.parse(localStorage.getItem('good'))
         let path = JSON.parse(localStorage.getItem('path'))
@@ -71,17 +71,22 @@ const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAl
         let agent = {
             company_name: company,
             phone: phone,
-            email: email
+            email: email,
+            comment: comment
+        }
+        let special = {
+            send_mail: send_mail
         }
         let body = {
-            good: {boxes: good}, path, customs, agent
+            good: {boxes: good}, path, customs, agent, special
         }
         const options = {
             headers: {'Content-Type': 'application/json'}
         }
+
         axios.post(CREATE_ORDER_URL, body, options)
             .then(res => setFirstPageActive(true))
-            .catch(err=> console.log({err}))
+            .catch(err => console.log({err}))
     }
 
     return (
@@ -112,7 +117,9 @@ const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAl
                 <div className={'title'}>Итого:</div>
                 <div>Расстояние: {(chosenPath[0].total_distance).toFixed(0)} км</div>
                 <div>Цена: {(chosenPath[0].total_cost)}€/{(chosenPath[0].total_cost * 1.18).toFixed(2)}$</div>
-                <div>Время в пути: {(chosenPath[0].total_duration.min).toFixed(0)} - {(chosenPath[0].total_duration.max).toFixed(0)} дней</div>
+                <div>Время в
+                    пути: {(chosenPath[0].total_duration.min).toFixed(0)} - {(chosenPath[0].total_duration.max).toFixed(0)} дней
+                </div>
                 <div>Вес: {weight} кг</div>
                 <div>Объем: {volume} м³</div>
             </div>
@@ -132,7 +139,7 @@ const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAl
                     </div>
                     <div className={'input-example'}>
                         <label htmlFor="">Email</label>
-                        <input type="email" value={email} onChange={e => handleInputChange(setEmail, e)} />
+                        <input type="email" value={email} onChange={e => handleInputChange(setEmail, e)}/>
                     </div>
                     <div className={'input-example'}>
                         <label>Особые замечания</label>
@@ -140,8 +147,10 @@ const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAl
                     </div>
                 </div>
                 <div className={'buttons-order-wrapper'}>
-                    <button className={'send-order-button'} onClick={validateFormHandler} disabled={formWarning}>Оформить заявку</button>
-                    <button className={'send-email-button'}>Отправить на почту</button>
+                    <button className={'send-order-button'} onClick={() => validateFormHandler(false)}
+                            disabled={formWarning}>Оформить заявку
+                    </button>
+                    <button className={'send-email-button'} onClick={() => validateFormHandler(true)}>Отправить на почту</button>
                 </div>
                 {formWarning ? <div className={'form-warning'}>Все поля обязательны к заполнению</div> : ''}
             </div>
