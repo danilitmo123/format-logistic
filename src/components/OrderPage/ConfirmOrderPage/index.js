@@ -8,6 +8,7 @@ import {IMaskInput} from 'react-imask'
 
 import airplane from '../../../img/black-airplane-icon.svg'
 import truck from '../../../img/black-truck-icon.svg'
+import train from '../../../img/train-icon.svg'
 
 import './ConfirmOrderPage.scss'
 
@@ -100,8 +101,10 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
                                     <div className={'source'}>{item.source.name}</div>
                                     <div className={'route-info'}>
                                         <div className={'type'}>{item.type === 'TRUCK' ?
-                                            <img className={'truck'} src={truck} alt="truck"/> :
-                                            <img className={'airplane'} src={airplane} alt="airplane"/>}</div>
+                                            <img className={'truck'} src={truck} alt="truck"/> : item.type === 'AIR' ?
+                                            <img className={'airplane'} src={airplane} alt="airplane"/> :
+                                                <img src={train} alt=""/>
+                                        }</div>
                                         <div className={'route-distance'}>{(item.distance).toFixed(0)}км</div>
                                     </div>
                                     <div className={'destination'}>{item.destination.name}</div>
