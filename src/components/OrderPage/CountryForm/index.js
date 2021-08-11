@@ -13,7 +13,6 @@ import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
 
 import './CountryForm.scss'
-import Place from "react-here-map/dist/es/components/Places";
 
 const placeHolderFromType = type => {
     switch (type) {
@@ -54,18 +53,27 @@ const CountryForm = ({
     const [optionCountryFromValue, setOptionCountryFromValue] = useState({})
     const [optionCountryToValue, setOptionCountryToValue] = useState({})
     const [countryWarning, setCountryWarning] = useState(false)
+    const [optionCityFrom, setOptionCityFrom] = useState(null)
+    const [optionCityTo, setOptionCityTo] = useState(null)
 
     const handleDestSwitcher = value => {
+        setIdTo(null)
+        setOptionCityTo(null)
         if (sourceType === PlaceType.CITY || sourceType === value || value === PlaceType.CITY) {
             setDestinationType(value)
         }
     }
+
     const handleSourceSwitcher = value => {
         setSourceType(value)
+        setIdFrom(null)
+        setOptionCityFrom(null)
         if (destinationType !== value && destinationType !== PlaceType.CITY){
             setDestinationType(value)
         }
     }
+
+
 
     const filterCandidate = (candidate, inputValue) => {
         let alias = candidate.data ? candidate.data.alias : candidate.alias
@@ -108,17 +116,18 @@ const CountryForm = ({
     };
 
     const selectedCityIdFromHandler = (newValue) => {
+        setOptionCityFrom(newValue)
         setIdFrom(newValue.id)
         setCityWarningFrom(false)
         return newValue
     }
 
     const selectedCityIdToHandler = (newValue) => {
+        setOptionCityTo(newValue)
         setIdTo(newValue.id)
         setCityWarningTo(false)
         return newValue
     }
-
 
     useEffect(() => {
         if ((optionCountryFromValue.value && optionCountryToValue.value)
@@ -135,6 +144,10 @@ const CountryForm = ({
                 setChooseRussiaWarning(false)
             } else {
                 setChooseRussiaWarning(true)
+            }
+            if(optionCountryFromValue.value === 'Russia'
+                && optionCountryToValue.value === 'Russia') {
+                setChooseRussiaWarning(false)
             }
         }
     }, [optionCountryFromValue.value, optionCountryToValue.value])
@@ -231,6 +244,7 @@ const CountryForm = ({
                           <Select
                             classNamePrefix={cityWarningFrom ? 'react-select' : ''}
                             theme={customTheme}
+                            value={optionCityFrom}
                             options={modifyCitiesFromObj}
                             onChange={selectedCityIdFromHandler}
                             noOptionsMessage={() => 'Не найдено'}
@@ -311,6 +325,7 @@ const CountryForm = ({
                             classNamePrefix={cityWarningTo ? 'react-select' : ''}
                             theme={customTheme}
                             options={modifyCitiesToObj}
+                            value={optionCityTo}
                             onChange={selectedCityIdToHandler}
                             noOptionsMessage={() => 'Не найдено'}
                             placeholder={placeHolderFromType(destinationType)}

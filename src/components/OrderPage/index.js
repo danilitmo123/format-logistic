@@ -15,8 +15,8 @@ import Alert from "../Common/Alert";
 const OrderPage = ({setFirstPageActive ,firstActivePage, setActive}) => {
 
   const [chosenPath, setChosenPath] = useState([])
-  const [selectedCityIdFrom, setSelectedCityIdFrom] = useState()
-  const [selectedCityIdTo, setSelectedCityIdTo] = useState()
+  const [selectedCityIdFrom, setSelectedCityIdFrom] = useState(null)
+  const [selectedCityIdTo, setSelectedCityIdTo] = useState(null)
   const [paths, setPaths] = useState([])
   const [secondActivePage, setSecondActivePage] = useState(false)
   const [cityWarningTo, setCityWarningTo] = useState(false)
@@ -33,6 +33,8 @@ const OrderPage = ({setFirstPageActive ,firstActivePage, setActive}) => {
   const [showAlert, setShowAlert]  = useState(false)
   const prevIdToCount = useRef()
   const prevIdFromCount = useRef()
+
+  console.log(selectedCityIdFrom)
 
   useEffect(() => {
     prevIdFromCount.current = selectedCityIdFrom
