@@ -65,12 +65,14 @@ const initPlaces = {
 const labelTypeOfShipping = {
     [ShippingType.AIR]: "Авиафрахт",
     [ShippingType.TRAIN]: "Железнодородная перевозка",
-    [ShippingType.TRUCK]: "Автомобильная перевозка"
+    [ShippingType.TRUCK]: "Автомобильная перевозка",
+    [ShippingType.SEA]: 'Морская перевозка'
 }
 const typeOfShippingOptions = [
     {value: ShippingType.AIR, label: labelTypeOfShipping[ShippingType.AIR], id: ShippingType.AIR},
     {value: ShippingType.TRUCK, label: labelTypeOfShipping[ShippingType.TRUCK], id: ShippingType.TRUCK},
     {value: ShippingType.TRAIN, label: labelTypeOfShipping[ShippingType.TRAIN], id: ShippingType.TRAIN},
+    {value: ShippingType.SEA, label: labelTypeOfShipping[ShippingType.SEA], id: ShippingType.SEA}
 ]
 const placeObjectFromInitData = (initData) => {
     if (initData.source && initData.destination) {
