@@ -337,6 +337,7 @@
                     .css-2b097c-container {
                       .css-yk16xz-control {
                         border-radius: 0 4px 4px 0;
+                        position: static;
                         .css-g1d714-ValueContainer {
                           position: static;
                           .css-b8ldur-Input {
@@ -378,6 +379,12 @@
                     .css-2b097c-container {
                       .css-yk16xz-control {
                         border-radius: 0;
+                        .css-g1d714-ValueContainer {
+                          position: static;
+                          .css-b8ldur-Input {
+                            visibility: hidden;
+                          }
+                        }
                       }
                     }
                     .units-select-pallet-select__value-container{

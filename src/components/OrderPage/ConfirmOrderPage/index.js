@@ -31,9 +31,17 @@ const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAl
         return pointsOfPath
     }
 
-    const validateFormHandler = () => {
-        if(company !== '' && phone !== '' && email !== '') {
+    const validateFormCreateOrder = () => {
+        if(phone !== '' || email !== '') {
             createOrder()
+            setFormWarning(false)
+        } else {
+            setFormWarning(true)
+        }
+    }
+
+    const validateFormSendEmail = () => {
+        if(email !== '') {
             setFormWarning(false)
         } else {
             setFormWarning(true)
@@ -143,8 +151,8 @@ const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAl
                     </div>
                 </div>
                 <div className={'buttons-order-wrapper'}>
-                    <button className={'send-order-button'} onClick={validateFormHandler} disabled={formWarning}>Оформить заявку</button>
-                    <button className={'send-email-button'}>Отправить на почту</button>
+                    <button className={'send-order-button'} onClick={validateFormCreateOrder}>Оформить заявку</button>
+                    <button className={'send-email-button'} onClick={validateFormSendEmail}>Отправить на почту</button>
                 </div>
                 {formWarning ? <div className={'form-warning'}>Все поля обязательны к заполнению</div> : ''}
             </div>
