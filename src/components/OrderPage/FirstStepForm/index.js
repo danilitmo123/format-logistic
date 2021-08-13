@@ -1,13 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {withRouter} from "react-router-dom";
 
 import CargoForm from "../CargoForm";
 import CountryForm from "../CountryForm";
 import CustomsClearanceForm from "../CustomsClearanceForm";
-import Alert from "../../Common/Alert";
+
 
 const FirstStepForm = ({setChooseRussiaWarning,chooseRussiaWarning,setCityWarningFrom, setCityWarningTo,cargoWarning, data, setDataRaw, setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, setSourceType, setDestinationType, destinationType, sourceType, volume, setVolume, weight, setWeight}) => {
+
+    useEffect(() => {
+      window.scroll(0,0)
+    }, [])
 
     return (
         <div>

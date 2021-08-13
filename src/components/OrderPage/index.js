@@ -34,9 +34,6 @@ const OrderPage = ({setFirstPageActive ,firstActivePage, setActive}) => {
   const prevIdToCount = useRef()
   const prevIdFromCount = useRef()
 
-  console.log(selectedCityIdFrom)
-  console.log(selectedCityIdTo)
-
   useEffect(() => {
     prevIdFromCount.current = selectedCityIdFrom
     prevIdToCount.current = selectedCityIdTo
@@ -134,8 +131,6 @@ const OrderPage = ({setFirstPageActive ,firstActivePage, setActive}) => {
           }))
     }
   }
-
-  console.log(paths)
 
   const secondPageActiveHandler = () => {
     setSelectedCityIdTo(null)
