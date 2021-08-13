@@ -135,7 +135,11 @@ const OrderPage = ({setFirstPageActive ,firstActivePage, setActive}) => {
     }
   }
 
+  console.log(paths)
+
   const secondPageActiveHandler = () => {
+    setSelectedCityIdTo(null)
+    setSelectedCityIdFrom(null)
     setSecondActivePage(false)
     setActive(true)
   }
