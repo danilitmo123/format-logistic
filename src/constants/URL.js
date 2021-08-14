@@ -1,12 +1,15 @@
-const DEV_SERVER_URL = "https://ancient-temple-39835.herokuapp.com/"
 const DEV_LOCAL_SERVER_URL = "http://localhost:8000/"
-
+let DEV_SERVER_URL
 let _SERVER_URL
 
 // temporary solution
-const RUN_LOCAL = false
+if (process.env.REACT_APP_API_SERVER_URL) {
+    DEV_SERVER_URL = process.env.REACT_APP_API_SERVER_URL
+} else {
+    DEV_SERVER_URL = "https://ancient-temple-39835.herokuapp.com/"
+}
 
-if (RUN_LOCAL)
+if (process.env.REACT_APP_MODE === 'LOCAL')
     _SERVER_URL = DEV_LOCAL_SERVER_URL
 else
     _SERVER_URL = DEV_SERVER_URL
