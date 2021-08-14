@@ -12,10 +12,12 @@ import ConfirmOrderPage from "./ConfirmOrderPage";
 import './OrderPage.scss'
 import Alert from "../Common/Alert";
 
+
 const OrderPage = ({setFirstPageActive, firstActivePage, setActive}) => {
+
     const [chosenPath, setChosenPath] = useState([])
-    const [selectedCityIdFrom, setSelectedCityIdFrom] = useState()
-    const [selectedCityIdTo, setSelectedCityIdTo] = useState()
+    const [selectedCityIdFrom, setSelectedCityIdFrom] = useState(null)
+    const [selectedCityIdTo, setSelectedCityIdTo] = useState(null)
     const [paths, setPaths] = useState([])
     const [secondActivePage, setSecondActivePage] = useState(false)
     const [cityWarningTo, setCityWarningTo] = useState(false)
@@ -28,19 +30,9 @@ const OrderPage = ({setFirstPageActive, firstActivePage, setActive}) => {
     const [weight, setWeight] = useState(0)
     const [data, setDataRaw] = useState([])
     const [cargoWarning, setCargoWarning] = useState(false)
-    const [showAlert, setShowAlert] = useState(false)
-    const prevIdToCount = useRef()
-    const prevIdFromCount = useRef()
     const [chooseRussiaWarning, setChooseRussiaWarning] = useState(false)
+    const [showAlert, setShowAlert] = useState(false)
 
-    useEffect(() => {
-        prevIdFromCount.current = selectedCityIdFrom
-        prevIdToCount.current = selectedCityIdTo
-        if (prevIdFromCount.current !== selectedCityIdFrom || prevIdToCount.current !== selectedCityIdTo) {
-            setPaths([])
-            setIdChanged(true)
-        }
-    }, [selectedCityIdTo, selectedCityIdFrom])
 
     const disabledButtonHandler = () => {
         let warning = false
@@ -131,7 +123,10 @@ const OrderPage = ({setFirstPageActive, firstActivePage, setActive}) => {
         }
     }
 
+
     const secondPageActiveHandler = () => {
+        setSelectedCityIdTo(null)
+        setSelectedCityIdFrom(null)
         setSecondActivePage(false)
         setActive(true)
     }

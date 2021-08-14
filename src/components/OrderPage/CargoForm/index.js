@@ -81,7 +81,7 @@ const CargoForm = ({cargoWarning, data, setDataRaw, volume, setVolume, weight, s
     setData(newData)
     switch (data[i].weightUnits) {
       case 'LB':
-        setWeight((weight - data[i].weight * data[i].count * 2.2).toFixed(2))
+        setWeight((weight - data[i].weight * data[i].count / 2.2).toFixed(2))
         break
       case 'КГ':
         setWeight((weight - data[i].weight * data[i].count).toFixed(2))
@@ -143,10 +143,10 @@ const CargoForm = ({cargoWarning, data, setDataRaw, volume, setVolume, weight, s
       switch (item.weightUnits) {
         case 'КГ':
           totalWeightKG += +item.weight * item.count
-          setWeight((totalWeightKG + totalWeightLB).toFixed(2))
+          setWeight((totalWeightKG + totalWeightLB).toFixed(2)) 
           break
         case 'LB':
-          totalWeightLB += item.weight * item.count * 2.2
+          totalWeightLB += item.weight * item.count / 2.2
           setWeight((totalWeightKG + totalWeightLB).toFixed(2))
           break
         default:

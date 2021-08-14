@@ -1,7 +1,14 @@
 @import "../../../global";
 .path-container-page {
   height: 100%;
-  min-height: 700px;
+  min-height: 900px;
+}
+
+.warning-path {
+  height: 700px;
+  text-align: center;
+  font-size: 18px;
+  color: $white;
 }
 
 .loader {

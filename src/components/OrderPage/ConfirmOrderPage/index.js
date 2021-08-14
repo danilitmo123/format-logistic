@@ -21,6 +21,7 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
     const [formWarning, setFormWarning] = useState(false)
+    const [canSend, setCanSend] = useState(true)
 
     const getPoints = (pathOfItem) => {
         let pointsOfPath = []
@@ -31,12 +32,26 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
         return pointsOfPath
     }
 
-    const validateFormHandler = (flg) => {
-        if (company !== '' && phone !== '' && email !== '') {
-            createOrder(flg)
-            setFormWarning(false)
-        } else {
-            setFormWarning(true)
+
+    const validateFormCreateOrder = () => {
+        if (canSend) {
+            if (phone !== '' || email !== '') {
+                createOrder(false)
+                setFormWarning(false)
+            } else {
+                setFormWarning(true)
+            }
+        }
+    }
+
+    const validateFormSendEmail = () => {
+        if (canSend) {
+            if (email !== '') {
+                createOrder(true)
+                setFormWarning(false)
+            } else {
+                setFormWarning(true)
+            }
         }
     }
 
@@ -65,7 +80,7 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
     }
 
     const createOrder = (send_mail) => {
-        setAlert(true)
+        setCanSend(false)
         let good = JSON.parse(localStorage.getItem('good'))
         let path = JSON.parse(localStorage.getItem('path'))
         let customs = JSON.parse(localStorage.getItem('customs'))
@@ -86,8 +101,16 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
         }
 
         axios.post(CREATE_ORDER_URL, body, options)
-            .then(res => setFirstPageActive(true))
-            .catch(err => console.log({err}))
+            .then(res => {
+                    setFirstPageActive(true);
+                    setAlert(true)
+                }
+            )
+            .catch(err => {
+                    console.log({err})
+                    setCanSend(true)
+                }
+            )
     }
 
     return (
@@ -102,7 +125,7 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
                                     <div className={'route-info'}>
                                         <div className={'type'}>{item.type === 'TRUCK' ?
                                             <img className={'truck'} src={truck} alt="truck"/> : item.type === 'AIR' ?
-                                            <img className={'airplane'} src={airplane} alt="airplane"/> :
+                                                <img className={'airplane'} src={airplane} alt="airplane"/> :
                                                 <img src={train} alt=""/>
                                         }</div>
                                         <div className={'route-distance'}>{(item.distance).toFixed(0)}км</div>
@@ -150,10 +173,9 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
                     </div>
                 </div>
                 <div className={'buttons-order-wrapper'}>
-                    <button className={'send-order-button'} onClick={() => validateFormHandler(false)}
-                            disabled={formWarning}>Оформить заявку
-                    </button>
-                    <button className={'send-email-button'} onClick={() => validateFormHandler(true)}>Отправить на почту</button>
+
+                    <button className={'send-order-button'} onClick={validateFormCreateOrder}>Оформить заявку</button>
+                    <button className={'send-email-button'} onClick={validateFormSendEmail}>Отправить на почту</button>
                 </div>
                 {formWarning ? <div className={'form-warning'}>Все поля обязательны к заполнению</div> : ''}
             </div>

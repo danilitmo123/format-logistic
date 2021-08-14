@@ -7,7 +7,8 @@ const RateType = Object.freeze({
 const ShippingType = Object.freeze({
     TRAIN: "TRAIN",
     AIR: "AIR",
-    TRUCK: "TRUCK"
+    TRUCK: "TRUCK",
+    SEA: 'SEA'
 })
 
 const PlaceType = Object.freeze({

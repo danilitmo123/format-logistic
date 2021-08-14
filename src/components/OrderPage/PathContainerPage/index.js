@@ -20,6 +20,14 @@ const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler, weight
       thirdPageActiveHandler(false)
     }
   }, [index])
+
+  if (paths.paths && !paths.paths.length) {
+    return  <div className={'warning-path'}>
+      <div>На данном направлении пока что нет сервиса</div>
+      <div>Вернитесь на предыдущую страницу и измените маршрут</div>
+    </div>
+  }
+
   return (
       <div className={'path-container-page'}>
         {paths.paths ? <div>{paths.paths.map((item, index) => <PathItem

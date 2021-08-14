@@ -27,7 +27,7 @@ const ZoneItem = ({data}) => {
         })
     }
     const loadStateOptions = () => {
-        adminInstance.get(`${STATES_BY_ZONE_URL}?empty=true`).then(res => {
+        adminInstance.get(`${STATES_BY_ZONE_URL}`).then(res => {
             let options = []
             res.data.map(state => {
                 options.push({value: state.id, label: state.name, id: state.id})
