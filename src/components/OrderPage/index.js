@@ -31,7 +31,7 @@ const OrderPage = ({setFirstPageActive, firstActivePage, setActive}) => {
     const [data, setDataRaw] = useState([])
     const [cargoWarning, setCargoWarning] = useState(false)
     const [chooseRussiaWarning, setChooseRussiaWarning] = useState(false)
-    const [showAlert, setShowAlert] = useState(false)
+    const [showAlert, setShowAlert] = useState({active: false, isEmail: false})
 
 
     const disabledButtonHandler = () => {
@@ -205,7 +205,7 @@ const OrderPage = ({setFirstPageActive, firstActivePage, setActive}) => {
                         </>
                 }
             </div>
-            {showAlert ? <Alert showAlert={showAlert} setAlert={setShowAlert}/> : ''}
+            {showAlert.active ? <Alert showAlert={showAlert} setAlert={setShowAlert}/> : ''}
         </section>
     );
 };
