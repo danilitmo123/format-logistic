@@ -52,7 +52,7 @@ const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAl
     const Map = ({points}) => {
         return (<HPlatform
                 apikey={"lDfJOpVUkj3EiYJMC1Za_oSkIvvY2pL2i6R5801iSoo"}
-                useCIT
+                useCITv
                 useHTTPS
                 includeUI
                 includePlaces

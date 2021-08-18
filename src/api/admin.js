@@ -30,7 +30,6 @@ const getAuthStatus = () => {
     return JSON.parse(localStorage.getItem(authStatusKey))
 }
 const setAuthToken = (token) => {
-    console.log({token})
     if (token) {
         localStorage.setItem(accessTokenKey, JSON.stringify(token))
         adminInstance.defaults.headers.common['Authorization'] = `${AUTH_HEADER_TYPE} ${token}`;
@@ -39,7 +38,6 @@ const setAuthToken = (token) => {
     }
 }
 const setRefreshToken = (token) => {
-    console.log({token})
     if (token) {
         localStorage.setItem(refreshTokenKey, JSON.stringify(token))
     } else{
@@ -60,7 +58,6 @@ const pingAuth = async () => {
         if (res.status === 200)
             return ResponseStatus.CORRECT
     } catch (err){
-        console.log({err})
         return ResponseStatus.INCORRECT
     }
 }
@@ -69,9 +66,6 @@ const initAuth = async () => {
     await new Promise(r => setTimeout(r, 2000));
     let access = getAuthToken()
     let status = getAuthStatus()
-    console.group('iinit')
-    console.log({access})
-    console.log({status})
     console.groupEnd()
     if (access && status && status === AuthStatus.AUTHENTICATED){
         pingAuth().then(status => {
@@ -94,16 +88,11 @@ initAuth()
 
 const auth = async (username, password) => {
     let body = {username, password}
-    console.group('auth')
     try {
         let res = await axios.post(ADMIN_TOKEN_OBTAIN_URL, body, defaultOptions)
-        console.log('success')
         setAuthToken(res.data.access)
         setRefreshToken(res.data.refresh)
         setAuthStatus(AuthStatus.AUTHENTICATED)
-        console.log({access: getAuthToken()})
-        console.log({refresh: getRefreshToken()})
-        console.log({status: getAuthStatus()})
         console.groupEnd()
         return {status: ResponseStatus.CORRECT, data: {}}
     } catch (err) {
@@ -111,10 +100,6 @@ const auth = async (username, password) => {
         setAuthStatus(AuthStatus.UNAUTHENTICATED)
         setAuthToken(null)
         setRefreshToken(null)
-        console.log('auth error', {err})
-        console.log({access: getAuthToken()})
-        console.log({refresh: getRefreshToken()})
-        console.log({status: getAuthStatus()})
         console.groupEnd()
         return {status: ResponseStatus.INCORRECT, data: {res}}
     }
@@ -124,11 +109,9 @@ const checkAuth =  () => {
     let authStatus = getAuthStatus()
     let access = getAuthToken()
     if (!!authStatus & !!access && (authStatus === AuthStatus.AUTHENTICATED)) {
-        console.log('auth true')
         return AuthStatus.AUTHENTICATED
     }
     else {
-        console.log('auth false')
         return AuthStatus.UNAUTHENTICATED
     }
 }
@@ -136,30 +119,20 @@ const checkAuth =  () => {
 const refresh = async () => {
     let refresh = getRefreshToken()
     let res
-    console.group('refresh')
     if (refresh){
         try{
 
             let body = {refresh}
             res = await axios.post(ADMIN_TOKEN_REFRESH_URL, body, defaultOptions)
-            console.log('success')
-            console.log({res})
             let access = res.data.access
             setAuthToken(access)
-            console.log({access: getAuthToken()})
-            console.log({refresh: getRefreshToken()})
-            console.log({status: getAuthStatus()})
             console.groupEnd()
             return ResponseStatus.CORRECT
         }
         catch (err){
-            console.log('error')
             setRefreshToken(null)
             setAuthToken(null)
             setAuthStatus(AuthStatus.UNAUTHENTICATED)
-            console.log({access: getAuthToken()})
-            console.log({refresh: getRefreshToken()})
-            console.log({status: getAuthStatus()})
             console.groupEnd()
             return ResponseStatus.INCORRECT
         }
@@ -167,26 +140,18 @@ const refresh = async () => {
 }
 
 adminInstance.interceptors.response.use(res => res, err => {
-    console.group('adminInstance error')
-    console.log({err})
     if (err.config && err.response && err.response.status === 401) {
         console.log('refresh')
         return refresh().then(status => {
             if (status === ResponseStatus.CORRECT) {
-                console.log('Correct, retry request')
                 err.config.headers['Authorization'] = `${AUTH_HEADER_TYPE} ${getAuthToken()}`
-                console.log({headers: err.config.headers})
                 console.groupEnd()
                 return axios.request(err.config);
             }
             else {
-                console.log('Incorrect, go to login page')
                 setAuthToken(null)
                 setRefreshToken(null)
                 setAuthStatus(AuthStatus.UNAUTHENTICATED)
-                console.log({access: getAuthToken()})
-                console.log({refresh: getRefreshToken()})
-                console.log({status: getAuthStatus()})
                 console.groupEnd()
                 window.location = '/admin/auth'
                 return Promise.reject(err)
