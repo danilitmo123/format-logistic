@@ -1,5 +1,6 @@
 import axios from "axios";
 import {GEO_SERVER_URL} from "../constants/URL";
+import {PlaceType} from "../constants/unit";
 
 export const getCountries = (setAllCountries) => {
     axios.get(`${GEO_SERVER_URL}countries/?alias=ru`)
@@ -8,8 +9,16 @@ export const getCountries = (setAllCountries) => {
         })
 }
 
-export const getCities = (countryOption, setAllCities, destinationType) => {
-    axios.get(`${GEO_SERVER_URL}cities/short?country=${countryOption.value}&type=${destinationType}&alias=ru`)
+export const getCities = (countryOption, setAllCities, type, flg) => {
+    if (type !== PlaceType.CITY) {
+        if (flg === 's') {
+            type += '_SRC'
+        } else {
+            type += '_DST'
+        }
+    }
+
+    axios.get(`${GEO_SERVER_URL}cities/short?country=${countryOption.value}&type=${type}&alias=ru`)
         .then(res => {
             setAllCities(res.data)
         })

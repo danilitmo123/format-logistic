@@ -14,13 +14,14 @@ import './ConfirmOrderPage.scss'
 
 const CREATE_ORDER_URL = `${ORDER_SERVER_URL}orders/`
 
-const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAlert}) => {
+const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAlert}) => {
 
     const [company, setCompany] = useState('')
     const [comment, setComment] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
     const [formWarning, setFormWarning] = useState(false)
+    const [canSend, setCanSend] = useState(true)
 
     const getPoints = (pathOfItem) => {
         let pointsOfPath = []
@@ -31,20 +32,26 @@ const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAl
         return pointsOfPath
     }
 
+
     const validateFormCreateOrder = () => {
-        if(phone !== '' || email !== '') {
-            createOrder()
-            setFormWarning(false)
-        } else {
-            setFormWarning(true)
+        if (canSend) {
+            if (phone !== '' || email !== '') {
+                createOrder(false)
+                setFormWarning(false)
+            } else {
+                setFormWarning(true)
+            }
         }
     }
 
     const validateFormSendEmail = () => {
-        if(email !== '') {
-            setFormWarning(false)
-        } else {
-            setFormWarning(true)
+        if (canSend) {
+            if (email !== '') {
+                createOrder(true)
+                setFormWarning(false)
+            } else {
+                setFormWarning(true)
+            }
         }
     }
 
@@ -72,25 +79,38 @@ const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAl
         setInput(e.target.value)
     }
 
-    const createOrder = () => {
-        setAlert(true)
+    const createOrder = (send_mail) => {
+        setCanSend(false)
         let good = JSON.parse(localStorage.getItem('good'))
         let path = JSON.parse(localStorage.getItem('path'))
         let customs = JSON.parse(localStorage.getItem('customs'))
         let agent = {
             company_name: company,
             phone: phone,
-            email: email
+            email: email,
+            comment: comment
+        }
+        let special = {
+            send_mail: send_mail
         }
         let body = {
-            good: {boxes: good}, path, customs, agent
+            good: {boxes: good}, path, customs, agent, special
         }
         const options = {
             headers: {'Content-Type': 'application/json'}
         }
+
         axios.post(CREATE_ORDER_URL, body, options)
-            .then(res => setFirstPageActive(true))
-            .catch(err=> console.log({err}))
+            .then(res => {
+                    setFirstPageActive(true);
+                    setAlert(true)
+                }
+            )
+            .catch(err => {
+                    console.log({err})
+                    setCanSend(true)
+                }
+            )
     }
 
     return (
@@ -105,7 +125,7 @@ const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAl
                                     <div className={'route-info'}>
                                         <div className={'type'}>{item.type === 'TRUCK' ?
                                             <img className={'truck'} src={truck} alt="truck"/> : item.type === 'AIR' ?
-                                            <img className={'airplane'} src={airplane} alt="airplane"/> :
+                                                <img className={'airplane'} src={airplane} alt="airplane"/> :
                                                 <img src={train} alt=""/>
                                         }</div>
                                         <div className={'route-distance'}>{(item.distance).toFixed(0)}км</div>
@@ -123,7 +143,9 @@ const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAl
                 <div className={'title'}>Итого:</div>
                 <div>Расстояние: {(chosenPath[0].total_distance).toFixed(0)} км</div>
                 <div>Цена: {(chosenPath[0].total_cost)}€/{(chosenPath[0].total_cost * 1.18).toFixed(2)}$</div>
-                <div>Время в пути: {(chosenPath[0].total_duration.min).toFixed(0)} - {(chosenPath[0].total_duration.max).toFixed(0)} дней</div>
+                <div>Время в
+                    пути: {(chosenPath[0].total_duration.min).toFixed(0)} - {(chosenPath[0].total_duration.max).toFixed(0)} дней
+                </div>
                 <div>Вес: {weight} кг</div>
                 <div>Объем: {volume} м³</div>
             </div>
@@ -143,7 +165,7 @@ const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAl
                     </div>
                     <div className={'input-example'}>
                         <label htmlFor="">Email</label>
-                        <input type="email" value={email} onChange={e => handleInputChange(setEmail, e)} />
+                        <input type="email" value={email} onChange={e => handleInputChange(setEmail, e)}/>
                     </div>
                     <div className={'input-example'}>
                         <label>Особые замечания</label>
@@ -151,6 +173,7 @@ const ConfirmOrderPage = ({setFirstPageActive ,chosenPath, volume, weight, setAl
                     </div>
                 </div>
                 <div className={'buttons-order-wrapper'}>
+
                     <button className={'send-order-button'} onClick={validateFormCreateOrder}>Оформить заявку</button>
                     <button className={'send-email-button'} onClick={validateFormSendEmail}>Отправить на почту</button>
                 </div>

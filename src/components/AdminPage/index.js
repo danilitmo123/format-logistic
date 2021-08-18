@@ -26,6 +26,13 @@ const PrivateRoute = ({component: Component, ...rest}) => {
     );
 };
 
+const RedirectToMainAdmin = () => {
+    return (
+        <Redirect to={"/admin/hub-routes"}/>
+    )
+}
+
+
 
 const AdminPage = () => {
 
@@ -33,6 +40,7 @@ const AdminPage = () => {
         <Router>
             <SideBar/>
             <Switch>
+                <PrivateRoute path={'/admin'} exact={true} component={RedirectToMainAdmin}/>
                 <PrivateRoute path={'/admin/hub-routes'} exact={true} component={AllHubsPage}/>
                 <PrivateRoute path={'/admin/hub-routes/create'} component={CreateHubRoutePage} exact/>
                 <PrivateRoute path={'/admin/hub-routes/edit/:id'} component={EditHubRoutePage}/>
