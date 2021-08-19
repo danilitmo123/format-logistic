@@ -91,7 +91,7 @@ const placeObjectFromInitData = (initData) => {
 
 
 export const HubRouteBlock = ({initData, onSubmit}) => {
-
+    console.log(initData)
     const [distance, setDistance] = useState(initData.distance ? initData.distance : 0)
     const [duration, setDuration] = useState(initData.duration ? initData.duration : 0)
 
@@ -106,6 +106,7 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
     const [rankedServices, setRankedServices] = useState(initData.ranked_services ? initData.ranked_services : [])
 
     const [minimalPrice, setMinimalPrice] = useState(initData.minimal_price ? initData.minimal_price : 0)
+    const [validityOfTariff, setValidity] = useState('')
 
     const activateWeekday = (dayInd) => {
         timetableDays[dayInd] = timetableDays[dayInd] ? 0 : 1
@@ -181,6 +182,10 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
             <RatesContext.Provider value={{rates, setRates}}>
                 <PriceBlock/>
             </RatesContext.Provider>
+            <div className={'rate-wrapper'}>
+                <label className={'rate-title'}>Срок действия тарифов</label>
+                <input type="date" value={validityOfTariff} onChange={e => setValidity(e.target.value)}/>
+            </div>
             <div className={'minimal-price-wrapper'}>
                 <label>Минимальная ставка</label>
                 <input type="number" value={minimalPrice} onChange={e => setMinimalPrice(e.target.value)}/>

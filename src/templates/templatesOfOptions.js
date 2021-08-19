@@ -1,9 +1,3 @@
-export const placeOfCargoOptions = [
-  {value: 'Со склада', label: 'Со склада'},
-  {value: 'Морской порт', label: 'Морской порт'},
-  {value: 'Аэропорт', label: 'Аэропорт'},
-]
-
 export const typeOfShipping = [
   {value: 'Автомобильная перевозка', label: 'Автомобильная перевозка'},
   {value: 'Авиафрахт', label: 'Авиафрахт'},

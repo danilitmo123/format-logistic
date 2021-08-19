@@ -1,0 +1,98 @@
+@import "../../../../../global";
+.place-select {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+
+  .place-button {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    width: 117px;
+    height: 35px;
+    background: white;
+    border: 1px solid hsl(0, 0%, 80%);
+    cursor: pointer;
+    outline: none;
+
+    &:nth-child(1) {
+      border-radius: 8px 0 0 8px;
+    }
+
+    &:nth-child(5) {
+      border-radius: 0 8px 8px 0;
+    }
+  }
+
+  .active-city-button {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    width: 117px;
+    height: 35px;
+    background: $light-blue;
+    border: none;
+    cursor: pointer;
+    color: $white;
+    outline: none;
+
+    &:nth-child(1) {
+      border-radius: 8px 0 0 8px;
+    }
+  }
+
+  .active-sea-button {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    width: 117px;
+    height: 35px;
+    background: $light-blue;
+    border: none;
+    cursor: pointer;
+    color: $white;
+    outline: none;
+    &:nth-child(5) {
+      border-radius: 0 8px 8px 0;
+    }
+  }
+
+  .active-storage-button {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    width: 117px;
+    height: 35px;
+    background: $light-blue;
+    border: none;
+    cursor: pointer;
+    color: $white;
+    outline: none;
+  }
+
+  .active-air-button {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    width: 117px;
+    height: 35px;
+    background: $light-blue;
+    border: none;
+    cursor: pointer;
+    color: $white;
+    outline: none;
+  }
+
+  .active-train-button {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    width: 117px;
+    height: 35px;
+    background: $light-blue;
+    border: none;
+    cursor: pointer;
+    color: $white;
+    outline: none;
+  }
+}
