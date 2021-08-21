@@ -1,5 +1,7 @@
 import React from 'react';
-import HPlatform, {HMap, HMapPolyLine} from "react-here-map";
+
+import Map from "../../../MapUI/Map";
+import TypeOfRoutes from "../../../MapUI/TypeOfRoutes";
 
 import airplane from '../../../../img/black-airplane-icon.svg'
 import truck from '../../../../img/black-truck-icon.svg'
@@ -7,11 +9,6 @@ import train from '../../../../img/train-icon.svg'
 import ship from '../../../../img/ship.svg'
 
 import './PathItem.scss'
-
-const AIR = 'AIR'
-const SEA = 'SEA'
-const TRAIN = 'TRAIN'
-const TRUCK = 'TRUCK'
 
 const PathItem = ({path, setIndex, index, volume, weight}) => {
 
@@ -22,54 +19,6 @@ const PathItem = ({path, setIndex, index, volume, weight}) => {
           pointsOfPath.push({lat: item.destination.location.latitude, lng: item.destination.location.longitude})
         })
    return pointsOfPath
-  }
-
-  const hubType = (type) => {
-    switch (type) {
-      case AIR:
-        return airplane
-      case SEA:
-        return ship
-      case TRAIN:
-        return train
-      case TRUCK:
-        return  truck
-      default:
-        return ''
-    }
-  }
-
-  const TypeOfRoutes = ({route, step}) => {
-     return (
-         <div className={'type-of-route-wrapper'}>
-           <div className={'step-circle'}>{step + 1}</div>
-           <div className={'step-wrapper'}>
-              <div className={'source'}>{route.source.name}</div>
-              <div className={'route-info'}>
-                <div className={'type'}>
-                  <img className={'type-icon'} src={hubType(route.type)} alt=""/>
-                </div>
-                <div className={'route-distance'}>{(route.distance).toFixed(0)}км {route.total_cost}</div>
-              </div>
-              <div className={'destination'}>{route.destination.name}</div>
-           </div>
-         </div>
-     )
-  }
-
-  const Map = ({points}) => {
-    return (
-        <HPlatform
-            apikey={"lDfJOpVUkj3EiYJMC1Za_oSkIvvY2pL2i6R5801iSoo"}
-            useCIT
-            useHTTPS
-            includeUI
-            includePlaces>
-          <HMap mapOptions={{zoom: 1}}>
-            <HMapPolyLine points={points}/>
-          </HMap>
-        </HPlatform>
-    )
   }
 
   return (

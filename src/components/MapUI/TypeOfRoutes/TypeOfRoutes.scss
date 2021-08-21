@@ -1,0 +1,56 @@
+@import "../../../global";
+.type-of-route-wrapper {
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  .step-circle {
+    border-radius: 50%;
+    background-color: $light-blue;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    color: $white;
+  }
+  .step-wrapper {
+    .source {
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .route-info {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+
+      .type-icon {
+        width: 40px;
+      }
+
+      .route-distance {
+        color: black;
+        opacity: 0.4;
+        font-size: 14px;
+        margin-right: 10px;
+      }
+      .route-duration {
+        color: black;
+        opacity: 0.4;
+      }
+      .type{
+        margin-bottom: 5px;
+        margin-right: 10px;
+      }
+    }
+    .destination {
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+  }
+}

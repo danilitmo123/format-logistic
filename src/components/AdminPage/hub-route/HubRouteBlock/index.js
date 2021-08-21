@@ -91,7 +91,7 @@ const placeObjectFromInitData = (initData) => {
 
 
 export const HubRouteBlock = ({initData, onSubmit}) => {
-    console.log(initData)
+
     const [distance, setDistance] = useState(initData.distance ? initData.distance : 0)
     const [duration, setDuration] = useState(initData.duration ? initData.duration : 0)
 

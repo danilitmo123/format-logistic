@@ -31,6 +31,7 @@ const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler, weight
   return (
       <div className={'path-container-page'}>
         {paths.paths ? <div>{paths.paths.map((item, index) => <PathItem
+            key={index}
             weight={weight}
             volume={volume}
             index={index}

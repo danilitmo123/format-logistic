@@ -9,16 +9,16 @@ const measurementFromRateType = (rateType) => {
         case RateType.LDM:
             return "LDM"
         case RateType.SIZE:
-            return "см³"
+            return "м³"
         default:
-            return "HUY"
+            return ''
     }
 }
 
 const PriceItem = ({rateData, setRateData, onDelete}) => {
 
     const updateItem = (key, value) => {
-        console.log({key, value})
+
         if (key === 'range_to'){
             if (value <= rateData.range_from){
                 return

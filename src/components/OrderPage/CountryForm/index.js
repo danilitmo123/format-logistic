@@ -193,6 +193,7 @@ const CountryForm = ({
                         options={modifyCountryObj}
                         onChange={setOptionCountryFromValue}
                         noOptionsMessage={() => `Не найдено`}
+                        loadingMessage={() => 'Поиск...'}
                         placeholder={'Выберите страну'}
                         filterOption={filterOptions}
                     />
@@ -234,6 +235,7 @@ const CountryForm = ({
                                 options={modifyCitiesFromObj}
                                 onChange={selectedCityIdFromHandler}
                                 noOptionsMessage={() => 'Не найдено'}
+                                loadingMessage={() => 'Поиск...'}
                                 placeholder={placeHolderFromType(sourceType)}
                                 filterOption={filterOptions}
                             />
@@ -248,6 +250,7 @@ const CountryForm = ({
                                 options={modifyCitiesFromObj}
                                 onChange={selectedCityIdFromHandler}
                                 noOptionsMessage={() => 'Не найдено'}
+                                loadingMessage={() => 'Поиск...'}
                                 placeholder={placeHolderFromType(sourceType)}
                                 filterOption={filterOptions}
                             />
@@ -268,6 +271,7 @@ const CountryForm = ({
                         options={modifyCountryObj}
                         onChange={setOptionCountryToValue}
                         noOptionsMessage={() => `Не найдено`}
+                        loadingMessage={() => 'Поиск...'}
                         placeholder={'Выберите страну'}
                         filterOption={filterOptions}
                     />
@@ -314,6 +318,7 @@ const CountryForm = ({
                                 options={modifyCitiesToObj}
                                 onChange={selectedCityIdToHandler}
                                 noOptionsMessage={() => 'Не найдено'}
+                                loadingMessage={() => 'Поиск...'}
                                 placeholder={placeHolderFromType(destinationType)}
                                 filterOption={filterOptions}
                             />
@@ -328,6 +333,7 @@ const CountryForm = ({
                                 value={optionCityTo}
                                 onChange={selectedCityIdToHandler}
                                 noOptionsMessage={() => 'Не найдено'}
+                                loadingMessage={() => 'Поиск...'}
                                 placeholder={placeHolderFromType(destinationType)}
                                 filterOption={filterOptions}
                             />

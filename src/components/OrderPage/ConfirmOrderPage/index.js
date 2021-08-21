@@ -5,12 +5,9 @@ import axios from "axios";
 import {useInput} from "../../../utils/hooks";
 
 import ErrorMessage from "../../Common/ErrorMessage";
-import HPlatform, {HMap, HMapPolyLine} from "react-here-map";
+import Map from "../../MapUI/Map";
+import TypeOfRoutes from "../../MapUI/TypeOfRoutes";
 import {IMaskInput} from 'react-imask'
-
-import airplane from '../../../img/black-airplane-icon.svg'
-import truck from '../../../img/black-truck-icon.svg'
-import train from '../../../img/train-icon.svg'
 
 import './ConfirmOrderPage.scss'
 
@@ -24,7 +21,6 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
   const [phone, setPhone] = useState('')
   const [createOrderWarning, setOrderWarning] = useState(false)
   const [sendEmailWarning, setEmailWarning] = useState(false)
-  const [incorrectEmail, setIncorrectEmail] = useState(false)
   const [canSend, setCanSend] = useState(true)
 
   const getPoints = (pathOfItem) => {
@@ -61,24 +57,6 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
     }
   }
 
-
-  const Map = ({points}) => {
-    return (<HPlatform
-            apikey={"lDfJOpVUkj3EiYJMC1Za_oSkIvvY2pL2i6R5801iSoo"}
-            useCITv
-            useHTTPS
-            includeUI
-            includePlaces
-        >
-          <HMap
-              mapOptions={{zoom: 1}}
-          >
-            <HMapPolyLine points={points}/>
-          </HMap>
-        </HPlatform>
-    )
-  }
-
   const memoizedMap = useMemo(() => <Map points={getPoints(chosenPath)}/>, [chosenPath.routes])
 
   const createOrder = (send_mail) => {
@@ -103,12 +81,12 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
     }
 
     axios.post(CREATE_ORDER_URL, body, options)
-        .then(res => {
+        .then(() => {
               setFirstPageActive(true);
               setAlert({active: true, isEmail: special.send_mail})
             }
         )
-        .catch(err => {
+        .catch(() => {
               setCanSend(true)
             }
         )
@@ -118,25 +96,8 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
       <div className={'final-order-page-wrapper'}>
         <div className={'final-map-wrapper'}>
           <div className={'route'}>
-            {chosenPath[0].routes ? chosenPath[0].routes.map((item, index) => ((
-                    <div className={'type-of-route-wrapper'}>
-                      <div className={'step-circle'}>{index + 1}</div>
-                      <div className={'step-wrapper'}>
-                        <div className={'source'}>{item.source.name}</div>
-                        <div className={'route-info'}>
-                          <div className={'type'}>{item.type === 'TRUCK' ?
-                              <img className={'truck'} src={truck} alt="truck"/> : item.type === 'AIR' ?
-                                  <img className={'airplane'} src={airplane} alt="airplane"/> :
-                                  <img src={train} alt=""/>
-                          }</div>
-                          <div className={'route-distance'}>{(item.distance).toFixed(0)}км</div>
-                        </div>
-                        <div className={'destination'}>{item.destination.name}</div>
-                      </div>
-                    </div>)))
-                :
-                ''
-            }
+            {chosenPath[0].routes &&
+            chosenPath[0].routes.map((item, index) => <TypeOfRoutes step={index} route={item} />)}
           </div>
           {memoizedMap}
         </div>
