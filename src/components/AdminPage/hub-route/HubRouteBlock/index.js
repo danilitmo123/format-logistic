@@ -89,7 +89,6 @@ const placeObjectFromInitData = (initData) => {
 }
 
 
-
 export const HubRouteBlock = ({initData, onSubmit}) => {
 
     const [distance, setDistance] = useState(initData.distance ? initData.distance : 0)
@@ -100,39 +99,56 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
     const [prepareDays, setPrepareDays] = useState(initData.timetable ? initData.timetable.preparation_period : 0)
 
     const [places, dispatchPlaces] = useRefReducer(placeReducer, placeObjectFromInitData(initData))
-    const [typeOfShipping, setTypeOfShipping] = useRefSetter(initData.type ? initData.type: typeOfShippingOptions[0].value)
+    const [typeOfShipping, setTypeOfShipping] = useRefSetter(initData.type ? initData.type : typeOfShippingOptions[0].value)
     const [rates, setRates] = useState(() => initRates(initData))
-    const [additionalServices, setAdditionalServices] = useState(initData.additional_services ? initData.additional_services: [])
+    const [additionalServices, setAdditionalServices] = useState(initData.additional_services ? initData.additional_services : [])
     const [rankedServices, setRankedServices] = useState(initData.ranked_services ? initData.ranked_services : [])
 
     const [minimalPrice, setMinimalPrice] = useState(initData.minimal_price ? initData.minimal_price : 0)
-    const [validityOfTariff, setValidity] = useState('')
+    const [validityOfTariff, setValidity] = useState(initData.rates_valid_to ? initData.rates_valid_to : '')
+
+    const [active, setActive] = useState(initData.active ? initData.active : false)
+    const [title, setTitle] = useState(initData.title ? initData.title : '')
+
 
     const activateWeekday = (dayInd) => {
         timetableDays[dayInd] = timetableDays[dayInd] ? 0 : 1
         setTimetableDays([...timetableDays])
     }
 
-    const submit = () =>{
+    const submit = () => {
         onSubmit({
             sourceId: places.current.cityFrom.id,
             destinationId: places.current.cityTo.id,
             distance,
             duration,
-            rates: rates.filter(rate => {return !!rate}),
+            rates: rates.filter(rate => {
+                return !!rate
+            }),
             typeOfShipping: typeOfShipping.current,
-            additionalServices : additionalServices.filter(service => {return !!service}),
-            rankedServices: rankedServices.filter(service => {return !!service}),
+            additionalServices: additionalServices.filter(service => {
+                return !!service
+            }),
+            rankedServices: rankedServices.filter(service => {
+                return !!service
+            }),
             timetableDays,
             prepareDays,
             activeTimetable,
-            minimalPrice
+            minimalPrice,
+            ratesValidTo: validityOfTariff,
+            active: active,
+            title: title
         })
     }
 
 
     return (
         <div className={'hubs-settings-wrapper'}>
+            <div>
+                <label htmlFor={'title'}>Название плеча</label>
+                <input id={'title'} type="text" value={title} onChange={e => setTitle(e.target.value)}/>
+            </div>
             <div className={'shipping-title'}>Отправление</div>
             <PlaceDispatcherContext.Provider value={{dispatch: dispatchPlaces}}>
                 <PlaceSelectBlock titleCountry={"Страна отправки"}
@@ -151,8 +167,9 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
                         onChange={({value}) => setTypeOfShipping(value)}
                         noOptionsMessage={() => `Не найдено`}
                         defaultValue={{
-                            value: initData.type ? initData.type: typeOfShippingOptions[0].value,
-                            label: initData.type ? labelTypeOfShipping[initData.type]: typeOfShippingOptions[0].label}}
+                            value: initData.type ? initData.type : typeOfShippingOptions[0].value,
+                            label: initData.type ? labelTypeOfShipping[initData.type] : typeOfShippingOptions[0].label
+                        }}
                         placeholder={'Перевозка'}
                         filterOption={createFilter(filterConfig)}
                     />
@@ -185,6 +202,10 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
             <div className={'rate-wrapper'}>
                 <label className={'rate-title'}>Срок действия тарифов</label>
                 <input type="date" value={validityOfTariff} onChange={e => setValidity(e.target.value)}/>
+            </div>
+            <div>
+                <label htmlFor={'active'}>Активно</label>
+                <input id={'active'} type="checkbox" checked={active} onChange={() => setActive(!active)}/>
             </div>
             <div className={'minimal-price-wrapper'}>
                 <label>Минимальная ставка</label>
@@ -246,6 +267,7 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
                     </div> : ''
                 }
             </div>
+
             <div className={'services-wrapper'}>
                 <div className={'service-title'}>Услуги</div>
                 <ServiceContext.Provider

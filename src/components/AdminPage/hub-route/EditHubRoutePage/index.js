@@ -8,7 +8,7 @@ import Loader from "../../../Common/Loader"
 import {HubRouteBlock} from "../HubRouteBlock";
 
 const EditHubRoutePage = () => {
-    const { id } = useParams();
+    const {id} = useParams();
     const [initData, setInitData] = useState({})
     const [loading, setLoading] = useState(true)
 
@@ -16,7 +16,7 @@ const EditHubRoutePage = () => {
         adminInstance.get(`${ADMIN_SERVER_URL}admin-routes/${id}`).then(res => {
             setInitData(res.data)
             setLoading(false)
-        }).catch (err => {
+        }).catch(err => {
                 console.log({err})
             }
         )
@@ -34,7 +34,10 @@ const EditHubRoutePage = () => {
                              timetableDays,
                              prepareDays,
                              activeTimetable,
-                             minimalPrice
+                             minimalPrice,
+                             ratesValidTo,
+                             active,
+                             title
                          }) => {
         const options = {
             headers: {'Content-Type': 'application/json'}
@@ -52,7 +55,10 @@ const EditHubRoutePage = () => {
             rates: rates,
             additional_services: additionalServices,
             ranked_services: rankedServices,
-            minimal_price: minimalPrice
+            minimal_price: minimalPrice,
+            rates_valid_to: ratesValidTo,
+            active: active,
+            title: title
         }
         if (activeTimetable) {
             body.timetable = {
