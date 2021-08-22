@@ -35,6 +35,7 @@ const AdminOrderPage = () => {
         {
           orders[0] !== undefined ? orders[0].map(order => <AdminOrderItem order={order}/>) : <Loader/>
         }
+
       </div>
     </section>
   );

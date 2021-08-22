@@ -26,6 +26,32 @@
     margin-bottom: 40px;
     margin-top: 40px;
   }
+  .hubs-table {
+    width: 90%;
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-family: 'Montserrat', sans-serif;
+    .hubs-table-header {
+      background: $white;
+      height: 50px;
+      border: 1px solid black;
+      border-collapse: collapse;
+      tr {
+
+      }
+      th {
+        border: 1px solid black;
+        border-collapse: collapse;
+        font-weight: 500;
+        padding: 20px;
+        text-align: left;
+      }
+    }
+    .table-body {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  }
   .create-hubs-button {
     margin-top: 20px;
     width: 210px;
@@ -40,15 +66,5 @@
     outline: none;
     cursor: pointer;
     margin-bottom: 60px;
-  }
-  .all-hubs-wrapper {
-    width: 1300px;
-    display: flex;
-    flex-direction: row;
-    .hubs {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
   }
 }

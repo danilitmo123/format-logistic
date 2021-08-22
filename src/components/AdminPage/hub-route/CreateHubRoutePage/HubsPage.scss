@@ -464,9 +464,6 @@
             opacity: .4;
             margin-bottom: 20px;
           }
-          .buttons-wrapper {
-
-          }
           .button-day {
             font-family: 'Montserrat', sans-serif;
             font-weight: 400;
@@ -568,6 +565,15 @@
           font-family: "Montserrat", sans-serif;
           font-size: 16px;
         }
+      }
+    }
+    .active-panel {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: 24px;
+      margin-bottom: 20px;
+      label {
+        margin-right: 20px;
       }
     }
   }

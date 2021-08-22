@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 
-import axios from "axios";
 import {Link} from "react-router-dom";
 import {ADMIN_SERVER_URL} from "../../../../constants/URL";
 
@@ -30,7 +29,6 @@ const AllHubsPage = () => {
         getHubs()
     }, [])
 
-
     return (
         <section className={'all-hubs-page-wrapper'}>
             <div className={'hub-title'}>Хабовые плечи</div>
@@ -40,21 +38,29 @@ const AllHubsPage = () => {
                     <div className={'loader-text'}>Загрузка...</div>
                 </div>
                 :
-                <div className={'all-hubs-wrapper'}>
+                <table className={'hubs-table'}>
+                  <thead className={'hubs-table-header'}>
+                    <tr>
+                      <th>Плечо</th>
+                      <th>Основная информация</th>
+                    </tr>
+                  </thead>
+                  <tbody className={'table-body'}>
                     {
-                        routes ?
-                            <div className={'hubs'}>
-                                {
-                                    routes.map((item) => <HubsItem
-                                        hub={item} setManageHub
-                                    />)
-                                }
-                            </div>
-                            :
-                            ''
+                      routes ?
+                          <>
+                            {
+                              routes.map((item) => <HubsItem
+                                  hub={item}
+                              />)
+                            }
+                          </>
+                          :
+                          ''
                     }
+                  </tbody>
 
-                </div>
+                </table>
             }
             <Link to={'/admin/hub-routes/create'}>
                 <button className={'create-hubs-button'}>Создать плечо</button>

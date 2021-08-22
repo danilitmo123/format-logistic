@@ -145,8 +145,8 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
 
     return (
         <div className={'hubs-settings-wrapper'}>
-            <div>
-                <label htmlFor={'title'}>Название плеча</label>
+            <div className={'rate-wrapper'}>
+                <label htmlFor={'title'} className={'rate-title'}>Название плеча</label>
                 <input id={'title'} type="text" value={title} onChange={e => setTitle(e.target.value)}/>
             </div>
             <div className={'shipping-title'}>Отправление</div>
@@ -203,7 +203,7 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
                 <label className={'rate-title'}>Срок действия тарифов</label>
                 <input type="date" value={validityOfTariff} onChange={e => setValidity(e.target.value)}/>
             </div>
-            <div>
+            <div className={'active-panel'}>
                 <label htmlFor={'active'}>Активно</label>
                 <input id={'active'} type="checkbox" checked={active} onChange={() => setActive(!active)}/>
             </div>
