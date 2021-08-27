@@ -110,14 +110,14 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
     const [active, setActive] = useState(initData.active ? initData.active : false)
     const [title, setTitle] = useState(initData.title ? initData.title : '')
 
-    const [isStorage, setStorage] = useState(false)
-
-    console.log(isStorage)
+    const [isStorageFrom, setStorageFrom] = useState(initData.source_is_storage ? initData.source_is_storage : false)
+    const [isStorageTo, setStorageTo] = useState(initData.destination_is_storage ? initData.destination_is_storage : false)
 
     const activateWeekday = (dayInd) => {
         timetableDays[dayInd] = timetableDays[dayInd] ? 0 : 1
         setTimetableDays([...timetableDays])
     }
+    console.log(initData)
 
     const submit = () => {
         onSubmit({
@@ -141,7 +141,9 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
             minimalPrice,
             ratesValidTo: validityOfTariff,
             active: active,
-            title: title
+            title: title,
+            source_is_storage: isStorageFrom,
+            destination_is_storage: isStorageTo
         })
     }
 
@@ -158,15 +160,11 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
                     titleCountry={"Страна отправки"}
                     titleCity={"Город отправки"}
                     dispatchKey={"from"}
-                    setStorage={setStorage}
-                    isStorage={isStorage}
                 />
                 <PlaceSelectBlock
                     titleCountry={"Страна прибытия"}
                     titleCity={"Город прибытия"}
                     dispatchKey={"to"}
-                    setStorage={setStorage}
-                    isStorage={isStorage}
                 />
             </PlaceDispatcherContext.Provider>
             <div className={'shipping-selects-wrapper'}>
@@ -185,6 +183,14 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
                         filterOption={createFilter(filterConfig)}
                     />
                 </div>
+            </div>
+            <div className={'isStorage-wrapper'}>
+                <div className={'isStorage-title'}>Внести точку А хабового плеча в 'Наш склад'</div>
+                <input type="checkbox" onChange={() => setStorageFrom(!isStorageFrom)}/>
+            </div>
+            <div className={'isStorage-wrapper'}>
+                <div className={'isStorage-title'}>Внести точку B хабового плеча в 'Наш склад'</div>
+                <input type="checkbox" onChange={() => setStorageTo(!isStorageTo)}/>
             </div>
             <div className={'upload-dest-and-dur'}>
                 <div className={'upload-title'}>Расстояние и время</div>

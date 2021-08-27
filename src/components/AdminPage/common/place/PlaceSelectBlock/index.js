@@ -38,7 +38,7 @@ const optionsFromCountryData = (countries) => {
     return countryOptions
 }
 
-export const PlaceSelectBlock = ({titleCountry, titleCity, dispatchKey, setStorage, isStorage}) => {
+export const PlaceSelectBlock = ({titleCountry, titleCity, dispatchKey}) => {
 
     const [city, setCityRaw] = useState()
     const [country, setCountryRaw] = useState()
@@ -111,10 +111,6 @@ export const PlaceSelectBlock = ({titleCountry, titleCity, dispatchKey, setStora
                     noOptionsMessage={() => !cityLoaded ? `Загрузка...` : `Не найдено`}
                     filterOption={createFilter(filterConfig)}
                 />
-            </div>
-            <div className={'check-storage'}>
-                <div>Внести город в 'Наш склад'</div>
-                <input type="checkbox" />
             </div>
         </div>
     )
