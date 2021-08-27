@@ -2,19 +2,21 @@ import React, {useEffect, useState} from 'react';
 
 import {Link} from "react-router-dom";
 import {ADMIN_SERVER_URL} from "../../../../constants/URL";
-
-import HubsItem from "./HubsItem";
-
 import loader from '../../../../img/loader.svg'
-
 import './AllHubsPage.scss'
 import {adminInstance} from "../../../../api/admin";
+import FilterPanel from "../../UI/FilterPanel";
+import HubList from "./HubList";
+import {useRoutes} from "../../../../utils/hooks";
+
 
 
 const AllHubsPage = () => {
 
     const [loading, setLoading] = useState(true)
     const [routes, setRoutes] = useState([])
+    const [filter, setFilter] = useState({type: '', countryFrom: '', cityFrom: '', countryTo: '', cityTo: '', clear: false})
+    const filteredHubs = useRoutes(routes, filter, setFilter)
 
     const getHubs = () => {
         adminInstance.get(`${ADMIN_SERVER_URL}admin-routes/?short`)
@@ -29,9 +31,10 @@ const AllHubsPage = () => {
         getHubs()
     }, [])
 
-    return (
+  return (
         <section className={'all-hubs-page-wrapper'}>
             <div className={'hub-title'}>Хабовые плечи</div>
+            <FilterPanel filter={filter} setFilter={setFilter}/>
             {loading ?
                 <div className={'loading-wrapper'}>
                     <img src={loader} alt="loader"/>
@@ -42,24 +45,16 @@ const AllHubsPage = () => {
                   <thead className={'hubs-table-header'}>
                     <tr>
                       <th>Плечо</th>
-                      <th>Основная информация</th>
+                      <th>Название плеча</th>
+                      <th>Страна отправления</th>
+                      <th>Город отправления</th>
+                      <th>Страна прибытия</th>
+                      <th>Город прибытия</th>
+                      <th>Тип перевозки</th>
+                      <th>Активно до</th>
                     </tr>
                   </thead>
-                  <tbody className={'table-body'}>
-                    {
-                      routes ?
-                          <>
-                            {
-                              routes.map((item) => <HubsItem
-                                  hub={item}
-                              />)
-                            }
-                          </>
-                          :
-                          ''
-                    }
-                  </tbody>
-
+                  <HubList hubs={filteredHubs.sortedAndSearchRoutes} />
                 </table>
             }
             <Link to={'/admin/hub-routes/create'}>

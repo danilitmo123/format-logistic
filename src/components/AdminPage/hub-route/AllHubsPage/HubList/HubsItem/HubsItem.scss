@@ -1,4 +1,4 @@
-@import '../../../../../global';
+@import '../../../../../../global';
 a {
   text-decoration: none;
   text-underline: none;
@@ -42,6 +42,7 @@ a {
       .edit-button {
         width: 120px;
         margin-right: 20px;
+        margin-bottom: 10px;
       }
       .delete-button {
         width: 90px;

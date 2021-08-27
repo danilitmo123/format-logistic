@@ -110,6 +110,9 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
     const [active, setActive] = useState(initData.active ? initData.active : false)
     const [title, setTitle] = useState(initData.title ? initData.title : '')
 
+    const [isStorage, setStorage] = useState(false)
+
+    console.log(isStorage)
 
     const activateWeekday = (dayInd) => {
         timetableDays[dayInd] = timetableDays[dayInd] ? 0 : 1
@@ -151,12 +154,20 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
             </div>
             <div className={'shipping-title'}>Отправление</div>
             <PlaceDispatcherContext.Provider value={{dispatch: dispatchPlaces}}>
-                <PlaceSelectBlock titleCountry={"Страна отправки"}
-                                  titleCity={"Город отправки"}
-                                  dispatchKey={"from"}/>
-                <PlaceSelectBlock titleCountry={"Страна прибытия"}
-                                  titleCity={"Город прибытия"}
-                                  dispatchKey={"to"}/>
+                <PlaceSelectBlock
+                    titleCountry={"Страна отправки"}
+                    titleCity={"Город отправки"}
+                    dispatchKey={"from"}
+                    setStorage={setStorage}
+                    isStorage={isStorage}
+                />
+                <PlaceSelectBlock
+                    titleCountry={"Страна прибытия"}
+                    titleCity={"Город прибытия"}
+                    dispatchKey={"to"}
+                    setStorage={setStorage}
+                    isStorage={isStorage}
+                />
             </PlaceDispatcherContext.Provider>
             <div className={'shipping-selects-wrapper'}>
                 <div className={'type-of-place-select'}>
