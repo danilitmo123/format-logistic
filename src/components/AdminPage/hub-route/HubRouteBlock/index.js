@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import {PlaceDispatcherContext} from "../../common/place/placeContext";
 import Select, {createFilter} from "react-select";
@@ -6,7 +6,7 @@ import {customTheme} from "../../../../templates/templatesOfOptions";
 import {filterConfig} from "../../../../templates/filterSelectTemplate";
 import {RatesContext} from "../../common/price/PriceContext";
 import {ServiceContext} from "../../common/service/ServiceContext";
-import {useRefReducer, useRefSetter} from "../../../../utils/hooks";
+import {useRefReducer, useRefSetter} from "../../../../utils/useRef";
 import {ShippingType} from "../../../../constants/unit";
 import {Link} from 'react-router-dom'
 
@@ -113,11 +113,23 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
     const [isStorageFrom, setStorageFrom] = useState(initData.source_is_storage ? initData.source_is_storage : false)
     const [isStorageTo, setStorageTo] = useState(initData.destination_is_storage ? initData.destination_is_storage : false)
 
+    const [additionalInfoData, setAdditionalInfo] = useState([])
+    const [additionalPoint, setPoint] = useState('')
+    const [joinedArray, setJoinedArray] = useState('')
+
+    useEffect(() => {
+        setJoinedArray(additionalInfoData.join('\n\n'))
+    }, [additionalInfoData])
+
     const activateWeekday = (dayInd) => {
         timetableDays[dayInd] = timetableDays[dayInd] ? 0 : 1
         setTimetableDays([...timetableDays])
     }
-    console.log(initData)
+
+    const addAdditionalPoint = () => {
+        setAdditionalInfo([...additionalInfoData, additionalPoint])
+        setPoint('')
+    }
 
     const submit = () => {
         onSubmit({
@@ -143,10 +155,10 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
             active: active,
             title: title,
             source_is_storage: isStorageFrom,
-            destination_is_storage: isStorageTo
+            destination_is_storage: isStorageTo,
+            description: joinedArray
         })
     }
-
 
     return (
         <div className={'hubs-settings-wrapper'}>
@@ -284,13 +296,30 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
                     </div> : ''
                 }
             </div>
-
             <div className={'services-wrapper'}>
                 <div className={'service-title'}>Услуги</div>
                 <ServiceContext.Provider
                     value={{additionalServices, setAdditionalServices, rankedServices, setRankedServices}}>
                     <ServiceContainer/>
                 </ServiceContext.Provider>
+            </div>
+            <div className={'additional-block'}>
+                <div className={'additional-title'}>Дополнительное описание хабового плеча</div>
+                <textarea
+                    value={additionalPoint}
+                    onChange={(e) => setPoint(e.target.value)}
+                />
+                <div>
+                    <button onClick={addAdditionalPoint} disabled={!additionalPoint}>Добавить</button>
+                </div>
+                {additionalInfoData.map((point, index) => {
+                    return (
+                        <div className={'point-wrapper'}>
+                            <div>{index + 1})</div>
+                            <div>{point}</div>
+                        </div>
+                    )
+                })}
             </div>
             <Link to={'/admin/hub-routes'}>
                 <button onClick={submit} className={'create-hub-button'}>Сохранить</button>

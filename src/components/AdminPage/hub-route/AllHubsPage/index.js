@@ -7,7 +7,7 @@ import './AllHubsPage.scss'
 import {adminInstance} from "../../../../api/admin";
 import FilterPanel from "../../UI/FilterPanel";
 import HubList from "./HubList";
-import {useRoutes} from "../../../../utils/hooks";
+import {useRoutes} from "../../../../utils/useRoutes";
 
 
 
