@@ -30,7 +30,10 @@ const CreateHubRoutePage = ({}) => {
                              minimalPrice,
                              ratesValidTo,
                              active,
-                             title
+                             title,
+                             source_is_storage,
+                             destination_is_storage,
+                             description
                          }) => {
 
         let body = {
@@ -49,7 +52,10 @@ const CreateHubRoutePage = ({}) => {
             minimal_price: minimalPrice,
             rates_valid_to: ratesValidTo,
             active: active,
-            title: title
+            title: title,
+            source_is_storage: source_is_storage,
+            destination_is_storage: destination_is_storage,
+            description: description
         }
         if (activeTimetable) {
             body.timetable = {

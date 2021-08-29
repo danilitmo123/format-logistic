@@ -113,13 +113,8 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
     const [isStorageFrom, setStorageFrom] = useState(initData.source_is_storage ? initData.source_is_storage : false)
     const [isStorageTo, setStorageTo] = useState(initData.destination_is_storage ? initData.destination_is_storage : false)
 
-    const [additionalInfoData, setAdditionalInfo] = useState([])
+    const [additionalInfoData, setAdditionalInfo] = useState(initData.description ? initData.description.split('\n\n') : [])
     const [additionalPoint, setPoint] = useState('')
-    const [joinedArray, setJoinedArray] = useState('')
-
-    useEffect(() => {
-        setJoinedArray(additionalInfoData.join('\n\n'))
-    }, [additionalInfoData])
 
     const activateWeekday = (dayInd) => {
         timetableDays[dayInd] = timetableDays[dayInd] ? 0 : 1
@@ -156,7 +151,7 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
             title: title,
             source_is_storage: isStorageFrom,
             destination_is_storage: isStorageTo,
-            description: joinedArray
+            description: additionalInfoData.join('\n\n')
         })
     }
 
@@ -198,11 +193,11 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
             </div>
             <div className={'isStorage-wrapper'}>
                 <div className={'isStorage-title'}>Внести точку А хабового плеча в 'Наш склад'</div>
-                <input type="checkbox" onChange={() => setStorageFrom(!isStorageFrom)}/>
+                <input type="checkbox" onChange={() => setStorageFrom(!isStorageFrom)} checked={isStorageFrom}/>
             </div>
             <div className={'isStorage-wrapper'}>
                 <div className={'isStorage-title'}>Внести точку B хабового плеча в 'Наш склад'</div>
-                <input type="checkbox" onChange={() => setStorageTo(!isStorageTo)}/>
+                <input type="checkbox" onChange={() => setStorageTo(!isStorageTo)} checked={isStorageTo}/>
             </div>
             <div className={'upload-dest-and-dur'}>
                 <div className={'upload-title'}>Расстояние и время</div>
