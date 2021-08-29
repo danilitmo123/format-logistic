@@ -150,6 +150,17 @@
         }
       }
     }
+    .isStorage-wrapper {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 15px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      input {
+        margin-left: 10px;
+      }
+    }
     .set-price-wrapper {
       font-family: 'Montserrat', sans-serif;
       font-weight: 500;
@@ -522,6 +533,28 @@
       margin-bottom: 30px;
       .service-title {
         margin-bottom: 20px;
+      }
+    }
+    .additional-block {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: 24px;
+      margin-right: 20px;
+      .additional-title {
+        margin-bottom: 20px;
+      }
+      textarea {
+        width: 300px;
+        height: 50px;
+        resize: none;
+        outline: none;
+        padding: 5px;
+      }
+      .point-wrapper {
+        margin-top: 30px;
+        display: flex;
+        font-weight: 400;
+        font-size: 16px;
       }
     }
 

@@ -2,7 +2,7 @@ import React, {useMemo, useState} from 'react';
 
 import {ORDER_SERVER_URL} from "../../../constants/URL";
 import axios from "axios";
-import {useInput} from "../../../utils/hooks";
+import {useInput} from "../../../utils/useInput";
 
 import ErrorMessage from "../../Common/ErrorMessage";
 import Map from "../../MapUI/Map";

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Link} from 'react-router-dom';
-import axios from "axios";
+
 import {ADMIN_SERVER_URL} from "../../../../constants/URL";
 
 import {HubRouteBlock} from "../HubRouteBlock";

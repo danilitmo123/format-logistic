@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 
-import {ADMIN_SERVER_URL} from "../../../../../constants/URL";
-import {adminInstance} from "../../../../../api/admin";
-import arrow from '../../../../../img/arrow.svg'
+import {ADMIN_SERVER_URL} from "../../../../../../constants/URL";
+import {adminInstance} from "../../../../../../api/admin";
+import arrow from '../../../../../../img/arrow.svg'
 
 import {Link} from 'react-router-dom'
 
@@ -40,22 +40,6 @@ const HubsItem = ({hub}) => {
   }
 
   return (
-      // <Link to={`/admin/hub-routes/edit/${hub.id}`}>
-      //   <div className={'hub-wrapper'}>
-      //     <div className={'countries-hub-wrapper'}>
-      //       <div className={'source-name'}>{hub.source.name}</div>
-      //       -
-      //       <div className={'destination-name'}>{hub.destination.name}</div>
-      //     </div>
-      //     <div className={'cities-hub-wrapper'}>
-      //       <div className={'hub-type'}>{hubType(hub.type)}</div>
-      //     </div>
-      //     <button className={'delete-hub-button'} onClick={(e) => {
-      //       deleteHub(hub.id)
-      //       e.preventDefault()
-      //     }}>X</button>
-      //   </div>
-      // </Link>
       <tr className={'row-wrapper'}>
         <td>
           <div className={'row-main-info'}>
@@ -72,7 +56,13 @@ const HubsItem = ({hub}) => {
             }}>Удалить</button>
           </div>}
         </td>
+        <td>{hub.title ? hub.title : '----'}</td>
+        <td>{hub.source.state.country.name}</td>
+        <td>{hub.source.name}</td>
+        <td>{hub.destination.state.country.name}</td>
+        <td>{hub.destination.name}</td>
         <td>{hubType(hub.type)}</td>
+        <td>{hub.rates_valid_to}</td>
       </tr>
   );
 };

@@ -1,6 +1,7 @@
 @import '../../../../global';
 .all-hubs-page-wrapper {
-  height: 800px;
+  min-height: 1000px;
+  height: max-content;
   background: #028090;
   display: flex;
   align-items: center;
@@ -27,7 +28,7 @@
     margin-top: 40px;
   }
   .hubs-table {
-    width: 90%;
+    width: 100%;
     border: 1px solid black;
     border-collapse: collapse;
     font-family: 'Montserrat', sans-serif;

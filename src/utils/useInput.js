@@ -1,24 +1,4 @@
-import React, {useRef, useState, useEffect} from 'react';
-
-export const useRefReducer = (reducer, initArgs={}) => {
-  const ref = useRef(initArgs)
-
-  const dispatch = (action) => {
-    ref.current = reducer(ref.current, action)
-  }
-
-  return [ref, dispatch]
-}
-
-export const useRefSetter = (initRef) => {
-  const ref = useRef(initRef)
-
-  const setRef = (newRef) => {
-    ref.current = newRef
-  }
-
-  return [ref, setRef]
-}
+import {useState, useEffect} from "react";
 
 export const useInput = (initialState, validations) => {
   const [value, setValue] = useState(initialState)
@@ -61,10 +41,4 @@ export const useValidation = (value, validations) => {
     isEmpty,
     emailError,
   }
-
 }
-
-export const useSelect = (initialState, validations) => {
-
-}
-
