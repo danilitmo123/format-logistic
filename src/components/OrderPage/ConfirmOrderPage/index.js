@@ -111,6 +111,27 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
           <div>Вес: {weight} кг</div>
           <div>Объем: {volume} м³</div>
         </div>
+        <div className={'additional-info'}>
+          <div className={'additional-info-title'}>Дополнительная информация о хабовых плечах</div>
+          <div className={'additional-blocks'}>
+            {chosenPath[0].routes.map((path) => {
+              if (path.is_hub && path.description.length) {
+                return (
+                    <div className={'info-wrapper'}>
+                      <div className={'city-title'}>
+                        <div>{path.source.name} </div>
+                        <span> - </span>
+                        <div>{path.destination.name}</div>
+                      </div>
+                      <div>{path.description.split('\n\n').map((point, index) => {
+                        return <div className={'info-point'}>{index + 1}) {point}</div>
+                      })}</div>
+                    </div>
+                )
+              }
+            })}
+          </div>
+        </div>
         <div className={'final-form-wrapper'}>
           <div className={'shipper-title'}>Оформление заказа на перевозку</div>
           <div className="shipper">

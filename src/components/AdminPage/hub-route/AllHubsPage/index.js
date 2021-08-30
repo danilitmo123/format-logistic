@@ -15,8 +15,17 @@ const AllHubsPage = () => {
 
     const [loading, setLoading] = useState(true)
     const [routes, setRoutes] = useState([])
-    const [filter, setFilter] = useState({type: '', countryFrom: '', cityFrom: '', countryTo: '', cityTo: '', clear: false})
-    const filteredHubs = useRoutes(routes, filter, setFilter)
+    const [filter, setFilter] = useState({
+      type: '',
+      countryFrom: '',
+      cityFrom: '',
+      countryTo: '',
+      cityTo: '',
+      date: '',
+      clear: false
+    })
+
+    const filteredHubs = useRoutes(routes, filter)
 
     const getHubs = () => {
         adminInstance.get(`${ADMIN_SERVER_URL}admin-routes/?short`)

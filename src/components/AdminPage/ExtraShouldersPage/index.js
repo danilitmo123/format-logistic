@@ -38,7 +38,7 @@ const ExtraShouldersPage = () => {
                 </Link>
             </div>
             <div className={'items-wrapper'}>
-                {zonesLoaded ? zones.map(item => <ExtraShoulderItem item={item}/>) : <Loader/>}
+                {zonesLoaded ? zones.map(item => <ExtraShoulderItem key={item.id} item={item}/>) : <Loader/>}
             </div>
         </div>
     );

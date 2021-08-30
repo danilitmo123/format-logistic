@@ -7,6 +7,7 @@ import arrow from '../../../../../../img/arrow.svg'
 import {Link} from 'react-router-dom'
 
 import './HubsItem.scss'
+import {logDOM} from "@testing-library/react";
 const AIR = 'AIR'
 const SEA = 'SEA'
 const TRAIN = 'TRAIN'

@@ -73,7 +73,6 @@ const EditHubRoutePage = () => {
             }
         }
 
-        console.log({body})
         adminInstance.put(`${ADMIN_SERVER_URL}admin-routes/${id}/`, body, options)
             .then(res => {
                 console.log(res.data)
