@@ -46,6 +46,15 @@ a {
       }
       .delete-button {
         width: 90px;
+        margin-bottom: 10px;
+      }
+      .active-checkbox {
+        display: flex;
+        align-items: center;
+        font-size: 13px;
+        input {
+          margin-right: 5px;
+        }
       }
     }
   }

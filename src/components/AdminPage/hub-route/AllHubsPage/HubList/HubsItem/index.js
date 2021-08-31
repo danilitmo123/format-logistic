@@ -14,9 +14,10 @@ const TRAIN = 'TRAIN'
 const TRUCK = 'TRUCK'
 
 const HubsItem = ({hub}) => {
-
+  console.log(hub)
   const [activePanel, setPanel] = useState(false)
-
+  const [isActiveRoute, setActive] = useState(hub.active)
+  console.log(isActiveRoute)
   const deleteHub = (id) => {
       adminInstance.delete(`${ADMIN_SERVER_URL}admin-routes/${id}`)
         .then(() => {
@@ -55,6 +56,14 @@ const HubsItem = ({hub}) => {
               deleteHub(hub.id)
               e.preventDefault()
             }}>Удалить</button>
+            <div className={'active-checkbox'}>
+              <input
+                  type="checkbox"
+                  checked={isActiveRoute}
+                  onChange={() => setActive(!isActiveRoute)}
+              />
+              <label>Активно</label>
+            </div>
           </div>}
         </td>
         <td>{hub.title ? hub.title : '----'}</td>
