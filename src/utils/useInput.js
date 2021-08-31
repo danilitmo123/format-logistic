@@ -29,9 +29,8 @@ export const useValidation = (value, validations) => {
           value ? setEmptyError(false) : setEmptyError(true)
           break
         case 'isEmail':
-          const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+          const re = /^(([^<>()[\],;:\s@]+(\.[^<>()[\],;:\s@]+)*)|(.+))@(([^<>()[\],;:\s@]+\.)+[^<>()[\],;:\s@]{2,})$/i;
           return value.match(re) ? setEmailError(false) : setEmailError(true)
-          break
       }
     }
 

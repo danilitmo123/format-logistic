@@ -1,9 +1,10 @@
 import React,{useState} from 'react';
 
-import './AuthPahe.scss'
 import {auth} from "../../api/admin";
-import {AuthStatus, ResponseStatus} from "../../constants/api";
+import {ResponseStatus} from "../../constants/api";
 import {useHistory} from "react-router-dom";
+
+import './AuthPahe.scss'
 
 const AuthPage = () => {
 
@@ -24,8 +25,6 @@ const AuthPage = () => {
     auth(email, password).then(r => {
       if (r.status === ResponseStatus.CORRECT) {
         history.push('/admin/hub-routes')
-      } else{
-        console.log("wring password")
       }
     })
   }

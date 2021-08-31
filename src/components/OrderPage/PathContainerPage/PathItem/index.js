@@ -3,11 +3,6 @@ import React from 'react';
 import Map from "../../../MapUI/Map";
 import TypeOfRoutes from "../../../MapUI/TypeOfRoutes";
 
-import airplane from '../../../../img/black-airplane-icon.svg'
-import truck from '../../../../img/black-truck-icon.svg'
-import train from '../../../../img/train-icon.svg'
-import ship from '../../../../img/ship.svg'
-
 import './PathItem.scss'
 
 const PathItem = ({path, setIndex, index, volume, weight}) => {

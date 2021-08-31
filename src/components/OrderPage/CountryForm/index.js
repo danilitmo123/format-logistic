@@ -68,12 +68,11 @@ const CountryForm = ({
         setSourceType(value)
         setIdFrom(null)
         setOptionCityFrom(null)
+        setOptionCityTo(null)
         if (destinationType !== value && destinationType !== PlaceType.CITY){
             setDestinationType(value)
         }
     }
-
-
 
     const filterCandidate = (candidate, inputValue) => {
         let alias = candidate.data ? candidate.data.alias : candidate.alias

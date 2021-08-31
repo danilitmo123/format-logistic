@@ -2,13 +2,13 @@
 .path-item-wrapper {
   display: flex;
   height: 100%;
-  width: 1000px;
+  width: max-content;
   margin-bottom: 50px;
   border-radius: 20px;
   .info-routes-wrapper {
     background-color: $white;
     border-radius: 20px 0 0 20px;
-    width: 420px;
+    width: max-content;
     padding: 40px 30px;
     display: flex;
     flex-direction: row;
