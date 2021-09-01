@@ -112,7 +112,7 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
           <div>Объем: {volume} м³</div>
         </div>
         <div className={'additional-info'}>
-          <div className={'additional-info-title'}>Дополнительная информация о хабовых плечах</div>
+          <div className={'additional-info-title'}>Дополнительная информация</div>
           <div className={'additional-blocks'}>
             {chosenPath[0].routes.map((path) => {
               if (path.is_hub && path.description.length) {

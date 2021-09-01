@@ -24,12 +24,12 @@ const Header = ({setActive}) => {
           </div>
         </div>
         <div className={'contacts'}>
-        {/*  {*/}
-        {/*    process.env.REACT_APP_ENV !== 'production' ?*/}
-        {/*    <Link to={'/admin/hub-routes'}>*/}
-        {/*        <button className={'admin-button'}>Админка</button>*/}
-        {/*    </Link> : ""*/}
-        {/*}*/}
+          {
+            process.env.REACT_APP_ENV !== 'production' ?
+            <Link to={'/admin/hub-routes'}>
+                <button className={'admin-button'}>Админка</button>
+            </Link> : ""
+        }
           <div className={'number'}>+7 (499) 281-60-81</div>
           <div className={'mail'}>customfreight2020@gmail.com</div>
         </div>
