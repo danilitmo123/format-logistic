@@ -1,4 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
 $light-blue: #35d2d2;
 $white: #f6fbf9;
 $dark-blue: #2E5163;
+
+%input {
+  width: 100px;
+  height: 32px;
+  padding: 2px 8px;
+  align-items: center;
+  background-color: hsl(0, 0%, 100%);
+  border-color: hsl(0, 0%, 80%);
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  &:focus {
+    border-color: $light-blue;
+    box-shadow: 0 0 0 1px $light-blue;
+  }
+}
+
+%label {
+  font-weight: 400;
+  font-size: 14px;
+  opacity: .4;
+}
+
+

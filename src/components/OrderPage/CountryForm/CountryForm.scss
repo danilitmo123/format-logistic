@@ -1,385 +1,122 @@
 @import "../../../global";
-.country-form-wrapper {
-  font-family: 'Montserrat', sans-serif;
-  color: black;
+
+.choose-tiles-wrapper {
   margin-top: 90px;
   display: flex;
   justify-content: space-between;
-  .from-form-wrapper {
-    width: 470px;
-    height: max-content;
-    background-color: $white;
-    padding: 40px 30px;
+
+  .choose-tile {
+    background: $white;
     border-radius: 20px;
-    border: 1px solid gray;
-    box-shadow: 0 5px 5px -5px #333;
+    padding: 40px 30px;
+    width: 480px;
 
-    .warning-country-text {
-      color: red;
-      font-size: 10px;
-      margin-top: -10px;
-      margin-bottom: 20px;
-    }
-
-    .from-form-title-wrapper {
+    .tile-title-wrapper {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 15px;
+      margin-bottom: 16px;
 
-      .from-form-title {
-        font-weight: 400;
-        font-size: 24px;
-        color: black;
+      .title {
+        font-weight: 500;
+        font-size: 22px;
       }
 
-      .from-form-text {
-        font-weight: 400;
-        font-size: 12px;
-        color: black;
-        opacity: 0.4;
+      .text {
+        font-size: 14px;
+        opacity: .4;
       }
     }
 
-    .country-select-from {
-      display: flex;
-      justify-content: flex-start;
-      flex-direction: column;
-      margin-bottom: 20px;
+    .country-select {
+      margin-bottom: 16px;
 
-      .react-select__control {
-        border-color: red;
+      .select-title {
+        @extend %label;
       }
 
-      label {
-        color: black;
-        font-size: 12px;
-        font-weight: 400;
-        opacity: 0.4;
+      .select {
+        margin-top: 10px;
+      }
+    }
+
+    .place-switcher {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      margin-bottom: 16px;
+
+      .place-switcher-title {
+        @extend %label;
         margin-bottom: 10px;
       }
 
-      select {
-        width: 470px;
-        height: 40px;
-        border: 1px solid $light-blue;
-        border-radius: 0 2px 2px 0;
-        padding: 0 5px 0 12px;
-        outline: none;
-      }
-    }
-
-    .city-select-from {
-      display: flex;
-      justify-content: flex-start;
-      flex-direction: column;
-      margin-bottom: 20px;
-
-      .react-select__control {
-        border-color: red;
-      }
-
-      label {
-        color: black;
-        font-size: 12px;
-        font-weight: 400;
-        opacity: 0.4;
-        margin-bottom: 10px;
-      }
-
-      select {
-        width: 470px;
-        height: 40px;
-        border: 1px solid $light-blue;
-        border-radius: 0 2px 2px 0;
-        padding: 0 5px 0 12px;
-        outline: none;
-      }
-    }
-
-    .prompt-block {
-      font-weight: 400;
-      font-size: 12px;
-      color: black;
-      opacity: 0.4;
-    }
-
-    .place-select-to {
-      display: flex;
-      flex-direction: row;
-      margin-bottom: 10px;
-
-      .place-button {
+      .switcher-buttons {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
         font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        font-size: 12px;
-        width: 117px;
-        height: 35px;
-        background: white;
-        border: 1px solid hsl(0, 0%, 80%);
-        cursor: pointer;
-        outline: none;
 
-        &:nth-child(1) {
-          border-radius: 8px 0 0 8px;
-        }
-
-        &:nth-child(5) {
-          border-radius: 0 8px 8px 0;
-        }
-      }
-
-      .active-city-button {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        font-size: 12px;
-        width: 117px;
-        height: 35px;
-        background: $light-blue;
-        border: none;
-        cursor: pointer;
-        color: $white;
-        outline: none;
-
-        &:nth-child(1) {
-          border-radius: 8px 0 0 8px;
-        }
-      }
-
-      .active-sea-button {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        font-size: 12px;
-        width: 117px;
-        height: 35px;
-        background: $light-blue;
-        border: none;
-        cursor: pointer;
-        color: $white;
-        outline: none;
-        &:nth-child(5) {
-          border-radius: 0 8px 8px 0;
-        }
-      }
-
-      .active-storage-button {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        font-size: 12px;
-        width: 117px;
-        height: 35px;
-        background: $light-blue;
-        border: none;
-        cursor: pointer;
-        color: $white;
-        outline: none;
-      }
-
-      .active-air-button {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        font-size: 12px;
-        width: 117px;
-        height: 35px;
-        background: $light-blue;
-        border: none;
-        cursor: pointer;
-        color: $white;
-        outline: none;
-      }
-
-      .active-train-button {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        font-size: 12px;
-        width: 117px;
-        height: 35px;
-        background: $light-blue;
-        border: none;
-        cursor: pointer;
-        color: $white;
-        outline: none;
-      }
-    }
-  }
-  .where-form-wrapper {
-    width: 470px;
-    height: max-content;
-    background-color: $white;
-    padding: 40px 30px;
-    border-radius: 20px;
-    border: 1px solid gray;
-    box-shadow: 0 5px 5px -5px #333;
-
-    .warning-country-text {
-      color: red;
-      font-size: 10px;
-      margin-top: -10px;
-      margin-bottom: 20px;
-    }
-    .where-form-title-wrapper {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-      .where-form-title {
-        font-weight: 400;
-        font-size: 24px;
-        color: black;
-      }
-      .where-form-text {
-        font-weight: 400;
-        font-size: 12px;
-        color: black;
-        opacity: 0.4;
-      }
-    }
-    .country-select-where {
-      display: flex;
-      justify-content: flex-start;
-      flex-direction: column;
-      margin-bottom: 20px;
-      .react-select__control {
-        border-color: red;
-      }
-      label {
-        color: black;
-        font-size: 12px;
-        font-weight: 400;
-        opacity: 0.4;
-        margin-bottom: 10px;
-      }
-      select {
-        width: 470px;
-        height: 40px;
-        border: 1px solid $light-blue;
-        border-radius: 0 2px 2px 0;
-        padding: 0 5px 0 12px;
-        &:focus {
+        .place-button {
+          font-family: 'Montserrat', sans-serif;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 4px;
+          border: 1px solid hsl(0, 0%, 80%);
+          width: 96px;
+          height: 38px;
+          background: $white;
           outline: none;
+          cursor: pointer;
+
+          &:nth-child(1) {
+            border-radius: 4px 0 0 4px;
+          }
+
+          &:nth-child(5) {
+            border-radius: 0 4px 4px 0;
+          }
+        }
+
+        .active-place-button {
+          font-family: 'Montserrat', sans-serif;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 4px;
+          width: 96px;
+          height: 38px;
+          background: $light-blue;
+          cursor: pointer;
+          outline: none;
+          border: none;
+          color: $white;
+
+          &:nth-child(1) {
+            border-radius: 4px 0 0 4px;
+          }
+
+          &:nth-child(5) {
+            border-radius: 0 4px 4px 0;
+          }
         }
       }
     }
-    .place-select-where {
-      display: flex;
-      flex-direction: row;
-      margin-bottom: 10px;
-      .place-button {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        font-size: 12px;
-        width: 117px;
-        height: 35px;
-        background: white;
-        border: 1px solid hsl(0, 0%, 80%);
-        cursor: pointer;
-        outline: none;
 
-        &:nth-child(1) {
-          border-radius: 8px 0 0 8px;
-        }
-        &:nth-child(5) {
-          border-radius: 0 8px 8px 0;
-        }
+    .city-select {
+      margin-bottom: 16px;
+      .select-title {
+        @extend %label;
       }
-      .active-city-button {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        font-size: 12px;
-        width: 117px;
-        height: 35px;
-        background: $light-blue;
-        border: none;
-        cursor: pointer;
-        color: $white;
-        outline: none;
-        &:nth-child(1) {
-          border-radius: 8px 0 0 8px;
-        }
+      .select {
+        margin-top: 10px;
       }
-      .active-sea-button {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        font-size: 12px;
-        width: 117px;
-        height: 35px;
-        background: $light-blue;
-        border: none;
-        cursor: pointer;
-        color: $white;
-        outline: none;
-        &:nth-child(5) {
-          border-radius: 0 8px 8px 0;
-        }
-      }
+    }
 
-      .active-storage-button {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        font-size: 12px;
-        width: 117px;
-        height: 35px;
-        background: $light-blue;
-        border: none;
-        cursor: pointer;
-        color: $white;
-        outline: none;
-        }
-      }
     .prompt-block {
-      font-weight: 400;
-      font-size: 12px;
-      color: black;
-      opacity: 0.4;
-    }
-
-      .active-air-button {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        font-size: 12px;
-        width: 117px;
-        height: 35px;
-        background: $light-blue;
-        border: none;
-        cursor: pointer;
-        color: $white;
-        outline: none;
-      }
-      .active-train-button {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        font-size: 12px;
-        width: 117px;
-        height: 35px;
-        background: $light-blue;
-        border: none;
-        cursor: pointer;
-        color: $white;
-        outline: none;
-    }
-    .city-select-where {
-      display: flex;
-      justify-content: flex-start;
-      flex-direction: column;
-      margin-bottom: 20px;
-      .react-select__control {
-        border-color: red;
-      }
-      label {
-        color: black;
-        font-size: 12px;
-        font-weight: 400;
-        opacity: 0.4;
-        margin-bottom: 10px;
-      }
-      select {
-        width: 470px;
-        height: 40px;
-        border: 1px solid $light-blue;
-        border-radius: 0 2px 2px 0;
-        padding: 0 5px 0 12px;
-        outline: none;
-      }
+      @extend %label;
     }
   }
 }
@@ -387,41 +124,53 @@
 @media (min-width: 992px) and (max-width: 1199px) {
   .country-form-wrapper {
     width: 962px;
+
     .from-form-wrapper {
       width: 400px;
+
       .place-select-to {
         .place-button {
           font-size: 12px;
         }
+
         .active-city-button {
           font-size: 12px;
         }
+
         .active-sea-button {
           font-size: 12px;
         }
+
         .active-train-button {
           font-size: 12px;
         }
+
         .active-air-button {
           font-size: 12px;
         }
       }
     }
+
     .where-form-wrapper {
       width: 400px;
+
       .place-select-where {
         .place-button {
           font-size: 12px;
         }
+
         .active-city-button {
           font-size: 12px;
         }
+
         .active-sea-button {
           font-size: 12px;
         }
+
         .active-train-button {
           font-size: 12px;
         }
+
         .active-air-button {
           font-size: 12px;
         }
@@ -429,60 +178,76 @@
     }
   }
 }
+
 @media (min-width: 768px) and (max-width: 991px) {
   .country-form-wrapper {
     flex-direction: column;
     margin-top: 30px;
+
     .from-form-wrapper {
       width: 630px;
       margin-bottom: 20px;
     }
+
     .where-form-wrapper {
       width: 630px;
     }
   }
 }
+
 @media (min-width: 300px) and (max-width: 767px) {
   .country-form-wrapper {
     flex-direction: column;
     margin-top: 30px;
     width: 100%;
+
     .from-form-wrapper {
       width: 80%;
       margin-bottom: 20px;
+
       .place-select-to {
         .place-button {
           font-size: 12px;
         }
+
         .active-city-button {
           font-size: 12px;
         }
+
         .active-air-button {
           font-size: 12px;
         }
+
         .active-train-button {
           font-size: 12px;
         }
+
         .active-sea-button {
           font-size: 12px;
         }
       }
     }
+
     .where-form-wrapper {
       width: 80%;
+
       .place-select-where {
         .place-button {
           font-size: 12px;
         }
+
         .active-city-button {
           font-size: 12px;
         }
+
         .active-air-button {
           font-size: 12px;
         }
+
         .active-train-button {
           font-size: 12px;
         }
+
         .active-sea-button {
           font-size: 12px;
         }
@@ -490,98 +255,3 @@
     }
   }
 }
-//@media (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
-//  .country-form-wrapper {
-//    flex-direction: column;
-//    margin-top: 30px;
-//    .from-form-wrapper {
-//      width: 340px;
-//      margin-bottom: 20px;
-//      .place-select-to {
-//        .place-button {
-//          font-size: 12px;
-//        }
-//        .active-city-button {
-//          font-size: 12px;
-//        }
-//        .active-air-button {
-//          font-size: 12px;
-//        }
-//        .active-train-button {
-//          font-size: 12px;
-//        }
-//        .active-sea-button {
-//          font-size: 12px;
-//        }
-//      }
-//    }
-//    .where-form-wrapper {
-//      width: 340px;
-//      .place-select-where {
-//        .place-button {
-//          font-size: 12px;
-//        }
-//        .active-city-button {
-//          font-size: 12px;
-//        }
-//        .active-air-button {
-//          font-size: 12px;
-//        }
-//        .active-train-button {
-//          font-size: 12px;
-//        }
-//        .active-sea-button {
-//          font-size: 12px;
-//        }
-//      }
-//    }
-//  }
-//}
-//@media (device-width: 375px)  and (device-height: 812px)  and (-webkit-device-pixel-ratio: 3) {
-//  .country-form-wrapper {
-//    flex-direction: column;
-//    margin-top: 30px;
-//    .from-form-wrapper {
-//      width: 300px;
-//      margin-bottom: 20px;
-//      .place-select-to {
-//        .place-button {
-//          font-size: 12px;
-//        }
-//        .active-city-button {
-//          font-size: 12px;
-//        }
-//        .active-air-button {
-//          font-size: 12px;
-//        }
-//        .active-train-button {
-//          font-size: 12px;
-//        }
-//        .active-sea-button {
-//          font-size: 12px;
-//        }
-//      }
-//    }
-//    .where-form-wrapper {
-//      width: 300px;
-//      .place-select-where {
-//        .place-button {
-//          font-size: 12px;
-//        }
-//        .active-city-button {
-//          font-size: 12px;
-//        }
-//        .active-air-button {
-//          font-size: 12px;
-//        }
-//        .active-train-button {
-//          font-size: 12px;
-//        }
-//        .active-sea-button {
-//          font-size: 12px;
-//        }
-//      }
-//    }
-//  }
-//}
-
