@@ -39,9 +39,7 @@
     }
 
     .cargo-title {
-      font-weight: 400;
-      font-size: 24px;
-      color: black;
+      @extend %tile-title;
       margin-bottom: 15px;
     }
   }
