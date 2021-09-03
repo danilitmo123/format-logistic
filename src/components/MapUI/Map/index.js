@@ -8,7 +8,7 @@ const Map = ({points}) => {
           apikey={"lDfJOpVUkj3EiYJMC1Za_oSkIvvY2pL2i6R5801iSoo"}
           useHTTPS={true}
          >
-        <HMap mapOptions={{zoom: 1}}>
+        <HMap mapOptions={{zoom: 2}}>
           <HMapPolyLine points={points}/>
         </HMap>
       </HPlatform>

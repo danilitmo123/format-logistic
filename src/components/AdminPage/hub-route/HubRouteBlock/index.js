@@ -88,7 +88,6 @@ const placeObjectFromInitData = (initData) => {
 
 }
 
-
 export const HubRouteBlock = ({initData, onSubmit}) => {
 
   const [distance, setDistance] = useState(initData.distance ? initData.distance : 0)
@@ -151,7 +150,7 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
       prepareDays,
       activeTimetable,
       minimalPrice,
-      ratesValidTo: validityOfTariff,
+      ratesValidTo: validityOfTariff || '9999-12-31',
       active: active,
       title: title,
       source_is_storage: isStorageFrom,
@@ -315,7 +314,8 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
                   className={'add-point-btn'}
                   onClick={addAdditionalPoint}
                   disabled={!additionalPoint}
-              >Добавить</button>
+              >Добавить
+              </button>
             </div>
           </div>
           {additionalInfoData.map((point, index) => {
@@ -324,7 +324,8 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
                   <button
                       className={'delete-point-btn'}
                       onClick={() => deleteAdditionalPoint(index)}
-                  >x</button>
+                  >x
+                  </button>
                   <div className={'number'}>{index + 1})</div>
                   <div>{point}</div>
                 </div>

@@ -13,6 +13,7 @@ import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
 
 import './CountryForm.scss'
+import ErrorMessage from "../../Common/ErrorMessage";
 
 const placeHolderFromType = type => {
   switch (type) {
@@ -128,6 +129,20 @@ const CountryForm = ({
     return newValue
   }
 
+  const setCountryFromOption = (newValue) => {
+    if (optionCountryFromValue.value !== newValue.value) {
+      setOptionCityFrom(null)
+    }
+    setOptionCountryFromValue(newValue)
+  }
+
+  const setCountryToOption = (newValue) => {
+    if (optionCountryToValue.value !== newValue.value) {
+      setOptionCityTo(null)
+    }
+    setOptionCountryToValue(newValue)
+  }
+
   useEffect(() => {
     if ((optionCountryFromValue.value && optionCountryToValue.value)
         && (optionCountryFromValue.value === optionCountryToValue.value)) {
@@ -191,7 +206,7 @@ const CountryForm = ({
                   classNamePrefix={countryWarning ? 'react-select' : ''}
                   theme={customTheme}
                   options={modifyCountryObj}
-                  onChange={setOptionCountryFromValue}
+                  onChange={setCountryFromOption}
                   noOptionsMessage={() => `Не найдено`}
                   loadingMessage={() => 'Поиск...'}
                   placeholder={'Выберите страну'}
@@ -199,10 +214,8 @@ const CountryForm = ({
               />
             </div>
           </div>
-          {countryWarning ? <div className={'warning-country-text'}>Названия стран должны отличаться</div> : ''}
-          {chooseRussiaWarning ?
-              <div className={'warning-country-text'}>Точка отправки/доставки обязательно должен быть регион
-                России</div> : ''}
+          {countryWarning && <ErrorMessage text={'Названия стран должны отличаться'} />}
+          {chooseRussiaWarning && <ErrorMessage text={'Точка отправки/доставки обязательно должен быть регион'} />}
           <div className={'place-switcher'}>
             <div className={'place-switcher-title'}>Точка отправления</div>
             <div className={'switcher-buttons'}>
@@ -235,6 +248,7 @@ const CountryForm = ({
               sourceType === PlaceType.CITY ?
                   <div className={'select'}>
                     <AsyncSelect
+                        value={optionCityFrom}
                         classNamePrefix={cityWarningFrom ? 'react-select' : ''}
                         theme={customTheme}
                         loadOptions={loadCitiesOptionsFrom}
@@ -249,9 +263,9 @@ const CountryForm = ({
                   :
                   <div className={'select'}>
                     <Select
+                        value={optionCityFrom}
                         classNamePrefix={cityWarningFrom ? 'react-select' : ''}
                         theme={customTheme}
-                        value={optionCityFrom}
                         options={modifyCitiesFromObj}
                         onChange={selectedCityIdFromHandler}
                         noOptionsMessage={() => 'Не найдено'}
@@ -276,7 +290,7 @@ const CountryForm = ({
                   classNamePrefix={countryWarning ? 'react-select' : ''}
                   theme={customTheme}
                   options={modifyCountryObj}
-                  onChange={setOptionCountryToValue}
+                  onChange={setCountryToOption}
                   noOptionsMessage={() => `Не найдено`}
                   loadingMessage={() => 'Поиск...'}
                   placeholder={'Выберите страну'}
@@ -284,10 +298,8 @@ const CountryForm = ({
               />
             </div>
           </div>
-          {countryWarning ? <div className={'warning-country-text'}>Названия стран должны отличаться</div> : ''}
-          {chooseRussiaWarning ?
-              <div className={'warning-country-text'}>Точка отправки/доставки обязательно должен быть регион
-                России</div> : ''}
+          {countryWarning && <ErrorMessage text={'Названия стран должны отличаться'}/>}
+          {chooseRussiaWarning && <ErrorMessage text={'Точка отправки/доставки обязательно должен быть регион России'}/>}
           <div className={'place-switcher'}>
             <div className={'place-switcher-title'}>Точка доставки</div>
             <div className={'switcher-buttons'}>
@@ -326,6 +338,7 @@ const CountryForm = ({
                     <AsyncSelect
                         classNamePrefix={cityWarningTo ? 'react-select' : ''}
                         theme={customTheme}
+                        value={optionCityTo}
                         loadOptions={loadCitiesOptionsTo}
                         options={modifyCitiesToObj}
                         onChange={selectedCityIdToHandler}

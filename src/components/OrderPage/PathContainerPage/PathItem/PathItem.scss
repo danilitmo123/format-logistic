@@ -1,70 +1,73 @@
 @import '../../../../global';
-.path-item-wrapper {
+
+.route-item-wrapper {
   display: flex;
+  justify-content: flex-start;
   height: 100%;
-  width: max-content;
+  width: 1200px;
   margin-bottom: 50px;
   border-radius: 20px;
-  .info-routes-wrapper {
-    background-color: $white;
-    border-radius: 20px 0 0 20px;
-    width: max-content;
-    padding: 40px 30px;
+  position: relative;
+
+  .route-points-wrapper {
+    position: absolute;
+    z-index: 3;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    position: relative;
-    .route-info-title {
-      font-weight: 600;
-      font-size: 16px;
-      margin-bottom: 10px;
-      margin-left: 50px;
+    align-items: center;
+    background: $white;
+    width: 900px;
+    height: max-content;
+    padding: 10px;
+  }
+
+  .route-info {
+    background: $white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 0 8px 8px 0;
+
+    .route-total-cost {
+      margin-top: 50px;
+      font-size: 32px;
+      font-weight: 400;
+      margin-bottom: 20px;
     }
+
+    .route-total-duration {
+      font-size: 14px;
+      font-weight: 400;
+      margin-bottom: 40px;
+    }
+
+    .route-info-title {
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
     .route-time-and-cost-wrapper {
       display: flex;
-      flex-direction: column;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 400;
-      font-size: 12px;
-      margin-left: 50px;
-      margin-bottom: 20px;
-      .route-total-cost {
-        margin-right: 15px;
-        margin-bottom: 5px;
-      }
-      .route-total-duration {
-        margin-right: 15px;
-        margin-bottom: 5px;
-      }
-      .route-total-weight {
-        margin-bottom: 5px;
+      font-size: 14px;
+      margin-bottom: 70px;
+
+      .weight {
+        margin-right: 10px;
       }
     }
 
     .choose-button {
-      position: absolute;
-      margin-left: -75px;
-      left: 50%;
-      bottom: -20px;
-      width: 150px;
-      height: 40px;
-      background-color: $light-blue;
-      border: none;
-      border-radius: 8px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: $white;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 500;
-      cursor: pointer;
-    }
+      @extend %active-button;
 
+    }
   }
+
   #HERE_MAP_CONTAINER.here-map-container {
-    border-radius: 0 20px 20px 0;
     min-height: 400px;
-    width: 580px;
+    width: 900px;
   }
 }
 
@@ -73,22 +76,27 @@
     width: 950px;
   }
 }
+
 @media (min-width: 768px) and (max-width: 991px) {
   .path-item-wrapper {
     width: 730px;
   }
 }
+
 @media (min-width: 300px) and (max-width: 767px) {
   .path-item-wrapper {
     width: 100%;
     flex-wrap: wrap;
+
     .info-routes-wrapper {
       border-radius: 20px 20px 0 0;
       width: 85%;
+
       .choose-button {
         z-index: 100;
       }
     }
+
     #HERE_MAP_CONTAINER.here-map-container {
       border-radius: 0 20px 20px 0;
       min-height: 400px;

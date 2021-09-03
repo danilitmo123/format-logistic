@@ -7,23 +7,24 @@ import arrow from '../../../../../../img/arrow.svg'
 import {Link} from 'react-router-dom'
 
 import './HubsItem.scss'
-import {logDOM} from "@testing-library/react";
+
+
 const AIR = 'AIR'
 const SEA = 'SEA'
 const TRAIN = 'TRAIN'
 const TRUCK = 'TRUCK'
 
 const HubsItem = ({hub}) => {
-  console.log(hub)
   const [activePanel, setPanel] = useState(false)
   const [isActiveRoute, setActive] = useState(hub.active)
-  console.log(isActiveRoute)
   const deleteHub = (id) => {
-      adminInstance.delete(`${ADMIN_SERVER_URL}admin-routes/${id}`)
+    adminInstance.delete(`${ADMIN_SERVER_URL}admin-routes/${id}`)
         .then(() => {
           window.location.reload();
         })
-        .catch(err => {console.log(err)})
+        .catch(err => {
+          console.log(err)
+        })
   }
 
   const hubType = (type) => {
@@ -35,7 +36,7 @@ const HubsItem = ({hub}) => {
       case TRAIN:
         return 'Ж/Д перевозка'
       case TRUCK:
-        return  'Автомобильная перевозка'
+        return 'Автомобильная перевозка'
       default:
         return ''
     }
@@ -45,17 +46,19 @@ const HubsItem = ({hub}) => {
       <tr className={'row-wrapper'}>
         <td>
           <div className={'row-main-info'}>
-            <img className={activePanel ? 'arrow-icon-up' : 'arrow-icon-down'} src={arrow} alt="arrow" onClick={() => setPanel(!activePanel)}/>
+            <img className={activePanel ? 'arrow-icon-up' : 'arrow-icon-down'} src={arrow} alt="arrow"
+                 onClick={() => setPanel(!activePanel)}/>
             <div>{hub.source.name} - {hub.destination.name}</div>
           </div>
-          {activePanel &&  <div className={'table-info-buttons'}>
+          {activePanel && <div className={'table-info-buttons'}>
             <Link to={`/admin/hub-routes/edit/${hub.id}`}>
               <button className={'btn edit-button'}>Редактировать</button>
             </Link>
             <button className={'btn delete-button'} onClick={(e) => {
               deleteHub(hub.id)
               e.preventDefault()
-            }}>Удалить</button>
+            }}>Удалить
+            </button>
             <div className={'active-checkbox'}>
               <input
                   type="checkbox"

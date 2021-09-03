@@ -35,4 +35,19 @@ $dark-blue: #2E5163;
   color: black;
 }
 
+%active-button {
+  width: 150px;
+  height: 40px;
+  background-color: $light-blue;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $white;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+}
+
 

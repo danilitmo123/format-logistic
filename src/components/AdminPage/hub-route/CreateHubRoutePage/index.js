@@ -64,6 +64,8 @@ const CreateHubRoutePage = ({}) => {
             }
         }
 
+      console.log({body})
+
         adminInstance.post(`${ADMIN_SERVER_URL}admin-routes/`, body)
             .then(res => {
                 console.log(res)
