@@ -249,7 +249,7 @@ const CountryForm = ({
                   <div className={'select'}>
                     <AsyncSelect
                         value={optionCityFrom}
-                        classNamePrefix={cityWarningFrom ? 'react-select' : ''}
+                        classNamePrefix={cityWarningFrom ? 'select' : ''}
                         theme={customTheme}
                         loadOptions={loadCitiesOptionsFrom}
                         options={modifyCitiesFromObj}
@@ -264,7 +264,7 @@ const CountryForm = ({
                   <div className={'select'}>
                     <Select
                         value={optionCityFrom}
-                        classNamePrefix={cityWarningFrom ? 'react-select' : ''}
+                        classNamePrefix={cityWarningFrom ? 'select' : ''}
                         theme={customTheme}
                         options={modifyCitiesFromObj}
                         onChange={selectedCityIdFromHandler}
@@ -336,7 +336,7 @@ const CountryForm = ({
               destinationType === PlaceType.CITY ?
                   <div className={'select'}>
                     <AsyncSelect
-                        classNamePrefix={cityWarningTo ? 'react-select' : ''}
+                        classNamePrefix={cityWarningTo ? 'select' : ''}
                         theme={customTheme}
                         value={optionCityTo}
                         loadOptions={loadCitiesOptionsTo}
@@ -351,7 +351,7 @@ const CountryForm = ({
                   :
                   <div className={'select'}>
                     <Select
-                        classNamePrefix={cityWarningTo ? 'react-select' : ''}
+                        classNamePrefix={cityWarningTo ? 'select' : ''}
                         theme={customTheme}
                         options={modifyCitiesToObj}
                         value={optionCityTo}

@@ -18,7 +18,7 @@
       margin-bottom: 16px;
 
       .title {
-       @extend %tile-title;
+        @extend %tile-title;
       }
 
       .text {
@@ -106,11 +106,17 @@
 
     .city-select {
       margin-bottom: 16px;
+
       .select-title {
         @extend %label;
       }
+
       .select {
         margin-top: 10px;
+
+        .select__control {
+          border: 1px solid red;
+        }
       }
     }
 
