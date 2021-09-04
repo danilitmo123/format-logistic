@@ -70,6 +70,7 @@ const ExtraShoulderItem = ({item}) => {
     const [activeButtonForVolume, setActiveButtonForVolume] = useState(false)
     const [activeButtonForMeter, setActiveButtonForMeter] = useState(false)
     const [minimalPrice, setMinimalPrice] = useState(item.minimal_price)
+    const [markup, setMarkup] = useState(((item.markup - 1 ) * 100).toFixed(2))
 
     const addWeightItem = () => {
         const newData = [...dataWeight, {...defaultMassRate}]
@@ -151,7 +152,7 @@ const ExtraShoulderItem = ({item}) => {
     }
 
     const sendRatesData = () => {
-        let body = {rates: flatRates(), minimal_price: minimalPrice}
+        let body = {rates: flatRates(), minimal_price: minimalPrice, markup: (markup /100) + 1}
         adminInstance.patch(`${UPDATE_RATES_URL}/${item.id}/`, body).then()
     }
 
@@ -293,6 +294,11 @@ const ExtraShoulderItem = ({item}) => {
                             <button className={'add-button'} onClick={addMeterItem}>Добавить промежуток</button>
                         </div>
                 }
+            </div>
+            <div>
+                <label htmlFor="markup">Наценка
+                    <input id={'markup'} type="number" value={markup} onChange={e => setMarkup(e.target.value)}/>%
+                </label>
             </div>
             <div className={'minimal-price'}>
                 <label>Минимальная ставка</label>

@@ -40,7 +40,8 @@ const EditHubRoutePage = () => {
                              title,
                              source_is_storage,
                              destination_is_storage,
-                             description
+                             description,
+                             markup
                          }) => {
         const options = {
             headers: {'Content-Type': 'application/json'}
@@ -64,7 +65,8 @@ const EditHubRoutePage = () => {
             title: title,
             source_is_storage: source_is_storage,
             destination_is_storage: destination_is_storage,
-            description: description
+            description: description,
+            markup: markup
         }
         if (activeTimetable) {
             body.timetable = {

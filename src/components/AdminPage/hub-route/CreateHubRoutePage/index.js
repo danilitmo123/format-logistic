@@ -33,7 +33,8 @@ const CreateHubRoutePage = ({}) => {
                              title,
                              source_is_storage,
                              destination_is_storage,
-                             description
+                             description,
+                             markup
                          }) => {
 
         let body = {
@@ -55,7 +56,8 @@ const CreateHubRoutePage = ({}) => {
             title: title,
             source_is_storage: source_is_storage,
             destination_is_storage: destination_is_storage,
-            description: description
+            description: description,
+            markup: markup
         }
         if (activeTimetable) {
             body.timetable = {
