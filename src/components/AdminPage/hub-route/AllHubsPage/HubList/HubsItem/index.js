@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {ADMIN_SERVER_URL} from "../../../../../../constants/URL";
 import {adminInstance} from "../../../../../../api/admin";
 import arrow from '../../../../../../img/arrow.svg'
+import {defaultOptions} from "../../../../../../api/config";
 
 import {Link} from 'react-router-dom'
 
@@ -15,6 +16,7 @@ const TRAIN = 'TRAIN'
 const TRUCK = 'TRUCK'
 
 const HubsItem = ({hub}) => {
+
   const [activePanel, setPanel] = useState(false)
   const [isActiveRoute, setActive] = useState(hub.active)
   const deleteHub = (id) => {
@@ -25,6 +27,15 @@ const HubsItem = ({hub}) => {
         .catch(err => {
           console.log(err)
         })
+  }
+
+  const setActiveHub = (id) => {
+    setActive(!isActiveRoute)
+    const body = {
+      active: !isActiveRoute
+    }
+    adminInstance.patch(`${ADMIN_SERVER_URL}admin-routes/${id}/active/`, body, defaultOptions)
+        .then((res) => console.log(res))
   }
 
   const hubType = (type) => {
@@ -63,7 +74,7 @@ const HubsItem = ({hub}) => {
               <input
                   type="checkbox"
                   checked={isActiveRoute}
-                  onChange={() => setActive(!isActiveRoute)}
+                  onChange={() => setActiveHub(hub.id)}
               />
               <label>Активно</label>
             </div>
