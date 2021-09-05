@@ -1,4 +1,5 @@
 @import '../../../../global';
+
 .hubs-page-wrapper {
   height: 100%;
   min-height: 1200px;
@@ -8,23 +9,28 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+
   .top-hubs-tile {
     display: flex;
     justify-content: space-between;
     width: 1000px;
     margin-top: 30px;
     margin-bottom: 30px;
+
     .title {
       color: $white;
       font-weight: 400;
       font-size: 30px;
+
       .hubs-title {
         margin-bottom: 10px;
       }
+
       .way-title {
         font-size: 16px;
       }
     }
+
     .back-to-hubs-button {
       font-family: 'Montserrat', sans-serif;
       color: $white;
@@ -33,11 +39,13 @@
       background: none;
       border: 1px solid $light-blue;
       border-radius: 8px;
+
       &:hover {
         cursor: pointer;
       }
     }
   }
+
   .hubs-settings-wrapper {
     width: 1000px;
     height: 100%;
@@ -47,15 +55,18 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 60px;
+
     .minimal-price-wrapper {
       display: flex;
       flex-direction: column;
+
       label {
         font-family: 'Montserrat', sans-serif;
         font-weight: 500;
         font-size: 24px;
         margin-bottom: 20px;
       }
+
       input {
         width: 250px;
         height: 38px;
@@ -78,10 +89,12 @@
         font-family: 'Montserrat', sans-serif;
         font-size: 16px;
         margin-bottom: 20px;
+
         &:focus {
           border-color: $light-blue;
           box-shadow: 0 0 0 1px $light-blue;
         }
+
         &::placeholder {
           color: hsl(0, 0%, 50%);
           font-family: "Montserrat", sans-serif;
@@ -89,67 +102,85 @@
         }
       }
     }
+
     .shipping-title {
       font-family: 'Montserrat', sans-serif;
       font-weight: 500;
       font-size: 24px;
       margin-bottom: 20px;
     }
+
     .shipping-selects-wrapper {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       margin-bottom: 20px;
+
       .departure-country-select {
         width: 300px;
         height: 100px;
+
         .label-departure-select {
           opacity: .4;
         }
+
         .css-2b097c-container {
           margin-top: 10px;
         }
       }
+
       .departure-city-select {
         width: 300px;
         height: 100px;
+
         .label-departure-select {
           opacity: .4;
         }
+
         .css-2b097c-container {
           margin-top: 10px;
         }
       }
+
       .arrival-country-select {
         width: 300px;
         height: 100px;
+
         .label-arrival-select {
           opacity: .4;
         }
+
         .css-2b097c-container {
           margin-top: 10px;
         }
       }
+
       .arrival-city-select {
         width: 300px;
         height: 100px;
+
         .label-arrival-select {
           opacity: .4;
         }
+
         .css-2b097c-container {
           margin-top: 10px;
         }
       }
+
       .type-of-place-select {
         width: 300px;
+
         .label-shipping-select {
           opacity: .4;
         }
+
         .css-2b097c-container {
           margin-top: 10px;
         }
       }
     }
+
     .isStorage-wrapper {
       display: flex;
       flex-direction: row;
@@ -157,28 +188,34 @@
       font-family: 'Montserrat', sans-serif;
       font-weight: 500;
       font-size: 16px;
+
       input {
         margin-left: 10px;
       }
     }
+
     .set-price-wrapper {
       font-family: 'Montserrat', sans-serif;
       font-weight: 500;
       font-size: 24px;
       margin-bottom: 20px;
+
       .set-price-title {
         font-family: 'Montserrat', sans-serif;
         font-weight: 500;
         font-size: 24px;
         margin-bottom: 20px;
       }
+
       .settings-for-price-wrapper {
         display: flex;
         flex-direction: row;
+
         .price-for-type-wrapper {
           display: flex;
           flex-direction: column;
           margin-right: 20px;
+
           .price-button {
             font-family: 'Montserrat', sans-serif;
             font-weight: 400;
@@ -193,9 +230,11 @@
             background: none;
             outline: none;
             margin-bottom: 1px;
+
             &:nth-child(1) {
               border-radius: 20px 20px 0 0;
             }
+
             &:nth-child(3) {
               border-radius: 0 0 20px 20px;
             }
@@ -216,14 +255,17 @@
             border: none;
             outline: none;
             margin-bottom: 1px;
+
             &:nth-child(1) {
               border-radius: 20px 20px 0 0;
             }
+
             &:nth-child(3) {
               border-radius: 0 0 20px 20px;
             }
           }
         }
+
         .weight-settings-wrapper {
           min-height: 140px;
           display: flex;
@@ -234,9 +276,11 @@
           width: 800px;
           border-radius: 20px;
           margin-bottom: 20px;
+
           .inputs-wrapper {
             display: flex;
             flex-direction: row;
+
             input {
               width: 100px;
               height: 38px;
@@ -258,22 +302,26 @@
               box-sizing: border-box;
               font-family: 'Montserrat', sans-serif;
               font-size: 16px;
+
               &:focus {
                 border-color: $light-blue;
                 box-shadow: 0 0 0 1px $light-blue;
               }
+
               &::placeholder {
                 color: hsl(0, 0%, 50%);
                 font-family: "Montserrat", sans-serif;
                 font-size: 16px;
               }
             }
+
             label {
               font-family: 'Montserrat', sans-serif;
               font-weight: 400;
               font-size: 16px;
               margin-right: 10px;
             }
+
             .start-input {
               display: flex;
               align-items: center;
@@ -309,9 +357,11 @@
               flex-direction: row;
               width: max-content;
               height: 50px;
+
               input {
                 width: 150px;
               }
+
               .icon-euro {
                 margin-left: 5px;
               }
@@ -342,8 +392,10 @@
         }
       }
     }
+
     .upload-dest-and-dur {
       margin-bottom: 20px;
+
       input {
         margin-top: 10px;
         width: 220px;
@@ -366,27 +418,33 @@
         box-sizing: border-box;
         font-family: 'Montserrat', sans-serif;
         font-size: 16px;
+
         &:focus {
           border-color: $light-blue;
           box-shadow: 0 0 0 1px $light-blue;
         }
+
         &::placeholder {
           color: hsl(0, 0%, 50%);
           font-family: "Montserrat", sans-serif;
           font-size: 16px;
         }
       }
+
       .upload-title {
         font-family: 'Montserrat', sans-serif;
         font-weight: 500;
         font-size: 24px;
         margin-bottom: 20px;
       }
+
       .upload-inputs-wrapper {
         display: flex;
         flex-direction: row;
+
         .destination-wrapper {
           margin-right: 20px;
+
           label {
             font-family: 'Montserrat', sans-serif;
             font-weight: 400;
@@ -395,6 +453,7 @@
             opacity: .4;
           }
         }
+
         .duration-wrapper {
           label {
             font-family: 'Montserrat', sans-serif;
@@ -406,17 +465,21 @@
         }
       }
     }
+
     .timetable-wrapper {
       font-family: 'Montserrat', sans-serif;
       font-weight: 500;
+
       .timetable-title-wrapper {
         display: flex;
         flex-direction: row;
         align-items: center;
+
         .timetable-title {
           font-size: 24px;
           margin-right: 20px;
         }
+
         margin-bottom: 20px;
       }
 
@@ -425,6 +488,7 @@
         flex-direction: row;
         width: 250px;
         margin-bottom: 20px;
+
         .timetable-input {
           label {
             font-family: 'Montserrat', sans-serif;
@@ -432,6 +496,7 @@
             font-size: 16px;
             opacity: .4;
           }
+
           input {
             margin-top: 20px;
             width: 200px;
@@ -454,10 +519,12 @@
             box-sizing: border-box;
             font-family: 'Montserrat', sans-serif;
             font-size: 16px;
+
             &:focus {
               border-color: $light-blue;
               box-shadow: 0 0 0 1px $light-blue;
             }
+
             &::placeholder {
               color: hsl(0, 0%, 50%);
               font-family: "Montserrat", sans-serif;
@@ -465,8 +532,10 @@
             }
           }
         }
+
         .days-and-buttons-wrapper {
           margin-right: 20px;
+
           .timetable-days {
             font-family: 'Montserrat', sans-serif;
             font-weight: 400;
@@ -475,6 +544,7 @@
             opacity: .4;
             margin-bottom: 20px;
           }
+
           .button-day {
             font-family: 'Montserrat', sans-serif;
             font-weight: 400;
@@ -489,13 +559,16 @@
             background: none;
             outline: none;
             margin-bottom: 1px;
+
             &:nth-child(1) {
               border-radius: 20px 20px 0 0;
             }
+
             &:nth-child(7) {
               border-radius: 0 0 20px 20px;
             }
           }
+
           .active-button-day {
             font-family: 'Montserrat', sans-serif;
             font-weight: 400;
@@ -511,38 +584,46 @@
             border: none;
             outline: none;
             margin-bottom: 1px;
+
             &:nth-child(1) {
               border-radius: 20px 20px 0 0;
             }
+
             &:nth-child(7) {
               border-radius: 0 0 20px 20px;
             }
           }
         }
       }
+
       .chosen-timetable {
         width: 500px;
         height: 500px;
         border: 1px solid $light-blue;
       }
     }
+
     .services-wrapper {
       font-family: 'Montserrat', sans-serif;
       font-weight: 500;
       font-size: 24px;
       margin-bottom: 30px;
+
       .service-title {
         margin-bottom: 20px;
       }
     }
+
     .additional-block {
       font-family: 'Montserrat', sans-serif;
       font-weight: 500;
       font-size: 24px;
       margin-right: 20px;
+
       .additional-title {
         margin-bottom: 20px;
       }
+
       .add-point-block {
         display: flex;
 
@@ -554,6 +635,7 @@
           padding: 5px;
           margin-right: 15px;
         }
+
         .add-point-btn {
           font-family: 'Montserrat', sans-serif;
           background: none;
@@ -563,11 +645,13 @@
           cursor: pointer;
         }
       }
+
       .point-wrapper {
         margin-top: 30px;
         display: flex;
         font-weight: 400;
         font-size: 16px;
+
         .delete-point-btn {
           width: 20px;
           display: flex;
@@ -579,6 +663,7 @@
           cursor: pointer;
           margin-right: 20px;
         }
+
         .number {
           margin-right: 5px;
         }
@@ -592,9 +677,11 @@
       margin-bottom: 30px;
       display: flex;
       flex-direction: column;
+
       .rate-title {
         margin-bottom: 20px;
       }
+
       input {
         width: 200px;
         height: 38px;
@@ -616,10 +703,12 @@
         box-sizing: border-box;
         font-family: 'Montserrat', sans-serif;
         font-size: 16px;
+
         &:focus {
           border-color: $light-blue;
           box-shadow: 0 0 0 1px $light-blue;
         }
+
         &::placeholder {
           color: hsl(0, 0%, 50%);
           font-family: "Montserrat", sans-serif;
@@ -627,16 +716,40 @@
         }
       }
     }
+    .extra-change-wrapper {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 30px;
+      .extra-change-title {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      .extra-change-input {
+        display: flex;
+        align-items: center;
+        input {
+          @extend %input;
+        }
+        .percent {
+          margin-left: 10px;
+        }
+      }
+    }
+
     .active-panel {
       font-family: 'Montserrat', sans-serif;
       font-weight: 500;
       font-size: 24px;
       margin-bottom: 20px;
+
       label {
         margin-right: 20px;
       }
     }
   }
+
   .create-hub-button {
     width: 210px;
     height: 50px;
