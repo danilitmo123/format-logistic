@@ -26,8 +26,6 @@ const TypeOfRoutes = ({route, step}) => {
     }
   }, [])
 
-  console.log(route)
-
   const hubType = (type) => {
     switch (type) {
       case AIR:

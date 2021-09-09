@@ -5,8 +5,7 @@ import axios from "axios";
 import {useInput} from "../../../utils/useInput";
 
 import ErrorMessage from "../../Common/ErrorMessage";
-import Map from "../../MapUI/Map";
-import TypeOfRoutes from "../../MapUI/TypeOfRoutes";
+import MapBlock from "../../MapUI/MapBlock";
 import {IMaskInput} from 'react-imask'
 
 import './ConfirmOrderPage.scss'
@@ -22,16 +21,6 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
   const [createOrderWarning, setOrderWarning] = useState(false)
   const [sendEmailWarning, setEmailWarning] = useState(false)
   const [canSend, setCanSend] = useState(true)
-
-  const getPoints = (pathOfItem) => {
-    let pointsOfPath = []
-    pathOfItem[0].routes.map(item => {
-      pointsOfPath.push({lat: item.source.location.latitude, lng: item.source.location.longitude})
-      pointsOfPath.push({lat: item.destination.location.latitude, lng: item.destination.location.longitude})
-    })
-    return pointsOfPath
-  }
-
 
   const validateFormCreateOrder = () => {
     if (canSend) {
@@ -57,7 +46,8 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
     }
   }
 
-  const memoizedMap = useMemo(() => <Map points={getPoints(chosenPath)}/>, [chosenPath.routes])
+  const memoizedMap = useMemo(() => <MapBlock volume={volume} weight={weight}
+                                              chosenPath={chosenPath}/>, [chosenPath.routes])
 
   const createOrder = (send_mail) => {
     setCanSend(false)
@@ -94,23 +84,7 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
 
   return (
       <div className={'final-order-page-wrapper'}>
-        <div className={'final-map-wrapper'}>
-          <div className={'route'}>
-            {chosenPath[0].routes &&
-            chosenPath[0].routes.map((item, index) => <TypeOfRoutes step={index} route={item} />)}
-          </div>
-          {memoizedMap}
-        </div>
-        <div className={'all-info-route'}>
-          <div className={'title'}>Итого:</div>
-          <div>Расстояние: {(chosenPath[0].total_distance).toFixed(0)} км</div>
-          <div>Цена: {(chosenPath[0].total_cost)}€/{(chosenPath[0].total_cost * 1.18).toFixed(2)}$</div>
-          <div>Время в
-            пути: {(chosenPath[0].total_duration.min).toFixed(0)} - {(chosenPath[0].total_duration.max).toFixed(0)} дней
-          </div>
-          <div>Вес: {weight} кг</div>
-          <div>Объем: {volume} м³</div>
-        </div>
+        {memoizedMap}
         <div className={'additional-info'}>
           <div className={'additional-info-title'}>Дополнительная информация</div>
           <div className={'additional-blocks'}>
@@ -153,7 +127,7 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
                   value={email.value}
                   onBlur={email.onBlur}
                   onChange={email.onChange}/>
-              {(email.isDirty && email.emailError) && <ErrorMessage text={'Некорректный Email'} />}
+              {(email.isDirty && email.emailError) && <ErrorMessage text={'Некорректный Email'}/>}
             </div>
             <div className={'input-example'}>
               <label>Особые замечания</label>
@@ -162,8 +136,8 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
                   onChange={comment.onChange}/>
             </div>
           </div>
-          {createOrderWarning && <ErrorMessage text={'Телефон или Email обязательны к заполнению'} />}
-          {sendEmailWarning  && <ErrorMessage text={'Email обязателен к заполнению'} />}
+          {createOrderWarning && <ErrorMessage text={'Телефон или Email обязательны к заполнению'}/>}
+          {sendEmailWarning && <ErrorMessage text={'Email обязателен к заполнению'}/>}
           <div className={'buttons-order-wrapper'}>
             <button className={'send-order-button'} onClick={validateFormCreateOrder}>Оформить заявку</button>
             <button className={'send-email-button'} onClick={validateFormSendEmail}>Отправить на почту</button>

@@ -31,6 +31,7 @@
   .title-wrapper {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 15px;
 
     .cargo-all-info {
       font-size: 14px;
@@ -40,7 +41,6 @@
 
     .cargo-title {
       @extend %tile-title;
-      margin-bottom: 15px;
     }
   }
 
@@ -177,6 +177,230 @@
       width: 20px;
       height: 20px;
       cursor: pointer;
+    }
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .cargo-wrapper {
+    width: 95%;
+    padding: 32px 22px;
+
+    .cargo-input-wrapper {
+      .input-cargo-example {
+        margin-right: 25px;
+
+        .dimensions-box-wrapper,
+        .dimensions-pallet-wrapper {
+          .box-units-wrapper {
+            .cargo-input {
+              width: 60px;
+            }
+          }
+
+          .pallet-units-wrapper {
+            .pallet-length {
+              width: 60px;
+            }
+
+            .width-pallet {
+              width: 78px;
+            }
+
+            .cargo-input {
+              width: 60px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .cargo-wrapper {
+    width: 95%;
+    padding: 28px 18px;
+
+    .cargo-choice {
+      font-size: 14px;
+
+      .active-box-button {
+        width: 170px;
+        height: 40px;
+      }
+    }
+
+    .cargo-input-wrapper {
+      .input-cargo-example {
+        margin-right: 15px;
+
+        .choose-cargo-select {
+          width: 85px;
+        }
+
+        .count-input {
+          width: 50px;
+        }
+
+        .dimensions-box-wrapper,
+        .dimensions-pallet-wrapper {
+          .box-units-wrapper {
+            .cargo-input {
+              width: 45px;
+            }
+          }
+
+          .pallet-units-wrapper {
+            .pallet-length {
+              width: 45px;
+            }
+
+            .width-pallet {
+              width: 63px;
+            }
+
+            .cargo-input {
+              width: 45px;
+            }
+          }
+        }
+
+        .weight-cargo-wrapper {
+          .cargo-input {
+            width: 40px;
+          }
+
+          .weight-select {
+            width: 60px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .cargo-wrapper {
+    width: 95%;
+    padding: 20px 10px;
+
+    .title-wrapper {
+      align-items: center;
+
+      .cargo-all-info {
+        width: 265px;
+        font-size: 10px;
+      }
+
+      .cargo-title {
+        font-size: 18px;
+      }
+    }
+
+    .cargo-choice {
+      font-size: 12px;
+      margin-bottom: 20px;
+
+      .active-box-button {
+        height: 30px;
+        width: 140px;
+      }
+    }
+
+    .cargo-input-wrapper {
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 20px;
+
+      .input-cargo-example {
+        margin-bottom: 10px;
+
+        .count-input {
+          font-size: 12px;
+
+          &::placeholder {
+            font-size: 12px;
+          }
+        }
+
+        .choose-cargo-select {
+          .choose-cargo__placeholder {
+            font-size: 12px;
+          }
+
+          .choose-cargo__single-value {
+            font-size: 12px;
+          }
+        }
+
+        .dimensions-box-wrapper,
+        .dimensions-pallet-wrapper {
+          .box-units-wrapper {
+            .cargo-input {
+              width: 51px;
+              font-size: 12px;
+
+              &::placeholder {
+                font-size: 12px;
+              }
+            }
+          }
+
+          .dimensions-box-select {
+            .dimensions-box-select__placeholder {
+              font-size: 12px;
+            }
+
+            .dimensions-box-select__single-value {
+              font-size: 12px;
+            }
+          }
+
+          .dimensions-pallet-select {
+            .dimensions-pallet-select__single-value {
+              font-size: 12px;
+            }
+          }
+
+          .pallet-units-wrapper {
+            font-size: 12px;
+
+            .pallet-length {
+              font-size: 12px;
+              width: 45px;
+            }
+
+            .width-pallet {
+              width: 63px;
+            }
+
+            .cargo-input {
+              width: 45px;
+              font-size: 12px;
+              &::placeholder {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+
+        .weight-cargo-wrapper {
+          .cargo-input {
+            font-size: 12px;
+
+            &::placeholder {
+              font-size: 12px;
+            }
+          }
+
+          .weight-select {
+            .weight-select__single-value {
+              font-size: 12px;
+            }
+          }
+        }
+      }
     }
   }
 }

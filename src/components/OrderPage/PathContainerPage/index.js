@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 
-import PathItem from "./PathItem";
+
 import Loader from "../../Common/Loader";
+import MapBlock from "../../MapUI/MapBlock";
 
 import './PathContainerPage.scss'
 
@@ -10,11 +11,11 @@ const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler, weight
   const [index, setIndex] = useState('')
 
   useEffect(() => {
-    window.scroll(0,0)
+    window.scroll(0, 0)
   }, [])
 
   useEffect(() => {
-    if(paths.paths !== undefined && index !== '') {
+    if (paths.paths !== undefined && index !== '') {
       setChosenPath([paths.paths[index]])
       localStorage.setItem('path', JSON.stringify(paths.paths[index]))
       thirdPageActiveHandler(false)
@@ -22,7 +23,7 @@ const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler, weight
   }, [index])
 
   if (paths.paths && !paths.paths.length) {
-    return  <div className={'warning-path'}>
+    return <div className={'warning-path'}>
       <div>На данном направлении пока что нет сервиса</div>
       <div>Вернитесь на предыдущую страницу и измените маршрут</div>
     </div>
@@ -30,7 +31,7 @@ const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler, weight
 
   return (
       <div className={'path-container-page'}>
-        {paths.paths ? <div>{paths.paths.map((item, index) => <PathItem
+        {paths.paths ? <div>{paths.paths.map((item, index) => <MapBlock
             key={index}
             weight={weight}
             volume={volume}

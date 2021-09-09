@@ -203,7 +203,7 @@ const CountryForm = ({
             <label className={'select-title'}>Страна</label>
             <div className={'select'}>
               <Select
-                  classNamePrefix={countryWarning ? 'react-select' : ''}
+                  classNamePrefix={countryWarning ? 'react-select' : 'select'}
                   theme={customTheme}
                   options={modifyCountryObj}
                   onChange={setCountryFromOption}
@@ -233,10 +233,12 @@ const CountryForm = ({
                   className={sourceType === PlaceType.AIRPORT ? 'active-place-button' : 'place-button'}>Аэропорт
               </button>
               <button
+                  disabled={true}
                   onClick={() => handleSourceSwitcher(PlaceType.RAILWAY_STATION)}
                   className={sourceType === PlaceType.RAILWAY_STATION ? 'active-place-button' : 'place-button'}>Ж/Д
               </button>
               <button
+                  disabled={true}
                   onClick={() => handleSourceSwitcher(PlaceType.SEAPORT)}
                   className={sourceType === PlaceType.SEAPORT ? 'active-place-button' : 'place-button'}>Порт
               </button>
@@ -249,7 +251,7 @@ const CountryForm = ({
                   <div className={'select'}>
                     <AsyncSelect
                         value={optionCityFrom}
-                        classNamePrefix={cityWarningFrom ? 'select' : ''}
+                        classNamePrefix={cityWarningFrom ? 'select' : 'city-select'}
                         theme={customTheme}
                         loadOptions={loadCitiesOptionsFrom}
                         options={modifyCitiesFromObj}
@@ -264,7 +266,7 @@ const CountryForm = ({
                   <div className={'select'}>
                     <Select
                         value={optionCityFrom}
-                        classNamePrefix={cityWarningFrom ? 'select' : ''}
+                        classNamePrefix={cityWarningFrom ? 'select' : 'city-select'}
                         theme={customTheme}
                         options={modifyCitiesFromObj}
                         onChange={selectedCityIdFromHandler}
@@ -287,7 +289,7 @@ const CountryForm = ({
             <label className={'select-title'}>Страна</label>
             <div className={'select'}>
               <Select
-                  classNamePrefix={countryWarning ? 'react-select' : ''}
+                  classNamePrefix={countryWarning ? 'react-select' : 'select'}
                   theme={customTheme}
                   options={modifyCountryObj}
                   onChange={setCountryToOption}
@@ -316,17 +318,17 @@ const CountryForm = ({
               <button
                   disabled={!(sourceType === PlaceType.CITY || sourceType === PlaceType.AIRPORT)}
                   onClick={() => handleDestSwitcher(PlaceType.AIRPORT)}
-                  className={destinationType === PlaceType.AIRPORT ? 'active-air-button' : 'place-button'}>Аэропорт
+                  className={destinationType === PlaceType.AIRPORT ? 'active-place-button' : 'place-button'}>Аэропорт
               </button>
               <button
-                  disabled={!(sourceType === PlaceType.CITY || sourceType === PlaceType.RAILWAY_STATION)}
+                  disabled={true}
                   onClick={() => handleDestSwitcher(PlaceType.RAILWAY_STATION)}
-                  className={destinationType === PlaceType.RAILWAY_STATION ? 'active-train-button' : 'place-button'}>Ж/Д
+                  className={destinationType === PlaceType.RAILWAY_STATION ? 'active-place-button' : 'place-button'}>Ж/Д
               </button>
               <button
-                  disabled={!(sourceType === PlaceType.CITY || sourceType === PlaceType.SEAPORT)}
+                  disabled={true}
                   onClick={() => handleDestSwitcher(PlaceType.SEAPORT)}
-                  className={destinationType === PlaceType.SEAPORT ? 'active-sea-button' : 'place-button'}>Порт
+                  className={destinationType === PlaceType.SEAPORT ? 'active-place-button' : 'place-button'}>Порт
               </button>
             </div>
           </div>
@@ -336,7 +338,7 @@ const CountryForm = ({
               destinationType === PlaceType.CITY ?
                   <div className={'select'}>
                     <AsyncSelect
-                        classNamePrefix={cityWarningTo ? 'select' : ''}
+                        classNamePrefix={cityWarningTo ? 'select' : 'city-select'}
                         theme={customTheme}
                         value={optionCityTo}
                         loadOptions={loadCitiesOptionsTo}
@@ -351,7 +353,7 @@ const CountryForm = ({
                   :
                   <div className={'select'}>
                     <Select
-                        classNamePrefix={cityWarningTo ? 'select' : ''}
+                        classNamePrefix={cityWarningTo ? 'select' : 'city-select'}
                         theme={customTheme}
                         options={modifyCitiesToObj}
                         value={optionCityTo}

@@ -203,7 +203,7 @@ const CargoForm = ({cargoWarning, data, setDataRaw, volume, setVolume, weight, s
                 <div className={'input-cargo-example'}>
                   <label className={'input-cargo-label'}>Количество(шт)</label>
                   <input
-                      className={'cargo-input'}
+                      className={'cargo-input count-input'}
                       type="number"
                       value={item.count || ''}
                       onChange={(e) => updateItem('count', e.target.value)}

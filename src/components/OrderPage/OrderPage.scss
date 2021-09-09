@@ -23,7 +23,7 @@
   }
 
   .form-wrapper {
-    margin-bottom: 60px;
+    margin-bottom: 90px;
 
     .continue-button-first-page {
       position: absolute;
@@ -64,3 +64,40 @@
     }
   }
 }
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .order-page-wrapper {
+    padding: 0 2%;
+
+    .form-wrapper {
+      width: 95%;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .order-page-wrapper {
+    padding: 0 1%;
+  }
+  .form-wrapper {
+    width: 95%;
+  }
+}
+
+@media (max-width: 767px) {
+  .order-page-wrapper {
+    padding: 0 1%;
+  }
+  .order-title {
+    font-size: 28px !important;
+    margin-bottom: 20px !important;
+  }
+  .form-wrapper {
+    width: 95%;
+
+    .continue-button-first-page {
+
+    }
+  }
+}
+

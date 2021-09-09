@@ -1,0 +1,195 @@
+@import '../../../global';
+
+.all-route-info {
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+  width: max-content;
+  margin-bottom: 40px;
+
+  .route-points-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    background: $white;
+    width: 1180px;
+    height: max-content;
+    padding: 10px;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .route-item-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    height: max-content;
+    border-radius: 20px;
+    position: relative;
+
+    .route-info {
+      background: $white;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: column;
+      width: 30%;
+      border-radius: 0 0 20px 0;
+
+
+      .route-total-cost {
+        margin-top: 50px;
+        font-size: 32px;
+        font-weight: 400;
+        margin-bottom: 20px;
+      }
+
+      .route-total-duration {
+        font-size: 14px;
+        font-weight: 400;
+        margin-bottom: 20px;
+      }
+      .route-total-distance {
+        font-size: 14px;
+        font-weight: 400;
+        margin-bottom: 40px;
+      }
+
+      .route-info-title {
+        font-weight: 700;
+        margin-bottom: 15px;
+      }
+
+      .route-time-and-cost-wrapper {
+        display: flex;
+        font-size: 14px;
+        margin-bottom: 70px;
+
+        .weight {
+          margin-right: 10px;
+        }
+      }
+
+      .choose-button {
+        @extend %active-button;
+
+      }
+    }
+
+    #HERE_MAP_CONTAINER.here-map-container {
+      min-height: 400px;
+      width: 70%;
+    }
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .all-route-info {
+    width: 100%;
+
+    .route-points-wrapper {
+      width: 100%;
+      padding: 0;
+
+
+      .step-of-route-wrapper {
+        margin-top: 15px;
+        margin-left: 15px;
+        margin-bottom: 15px;
+      }
+    }
+
+    .route-item-wrapper {
+      width: 100%;
+
+      .route-info {
+        width: 30%;
+        .route-total-cost {
+          font-size: 27px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .all-route-info {
+    width: 100%;
+
+    .route-points-wrapper {
+      width: 100%;
+      padding: 0;
+      border-radius: 20px 20px 0 0;
+
+      .step-of-route-wrapper {
+        margin-top: 15px;
+        margin-left: 15px;
+      }
+    }
+
+    .route-item-wrapper {
+      width: 100%;
+
+      .route-info {
+        padding: 15px;
+        width: 100%;
+        border-radius: 0 0 20px 20px;
+
+        .route-total-cost {
+          margin-top: 30px;
+        }
+
+        .route-time-and-cost-wrapper {
+          margin-bottom: 30px;
+        }
+      }
+
+      #HERE_MAP_CONTAINER.here-map-container {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .all-route-info {
+    width: 100%;
+    margin-bottom: 20px;
+    .route-points-wrapper {
+      align-items: center;
+      flex-direction: column;
+      padding: 0;
+      width: 100%;
+      border-radius: 20px 20px 0 0;
+
+      .step-of-route-wrapper {
+        margin-right: 0;
+        width: 270px;
+        margin-top: 15px;
+      }
+    }
+
+    .route-item-wrapper {
+      width: 100%;
+
+      .route-info {
+        width: 100%;
+        padding: 10px;
+        border-radius: 0 0 20px 20px;
+
+        .route-total-cost {
+          margin-top: 20px;
+        }
+
+        .route-time-and-cost-wrapper {
+          margin-bottom: 40px;
+        }
+      }
+
+      #HERE_MAP_CONTAINER.here-map-container {
+        display: none;
+      }
+    }
+  }
+}
+
