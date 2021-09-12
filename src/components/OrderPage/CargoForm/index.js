@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {FC, useEffect} from 'react';
 
 import {
   typeOfCargoOptions,
@@ -29,10 +29,8 @@ const objectTemplate = {
   weightBoxSelect: 'КГ',
 }
 
-const CargoForm = ({cargoWarning, data, setDataRaw, volume, setVolume, weight, setWeight}) => {
 
-  const [activeContainerButton, setActiveContainerButton] = useState(false)
-  const [activeBoxButton, setActiveBoxButton] = useState(true)
+const CargoForm = ({cargoWarning, data, setDataRaw, volume, setVolume, weight, setWeight}) => {
 
   const setData = (data) => {
     localStorage.setItem('cargo', JSON.stringify(data))
@@ -163,10 +161,6 @@ const CargoForm = ({cargoWarning, data, setDataRaw, volume, setVolume, weight, s
     calculateWeight(newData)
   }
 
-  const ActiveBoxButtonHandler = () => {
-    setActiveContainerButton(false)
-    setActiveBoxButton(true)
-  }
 
   return (
       <div className={'cargo-wrapper'}>
@@ -175,9 +169,7 @@ const CargoForm = ({cargoWarning, data, setDataRaw, volume, setVolume, weight, s
           <div className={'cargo-all-info'}>Грузов: {data.length} Общий вес: {weight} кг Общий объем: {volume} м³</div>
         </div>
         <div className={'cargo-choice'}>
-          <div className={activeBoxButton ? 'active-box-button' : 'box'}
-               onClick={ActiveBoxButtonHandler}>Коробки / Паллеты
-          </div>
+          <div className={'active-box-button'}>Коробки / Паллеты</div>
         </div>
         {data.map((item, index) => {
 

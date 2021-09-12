@@ -11,16 +11,15 @@ import './App.css'
 
 const App = () => {
 
-  const [admin, setAdmin] = useState(false)
-  const [firstActivePage, setFirstActivePage] = useState(true)
+  const [firstActivePage, setFirstActivePage] = useState<boolean>(true)
 
   return (
       <Router>
         <div className={'App'}>
-          <Header isAdmin={admin} setAdmin={setAdmin} firstActivePage={firstActivePage} setActive={setFirstActivePage}/>
+          <Header setActive={setFirstActivePage}/>
           <Switch>
             <Route exact={true} path={'/'} >
-              <OrderPage setFirstPageActive={setFirstActivePage} firstActivePage={firstActivePage} setActive={setFirstActivePage}/>
+              <OrderPage setFirstPageActive={setFirstActivePage} firstActivePage={firstActivePage}/>
             </Route>
             <Route path={'/admin'}>
               <AdminPage/>

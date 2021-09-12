@@ -33,8 +33,10 @@ const MapBlock = ({weight, index, setIndex, path, volume, chosenPath}) => {
 
   return (
       <div className={'all-route-info'}>
+        {displayedInfo && (displayedInfo.cheapest && <div className={'variant cheapest-variant'}>Самый дешевый</div>)}
+        {displayedInfo && (displayedInfo.fastest && <div className={'variant fastest-variant'}>Самый быстрый</div>)}
         <div className={'route-points-wrapper'}>
-          {displayedPath && displayedPath.map((route, index) => <TypeOfRoutes step={index} route={route}/>)}
+          {displayedPath && displayedPath.map((route, index) => <TypeOfRoutes key={index} step={index} route={route}/>)}
         </div>
         <div className={'route-item-wrapper'}>
           <Map points={getPoints(displayedPath)}/>
@@ -47,7 +49,7 @@ const MapBlock = ({weight, index, setIndex, path, volume, chosenPath}) => {
               - {displayedInfo && (displayedInfo.total_duration.max).toFixed(0)} дней
             </div>
             <div className={'route-total-distance'}>
-              Расстояние: {(displayedInfo.total_distance).toFixed(0)} км
+              Расстояние: {displayedInfo && (displayedInfo.total_distance).toFixed(0)} км
             </div>
             <div className={'route-info-title'}>Информация о грузе</div>
             <div className={'route-time-and-cost-wrapper'}>

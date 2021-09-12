@@ -5,7 +5,34 @@
   flex-direction: column;
   height: max-content;
   width: max-content;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
+  position: relative;
+
+  .variant {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 400;
+    color: $white;
+    position: absolute;
+    right: 30px;
+    top: -20px;
+    height: 25px;
+    padding: 6px;
+    width: max-content;
+    border-radius: 8px;
+  }
+
+  .cheapest-variant {
+    //background: #52a863;
+    background: $light-blue;
+  }
+
+  .fastest-variant {
+    //background: #9066c7;
+    background: $light-blue;
+  }
 
   .route-points-wrapper {
     display: flex;

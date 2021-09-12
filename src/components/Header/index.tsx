@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 
 import {Link} from "react-router-dom";
 
@@ -6,7 +6,11 @@ import logo from '../../img/logo.svg'
 
 import './Header.scss'
 
-const Header = ({setActive}) => {
+interface HeaderProps {
+    setActive: (active: boolean) => void
+}
+
+const Header: FC<HeaderProps> = ({setActive}) => {
 
   const firstActivePageHandler = () => {
     setActive(true)

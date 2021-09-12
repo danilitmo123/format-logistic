@@ -9,7 +9,7 @@ import './PathContainerPage.scss'
 const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler, weight, volume}) => {
 
   const [index, setIndex] = useState('')
-
+  console.log(paths)
   useEffect(() => {
     window.scroll(0, 0)
   }, [])
