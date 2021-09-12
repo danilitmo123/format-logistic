@@ -11,7 +11,7 @@ import './App.css'
 
 const App = () => {
 
-  const [firstActivePage, setFirstActivePage] = useState<boolean>(true)
+  const [firstActivePage, setFirstActivePage] = useState(true)
 
   return (
       <Router>
