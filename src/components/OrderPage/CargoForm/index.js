@@ -161,7 +161,6 @@ const CargoForm = ({cargoWarning, data, setDataRaw, volume, setVolume, weight, s
     calculateWeight(newData)
   }
 
-
   return (
       <div className={'cargo-wrapper'}>
         <div className={'title-wrapper'}>

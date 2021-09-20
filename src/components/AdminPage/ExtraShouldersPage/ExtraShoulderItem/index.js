@@ -12,6 +12,7 @@ const defaultMassRate = {
     range_from: 0,
     range_to: 0,
     price_per_unit: 0,
+    minimal_cost: 0,
     type: 'MASS'
 }
 
@@ -19,6 +20,7 @@ const defaultSizeRate = {
     range_from: 0,
     range_to: 0,
     price_per_unit: 0,
+    minimal_cost: 0,
     type: 'SIZE'
 }
 
@@ -26,6 +28,7 @@ const defaultLdmRate = {
     range_from: 0,
     range_to: 0,
     price_per_unit: 0,
+    minimal_cost: 0,
     type: 'LDM'
 }
 
@@ -69,7 +72,6 @@ const ExtraShoulderItem = ({item}) => {
     const [activeButtonForWeight, setActiveButtonForWeight] = useState(true)
     const [activeButtonForVolume, setActiveButtonForVolume] = useState(false)
     const [activeButtonForMeter, setActiveButtonForMeter] = useState(false)
-    const [minimalPrice, setMinimalPrice] = useState(item.minimal_price)
     const [markup, setMarkup] = useState(((item.markup - 1 ) * 100).toFixed(2))
 
     const addWeightItem = () => {
@@ -152,7 +154,7 @@ const ExtraShoulderItem = ({item}) => {
     }
 
     const sendRatesData = () => {
-        let body = {rates: flatRates(), minimal_price: minimalPrice, markup: (markup /100) + 1}
+        let body = {rates: flatRates(), markup: (markup /100) + 1}
         adminInstance.patch(`${UPDATE_RATES_URL}/${item.id}/`, body).then()
     }
 
@@ -209,6 +211,13 @@ const ExtraShoulderItem = ({item}) => {
                                                 onChange={e => updateItem('price_per_unit', e.target.value)}
                                                 type="number"
                                                 value={item.price_per_unit}/>
+                                            <label className={'icon-euro'}>€</label>
+                                        </div>
+                                        <div className={'price-input'}>
+                                            <input
+                                                onChange={e => updateItem('minimal_cost', e.target.value)}
+                                                type="number"
+                                                value={item.minimal_cost}/>
                                             <label className={'icon-euro'}>€</label>
                                         </div>
                                         <img src={trash} onClick={() => deleteWeightItem(index)} alt="trash"/>
@@ -299,10 +308,6 @@ const ExtraShoulderItem = ({item}) => {
                 <label htmlFor="markup">Наценка
                     <input id={'markup'} type="number" value={markup} onChange={e => setMarkup(e.target.value)}/>%
                 </label>
-            </div>
-            <div className={'minimal-price'}>
-                <label>Минимальная ставка</label>
-                <input type="number" value={minimalPrice} onChange={e => setMinimalPrice(e.target.value)}/>
             </div>
             <button onClick={sendRatesData} className={'save-button'}>Сохранить</button>
         </div>

@@ -18,18 +18,21 @@ const defaultRateMass = {
   range_from: 0,
   range_to: 0,
   price_per_unit: 0,
+  minimal_cost: 0,
   type: 'MASS'
 }
 const defaultRateSize = {
   range_from: 0,
   range_to: 0,
   price_per_unit: 0,
+  minimal_cost: 0,
   type: 'SIZE'
 }
 const defaultRateLdm = {
   range_from: 0,
   range_to: 0,
   price_per_unit: 0,
+  minimal_cost: 0,
   type: 'LDM'
 }
 const initRates = (initData) => {
@@ -103,7 +106,6 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
   const [additionalServices, setAdditionalServices] = useState(initData.additional_services ? initData.additional_services : [])
   const [rankedServices, setRankedServices] = useState(initData.ranked_services ? initData.ranked_services : [])
 
-  const [minimalPrice, setMinimalPrice] = useState(initData.minimal_price ? initData.minimal_price : 0)
   const [validityOfTariff, setValidity] = useState(initData.rates_valid_to ? initData.rates_valid_to : '')
 
   const [active, setActive] = useState(initData.active ? initData.active : false)
@@ -151,7 +153,6 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
       timetableDays,
       prepareDays,
       activeTimetable,
-      minimalPrice,
       ratesValidTo: validityOfTariff,
       active: active,
       title: title,
@@ -244,10 +245,6 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
         <div className={'active-panel'}>
           <label htmlFor={'active'}>Активно</label>
           <input id={'active'} type="checkbox" checked={active} onChange={() => setActive(!active)}/>
-        </div>
-        <div className={'minimal-price-wrapper'}>
-          <label>Минимальная ставка</label>
-          <input type="number" value={minimalPrice} onChange={e => setMinimalPrice(e.target.value)}/>
         </div>
         <div className={'timetable-wrapper'}>
           <div className={'timetable-title-wrapper'}>
