@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 
 import {ADMIN_SERVER_URL} from "../../../../constants/URL";
-import axios from "axios";
 
 import trash from "../../../../img/trash-icon.svg";
 
@@ -12,7 +11,7 @@ const defaultMassRate = {
     range_from: 0,
     range_to: 0,
     price_per_unit: 0,
-    minimal_cost: 0,
+    minimal_price: 0,
     type: 'MASS'
 }
 
@@ -20,7 +19,7 @@ const defaultSizeRate = {
     range_from: 0,
     range_to: 0,
     price_per_unit: 0,
-    minimal_cost: 0,
+    minimal_price: 0,
     type: 'SIZE'
 }
 
@@ -28,7 +27,7 @@ const defaultLdmRate = {
     range_from: 0,
     range_to: 0,
     price_per_unit: 0,
-    minimal_cost: 0,
+    minimal_price: 0,
     type: 'LDM'
 }
 

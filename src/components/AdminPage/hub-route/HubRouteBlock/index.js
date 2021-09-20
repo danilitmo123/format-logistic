@@ -18,21 +18,21 @@ const defaultRateMass = {
   range_from: 0,
   range_to: 0,
   price_per_unit: 0,
-  minimal_cost: 0,
+  minimal_price: 0,
   type: 'MASS'
 }
 const defaultRateSize = {
   range_from: 0,
   range_to: 0,
   price_per_unit: 0,
-  minimal_cost: 0,
+  minimal_price: 0,
   type: 'SIZE'
 }
 const defaultRateLdm = {
   range_from: 0,
   range_to: 0,
   price_per_unit: 0,
-  minimal_cost: 0,
+  minimal_price: 0,
   type: 'LDM'
 }
 const initRates = (initData) => {
@@ -153,7 +153,7 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
       timetableDays,
       prepareDays,
       activeTimetable,
-      ratesValidTo: validityOfTariff,
+      ratesValidTo: validityOfTariff ? validityOfTariff : '9999-12-31',
       active: active,
       title: title,
       source_is_storage: isStorageFrom,
