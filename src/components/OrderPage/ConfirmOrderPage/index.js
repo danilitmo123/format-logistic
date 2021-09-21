@@ -9,7 +9,7 @@ import MapBlock from "../../MapUI/MapBlock";
 import {IMaskInput} from 'react-imask'
 
 import './ConfirmOrderPage.scss'
-import {log} from "util";
+import CustomsClearanceForm from "../CustomsClearanceForm";
 
 const CREATE_ORDER_URL = `${ORDER_SERVER_URL}orders/`
 
@@ -22,6 +22,7 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
       const [createOrderWarning, setOrderWarning] = useState(false)
       const [sendEmailWarning, setEmailWarning] = useState(false)
       const [canSend, setCanSend] = useState(true)
+      const isCustoms = localStorage.getItem('customs')
 
       const validateFormCreateOrder = () => {
         if (canSend) {
@@ -156,6 +157,7 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
                 })}
               </div>
             </div>
+            {isCustoms && <CustomsClearanceForm/>}
             <div className={'final-form-wrapper'}>
               <div className={'shipper-title'}>Оформление заказа на перевозку</div>
               <div className="shipper">

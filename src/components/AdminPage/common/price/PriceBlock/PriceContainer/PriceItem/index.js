@@ -27,7 +27,7 @@ const PriceItem = ({rateData, setRateData, onDelete}) => {
     rateData[key] = value
     setRateData(rateData)
   }
-
+  console.log(rateData)
   return (
       <div className={'inputs-wrapper'}>
         <div className={'start-input'}>
@@ -57,9 +57,9 @@ const PriceItem = ({rateData, setRateData, onDelete}) => {
         </div>
         <div className={'price-input'}>
           <input
-              onChange={e => updateItem('minimal_cost', +e.target.value)}
+              onChange={e => updateItem('minimal_price', +e.target.value)}
               type="number"
-              value={rateData.minimal_cost}/>
+              value={rateData.minimal_price}/>
           <label className={'icon-euro'}>€</label>
         </div>
         <img src={trash} onClick={onDelete} alt="trash"/>

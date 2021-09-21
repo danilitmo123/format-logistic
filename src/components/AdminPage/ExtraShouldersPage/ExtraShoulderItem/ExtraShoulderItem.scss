@@ -223,6 +223,19 @@
       }
     }
   }
+  .percent-block {
+    display: flex;
+    flex-direction: column;
+    .input-wrapper {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      input {
+        @extend %input;
+        margin-right: 5px;
+      }
+    }
+  }
   .save-button {
     margin-top: 10px;
     width: 150px;

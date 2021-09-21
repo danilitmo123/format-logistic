@@ -9,7 +9,7 @@ const MapBlock = ({weight, index, setIndex, path, volume, chosenPath}) => {
 
   const [displayedPath, setPath] = useState(null)
   const [displayedInfo, setInfo] = useState(null)
-  const isCustoms = localStorage.getItem('customs')
+
 
   useEffect(() => {
     if (chosenPath) {
@@ -32,8 +32,6 @@ const MapBlock = ({weight, index, setIndex, path, volume, chosenPath}) => {
     return pointsOfPath
   }
 
-  console.log(isCustoms)
-
   return (
       <div className={'all-route-info'}>
         {displayedInfo && (displayedInfo.cheapest && <div className={'variant cheapest-variant'}>Самый дешевый</div>)}
@@ -54,9 +52,6 @@ const MapBlock = ({weight, index, setIndex, path, volume, chosenPath}) => {
             </div>
             <div className={'route-total-distance'}>
               Расстояние: {displayedInfo && (displayedInfo.total_distance).toFixed(0)} км
-            </div>
-            <div className={'route-total-distance'}>
-              {isCustoms === 'true' ? <div>Таможенное офоромление: Да</div>: ''}
             </div>
             <div className={'route-info-title'}>Информация о грузе</div>
             <div className={'route-time-and-cost-wrapper'}>

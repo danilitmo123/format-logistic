@@ -1,9 +1,9 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import PriceSwitcher from "./PriceSwitcher";
 import {RateType} from "../../../../../constants/unit";
 import PriceContainer from "./PriceContainer";
 import {RateTypeOptionContext, useRatesContext} from "../PriceContext";
-import {act} from "@testing-library/react";
+
 
 const defaultOption = RateType.MASS
 
@@ -29,6 +29,7 @@ const rateTemplate = {
     range_from: 0,
     range_to: 0,
     price_per_unit: 0,
+    minimal_price: 0,
     type: defaultOption
 }
 

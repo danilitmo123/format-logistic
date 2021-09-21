@@ -29,7 +29,7 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
   const [cargoWarning, setCargoWarning] = useState(false)
   const [chooseRussiaWarning, setChooseRussiaWarning] = useState(false)
   const [showAlert, setShowAlert] = useState({active: false, isEmail: false})
-
+  const [isThirdPageActive, setThirdPageActive] = useState(false)
 
   const disabledButtonHandler = () => {
     let warning = false
@@ -190,7 +190,8 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
                 setAlert={setShowAlert}
                 chosenPath={chosenPath}
                 volume={volume}
-                weight={weight}/>
+                weight={weight}
+              />
               <button
                 className={'continue-button-first-page'}
                 onClick={returnSecondPagHandler}
