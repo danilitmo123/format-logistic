@@ -6,7 +6,7 @@ let _SERVER_URL
 if (process.env.REACT_APP_API_SERVER_URL) {
     DEV_SERVER_URL = process.env.REACT_APP_API_SERVER_URL
 } else {
-    DEV_SERVER_URL = "https://ancient-temple-39835.herokuapp.com/"
+    DEV_SERVER_URL = "https://fastcustoms-back-test.herokuapp.com/"
 }
 
 if (process.env.REACT_APP_MODE === 'LOCAL')
