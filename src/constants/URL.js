@@ -18,4 +18,4 @@ export const GEO_SERVER_URL = _SERVER_URL + "geo/"
 export const ROUTES_SERVER_URL = _SERVER_URL + "route/"
 export const ADMIN_SERVER_URL = _SERVER_URL + "api-admin/"
 export const ORDER_SERVER_URL = _SERVER_URL + "order/"
-
+export const REPORT_SERVER_URL = _SERVER_URL + "report/"
