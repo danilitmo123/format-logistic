@@ -121,7 +121,7 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
                     'Accept': ' application/pdf'
                 }
             }
-            axios.post(`${REPORT_SERVER_URL}/report`, body, options)
+            axios.post(`${REPORT_SERVER_URL}report`, body, options)
                 .then((response) => {
                     const url = window.URL.createObjectURL(new Blob([response.data]));
                     const link = document.createElement('a');
