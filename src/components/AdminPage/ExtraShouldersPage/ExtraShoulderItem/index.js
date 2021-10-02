@@ -263,6 +263,13 @@ const ExtraShoulderItem = ({item}) => {
                                     value={item.price_per_unit}/>
                                 <label className={'icon-euro'}>€</label>
                               </div>
+                              <div className={'price-input'}>
+                                <input
+                                    onChange={e => updateItem('minimal_cost', e.target.value)}
+                                    type="number"
+                                    value={item.minimal_cost}/>
+                                <label className={'icon-euro'}>€</label>
+                              </div>
                               <img src={trash} onClick={() => deleteVolumeItem(index)} alt="trash"/>
                             </div>
                         )

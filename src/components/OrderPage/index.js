@@ -29,7 +29,8 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
   const [cargoWarning, setCargoWarning] = useState(false)
   const [chooseRussiaWarning, setChooseRussiaWarning] = useState(false)
   const [showAlert, setShowAlert] = useState({active: false, isEmail: false})
-  const [isThirdPageActive, setThirdPageActive] = useState(false)
+  const [thirdPageActive, setThirdPageActive] = useState(false)
+
 
   const disabledButtonHandler = () => {
     let warning = false
@@ -104,9 +105,9 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
       localStorage.setItem('good', JSON.stringify(data_cargos))
       let data = {
         source:
-          {id: selectedCityIdFrom},
+            {id: selectedCityIdFrom},
         destination:
-          {id: selectedCityIdTo},
+            {id: selectedCityIdTo},
         good: {
           boxes: data_cargos
         },
@@ -114,9 +115,9 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
         destination_type: destinationType === PlaceType.CITY ? destinationType : destinationType + '_DST'
       }
       axios.post(`${ROUTES_SERVER_URL}paths`, data)
-        .then((res => {
-          setPaths(res.data)
-        })).catch(err => console.log({err}))
+          .then((res => {
+            setPaths(res.data)
+          })).catch(err => console.log({err}))
     }
   }
 
@@ -130,78 +131,83 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
 
   const returnSecondPagHandler = () => {
     setSecondActivePage(true)
+    setThirdPageActive(false)
   }
 
   return (
-    <section className={'order-page-wrapper'}>
-      <div
-        className={'order-title'}>{secondActivePage || firstActivePage ? 'Рассчитать перевозку' : 'Офоромление заявки на перевозку'}</div>
-      <div className={'form-wrapper'}>
-        {firstActivePage ?
-          <>
-            <FirstStepForm
-              setCityWarningTo={setCityWarningTo}
-              setCityWarningFrom={setCityWarningFrom}
-              firstActivePage={firstActivePage}
-              showAlert={showAlert}
-              setAlert={setShowAlert}
-              data={data}
-              setDataRaw={setDataRaw}
-              cargoWarning={cargoWarning}
-              volume={volume}
-              setVolume={setVolume}
-              weight={weight}
-              setWeight={setWeight}
-              cityWarningFrom={cityWarningFrom}
-              cityWarningTo={cityWarningTo}
-              setIdTo={setSelectedCityIdTo}
-              setIdFrom={setSelectedCityIdFrom}
-              sourceType={sourceType}
-              destinationType={destinationType}
-              setSourceType={setSourceType}
-              setDestinationType={setDestinationType}
-              chooseRussiaWarning={chooseRussiaWarning}
-              setChooseRussiaWarning={setChooseRussiaWarning}
-            />
-            <button
-              className={'continue-button-first-page'}
-              onClick={disabledButtonHandler}
-            >Продолжить
-            </button>
-          </>
-          : secondActivePage ?
-            <>
-              <PathContainerPage
-                volume={volume}
-                weight={weight}
-                paths={paths}
-                setChosenPath={setChosenPath}
-                thirdPageActiveHandler={setSecondActivePage}/>
-              <button
-                onClick={secondPageActiveHandler}
-                className={'continue-button-first-page'}
-              >Назад
-              </button>
-            </>
-            :
-            <>
-              <ConfirmOrderPage
-                setFirstPageActive={setFirstPageActive}
-                setAlert={setShowAlert}
-                chosenPath={chosenPath}
-                volume={volume}
-                weight={weight}
-              />
-              <button
-                className={'continue-button-first-page'}
-                onClick={returnSecondPagHandler}
-              >Назад
-              </button>
-            </>
-        }
-      </div>
-      {showAlert.active ? <Alert showAlert={showAlert} setAlert={setShowAlert}/> : ''}
-    </section>
+      <section className={'order-page-wrapper'}>
+        <div
+            className={'order-title'}>{secondActivePage || firstActivePage ? 'Рассчитать перевозку' : 'Офоромление заявки на перевозку'}</div>
+        <div className={'form-wrapper'}>
+          {firstActivePage ?
+              <>
+                <FirstStepForm
+                    setCityWarningTo={setCityWarningTo}
+                    setCityWarningFrom={setCityWarningFrom}
+                    firstActivePage={firstActivePage}
+                    showAlert={showAlert}
+                    setAlert={setShowAlert}
+                    data={data}
+                    setDataRaw={setDataRaw}
+                    cargoWarning={cargoWarning}
+                    volume={volume}
+                    setVolume={setVolume}
+                    weight={weight}
+                    setWeight={setWeight}
+                    cityWarningFrom={cityWarningFrom}
+                    cityWarningTo={cityWarningTo}
+                    setIdTo={setSelectedCityIdTo}
+                    setIdFrom={setSelectedCityIdFrom}
+                    sourceType={sourceType}
+                    destinationType={destinationType}
+                    setSourceType={setSourceType}
+                    setDestinationType={setDestinationType}
+                    chooseRussiaWarning={chooseRussiaWarning}
+                    setChooseRussiaWarning={setChooseRussiaWarning}
+                    thirdPageActive={thirdPageActive}
+                />
+                <button
+                    className={'continue-button-first-page'}
+                    onClick={disabledButtonHandler}
+                >Продолжить
+                </button>
+              </>
+              : secondActivePage ?
+                  <>
+                    <PathContainerPage
+                        volume={volume}
+                        weight={weight}
+                        paths={paths}
+                        setChosenPath={setChosenPath}
+                        thirdPageActiveHandler={setSecondActivePage}
+                        setThirdPage={setThirdPageActive}
+                    />
+                    <button
+                        onClick={secondPageActiveHandler}
+                        className={'continue-button-first-page'}
+                    >Назад
+                    </button>
+                  </>
+                  :
+                  <>
+                    <ConfirmOrderPage
+                        setFirstPageActive={setFirstPageActive}
+                        setAlert={setShowAlert}
+                        chosenPath={chosenPath}
+                        volume={volume}
+                        weight={weight}
+                        isThirdPageActive={thirdPageActive}
+                    />
+                    <button
+                        className={'continue-button-first-page'}
+                        onClick={returnSecondPagHandler}
+                    >Назад
+                    </button>
+                  </>
+          }
+        </div>
+        {showAlert.active ? <Alert showAlert={showAlert} setAlert={setShowAlert}/> : ''}
+      </section>
   );
 };
 

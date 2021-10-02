@@ -51,16 +51,25 @@
     display: flex;
     margin-bottom: 40px;
 
-    .active-box-button {
+    .active-button {
       display: flex;
       justify-content: center;
       align-items: center;
       border: 1px solid $light-blue;
       width: 195px;
       height: 40px;
-      border-radius: 10px;
       background-color: $light-blue;
       color: $white;
+      cursor: pointer;
+    }
+
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 195px;
+      height: 40px;
+      border: 1px solid $light-blue;
       cursor: pointer;
     }
   }

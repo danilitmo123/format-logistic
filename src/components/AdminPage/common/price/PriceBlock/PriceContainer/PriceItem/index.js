@@ -27,7 +27,7 @@ const PriceItem = ({rateData, setRateData, onDelete}) => {
     rateData[key] = value
     setRateData(rateData)
   }
-  console.log(rateData)
+
   return (
       <div className={'inputs-wrapper'}>
         <div className={'start-input'}>

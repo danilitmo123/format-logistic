@@ -5,7 +5,7 @@ import TypeOfRoutes from "../TypeOfRoutes";
 
 import './MapBlock.scss'
 
-const MapBlock = ({weight, index, setIndex, path, volume, chosenPath}) => {
+const MapBlock = ({weight, index, setIndex, path, volume, chosenPath, setThirdPage}) => {
 
   const [displayedPath, setPath] = useState(null)
   const [displayedInfo, setInfo] = useState(null)
@@ -58,7 +58,10 @@ const MapBlock = ({weight, index, setIndex, path, volume, chosenPath}) => {
               <div className={'weight'}>Вес: {weight} кг</div>
               <div className={'volume'}>Объем: {volume} м³</div>
             </div>
-            {chosenPath ? '' : <button className={'choose-button'} onClick={() => setIndex(index)}>Выбрать</button>}
+            {chosenPath ? '' : <button className={'choose-button'} onClick={() => {
+              setIndex(index)
+              setThirdPage(true)
+            }}>Выбрать</button>}
           </div>
         </div>
       </div>

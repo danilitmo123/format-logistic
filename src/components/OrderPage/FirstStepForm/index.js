@@ -7,7 +7,7 @@ import CountryForm from "../CountryForm";
 import CustomsClearanceForm from "../CustomsClearanceForm";
 
 
-const FirstStepForm = ({setChooseRussiaWarning,chooseRussiaWarning,setCityWarningFrom, setCityWarningTo,cargoWarning, data, setDataRaw, setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, setSourceType, setDestinationType, destinationType, sourceType, volume, setVolume, weight, setWeight}) => {
+const FirstStepForm = ({setChooseRussiaWarning,chooseRussiaWarning,setCityWarningFrom, setCityWarningTo,cargoWarning, data, setDataRaw, setIdFrom, setIdTo, cityWarningTo, cityWarningFrom, setSourceType, setDestinationType, destinationType, sourceType, volume, setVolume, weight, setWeight, thirdPageActive}) => {
 
     useEffect(() => {
       window.scroll(0,0)
@@ -37,7 +37,7 @@ const FirstStepForm = ({setChooseRussiaWarning,chooseRussiaWarning,setCityWarnin
                 sourceType={sourceType}
                 setIdFrom={setIdFrom}
             />
-            <CustomsClearanceForm/>
+            <CustomsClearanceForm thirdPageActive={thirdPageActive}/>
         </div>
     );
 };

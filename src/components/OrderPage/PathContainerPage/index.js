@@ -6,7 +6,7 @@ import MapBlock from "../../MapUI/MapBlock";
 
 import './PathContainerPage.scss'
 
-const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler, weight, volume}) => {
+const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler, weight, volume, setThirdPage}) => {
 
   const [index, setIndex] = useState('')
 
@@ -32,6 +32,7 @@ const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler, weight
   return (
       <div className={'path-container-page'}>
         {paths.paths ? <div>{paths.paths.map((item, index) => <MapBlock
+            setThirdPage={setThirdPage}
             key={index}
             weight={weight}
             volume={volume}
