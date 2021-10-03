@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import './CustomsClearanceForm.scss'
 
-const CustomsClearanceForm = ({thirdPageActive}) => {
+fi§const CustomsClearanceForm = () => {
 
   const [showInfo, setShowInfo] = useState(false)
 
@@ -13,12 +13,12 @@ const CustomsClearanceForm = ({thirdPageActive}) => {
   return (
       <div className={'customs-clearance-wrapper'}>
         <div className={'title-wrapper'}>
-          {!thirdPageActive && <input type="checkbox" defaultChecked={showInfo} onChange={() => setShowInfo(!showInfo)}/>}
+          <input type="checkbox" defaultChecked={showInfo} onChange={() => setShowInfo(!showInfo)}/>
           <div className={'title'}>Таможенное оформление</div>
         </div>
         <div className={'description-wrapper'}>
           {
-            showInfo || thirdPageActive ?
+            showInfo ?
                 <div className={'description'}>
                   <div>Услуги по таможенному оформлению и предоставление электронно-цифровой подписи (ЭЦП) Таможенного
                     представителя:
