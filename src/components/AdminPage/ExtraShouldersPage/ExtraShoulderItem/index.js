@@ -220,9 +220,9 @@ const ExtraShoulderItem = ({item}) => {
                           </div>
                           <div className={'price-input'}>
                             <input
-                                onChange={e => updateItem('minimal_cost', e.target.value)}
+                                onChange={e => updateItem('minimal_price', e.target.value)}
                                 type="number"
-                                value={item.minimal_cost}/>
+                                value={item.minimal_price}/>
                             <label className={'icon-euro'}>€</label>
                           </div>
                           <img src={trash} onClick={() => deleteWeightItem(index)} alt="trash"/>
@@ -265,9 +265,9 @@ const ExtraShoulderItem = ({item}) => {
                               </div>
                               <div className={'price-input'}>
                                 <input
-                                    onChange={e => updateItem('minimal_cost', e.target.value)}
+                                    onChange={e => updateItem('minimal_price', e.target.value)}
                                     type="number"
-                                    value={item.minimal_cost}/>
+                                    value={item.minimal_price}/>
                                 <label className={'icon-euro'}>€</label>
                               </div>
                               <img src={trash} onClick={() => deleteVolumeItem(index)} alt="trash"/>
