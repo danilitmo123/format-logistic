@@ -16,6 +16,43 @@
     margin-bottom: 30px;
     font-family: 'Montserrat', sans-serif;
 
+    .customs-clearance-wrapper {
+      height: max-content;
+      width: 1140px;
+      border-radius: 20px;
+      padding: 30px;
+      background-color: $white;
+      gap: 20px;
+      border: 1px solid gray;
+      box-shadow: 0 5px 5px -5px #333;
+      margin-bottom: 30px;
+
+      .title-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .title {
+          font-weight: 400;
+          font-size: 24px;
+          color: black;
+        }
+      }
+
+      .description-wrapper {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        transition: .2s;
+
+        .description {
+          margin-top: 10px;
+          display: flex;
+          flex-direction: column;
+          color: hsl(0, 0%, 50%);
+        }
+      }
+    }
     .additional-info-title {
       @extend %tile-title;
     }
