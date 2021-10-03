@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import './CustomsClearanceForm.scss'
 
-fi§const CustomsClearanceForm = () => {
+const CustomsClearanceForm = () => {
 
   const [showInfo, setShowInfo] = useState(false)
 
