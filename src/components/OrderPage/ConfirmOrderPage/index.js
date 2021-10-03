@@ -22,7 +22,7 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
       const [createOrderWarning, setOrderWarning] = useState(false)
       const [sendEmailWarning, setEmailWarning] = useState(false)
       const [canSend, setCanSend] = useState(true)
-      const isCustoms = localStorage.getItem('customs')
+      const isCustoms = JSON.parse(localStorage.getItem('customs'))
 
       const validateFormCreateOrder = () => {
         if (canSend) {
@@ -150,9 +150,9 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
                     )
                   }
                 })}
-              </div>
+              </div>  
             </div>
-            {isCustoms === 'true' && <CustomsClearanceForm thirdPageActive={isThirdPageActive}/>}
+            {isCustoms && <CustomsClearanceForm thirdPageActive={isThirdPageActive}/>}
             <div className={'final-form-wrapper'}>
               <div className={'shipper-title'}>Оформление заказа на перевозку</div>
               <div className="shipper">

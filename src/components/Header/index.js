@@ -31,7 +31,7 @@ const Header = ({setActive}) => {
             </Link> : ""
         }
           <div className={'number'}>+7 (499) 281-60-81</div>
-          <div className={'mail'}>customfreight2020@gmail.com</div>
+          <div className={'mail'}>request@formatlogistic.ru</div>
         </div>
       </header>
   );
