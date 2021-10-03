@@ -186,7 +186,7 @@ const CargoForm = ({cargoWarning, data, setDataRaw, volume, setVolume, weight, s
         </div>
         <div className={'cargo-choice'}>
           <div className={boxButtonActive ? 'active-button' : 'button'} onClick={updateBoxActive}>Коробки / Паллеты</div>
-          <div className={containerButtonActive ? 'active-button' : 'button'} onClick={updateContainerActive}>Контейнеры</div>
+          {/*<div className={containerButtonActive ? 'active-button' : 'button'} onClick={updateContainerActive}>Контейнеры</div>*/}
         </div>
         {data.map((item, index) => {
 
