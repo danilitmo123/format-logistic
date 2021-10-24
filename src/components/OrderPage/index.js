@@ -26,6 +26,7 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
   const [volume, setVolume] = useState('')
   const [weight, setWeight] = useState('')
   const [data, setDataRaw] = useState([])
+  const [containerData, setContainerData] = useState([])
   const [cargoWarning, setCargoWarning] = useState(false)
   const [chooseRussiaWarning, setChooseRussiaWarning] = useState(false)
   const [showAlert, setShowAlert] = useState({active: false, isEmail: false})
@@ -149,6 +150,8 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
                     setAlert={setShowAlert}
                     data={data}
                     setDataRaw={setDataRaw}
+                    containerData={containerData}
+                    setContainerData={setContainerData}
                     cargoWarning={cargoWarning}
                     volume={volume}
                     setVolume={setVolume}

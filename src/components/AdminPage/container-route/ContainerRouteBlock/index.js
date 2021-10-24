@@ -7,40 +7,14 @@ import {filterConfig} from "../../../../templates/filterSelectTemplate";
 import {RatesContext} from "../../common/price/PriceContext";
 import {ServiceContext} from "../../common/service/ServiceContext";
 import {useRefReducer, useRefSetter} from "../../../../utils/useRef";
-import {ShippingType} from "../../../../constants/unit";
 import {Link} from 'react-router-dom'
 
 import PriceBlock from "../../common/price/PriceBlock";
 import {PlaceSelectBlock} from "../../common/place/PlaceSelectBlock";
 import ServiceContainer from "../../common/service/serviceBlock/ServiceContainer";
+import {ShippingType} from "../../../../constants/unit";
 
-const defaultRateMass = {
-  range_from: 0,
-  range_to: 0,
-  price_per_unit: 0,
-  minimal_price: 0,
-  type: 'MASS'
-}
-const defaultRateSize = {
-  range_from: 0,
-  range_to: 0,
-  price_per_unit: 0,
-  minimal_price: 0,
-  type: 'SIZE'
-}
-const defaultRateLdm = {
-  range_from: 0,
-  range_to: 0,
-  price_per_unit: 0,
-  minimal_price: 0,
-  type: 'LDM'
-}
-const initRates = (initData) => {
-  if (initData.rates)
-    return initData.rates
-  else
-    return [defaultRateMass, defaultRateSize, defaultRateLdm]
-}
+
 const placeReducer = (ref, action) => {
   switch (action.type) {
     case "setCity":
@@ -65,18 +39,6 @@ const initPlaces = {
   countryFrom: "",
   countryTo: ""
 }
-const labelTypeOfShipping = {
-  [ShippingType.AIR]: "Авиафрахт",
-  [ShippingType.TRAIN]: "Железнодородная перевозка",
-  [ShippingType.TRUCK]: "Автомобильная перевозка",
-  [ShippingType.SEA]: 'Морская перевозка'
-}
-const typeOfShippingOptions = [
-  {value: ShippingType.AIR, label: labelTypeOfShipping[ShippingType.AIR], id: ShippingType.AIR},
-  {value: ShippingType.TRUCK, label: labelTypeOfShipping[ShippingType.TRUCK], id: ShippingType.TRUCK},
-  {value: ShippingType.TRAIN, label: labelTypeOfShipping[ShippingType.TRAIN], id: ShippingType.TRAIN},
-  {value: ShippingType.SEA, label: labelTypeOfShipping[ShippingType.SEA], id: ShippingType.SEA}
-]
 
 const placeObjectFromInitData = (initData) => {
   if (initData.source && initData.destination) {
@@ -92,7 +54,20 @@ const placeObjectFromInitData = (initData) => {
 
 }
 
-export const HubRouteBlock = ({initData, onSubmit}) => {
+const labelTypeOfShipping = {
+  [ShippingType.AIR]: "Авиафрахт",
+  [ShippingType.TRAIN]: "Железнодородная перевозка",
+  [ShippingType.TRUCK]: "Автомобильная перевозка",
+  [ShippingType.SEA]: 'Морская перевозка'
+}
+const typeOfShippingOptions = [
+  {value: ShippingType.AIR, label: labelTypeOfShipping[ShippingType.AIR], id: ShippingType.AIR},
+  {value: ShippingType.TRUCK, label: labelTypeOfShipping[ShippingType.TRUCK], id: ShippingType.TRUCK},
+  {value: ShippingType.TRAIN, label: labelTypeOfShipping[ShippingType.TRAIN], id: ShippingType.TRAIN},
+  {value: ShippingType.SEA, label: labelTypeOfShipping[ShippingType.SEA], id: ShippingType.SEA}
+]
+
+export const ContainerRouteBlock = ({initData, onSubmit}) => {
 
   const [distance, setDistance] = useState(initData.distance ? initData.distance : 0)
   const [duration, setDuration] = useState(initData.duration ? initData.duration : 0)
@@ -103,7 +78,7 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
 
   const [places, dispatchPlaces] = useRefReducer(placeReducer, placeObjectFromInitData(initData))
   const [typeOfShipping, setTypeOfShipping] = useRefSetter(initData.type ? initData.type : typeOfShippingOptions[0].value)
-  const [rates, setRates] = useState(() => initRates(initData))
+  // const [rates, setRates] = useState(() => initRates(initData))
   const [additionalServices, setAdditionalServices] = useState(initData.additional_services ? initData.additional_services : [])
   const [rankedServices, setRankedServices] = useState(initData.ranked_services ? initData.ranked_services : [])
 
@@ -112,13 +87,24 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
   const [active, setActive] = useState(initData.active ? initData.active : false)
   const [title, setTitle] = useState(initData.title ? initData.title : '')
 
-  const [isStorageFrom, setStorageFrom] = useState(initData.source_is_storage ? initData.source_is_storage : false)
-  const [isStorageTo, setStorageTo] = useState(initData.destination_is_storage ? initData.destination_is_storage : false)
-
   const [additionalInfoData, setAdditionalInfo] = useState(initData.description ? initData.description.split('\n\n') : [])
   const [additionalPoint, setPoint] = useState('')
 
   const [markup, setMarkup] = useState(initData.markup ? ((initData.markup - 1) * 100).toFixed(2) : 0)
+
+  const [smallPrice, setSmallPrice] = useState(0)
+  const [smallWeight, setSmallWeight] = useState(0)
+  const [smallOverload, setSmallOverload] = useState(0)
+
+  const [mediumPrice, setMediumPrice] = useState(0)
+  const [mediumWeight, setMediumWeight] = useState(0)
+  const [mediumOverload, setMediumOverload] = useState(0)
+
+  const [largePrice, setLargePrice] = useState(0)
+  const [largeWeight, setLargeWeight] = useState(0)
+  const [largeOverload, setLargeOverload] = useState(0)
+
+  const [activeButton, setActiveButton] = useState('small')
 
   const activateWeekday = (dayInd) => {
     timetableDays[dayInd] = timetableDays[dayInd] ? 0 : 1
@@ -141,10 +127,10 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
       destinationId: places.current.cityTo.id,
       distance,
       duration,
-      rates: rates.filter(rate => {
-        return !!rate
-      }),
-      typeOfShipping: typeOfShipping.current,
+      //rates: rates.filter(rate => {
+        //return !!rate
+      //}),
+      // typeOfShipping: typeOfShipping.current,
       additionalServices: additionalServices.filter(service => {
         return !!service
       }),
@@ -157,8 +143,6 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
       ratesValidTo: validityOfTariff ? validityOfTariff : '9999-12-31',
       active: active,
       title: title,
-      source_is_storage: isStorageFrom,
-      destination_is_storage: isStorageTo,
       description: additionalInfoData.join('\n\n'),
       markup: (markup / 100) + 1
     })
@@ -200,14 +184,6 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
             />
           </div>
         </div>
-        <div className={'isStorage-wrapper'}>
-          <div className={'isStorage-title'}>Внести точку А хабового плеча в 'Наш склад'</div>
-          <input type="checkbox" onChange={() => setStorageFrom(!isStorageFrom)} checked={isStorageFrom}/>
-        </div>
-        <div className={'isStorage-wrapper'}>
-          <div className={'isStorage-title'}>Внести точку B хабового плеча в 'Наш склад'</div>
-          <input type="checkbox" onChange={() => setStorageTo(!isStorageTo)} checked={isStorageTo}/>
-        </div>
         <div className={'upload-dest-and-dur'}>
           <div className={'upload-title'}>Расстояние и время</div>
           <div className={'upload-inputs-wrapper'}>
@@ -229,9 +205,117 @@ export const HubRouteBlock = ({initData, onSubmit}) => {
             </div>
           </div>
         </div>
-        <RatesContext.Provider value={{rates, setRates}}>
-          <PriceBlock/>
-        </RatesContext.Provider>
+        <div className={'settings-for-price-wrapper'}>
+          <div className={'set-price-title'}>Цена</div>
+          <div className={'price-block-wrapper'}>
+            <div className={'price-for-type-wrapper'}>
+              <button
+                  value={'small'}
+                  className={activeButton === 'small' ? 'active-price-button' : 'price-button'}
+                  onClick={() => setActiveButton('small')}
+              >20'</button>
+              <button
+                  value={'medium'}
+                  className={activeButton === 'medium' ? 'active-price-button' : 'price-button'}
+                  onClick={() => setActiveButton('medium')}
+              >40'</button>
+              <button
+                  value={'large'}
+                  className={activeButton === 'large' ? 'active-price-button' : 'price-button'}
+                  onClick={() => setActiveButton('large')}
+              >40'HC</button>
+            </div>
+            <div className={'weight-settings-wrapper'}>
+              {
+                activeButton === 'small' && 
+                <div className={'container-price-wrapper'}>
+                    <div className={'container-price-item'}>
+                      <label htmlFor="">Цена за контейнер</label>
+                      <input
+                          value={smallPrice}
+                          type="number"
+                          onChange={e => setSmallPrice(e.target.value)}
+                      />
+                    </div>
+                    <div className={'container-price-item'}>
+                      <label htmlFor="">Максимальная масса</label>
+                      <input
+                          value={smallWeight}
+                          type="number"
+                          onChange={e => setSmallWeight(e.target.value)}
+                      />
+                    </div>
+                    <div className={'container-price-item'}>
+                      <label htmlFor="">Цена за перегруз</label>
+                      <input
+                          value={smallOverload}
+                          type="number"
+                          onChange={e => setSmallOverload(e.target.value)}
+                      />
+                    </div>
+                </div>
+              }
+              {
+                activeButton === 'medium' &&
+                <div className={'container-price-wrapper'}>
+                  <div className={'container-price-item'}>
+                    <label htmlFor="">Цена за контейнер</label>
+                    <input
+                        value={mediumPrice}
+                        type="number"
+                        onChange={e => setMediumPrice(e.target.value)}
+                    />
+                  </div>
+                  <div className={'container-price-item'}>
+                    <label htmlFor="">Максимальная масса</label>
+                    <input
+                        value={mediumWeight}
+                        type="number"
+                        onChange={e => setMediumWeight(e.target.value)}
+                    />
+                  </div>
+                  <div className={'container-price-item'}>
+                    <label htmlFor="">Цена за перегруз</label>
+                    <input
+                        value={mediumOverload}
+                        type="number"
+                        onChange={e => setMediumOverload(e.target.value)}
+                    />
+                  </div>
+                </div>
+              }
+              {
+                activeButton === 'large' &&
+                <div className={'container-price-wrapper'}>
+                  <div className={'container-price-item'}>
+                    <label htmlFor="">Цена за контейнер</label>
+                    <input
+                        value={largePrice}
+                        type="number"
+                        onChange={e => setLargePrice(e.target.value)}
+                    />
+                  </div>
+                  <div className={'container-price-item'}>
+                    <label htmlFor="">Максимальная масса</label>
+                    <input
+                        value={largeWeight}
+                        type="number"
+                        onChange={e => setLargeWeight(e.target.value)}
+                    />
+                  </div>
+                  <div className={'container-price-item'}>
+                    <label htmlFor="">Цена за перегруз</label>
+                    <input
+                        value={largeOverload}
+                        type="number"
+                        onChange={e => setLargeOverload(e.target.value)}
+                    />
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
         <div className={'rate-wrapper'}>
           <label className={'rate-title'}>Срок действия тарифов</label>
           <input type="date" value={validityOfTariff} onChange={e => setValidity(e.target.value)}/>
