@@ -30,7 +30,7 @@ const objectTemplate = {
 }
 
 const containerObjectTemplate = {
-  containerCount: 0,
+  containerCount: 1,
   containerWeight: 0,
   containerWeightUnits: 'КГ',
   smallContainer: true,
@@ -48,12 +48,14 @@ const CargoForm = ({
                      weight,
                      setWeight,
                      containerData,
-                     setContainerData
+                     setContainerData,
+                     setContainerWeight,
+                     containerWeight
                    }) => {
 
   const [boxButtonActive, setBoxButtonActive] = useState(true)
   const [containerButtonActive, setContainerButtonActive] = useState(false)
-  const [containerType, setContainerType] = useState('small')
+  const [containerType, setContainerType] = useState(0)
 
   const setData = (data) => {
     localStorage.setItem('cargo', JSON.stringify(data))
@@ -140,6 +142,16 @@ const CargoForm = ({
   const deleteContainerItem = (i) => {
     const newData = [...containerData.slice(0, i), ...containerData.slice(i + 1)]
     setContainerData(newData)
+    switch (containerData[i].containerWeightUnits) {
+      case 'LB':
+        setContainerWeight((containerWeight - containerData[i].containerWeight * containerData[i].containerCount / 2.2).toFixed(2))
+        break
+      case 'КГ':
+        setContainerWeight((containerWeight - containerData[i].containerWeight * containerData[i].containerCount).toFixed(2))
+        break
+      default:
+        return ''
+    }
   }
 
   const calculateVolume = (newData) => {
@@ -188,6 +200,25 @@ const CargoForm = ({
     })
   }
 
+  const calculateContainerWeight = (newData) => {
+    let totalWeightKG = 0
+    let totalWeightLB = 0
+    newData.forEach(item => {
+      switch (item.containerWeightUnits) {
+        case 'КГ':
+          totalWeightKG += +item.containerWeight * +item.containerCount
+          setContainerWeight((totalWeightKG + totalWeightLB).toFixed(2))
+          break
+        case 'LB':
+          totalWeightLB += +item.containerWeight * +item.containerCount / 2.2
+          setContainerWeight((totalWeightKG + totalWeightLB).toFixed(2))
+          break
+        default:
+          return ''
+      }
+    })
+  }
+
   const updateDataItemField = (index, field, newValue) => {
     let newData = [...data]
     let newItem = {...newData[index]}
@@ -204,6 +235,7 @@ const CargoForm = ({
     newItem[field] = newValue
     newData[index] = newItem
     setContainerData(newData)
+    calculateContainerWeight(newData)
   }
 
   const updateBoxActive = () => {
@@ -216,11 +248,42 @@ const CargoForm = ({
     setBoxButtonActive(false)
   }
 
+  const updateContainerType = (index, value) => {
+    setContainerType(value)
+    let newCargo = [...containerData]
+    let newItem = {...newCargo[index]}
+    switch (value) {
+      case 1:
+        newItem['smallContainer'] = true
+        newItem['mediumContainer'] = false
+        newItem['largeContainer'] = false
+        break
+      case 2:
+        newItem['smallContainer'] = false
+        newItem['mediumContainer'] = true
+        newItem['largeContainer'] = false
+        break
+      case 3:
+        newItem['smallContainer'] = false
+        newItem['mediumContainer'] = false
+        newItem['largeContainer'] = true
+        break
+    }
+    newCargo[index] = newItem
+    setContainerData(newCargo)
+    console.log(containerData)
+  }
+
   return (
       <div className={'cargo-wrapper'}>
         <div className={'title-wrapper'}>
           <div className={'cargo-title'}>Груз</div>
-          <div className={'cargo-all-info'}>Грузов: {data.length} Общий вес: {weight} кг Общий объем: {volume} м³</div>
+          {boxButtonActive ?
+              <div className={'cargo-all-info'}>Грузов: {data.length} Общий вес: {weight ? weight : 0} кг Общий
+                объем: {volume ? volume : 0} м³</div>
+              :
+              <div className={'cargo-all-info'}>Грузов: {containerData.length} Общий вес: {containerWeight ? containerWeight : 0} кг</div>
+          }
         </div>
         <div className={'cargo-choice'}>
           <div className={boxButtonActive ? 'active-button' : 'button'} onClick={updateBoxActive}>Коробки / Паллеты
@@ -359,7 +422,7 @@ const CargoForm = ({
                           onChange={(e) => updateItem('weight', e.target.value)}
                           min={1}
                           step={1}
-                          placeholder={item.weightBoxSelect === 'КГ' ? 'КГ' : 'Фунты'}
+                          placeholder={'Вес'}
                       />
                       <div className={'weight-select'}>
                         <Select
@@ -392,6 +455,10 @@ const CargoForm = ({
               updateContainerDataItemField(index, field, newValue)
             }
 
+            const updateType = (newValue) => {
+              updateContainerType(index, newValue)
+            }
+
             return (
                 <div className={'cargo-input-wrapper'}>
                   <div className={'input-cargo-example'}>
@@ -411,56 +478,59 @@ const CargoForm = ({
                     <label className={'input-cargo-label'}>Тип контейнера</label>
                     <div className={'container-buttons-wrapper'}>
                       <button
-                            value={'small'}
-                            onClick={() => setContainerType('small')}
-                        >20'</button>
-                        <button 
-                            className={'container-button'}
-                            value={'medium'}
-                            onClick={() => setContainerType('medium')}
-                        >40'</button>
-                        <button 
-                            className={'container-button'}
-                            value={'large'}
-                            onClick={() => setContainerType('large')}
-                        >40'HC</button>
-                      </div>
+                          className={`container-button ${containerData[index].smallContainer && 'active'}`}
+                          value={'small'}
+                          onClick={() => updateType(1)}
+                      >20'
+                      </button>
+                      <button
+                          className={`container-button ${containerData[index].mediumContainer && containerType === 2 ? 'active' : ''}`}
+                          value={'medium'}
+                          onClick={() => updateType(2)}
+                      >40'
+                      </button>
+                      <button
+                          className={`container-button ${containerData[index].largeContainer && containerType === 3 ? 'active' : ''}`}
+                          value={'large'}
+                          onClick={() => updateType(3)}
+                      >40'HC
+                      </button>
                     </div>
-                    <div className={'input-cargo-example'}>
-                      <label className={'input-cargo-label'}>Вес</label>
-                      <div className={'weight-cargo-wrapper'}>
-                        <input
-                            className={'cargo-input'}
-                            type="number"
-                            value={item.containerWeight || ''}
-                            onChange={(e) => updateItem('containerWeight', e.target.value)}
-                            min={1}
-                            step={1}
-                            placeholder={item.weightBoxSelect === 'КГ' ? 'КГ' : 'Фунты'}
-                        />
-                        <div className={'weight-select'}>
-                          <Select
-                              classNamePrefix="weight-select"
-                              theme={customTheme}
-                              options={typeOfWeightUnits}
-                              defaultValue={{value: 'КГ', label: 'КГ'}}
-                              onChange={(e) => updateItem('containerWeightUnits', e.value)}
-                 
-                              placeholder={'КГ'}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <img
-                        src={trash}
-                        alt={'trash'}
-                        className={'trash-icon'}
-                        onClick={() => deleteContainerItem(index)}
-                    />
                   </div>
-              )
-            })}
-          </div>
+                  <div className={'input-cargo-example'}>
+                    <label className={'input-cargo-label'}>Вес</label>
+                    <div className={'weight-cargo-wrapper'}>
+                      <input
+                          className={'cargo-input'}
+                          type="number"
+                          value={item.containerWeight || ''}
+                          onChange={(e) => updateItem('containerWeight', e.target.value)}
+                          min={1}
+                          step={1}
+                          placeholder={'Вес'}
+                      />
+                      <div className={'weight-select'}>
+                        <Select
+                            classNamePrefix="weight-select"
+                            theme={customTheme}
+                            options={typeOfWeightUnits}
+                            defaultValue={{value: 'КГ', label: 'КГ'}}
+                            onChange={(e) => updateItem('containerWeightUnits', e.value)}
+                            placeholder={'КГ'}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <img
+                      src={trash}
+                      alt={'trash'}
+                      className={'trash-icon'}
+                      onClick={() => deleteContainerItem(index)}
+                  />
+                </div>
+            )
+          })}
+        </div>
         }
         <button className={'add-cargo-btn'} onClick={boxButtonActive ? addItem : addContainerItem}>+ Добавить</button>
         {cargoWarning ? <div className={'cargo-warning'}>Все поля должны быть заполнены</div> : ''}

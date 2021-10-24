@@ -17,7 +17,8 @@ const Footer = () => {
           </div>
         </div>
         <div className={'contacts'}>
-          <div className={'number'}>+7 (499) 281-60-81</div>
+          <div className={'number'}>+7 (495) 109-33-08</div>
+          <div className={'number'}>+7 (812) 209-25-70</div>
           <div className={'mail'}>request@formatlogistic.ru</div>
         </div>
       </footer>

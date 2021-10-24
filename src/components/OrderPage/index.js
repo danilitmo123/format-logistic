@@ -25,6 +25,7 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
   const [destinationType, setDestinationType] = useState(PlaceType.CITY)
   const [volume, setVolume] = useState('')
   const [weight, setWeight] = useState('')
+  const [containerWeight, setContainerWeight] = useState('')
   const [data, setDataRaw] = useState([])
   const [containerData, setContainerData] = useState([])
   const [cargoWarning, setCargoWarning] = useState(false)
@@ -157,6 +158,8 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
                     setVolume={setVolume}
                     weight={weight}
                     setWeight={setWeight}
+                    containerWeight={containerWeight}
+                    setContainerWeight={setContainerWeight}
                     cityWarningFrom={cityWarningFrom}
                     cityWarningTo={cityWarningTo}
                     setIdTo={setSelectedCityIdTo}

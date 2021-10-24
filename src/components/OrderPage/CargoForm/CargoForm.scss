@@ -99,6 +99,13 @@
           background: none;
           border: 1px solid #cccccc;
           border-radius: 4px;
+          cursor: pointer;
+        }
+
+        .active {
+          border: 1px solid $light-blue;
+          color: $light-blue;
+          cursor: pointer;
         }
       }
 
