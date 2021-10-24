@@ -5,6 +5,10 @@
   justify-content: center;
   flex-direction: column;
 
+  .all-route-info {
+    margin-bottom: 15px;
+  }
+
   .additional-info {
     background-color: $white;
     border-radius: 20px;
@@ -13,7 +17,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     font-family: 'Montserrat', sans-serif;
 
     .customs-clearance-wrapper {
@@ -53,6 +57,7 @@
         }
       }
     }
+
     .additional-info-title {
       @extend %tile-title;
     }
@@ -65,17 +70,53 @@
         display: flex;
         flex-direction: column;
         margin-right: 50px;
-
-        .city-title {
-          display: flex;
-          font-weight: 500;
-          margin-bottom: 15px;
-        }
+        margin-top: 40px;
 
         .info-point {
           margin-bottom: 10px;
-          font-size: 12px;
+          font-size: 16px;
+          color: gray;
+          font-family: 'Montserrat', sans-serif;
         }
+      }
+    }
+  }
+
+  .customs-clearance-wrapper {
+    margin-top: 0;
+    height: max-content;
+    width: 1140px;
+    border-radius: 20px;
+    padding: 30px;
+    background-color: $white;
+    gap: 20px;
+    border: 1px solid gray;
+    box-shadow: 0 5px 5px -5px #333;
+    margin-bottom: 15px;
+
+    .title-wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .title {
+        font-weight: 400;
+        font-size: 24px;
+        color: black;
+      }
+    }
+
+    .description-wrapper {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      transition: .2s;
+
+      .description {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        color: hsl(0, 0%, 50%);
       }
     }
   }
@@ -279,6 +320,7 @@
           input {
             font-size: 12px;
           }
+
           textarea {
             font-size: 12px;
             width: 150%;
@@ -288,6 +330,7 @@
 
       .buttons-order-wrapper {
         margin-bottom: 15px;
+
         .send-order-button {
           font-size: 12px;
           width: 130px;

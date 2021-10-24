@@ -22,7 +22,12 @@ const SideBar = () => {
         <ul>
           <li>
             <Link to={'/admin/hub-routes'}>
-              <button className={'button-in-sidebar'}>Хабовые плечи</button>
+              <button className={'button-in-sidebar'}>Хабовые плечи (Сборные грузы)</button>
+            </Link>
+          </li>
+          <li>
+            <Link to={'/admin/container-hubs'}>
+              <button className={'button-in-sidebar'}>Хабовые плечи (Контейнеры)</button>
             </Link>
           </li>
           <li>

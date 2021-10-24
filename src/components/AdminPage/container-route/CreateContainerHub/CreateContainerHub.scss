@@ -1,0 +1,101 @@
+@import '../../../../global';
+
+.settings-for-price-wrapper {
+  display: flex;
+  flex-direction: column;
+
+
+  .set-price-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .price-block-wrapper {
+    display: flex;
+
+    .price-for-type-wrapper {
+      display: flex;
+      flex-direction: column;
+      margin-right: 20px;
+      margin-bottom: 20px;
+
+      .price-button {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid $light-blue;
+        width: 220px;
+        height: 60px;
+        cursor: pointer;
+        background: none;
+        outline: none;
+        margin-bottom: 1px;
+
+        &:nth-child(1) {
+          border-radius: 20px 20px 0 0;
+        }
+
+        &:nth-child(3) {
+          border-radius: 0 0 20px 20px;
+        }
+      }
+
+      .active-price-button {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: $light-blue;
+        width: 220px;
+        height: 60px;
+        cursor: pointer;
+        color: $white;
+        border: none;
+        outline: none;
+        margin-bottom: 1px;
+
+        &:nth-child(1) {
+          border-radius: 20px 20px 0 0;
+        }
+
+        &:nth-child(3) {
+          border-radius: 0 0 20px 20px;
+        }
+      }
+    }
+
+    .weight-settings-wrapper {
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border: 1px solid $light-blue;
+      padding: 20px 20px;
+      width: 500px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      .container-price-wrapper {
+        display: flex;
+        .container-price-item {
+          display: flex;
+          flex-direction: column;
+          margin-right: 20px;
+          label {
+            @extend %label;
+            margin-bottom: 10px;
+          }
+          input {
+            @extend %input;
+          }
+        }
+      }
+    }
+  }
+}

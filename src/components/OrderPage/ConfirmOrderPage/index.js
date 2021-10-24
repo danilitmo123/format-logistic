@@ -70,8 +70,6 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
             const options = {
                 headers: {'Content-Type': 'application/json'}
             }
-            console.log({customs})
-            console.log({isCustoms})
             axios.post(CREATE_ORDER_URL, body, options)
                 .then(() => {
                         setFirstPageActive(true);
@@ -132,7 +130,7 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
                 })
                 .catch((error) => console.log(error));
         }
-        console.log(isCustoms)
+        
         return (
             <div className={'final-order-page-wrapper'}>
                 {memoizedMap}

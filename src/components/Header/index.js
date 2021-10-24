@@ -30,7 +30,8 @@ const Header = ({setActive}) => {
                 <button className={'admin-button'}>Админка</button>
             </Link> : ""
         }
-          <div className={'number'}>+7 (499) 281-60-81</div>
+          <div className={'number'}>+7 (495) 109-33-08</div>
+          <div className={'number'}>+7 (812) 209-25-70</div>
           <div className={'mail'}>request@formatlogistic.ru</div>
         </div>
       </header>

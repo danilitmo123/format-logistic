@@ -8,6 +8,7 @@ import Loader from "../../../Common/Loader"
 import {HubRouteBlock} from "../HubRouteBlock";
 
 const EditHubRoutePage = () => {
+
     const {id} = useParams();
     const [initData, setInitData] = useState({})
     const [loading, setLoading] = useState(true)
