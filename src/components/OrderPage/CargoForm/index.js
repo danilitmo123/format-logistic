@@ -271,7 +271,6 @@ const CargoForm = ({
     }
     newCargo[index] = newItem
     setContainerData(newCargo)
-    console.log(containerData)
   }
 
   return (

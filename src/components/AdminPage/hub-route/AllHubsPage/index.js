@@ -22,6 +22,7 @@ const AllHubsPage = () => {
       countryTo: '',
       cityTo: '',
       date: '',
+      cargoType: '',
       clear: false
     })
 

@@ -19,6 +19,11 @@ const typeOfShippingOptions = [
   {value: ShippingType.SEA, label: labelTypeOfShipping[ShippingType.SEA], id: ShippingType.SEA}
 ]
 
+const cargoType = [
+  {value: 'container', label: 'Контейнеры'},
+  {value: 'box', label: 'Коробки'}
+]
+
 const FilterPanel = ({filter, setFilter}) => {
 
   const [selectValue, setSelectValue] = useState({})
@@ -37,6 +42,7 @@ const FilterPanel = ({filter, setFilter}) => {
       countryTo: '',
       cityTo: '',
       date: '',
+      cargoType: '',
       clear: true
     })
     setSelectValue(null)
@@ -52,6 +58,19 @@ const FilterPanel = ({filter, setFilter}) => {
                 theme={customTheme}
                 value={selectValue}
                 options={typeOfShippingOptions}
+                onChange={optionHandler}
+                onFocus={() => setFilter({...filter, clear: false})}
+                noOptionsMessage={() => `Не найдено`}
+                placeholder={'Перевозка'}
+                filterOption={createFilter(filterConfig)}
+            />
+          </div>
+          <div className={'type-filter'}>
+            <div className={'type-title'}>Тип груза:</div>
+            <Select
+                theme={customTheme}
+                value={selectValue}
+                options={cargoType}
                 onChange={optionHandler}
                 onFocus={() => setFilter({...filter, clear: false})}
                 noOptionsMessage={() => `Не найдено`}
