@@ -219,6 +219,7 @@ const ExtraShoulderItem = ({item}) => {
                             <label className={'icon-euro'}>€</label>
                           </div>
                           <div className={'price-input'}>
+                            min price:
                             <input
                                 onChange={e => updateItem('minimal_price', e.target.value)}
                                 type="number"
@@ -264,6 +265,7 @@ const ExtraShoulderItem = ({item}) => {
                                 <label className={'icon-euro'}>€</label>
                               </div>
                               <div className={'price-input'}>
+                                min price:
                                 <input
                                     onChange={e => updateItem('minimal_price', e.target.value)}
                                     type="number"
@@ -301,11 +303,20 @@ const ExtraShoulderItem = ({item}) => {
                                     value={item.range_to}/>
                               </div>
                               <div className={'weight-unit'}>LDM</div>
+
                               <div className={'price-input'}>
                                 <input
                                     onChange={e => updateItem('price_per_unit', e.target.value)}
                                     type="number"
                                     value={item.price_per_unit}/>
+                                <label className={'icon-euro'}>€</label>
+                              </div>
+                              <div className={'price-input'}>
+                                min price:
+                                <input
+                                    onChange={e => updateItem('minimal_price', e.target.value)}
+                                    type="number"
+                                    value={item.minimal_price}/>
                                 <label className={'icon-euro'}>€</label>
                               </div>
                               <img src={trash} onClick={() => deleteMeterItem(index)} alt="trash"/>

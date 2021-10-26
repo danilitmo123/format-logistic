@@ -28,7 +28,7 @@ const AllHubsPage = () => {
     const filteredHubs = useRoutes(routes, filter)
 
     const getHubs = () => {
-        adminInstance.get(`${ADMIN_SERVER_URL}admin-routes/?short`)
+        adminInstance.get(`${ADMIN_SERVER_URL}admin-routes/?short&type=BOX`)
             .then(res => {
                 setRoutes(res.data)
                 setLoading(false)

@@ -64,6 +64,7 @@ const EditHubRoutePage = () => {
             rates_valid_to: ratesValidTo,
             active: active,
             title: title,
+            cargo_type: 'BOX',
             source_is_storage: source_is_storage,
             destination_is_storage: destination_is_storage,
             description: description,
