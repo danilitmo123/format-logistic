@@ -55,7 +55,7 @@
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
-  .header {
+  .footer {
     padding: 0 2%;
     .logo {
       .logo-text-block {
@@ -79,25 +79,25 @@
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-  .header {
+  .footer {
     padding: 0 2%;
     .logo {
       .logo-img {
-        width: 78px;
-        height: 63px;
+        width: 63px;
+        height: 48px;
       }
       .logo-text-block {
         margin-left: 10px;
         .logo-main-text {
-          font-size: 14px;
+          font-size: 10px;
         }
         .logo-subtitle {
-          font-size: 8px;
+          font-size: 6px;
         }
       }
     }
     .contacts {
-      font-size: 10px;
+      font-size: 8px;
       color: $white;
       .admin-button {
         font-size: 10px;
@@ -107,49 +107,34 @@
 
       .number {
         margin-right: 35px;
+      }
+      .mail {
+        display: none;
       }
     }
   }
 }
 
 @media (max-width: 767px) {
-  .header {
-    padding: 0 2%;
-    .contacts {
-      font-size: 10px;
-      color: $white;
-      .admin-button {
-        font-size: 10px;
-        width: 80px;
-        height: 20px;
-      }
-
-      .number {
-        display: none;
-        margin-right: 35px;
-      }
-      .mail {
-        display: none;
-      }
-    }
-  }
-}
-@media (min-device-width: 414px) and (max-device-width: 896px) {
-  .header {
+  .footer {
     padding: 0 2%;
     .logo {
+      .logo-img {
+        width: 63px;
+        height: 48px;
+      }
       .logo-text-block {
         margin-left: 10px;
         .logo-main-text {
           font-size: 10px;
         }
         .logo-subtitle {
-          font-size: 8px;
+          font-size: 6px;
         }
       }
     }
     .contacts {
-      font-size: 10px;
+      font-size: 8px;
       color: $white;
       .admin-button {
         font-size: 10px;
@@ -158,7 +143,6 @@
       }
 
       .number {
-        display: none;
         margin-right: 35px;
       }
       .mail {
@@ -167,36 +151,4 @@
     }
   }
 }
-@media (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
-  .header {
-    padding: 0 2%;
-    .logo {
-      .logo-text-block {
-        margin-left: 10px;
-        .logo-main-text {
-          font-size: 10px;
-        }
-        .logo-subtitle {
-          font-size: 8px;
-        }
-      }
-    }
-    .contacts {
-      font-size: 10px;
-      color: $white;
-      .admin-button {
-        font-size: 10px;
-        width: 80px;
-        height: 20px;
-      }
 
-      .number {
-        display: none;
-        margin-right: 35px;
-      }
-      .mail {
-        display: none;
-      }
-    }
-  }
-}
