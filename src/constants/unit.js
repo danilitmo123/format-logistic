@@ -19,5 +19,6 @@ const PlaceType = Object.freeze({
     WAREHOUSE: 'WAREHOUSE'
 })
 
+
 export {RateType, ShippingType, PlaceType}
 
