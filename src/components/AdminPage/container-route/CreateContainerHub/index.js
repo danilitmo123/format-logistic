@@ -10,7 +10,7 @@ import './CreateContainerHub.scss'
 const CreateContainerHub = ({}) => {
 
     const toAdminPage = () => {
-        window.location = '/admin/container-hubs/'
+        window.location = '/admin/container-hubs'
     }
 
     const sendRequest = ({
@@ -67,11 +67,8 @@ const CreateContainerHub = ({}) => {
             }
         }
 
-        console.log({body})
-
         adminInstance.post(`${ADMIN_SERVER_URL}admin-routes/`, body)
             .then(res => {
-                console.log(res)
                 toAdminPage()
             })
 
@@ -83,7 +80,7 @@ const CreateContainerHub = ({}) => {
                 <div className={'title'}>
                     <div className={'hubs-title'}>Добавить плечо</div>
                 </div>
-                <Link to={'/admin/hub-routes/'}>
+                <Link to={'/admin/container-hubs/'}>
                     <button className={'back-to-hubs-button'}>Вернуться</button>
                 </Link>
             </div>

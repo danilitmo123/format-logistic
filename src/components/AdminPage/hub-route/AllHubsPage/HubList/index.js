@@ -1,11 +1,11 @@
 import React from 'react';
 import HubsItem from "./HubsItem";
 
-const HubList = ({hubs}) => {
+const HubList = ({hubs, link=''}) => {
 
   return (
       <tbody className={'table-body'}>
-        {hubs && hubs.map(hub =>  <HubsItem key={hub.id} hub={hub} />)}
+        {hubs && hubs.map(hub =>  <HubsItem key={hub.id} hub={hub} link={link}/>)}
       </tbody>
   );
 };

@@ -3,12 +3,11 @@ import React, {useState, useEffect} from 'react';
 import {Link} from "react-router-dom";
 
 import {ADMIN_SERVER_URL} from "../../../constants/URL";
-
-import ExtraShoulderItem from "./ExtraShoulderItem";
 import Loader from "../../Common/Loader";
 
 import './ExtraShouldersPage.scss'
 import {adminInstance} from "../../../api/admin";
+import ExtraShoulderItem from "./ExtraShoulderItem";
 
 
 const ZONE_URL = `${ADMIN_SERVER_URL}admin-zones/`
@@ -17,6 +16,7 @@ const ExtraShouldersPage = () => {
 
     const [zones, setZones] = useState([])
     const [zonesLoaded, setLoadedZones] = useState(false)
+
 
     const getZones = () => {
         adminInstance.get(ZONE_URL).then(res => {

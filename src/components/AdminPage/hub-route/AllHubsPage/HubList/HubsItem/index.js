@@ -15,7 +15,7 @@ const SEA = 'SEA'
 const TRAIN = 'TRAIN'
 const TRUCK = 'TRUCK'
 
-const HubsItem = ({hub}) => {
+const HubsItem = ({hub, link}) => {
 
   const [activePanel, setPanel] = useState(false)
   const [isActiveRoute, setActive] = useState(hub.active)
@@ -62,7 +62,7 @@ const HubsItem = ({hub}) => {
             <div>{hub.source.name} - {hub.destination.name}</div>
           </div>
           {activePanel && <div className={'table-info-buttons'}>
-            <Link to={`/admin/hub-routes/edit/${hub.id}`}>
+            <Link to={`/admin/hub-routes/${link}edit/${hub.id}`}>
               <button className={'btn edit-button'}>Редактировать</button>
             </Link>
             <button className={'btn delete-button'} onClick={(e) => {

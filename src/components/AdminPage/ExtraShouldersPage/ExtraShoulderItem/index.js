@@ -73,6 +73,47 @@ const ExtraShoulderItem = ({item}) => {
   const [activeButtonForMeter, setActiveButtonForMeter] = useState(false)
   const [markup, setMarkup] = useState(((item.markup - 1) * 100).toFixed(2))
 
+  const [smallPrice, setSmallPrice] = useState(
+      item.container_rates.filter(rate => rate.container_type === 'SMALL')[0] ?
+          item.container_rates.filter(rate => rate.container_type === 'SMALL')[0].cost : 0
+  )
+  const [smallWeight, setSmallWeight] = useState(
+      item.container_rates.filter(rate => rate.container_type === 'SMALL')[0] ?
+          item.container_rates.filter(rate => rate.container_type === 'SMALL')[0].max_mass : 0
+  )
+  const [smallOverload, setSmallOverload] = useState(
+      item.container_rates.filter(rate => rate.container_type === 'SMALL')[0] ?
+          item.container_rates.filter(rate => rate.container_type === 'SMALL')[0].price_per_overload : 0
+  )
+
+  const [mediumPrice, setMediumPrice] = useState(
+      item.container_rates.filter(rate => rate.container_type === 'MIDDLE')[0] ?
+          item.container_rates.filter(rate => rate.container_type === 'MIDDLE')[0].cost : 0
+  )
+  const [mediumWeight, setMediumWeight] = useState(
+      item.container_rates.filter(rate => rate.container_type === 'MIDDLE')[0] ?
+          item.container_rates.filter(rate => rate.container_type === 'MIDDLE')[0].max_mass : 0
+  )
+  const [mediumOverload, setMediumOverload] = useState(
+      item.container_rates.filter(rate => rate.container_type === 'MIDDLE')[0] ?
+          item.container_rates.filter(rate => rate.container_type === 'MIDDLE')[0].price_per_overload : 0
+  )
+
+  const [largePrice, setLargePrice] = useState(
+      item.container_rates.filter(rate => rate.container_type === 'BIG')[0] ?
+          item.container_rates.filter(rate => rate.container_type === 'BIG')[0].cost : 0
+  )
+  const [largeWeight, setLargeWeight] = useState(
+      item.container_rates.filter(rate => rate.container_type === 'BIG')[0] ?
+          item.container_rates.filter(rate => rate.container_type === 'BIG')[0].max_mass : 0
+  )
+  const [largeOverload, setLargeOverload] = useState(
+      item.container_rates.filter(rate => rate.container_type === 'BIG')[0] ?
+          item.container_rates.filter(rate => rate.container_type === 'BIG')[0].price_per_overload : 0
+  )
+  
+  const [activeButton, setActiveButton] = useState('small')
+
   const addWeightItem = () => {
     const newData = [...dataWeight, {...defaultMassRate}]
     setDataWeight(newData)
@@ -159,7 +200,30 @@ const ExtraShoulderItem = ({item}) => {
   }
 
   const sendRatesData = () => {
-    let body = {rates: flatRates(), markup: (markup / 100) + 1}
+    let body = {
+      rates: flatRates(), 
+      markup: (markup / 100) + 1,
+      container_rates: [
+        {
+          container_type: 'SMALL',
+          max_mass: smallWeight,
+          cost: smallPrice,
+          price_per_overload: smallOverload
+        },
+        {
+          container_type: 'MIDDLE',
+          max_mass: mediumWeight,
+          cost: mediumPrice,
+          price_per_overload: mediumOverload
+        },
+        {
+          container_type: 'BIG',
+          max_mass: largePrice,
+          cost: largePrice,
+          price_per_overload: largeOverload
+        }
+      ],
+    }
     adminInstance.patch(`${UPDATE_RATES_URL}/${item.id}/`, body).then()
   }
 
@@ -326,6 +390,119 @@ const ExtraShoulderItem = ({item}) => {
                       <button className={'add-button'} onClick={addMeterItem}>Добавить промежуток</button>
                     </div>
           }
+        </div>
+        <div className={'settings-for-price-wrapper'}>
+          <div className={'price-block-wrapper'}>
+            <div className={'price-for-type-wrapper'}>
+              <button
+                  value={'small'}
+                  className={activeButton === 'small' ? 'active-price-button' : 'price-button'}
+                  onClick={() => setActiveButton('small')}
+              >20'
+              </button>
+              <button
+                  value={'medium'}
+                  className={activeButton === 'medium' ? 'active-price-button' : 'price-button'}
+                  onClick={() => setActiveButton('medium')}
+              >40'
+              </button>
+              <button
+                  value={'large'}
+                  className={activeButton === 'large' ? 'active-price-button' : 'price-button'}
+                  onClick={() => setActiveButton('large')}
+              >40'HC
+              </button>
+            </div>
+            <div className={'weight-settings-wrapper'}>
+              {
+                activeButton === 'small' &&
+                <div className={'container-price-wrapper'}>
+                  <div className={'container-price-item'}>
+                    <label htmlFor="">Цена за контейнер</label>
+                    <input
+                        value={smallPrice}
+                        type="number"
+                        onChange={e => setSmallPrice(e.target.value)}
+                    />
+                  </div>
+                  <div className={'container-price-item'}>
+                    <label htmlFor="">Максимальная масса</label>
+                    <input
+                        value={smallWeight}
+                        type="number"
+                        onChange={e => setSmallWeight(e.target.value)}
+                    />
+                  </div>
+                  <div className={'container-price-item'}>
+                    <label htmlFor="">Цена за перегруз</label>
+                    <input
+                        value={smallOverload}
+                        type="number"
+                        onChange={e => setSmallOverload(e.target.value)}
+                    />
+                  </div>
+                </div>
+              }
+              {
+                activeButton === 'medium' &&
+                <div className={'container-price-wrapper'}>
+                  <div className={'container-price-item'}>
+                    <label htmlFor="">Цена за контейнер</label>
+                    <input
+                        value={mediumPrice}
+                        type="number"
+                        onChange={e => setMediumPrice(e.target.value)}
+                    />
+                  </div>
+                  <div className={'container-price-item'}>
+                    <label htmlFor="">Максимальная масса</label>
+                    <input
+                        value={mediumWeight}
+                        type="number"
+                        onChange={e => setMediumWeight(e.target.value)}
+                    />
+                  </div>
+                  <div className={'container-price-item'}>
+                    <label htmlFor="">Цена за перегруз</label>
+                    <input
+                        value={mediumOverload}
+                        type="number"
+                        onChange={e => setMediumOverload(e.target.value)}
+                    />
+                  </div>
+                </div>
+              }
+              {
+                activeButton === 'large' &&
+                <div className={'container-price-wrapper'}>
+                  <div className={'container-price-item'}>
+                    <label htmlFor="">Цена за контейнер</label>
+                    <input
+                        value={largePrice}
+                        type="number"
+                        onChange={e => setLargePrice(e.target.value)}
+                    />
+                  </div>
+                  <div className={'container-price-item'}>
+                    <label htmlFor="">Максимальная масса</label>
+                    <input
+                        value={largeWeight}
+                        type="number"
+                        onChange={e => setLargeWeight(e.target.value)}
+                    />
+                  </div>
+                  <div className={'container-price-item'}>
+                    <label htmlFor="">Цена за перегруз</label>
+                    <input
+                        value={largeOverload}
+                        type="number"
+                        onChange={e => setLargeOverload(e.target.value)}
+                    />
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
         </div>
         <div className={'percent-block'}>
           <label htmlFor="markup">Наценка</label>

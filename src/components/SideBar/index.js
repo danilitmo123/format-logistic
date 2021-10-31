@@ -32,7 +32,7 @@ const SideBar = () => {
           </li>
           <li>
             <Link to={'/admin/zones/rates'}>
-              <button className={'button-in-sidebar'}>Вспомогательные плечи</button>
+              <button className={'button-in-sidebar'}>Вспомогательные плечи <br/>(Сборные грузы)</button>
             </Link>
           </li>
           <li>

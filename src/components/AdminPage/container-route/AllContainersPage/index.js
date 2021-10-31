@@ -62,7 +62,7 @@ const AllContainersPage = () => {
                         <th>Активно до</th>
                     </tr>
                     </thead>
-                    <HubList hubs={filteredHubs.sortedAndSearchRoutes}/>
+                    <HubList hubs={filteredHubs.sortedAndSearchRoutes} link={'container-'}/>
                 </table>
             }
             <Link to={'/admin/container-routes/create'}>

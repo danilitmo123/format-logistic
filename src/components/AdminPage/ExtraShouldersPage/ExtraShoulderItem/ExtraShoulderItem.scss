@@ -222,6 +222,19 @@
         cursor: pointer;
       }
     }
+    .price-block-wrapper {
+      .price-for-type-wrapper {
+        .price-button {
+          width: 170px;
+        }
+        .active-price-button {
+          width: 170px;
+        }
+      }
+      .weight-settings-wrapper {
+        width: 380px;
+      }
+    }
   }
   .percent-block {
     display: flex;

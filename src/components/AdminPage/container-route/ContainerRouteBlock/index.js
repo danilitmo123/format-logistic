@@ -78,7 +78,6 @@ export const ContainerRouteBlock = ({initData, onSubmit}) => {
 
     const [places, dispatchPlaces] = useRefReducer(placeReducer, placeObjectFromInitData(initData))
     const [typeOfShipping, setTypeOfShipping] = useRefSetter(initData.type ? initData.type : typeOfShippingOptions[0].value)
-    // const [rates, setRates] = useState(() => initRates(initData))
     const [additionalServices, setAdditionalServices] = useState(initData.additional_services ? initData.additional_services : [])
     const [rankedServices, setRankedServices] = useState(initData.ranked_services ? initData.ranked_services : [])
 
@@ -92,17 +91,44 @@ export const ContainerRouteBlock = ({initData, onSubmit}) => {
 
     const [markup, setMarkup] = useState(initData.markup ? ((initData.markup - 1) * 100).toFixed(2) : 0)
 
-    const [smallPrice, setSmallPrice] = useState(0)
-    const [smallWeight, setSmallWeight] = useState(0)
-    const [smallOverload, setSmallOverload] = useState(0)
+    const [smallPrice, setSmallPrice] = useState(
+        initData.container_rates.filter(rate => rate.container_type === 'SMALL')[0].cost ?
+            initData.container_rates.filter(rate => rate.container_type === 'SMALL')[0].cost : 0
+    )
+    const [smallWeight, setSmallWeight] = useState(
+        initData.container_rates.filter(rate => rate.container_type === 'SMALL')[0].max_mass ?
+        initData.container_rates.filter(rate => rate.container_type === 'SMALL')[0].max_mass : 0
+    )
+    const [smallOverload, setSmallOverload] = useState(
+        initData.container_rates.filter(rate => rate.container_type === 'SMALL')[0].price_per_overload ?
+        initData.container_rates.filter(rate => rate.container_type === 'SMALL')[0].price_per_overload : 0
+    )
 
-    const [mediumPrice, setMediumPrice] = useState(0)
-    const [mediumWeight, setMediumWeight] = useState(0)
-    const [mediumOverload, setMediumOverload] = useState(0)
+    const [mediumPrice, setMediumPrice] = useState(
+        initData.container_rates.filter(rate => rate.container_type === 'MIDDLE')[0].cost ?
+            initData.container_rates.filter(rate => rate.container_type === 'MIDDLE')[0].cost : 0
+    )
+    const [mediumWeight, setMediumWeight] = useState(
+        initData.container_rates.filter(rate => rate.container_type === 'MIDDLE')[0].max_mass ?
+            initData.container_rates.filter(rate => rate.container_type === 'MIDDLE')[0].max_mass : 0
+    )
+    const [mediumOverload, setMediumOverload] = useState(
+        initData.container_rates.filter(rate => rate.container_type === 'MIDDLE')[0].price_per_overload ?
+            initData.container_rates.filter(rate => rate.container_type === 'MIDDLE')[0].price_per_overload : 0
+    )
 
-    const [largePrice, setLargePrice] = useState(0)
-    const [largeWeight, setLargeWeight] = useState(0)
-    const [largeOverload, setLargeOverload] = useState(0)
+    const [largePrice, setLargePrice] = useState(
+        initData.container_rates.filter(rate => rate.container_type === 'BIG')[0].cost ?
+            initData.container_rates.filter(rate => rate.container_type === 'BIG')[0].cost : 0
+    )
+    const [largeWeight, setLargeWeight] = useState(
+        initData.container_rates.filter(rate => rate.container_type === 'BIG')[0].max_mass ?
+            initData.container_rates.filter(rate => rate.container_type === 'BIG')[0].max_mass : 0
+    )
+    const [largeOverload, setLargeOverload] = useState(
+        initData.container_rates.filter(rate => rate.container_type === 'BIG')[0].price_per_overload ?
+            initData.container_rates.filter(rate => rate.container_type === 'BIG')[0].price_per_overload : 0
+    )
 
     const [activeButton, setActiveButton] = useState('small')
 

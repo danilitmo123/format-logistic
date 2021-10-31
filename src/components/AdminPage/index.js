@@ -16,6 +16,7 @@ import CreateContainerHub from "./container-route/CreateContainerHub"
 import './AdminPage.scss'
 import {checkAuth} from "../../api/admin";
 import {AuthStatus} from "../../constants/api";
+import EditContainerHubRoutePage from "./container-route/EditContainerHub";
 
 const PrivateRoute = ({component: Component, ...rest}) => {
     let logged = checkAuth() === AuthStatus.AUTHENTICATED
@@ -46,6 +47,7 @@ const AdminPage = () => {
                 <PrivateRoute path={'/admin/hub-routes'} exact={true} component={AllHubsPage}/>
                 <PrivateRoute path={'/admin/hub-routes/create'} component={CreateHubRoutePage} exact/>
                 <PrivateRoute path={'/admin/hub-routes/edit/:id'} component={EditHubRoutePage}/>
+                <PrivateRoute path={'/admin/hub-routes/container-edit/:id'} component={EditContainerHubRoutePage}/>
                 <PrivateRoute path={'/admin/container-hubs'} component={AllContainerHubsPage}/>
                 <PrivateRoute path={'/admin/container-routes/create'} component={CreateContainerHub}/>
                 <PrivateRoute path={'/admin/zones/rates'} component={ExtraShouldersPage}/>
