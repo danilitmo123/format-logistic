@@ -72,6 +72,7 @@ const ExtraShoulderItem = ({item}) => {
   const [activeButtonForVolume, setActiveButtonForVolume] = useState(false)
   const [activeButtonForMeter, setActiveButtonForMeter] = useState(false)
   const [markup, setMarkup] = useState(((item.markup - 1) * 100).toFixed(2))
+  const [containerMarkup, setContainerMarkup] = useState(((item.container_markup - 1) * 100).toFixed(2))
 
   const [smallPrice, setSmallPrice] = useState(
       item.container_rates.filter(rate => rate.container_type === 'SMALL')[0] ?
@@ -203,6 +204,7 @@ const ExtraShoulderItem = ({item}) => {
     let body = {
       rates: flatRates(), 
       markup: (markup / 100) + 1,
+      container_markup: (containerMarkup / 100) + 1,
       container_rates: [
         {
           container_type: 'SMALL',
@@ -391,6 +393,13 @@ const ExtraShoulderItem = ({item}) => {
                     </div>
           }
         </div>
+        <div className={'percent-block'}>
+          <label htmlFor="markup">Наценка</label>
+          <div className={'input-wrapper'}>
+            <input id={'markup'} type="number" value={markup} onChange={e => setMarkup(e.target.value)}/>
+            <div>%</div>
+          </div>
+        </div>
         <div className={'settings-for-price-wrapper'}>
           <div className={'price-block-wrapper'}>
             <div className={'price-for-type-wrapper'}>
@@ -507,7 +516,7 @@ const ExtraShoulderItem = ({item}) => {
         <div className={'percent-block'}>
           <label htmlFor="markup">Наценка</label>
           <div className={'input-wrapper'}>
-            <input id={'markup'} type="number" value={markup} onChange={e => setMarkup(e.target.value)}/>
+            <input id={'markup'} type="number" value={containerMarkup} onChange={e => setContainerMarkup(e.target.value)}/>
             <div>%</div>
           </div>
         </div>
