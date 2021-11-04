@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Link} from "react-router-dom";
 
-import logo from '../../img/logo.svg'
+import logo from '../../img/logo.png'
 
 import './Header.scss'
 
@@ -19,7 +19,7 @@ const Header = ({setActive}) => {
            <img src={logo} alt="logo" className={'logo-img'}/>
          </Link>
           <div className={'logo-text-block'}>
-            <div className={'logo-main-text'}><span className={'format'}>Format</span> Logistic</div>
+            <div className={'logo-main-text'}>FORMAT LOGISTIC</div>
             <div className={'logo-subtitle'}>Перевозка грузов в Россию</div>
           </div>
         </div>

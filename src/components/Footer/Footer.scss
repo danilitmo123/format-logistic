@@ -3,28 +3,31 @@
   padding: 0 5%;
   display: flex;
   justify-content: space-between;
-  background-color: #028090;
+  background-color: $main-background;
   height: 100px;
-  border-top: 1px solid $white;
   .logo {
     display: flex;
     justify-content: center;
     align-items: center;
     color: $white;
+    .logo-img {
+      width: 76px;
+      height: 46px;
+    }
     .logo-text-block {
       margin-left: 15px;
       font-family: 'Montserrat', sans-serif;
       .logo-main-text {
-        font-size: 24px;
-        font-weight: 400;
+        font-size: 19px;
+        font-weight: 500;
         margin-bottom: 5px;
         .format {
           color: $white;
         }
       }
       .logo-subtitle {
-        font-weight: 400;
-        font-size: 11px;
+        font-size: 12px;
+        font-weight: 500;
       }
     }
   }
@@ -83,21 +86,21 @@
     padding: 0 2%;
     .logo {
       .logo-img {
-        width: 63px;
-        height: 48px;
+        width: 78px;
+        height: 63px;
       }
       .logo-text-block {
         margin-left: 10px;
         .logo-main-text {
-          font-size: 10px;
+          font-size: 14px;
         }
         .logo-subtitle {
-          font-size: 6px;
+          font-size: 8px;
         }
       }
     }
     .contacts {
-      font-size: 8px;
+      font-size: 10px;
       color: $white;
       .admin-button {
         font-size: 10px;
@@ -108,9 +111,6 @@
       .number {
         margin-right: 35px;
       }
-      .mail {
-        display: none;
-      }
     }
   }
 }
@@ -118,23 +118,8 @@
 @media (max-width: 767px) {
   .footer {
     padding: 0 2%;
-    .logo {
-      .logo-img {
-        width: 63px;
-        height: 48px;
-      }
-      .logo-text-block {
-        margin-left: 10px;
-        .logo-main-text {
-          font-size: 10px;
-        }
-        .logo-subtitle {
-          font-size: 6px;
-        }
-      }
-    }
     .contacts {
-      font-size: 8px;
+      font-size: 10px;
       color: $white;
       .admin-button {
         font-size: 10px;
@@ -143,6 +128,7 @@
       }
 
       .number {
+        display: none;
         margin-right: 35px;
       }
       .mail {

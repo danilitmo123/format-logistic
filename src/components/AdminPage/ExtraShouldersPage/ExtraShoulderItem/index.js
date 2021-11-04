@@ -73,7 +73,7 @@ const ExtraShoulderItem = ({item}) => {
   const [activeButtonForMeter, setActiveButtonForMeter] = useState(false)
   const [markup, setMarkup] = useState(((item.markup - 1) * 100).toFixed(2))
   const [containerMarkup, setContainerMarkup] = useState(((item.container_markup - 1) * 100).toFixed(2))
-
+  console.log(item)
   const [smallPrice, setSmallPrice] = useState(
       item.container_rates.filter(rate => rate.container_type === 'SMALL')[0] ?
           item.container_rates.filter(rate => rate.container_type === 'SMALL')[0].cost : 0
