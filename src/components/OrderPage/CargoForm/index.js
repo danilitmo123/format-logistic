@@ -1,11 +1,12 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {
   typeOfCargoOptions,
   typeOfVolumeUnits,
   customTheme,
   typeOfWeightUnits,
-  typeOfWidthPalletUnits
+  typeOfWidthPalletUnits,
+  typeOfContainer
 } from "../../../templates/templatesOfOptions";
 
 import Select from 'react-select';
@@ -33,9 +34,7 @@ const containerObjectTemplate = {
   containerCount: 1,
   containerWeight: 0,
   containerWeightUnits: 'КГ',
-  smallContainer: true,
-  mediumContainer: false,
-  largeContainer: false
+  containerType: 'small'
 }
 
 
@@ -55,7 +54,6 @@ const CargoForm = ({
 
   const [boxButtonActive, setBoxButtonActive] = useState(true)
   const [containerButtonActive, setContainerButtonActive] = useState(false)
-  const [containerType, setContainerType] = useState(0)
 
   const setData = (data) => {
     localStorage.setItem('cargo', JSON.stringify(data))
@@ -122,16 +120,16 @@ const CargoForm = ({
     switch (data[i].volumeUnits) {
       case 'M':
         if (data[i].cargo === 'Паллеты') {
-          setVolume((volume - 120 * data[i].heightPallet * data[i].widthPallet * data[i].count).toFixed(2))
+          setVolume((volume - 120 * +data[i].heightPallet * +data[i].widthPallet * data[i].count).toFixed(2))
         } else {
-          setVolume((volume - data[i].length * data[i].width * data[i].height * data[i].count).toFixed(2))
+          setVolume((volume - +data[i].length * +data[i].width * +data[i].height * +data[i].count).toFixed(2))
         }
         break
       case 'CM':
         if (data[i].cargo === 'Паллеты') {
-          setVolume(((volume - 120 * data[i].heightPallet * data[i].widthPallet * data[i].count) / 1000000).toFixed(2))
+          setVolume((volume - (120 * +data[i].heightPallet * +data[i].widthPallet * +data[i].count) / 1000000).toFixed(2))
         } else {
-          setVolume(((volume - data[i].length * data[i].width * data[i].height * data[i].count) / 1000000).toFixed(2))
+           setVolume((volume - (+data[i].length * +data[i].width * +data[i].height * +data[i].count) / 1000000).toFixed(2))
         }
         break
       default:
@@ -248,31 +246,6 @@ const CargoForm = ({
     setBoxButtonActive(false)
   }
 
-  const updateContainerType = (index, value) => {
-    setContainerType(value)
-    let newCargo = [...containerData]
-    let newItem = {...newCargo[index]}
-    switch (value) {
-      case 1:
-        newItem['smallContainer'] = true
-        newItem['mediumContainer'] = false
-        newItem['largeContainer'] = false
-        break
-      case 2:
-        newItem['smallContainer'] = false
-        newItem['mediumContainer'] = true
-        newItem['largeContainer'] = false
-        break
-      case 3:
-        newItem['smallContainer'] = false
-        newItem['mediumContainer'] = false
-        newItem['largeContainer'] = true
-        break
-    }
-    newCargo[index] = newItem
-    setContainerData(newCargo)
-  }
-
   return (
       <div className={'cargo-wrapper'}>
         <div className={'title-wrapper'}>
@@ -287,7 +260,7 @@ const CargoForm = ({
         <div className={'cargo-choice'}>
           <div className={boxButtonActive ? 'active-button' : 'button'} onClick={updateBoxActive}>Коробки / Паллеты
           </div>
-          <div className={containerButtonActive ? 'active-button' : 'button'}
+          <div className={containerButtonActive ? 'active-button-container' : 'button-container'}
                onClick={updateContainerActive}>Контейнеры
           </div>
         </div>
@@ -454,10 +427,6 @@ const CargoForm = ({
               updateContainerDataItemField(index, field, newValue)
             }
 
-            const updateType = (newValue) => {
-              updateContainerType(index, newValue)
-            }
-
             return (
                 <div className={'cargo-input-wrapper'}>
                   <div className={'input-cargo-example'}>
@@ -475,26 +444,15 @@ const CargoForm = ({
                   </div>
                   <div className={'input-cargo-example'}>
                     <label className={'input-cargo-label'}>Тип контейнера</label>
-                    <div className={'container-buttons-wrapper'}>
-                      <button
-                          className={`container-button ${containerData[index].smallContainer && 'active'}`}
-                          value={'small'}
-                          onClick={() => updateType(1)}
-                      >20'
-                      </button>
-                      <button
-                          className={`container-button ${containerData[index].mediumContainer && containerType === 2 ? 'active' : ''}`}
-                          value={'medium'}
-                          onClick={() => updateType(2)}
-                      >40'
-                      </button>
-                      <button
-                          className={`container-button ${containerData[index].largeContainer && containerType === 3 ? 'active' : ''}`}
-                          value={'large'}
-                          onClick={() => updateType(3)}
-                      >40'HC
-                      </button>
-                    </div>
+                    <Select
+                        classNamePrefix="dimensions-pallet-select"
+                        theme={customTheme}
+                        options={typeOfContainer}
+                        defaultValue={{value: 'small', label: "20'"}}
+                        onChange={(e) => updateItem('containerType', e.value)}
+                        noOptionsMessage={() => `Не найдено`}
+                        placeholder={'СМ'}
+                    />
                   </div>
                   <div className={'input-cargo-example'}>
                     <label className={'input-cargo-label'}>Вес</label>

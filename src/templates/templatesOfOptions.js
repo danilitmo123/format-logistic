@@ -24,6 +24,12 @@ export const typeOfWidthPalletUnits = [
   {value: '80', label: '80'},
 ]
 
+export const typeOfContainer = [
+  {value: 'small', label: "20'"},
+  {value: 'middle', label: "40'"},
+  {value: 'large', label: "40'HC"},
+]
+
 export const customTheme = (theme) => {
   return {
     ...theme,

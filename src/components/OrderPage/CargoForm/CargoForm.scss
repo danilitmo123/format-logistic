@@ -56,21 +56,51 @@
       justify-content: center;
       align-items: center;
       border: 1px solid $light-blue;
-      width: 195px;
-      height: 40px;
+      width: 170px;
+      height: 30px;
       background-color: $light-blue;
       color: $white;
       cursor: pointer;
+      border-radius: 8px 0 0 8px;
+      font-size: 12px;
     }
 
     .button {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 195px;
-      height: 40px;
+      width: 170px;
+      height: 30px;
       border: 1px solid $light-blue;
       cursor: pointer;
+      border-radius: 8px 0 0 8px;
+      font-size: 12px;
+    }
+
+    .active-button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid $light-blue;
+      width: 170px;
+      height: 30px;
+      background-color: $light-blue;
+      color: $white;
+      cursor: pointer;
+      border-radius: 0 8px 8px 0;
+      font-size: 12px;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 170px;
+      height: 30px;
+      border: 1px solid $light-blue;
+      cursor: pointer;
+      border-radius: 0 8px 8px 0;
+      font-size: 12px;
     }
   }
 

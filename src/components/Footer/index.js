@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../img/logo.svg'
+import logo from '../../img/logo.png'
 
 import './Footer.scss'
 import {Link} from "react-router-dom";
@@ -12,7 +12,7 @@ const Footer = () => {
             <img src={logo} alt="logo" className={'logo-img'}/>
           </Link>
           <div className={'logo-text-block'}>
-            <div className={'logo-main-text'}><span className={'format'}>Format</span> Logistic</div>
+            <div className={'logo-main-text'}>FORMAT LOGISTIC</div>
             <div className={'logo-subtitle'}>Перевозка грузов в Россию</div>
           </div>
         </div>
