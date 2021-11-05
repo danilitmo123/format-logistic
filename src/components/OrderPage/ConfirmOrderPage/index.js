@@ -65,7 +65,7 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
                 send_mail: send_mail
             }
             let body = {
-                good: {boxes: good}, path, customs, agent, special
+                good: good, path, customs, agent, special
             }
             const options = {
                 headers: {'Content-Type': 'application/json'}
