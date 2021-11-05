@@ -49,7 +49,7 @@ const FirstStepForm = ({
             weight={weight}
             setWeight={setWeight}
             containerData={containerData}
-            setContainerData={setContainerData}
+            setContainerDataRaw={setContainerData}
             containerWeight={containerWeight}
             setContainerWeight={setContainerWeight}
         />

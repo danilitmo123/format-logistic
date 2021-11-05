@@ -5,7 +5,7 @@ import TypeOfRoutes from "../TypeOfRoutes";
 
 import './MapBlock.scss'
 
-const MapBlock = ({weight, index, setIndex, path, volume, chosenPath, setThirdPage}) => {
+const MapBlock = ({weight, index, setIndex, path, volume, chosenPath, setThirdPage, containerWeight}) => {
 
   const [displayedPath, setPath] = useState(null)
   const [displayedInfo, setInfo] = useState(null)
@@ -55,8 +55,13 @@ const MapBlock = ({weight, index, setIndex, path, volume, chosenPath, setThirdPa
             </div>
             <div className={'route-info-title'}>Информация о грузе</div>
             <div className={'route-time-and-cost-wrapper'}>
-              <div className={'weight'}>Вес: {weight} кг</div>
-              <div className={'volume'}>Объем: {volume} м³</div>
+              {containerWeight &&  <div className={'weight'}>Вес: {containerWeight} кг</div>}
+              {(weight > 0 && volume > 0) &&
+                <>
+                  <div className={'weight'}>Вес: {weight} кг</div>
+                  <div className={'volume'}>Объем: {volume} м³</div>
+                </>
+              }
             </div>
             {chosenPath ? '' : <button className={'choose-button'} onClick={() => {
               setIndex(index)
