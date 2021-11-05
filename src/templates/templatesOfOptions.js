@@ -35,8 +35,8 @@ export const customTheme = (theme) => {
     ...theme,
     colors: {
       ...theme.colors,
-      primary25: 'rgba(53, 210, 210, .2)',
-      primary: '#35d2d2'
+      primary25: 'rgba(48, 165, 201, .3)',
+      primary: '#30A5C9'
     }
   }
 }
