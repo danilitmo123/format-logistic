@@ -24,8 +24,7 @@ const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler, weight
 
   if (paths.paths && !paths.paths.length) {
     return <div className={'warning-path'}>
-      <div>На данном направлении пока что нет сервиса</div>
-      <div>Вернитесь на предыдущую страницу и измените маршрут</div>
+      <div>Данное направление пока что нельзя рассчитать через он-лайн сервис, пожалуйста оставьте нам свои контакты для обратной связи, мы сделаем расчет по вашему направлению!</div>
     </div>
   }
 

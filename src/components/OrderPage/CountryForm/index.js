@@ -18,15 +18,15 @@ import ErrorMessage from "../../Common/ErrorMessage";
 const placeHolderFromType = type => {
   switch (type) {
     case PlaceType.CITY:
-      return 'Введите город / населенный пункт'
+      return 'Мы заберём груз из этого места / Incoterms - EXW'
     case PlaceType.AIRPORT:
-      return 'Выбрать аэропорт'
+      return 'Груз доставят в аэропорт отправления / Incoterms - FCA,CPT'
     case PlaceType.SEAPORT:
       return 'Выбрать морской порт'
     case PlaceType.RAILWAY_STATION:
       return 'Выбрать станцию'
     case PlaceType.WAREHOUSE:
-      return 'Выбрать склад'
+      return 'Груз доставят на склад компании Format / Inctomers - FCA,CPT'
   }
 }
 
@@ -258,7 +258,7 @@ const CountryForm = ({
                         onChange={selectedCityIdFromHandler}
                         noOptionsMessage={() => 'Не найдено'}
                         loadingMessage={() => 'Поиск...'}
-                        placeholder={placeHolderFromType(sourceType)}
+                        placeholder={'Введите город / населенный пунт'}
                         filterOption={filterOptions}
                     />
                   </div>
@@ -272,7 +272,7 @@ const CountryForm = ({
                         onChange={selectedCityIdFromHandler}
                         noOptionsMessage={() => 'Не найдено'}
                         loadingMessage={() => 'Поиск...'}
-                        placeholder={placeHolderFromType(sourceType)}
+                        placeholder={'Введите город / населенный пункт'}
                         filterOption={filterOptions}
                     />
                   </div>
@@ -346,7 +346,7 @@ const CountryForm = ({
                         onChange={selectedCityIdToHandler}
                         noOptionsMessage={() => 'Не найдено'}
                         loadingMessage={() => 'Поиск...'}
-                        placeholder={placeHolderFromType(destinationType)}
+                        placeholder={'Введите город / населенный пункт'}
                         filterOption={filterOptions}
                     />
                   </div>
@@ -360,7 +360,7 @@ const CountryForm = ({
                         onChange={selectedCityIdToHandler}
                         noOptionsMessage={() => 'Не найдено'}
                         loadingMessage={() => 'Поиск...'}
-                        placeholder={placeHolderFromType(destinationType)}
+                        placeholder={'Введите город / населенный пункт'}
                         filterOption={filterOptions}
                     />
                   </div>
