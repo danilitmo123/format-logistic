@@ -22,10 +22,21 @@ const PathContainerPage = ({paths, setChosenPath, thirdPageActiveHandler, weight
     }
   }, [index])
 
+  const Form = () => {
+    return (
+       <div>
+         <div className={'warning-path'}>
+           <div>Данное направление пока что нельзя рассчитать через он-лайн сервис, пожалуйста оставьте нам свои контакты для обратной связи, мы сделаем расчет по вашему направлению!</div>
+         </div>
+         <div>
+
+         </div>
+       </div>
+    )
+  }
+
   if (paths.paths && !paths.paths.length) {
-    return <div className={'warning-path'}>
-      <div>Данное направление пока что нельзя рассчитать через он-лайн сервис, пожалуйста оставьте нам свои контакты для обратной связи, мы сделаем расчет по вашему направлению!</div>
-    </div>
+    return <Form />
   }
 
   return (

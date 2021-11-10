@@ -60,6 +60,21 @@ const CountryForm = ({
   const placeholderFromType = type => {
     switch (type) {
       case PlaceType.CITY:
+        return 'Выберите город / населенный пункт'
+      case PlaceType.AIRPORT:
+        return 'Выберите аэропорт'
+      case PlaceType.SEAPORT:
+        return 'Выбрать морской порт'
+      case PlaceType.RAILWAY_STATION:
+        return 'Выбрать станцию'
+      case PlaceType.WAREHOUSE:
+        return 'Выберите склад'
+    }
+  }
+
+  const labelToType = type => {
+    switch (type) {
+      case PlaceType.CITY:
         return 'Доставим груз до этого места (до двери получателя)'
       case PlaceType.AIRPORT:
         return 'Доставим груз до выбранного аэропорта'
@@ -349,7 +364,7 @@ const CountryForm = ({
             </div>
           </div>
           <div className={'city-select'}>
-            <label className={'select-title'}>{labelFromType(destinationType)}</label>
+            <label className={'select-title'}>{labelToType(destinationType)}</label>
             {
               destinationType === PlaceType.CITY ?
                   <div className={'select'}>
