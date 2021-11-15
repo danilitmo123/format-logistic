@@ -100,7 +100,7 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
             })
 
             let body = {
-                good: {boxes: good},
+                good: good,
                 path: {
                     routes: path,
                     total_cost: pathes.total_cost,
@@ -116,7 +116,7 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
                 responseType: 'arraybuffer',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': ' application/pdf'
+                    'Accept': 'application/pdf'
                 }
             }
             axios.post(`${REPORT_SERVER_URL}report`, body, options)
