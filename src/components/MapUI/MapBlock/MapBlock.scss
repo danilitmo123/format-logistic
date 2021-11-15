@@ -67,6 +67,7 @@
         font-weight: 400;
         margin-bottom: 20px;
       }
+
       .route-total-distance {
         font-size: 14px;
         font-weight: 400;
@@ -82,6 +83,15 @@
         display: flex;
         font-size: 14px;
         margin-bottom: 50px;
+
+        .container-info-wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .container-cargo {
+            margin-bottom: 10px;
+          }
+        }
 
         .weight {
           margin-right: 10px;
@@ -121,6 +131,7 @@
 
       .route-info {
         width: 30%;
+
         .route-total-cost {
           font-size: 27px;
         }
@@ -172,6 +183,7 @@
   .all-route-info {
     width: 100%;
     margin-bottom: 20px;
+
     .route-points-wrapper {
       align-items: center;
       flex-direction: column;

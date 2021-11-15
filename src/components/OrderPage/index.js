@@ -32,6 +32,10 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
     const [chooseRussiaWarning, setChooseRussiaWarning] = useState(false)
     const [showAlert, setShowAlert] = useState({active: false, isEmail: false})
     const [thirdPageActive, setThirdPageActive] = useState(false)
+    const [smallCount, setSmallCount] = useState(1)
+    const [middleCount, setMiddleCount] = useState(0)
+    const [bigCount, setBigCount] = useState(0)
+    const [activeCargo, setActiveCargo] = useState('box')
 
 
     const disabledButtonHandler = () => {
@@ -190,6 +194,14 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
                             chooseRussiaWarning={chooseRussiaWarning}
                             setChooseRussiaWarning={setChooseRussiaWarning}
                             thirdPageActive={thirdPageActive}
+                            smallCount={smallCount}
+                            setSmallCount={setSmallCount}
+                            middleCount={middleCount}
+                            setMiddleCount={setMiddleCount}
+                            bigCount={bigCount}
+                            setBigCount={setBigCount}
+                            activeCargo={activeCargo}
+                            setActiveCargo={setActiveCargo}
                         />
                         <button
                             className={'continue-button-first-page'}
@@ -207,6 +219,9 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
                                 setChosenPath={setChosenPath}
                                 thirdPageActiveHandler={setSecondActivePage}
                                 setThirdPage={setThirdPageActive}
+                                smallCount={smallCount}
+                                middleCount={middleCount}
+                                bigCount={bigCount}
                             />
                             <button
                                 onClick={secondPageActiveHandler}
