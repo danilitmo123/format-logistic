@@ -296,15 +296,22 @@ const CargoForm = ({
     setContainerButtonActive(false)
     setBoxButtonActive(true)
     setActiveCargo('box')
-    localStorage.setItem('goodType', 'BOX')
   }
 
   const updateContainerActive = () => {
     setContainerButtonActive(true)
     setBoxButtonActive(false)
     setActiveCargo('container')
-    localStorage.setItem('goodType', 'CONTAINER')
   }
+
+  useEffect(() => {
+    if (boxButtonActive){
+      localStorage.setItem('goodType', 'BOX')
+    }
+    if (containerButtonActive){
+      localStorage.setItem('goodType', 'CONTAINER')
+    }
+  }, [boxButtonActive, containerButtonActive])
 
   return (
     <div className={'cargo-wrapper'}>
