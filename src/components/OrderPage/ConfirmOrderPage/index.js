@@ -57,7 +57,7 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
             let customs = JSON.parse(localStorage.getItem('customs'))
             let agent = {
                 company_name: company.value,
-                phone: phone,
+                phone:  phone,
                 email: email.value,
                 comment: comment.value
             }
