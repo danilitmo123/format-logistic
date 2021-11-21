@@ -112,6 +112,18 @@ const ExtraShoulderItem = ({item}) => {
         item.container_rates.filter(rate => rate.container_type === 'BIG')[0] ?
             item.container_rates.filter(rate => rate.container_type === 'BIG')[0].price_per_overload : 0
     )
+    const [largeMinimalPrice, setLargeMinimalPrice] = useState(
+        item.container_rates.filter(rate => rate.container_type === 'BIG')[0] ?
+            item.container_rates.filter(rate => rate.container_type === 'BIG')[0].minimal_price : 0
+    )
+    const [mediumMinimalPrice, setMediumMinimalPrice] = useState(
+        item.container_rates.filter(rate => rate.container_type === 'MIDDLE')[0] ?
+            item.container_rates.filter(rate => rate.container_type === 'MIDDLE')[0].minimal_price : 0
+    )
+    const [smallMinimalPrice, setSmallMinimalPrice] = useState(
+        item.container_rates.filter(rate => rate.container_type === 'SMALL')[0] ?
+            item.container_rates.filter(rate => rate.container_type === 'SMALL')[0].minimal_price : 0
+    )
 
     const [activeButton, setActiveButton] = useState('small')
 
@@ -451,6 +463,15 @@ const ExtraShoulderItem = ({item}) => {
                                         onChange={e => setSmallOverload(e.target.value)}
                                     />
                                 </div>
+                                <div className={'container-price-item'}>
+                                    <label htmlFor="smallMinimalPrice">минимальная цена</label>
+                                    <input
+                                        id={'smallMinimalPrice'}
+                                        type="number"
+                                        value={smallMinimalPrice}
+                                        onChange={e => setSmallMinimalPrice(e.target.value)}
+                                    />
+                                </div>
                             </div>
                         }
                         {
@@ -480,6 +501,15 @@ const ExtraShoulderItem = ({item}) => {
                                         onChange={e => setMediumOverload(e.target.value)}
                                     />
                                 </div>
+                                <div className={'container-price-item'}>
+                                    <label htmlFor="mediumMinimalPrice">минимальная цена</label>
+                                    <input
+                                        id={'mediumMinimalPrice'}
+                                        type="number"
+                                        value={mediumMinimalPrice}
+                                        onChange={e => setMediumMinimalPrice(e.target.value)}
+                                    />
+                                </div>
                             </div>
                         }
                         {
@@ -507,6 +537,15 @@ const ExtraShoulderItem = ({item}) => {
                                         value={largeOverload}
                                         type="number"
                                         onChange={e => setLargeOverload(e.target.value)}
+                                    />
+                                </div>
+                                <div className={'container-price-item'}>
+                                    <label htmlFor="largeMinimalPrice">минимальная цена</label>
+                                    <input
+                                        id={'largeMinimalPrice'}
+                                        type="number"
+                                        value={largeMinimalPrice}
+                                        onChange={e => setLargeMinimalPrice(e.target.value)}
                                     />
                                 </div>
                             </div>
