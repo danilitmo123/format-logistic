@@ -69,6 +69,22 @@ const ldmRatesFromItem = (item) => {
 const UPDATE_RATES_URL = `${ADMIN_SERVER_URL}admin-zones`
 
 
+const ServiceItem = (name, price, setPrice, setName) => {
+
+    return (
+        <div>
+            <label htmlFor="">Название</label>
+            <input type="text" value={name}
+                   onChange={e => setName(e.target.value)}/>
+            <label htmlFor="">Цена</label>
+            <input type="number" value={price}
+                   onChange={e => setPrice(e.target.value)}
+            />
+        </div>
+    )
+}
+
+
 const ExtraShoulderItem = ({item}) => {
     const [dataWeight, setDataWeight] = useState(() => massRatesFromItem(item))
     const [dataVolume, setDataVolume] = useState(() => sizeRatesFromItem(item))
@@ -544,17 +560,14 @@ const ExtraShoulderItem = ({item}) => {
                                     </div>
                                 </div>
                                 <div>
-                                    {smallServices.map((service, index) => {
-                                        return <div>
-                                            <label htmlFor="">Название</label>
-                                            <input type="text" value={service.name}
-                                                   onChange={e => getChangeSmallServiceName(index)(e.target.value)}/>
-                                            <label htmlFor="">Цена</label>
-                                            <input type="number" value={service.price}
-                                                   onChange={e => getChangeSmallServicePrice(index)(e.target.value)}
-                                            />
-                                        </div>
-                                    })}
+                                    {smallServices.map((service, index) => (
+                                        <ServiceItem
+                                            name={service.name}
+                                            price={service.price}
+                                            setName={getChangeSmallServiceName(index)}
+                                            setPrice={getChangeSmallServicePrice(index)}
+                                        />
+                                    ))}
                                     <button onClick={addSmallService}>+</button>
                                 </div>
                             </div>
