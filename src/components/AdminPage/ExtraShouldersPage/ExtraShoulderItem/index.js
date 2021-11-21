@@ -222,19 +222,22 @@ const ExtraShoulderItem = ({item}) => {
                     container_type: 'SMALL',
                     max_mass: smallWeight,
                     cost: smallPrice,
-                    price_per_overload: smallOverload
+                    price_per_overload: smallOverload,
+                    minimal_price: smallMinimalPrice
                 },
                 {
                     container_type: 'MIDDLE',
                     max_mass: mediumWeight,
                     cost: mediumPrice,
-                    price_per_overload: mediumOverload
+                    price_per_overload: mediumOverload,
+                    minimal_price: mediumMinimalPrice
                 },
                 {
                     container_type: 'BIG',
                     max_mass: largeWeight,
                     cost: largePrice,
-                    price_per_overload: largeOverload
+                    price_per_overload: largeOverload,
+                    minimal_price: largeMinimalPrice
                 }
             ],
         }
