@@ -31,6 +31,11 @@ const defaultLdmRate = {
     type: 'LDM'
 }
 
+const defaultService = {
+    name: '',
+    price: 0
+}
+
 const massRatesFromItem = (item) => {
     let rates = item.rates.filter(rete => {
         return rete.type === 'MASS'
@@ -73,7 +78,7 @@ const ExtraShoulderItem = ({item}) => {
     const [activeButtonForMeter, setActiveButtonForMeter] = useState(false)
     const [markup, setMarkup] = useState(((item.markup - 1) * 100).toFixed(2))
     const [containerMarkup, setContainerMarkup] = useState(((item.container_markup - 1) * 100).toFixed(2))
-    console.log(item)
+
     const [smallPrice, setSmallPrice] = useState(
         item.container_rates.filter(rate => rate.container_type === 'SMALL')[0] ?
             item.container_rates.filter(rate => rate.container_type === 'SMALL')[0].cost : 0
@@ -124,6 +129,10 @@ const ExtraShoulderItem = ({item}) => {
         item.container_rates.filter(rate => rate.container_type === 'SMALL')[0] ?
             item.container_rates.filter(rate => rate.container_type === 'SMALL')[0].minimal_price : 0
     )
+
+    const [smallServices, setSmallServices] = useState([])
+    const [mediumServices, setMediumServices] = useState([])
+    const [largeServices, setLargeServices] = useState([])
 
     const [activeButton, setActiveButton] = useState('small')
 
@@ -223,26 +232,83 @@ const ExtraShoulderItem = ({item}) => {
                     max_mass: smallWeight,
                     cost: smallPrice,
                     price_per_overload: smallOverload,
-                    minimal_price: smallMinimalPrice
+                    minimal_price: smallMinimalPrice,
+                    services: smallServices
                 },
                 {
                     container_type: 'MIDDLE',
                     max_mass: mediumWeight,
                     cost: mediumPrice,
                     price_per_overload: mediumOverload,
-                    minimal_price: mediumMinimalPrice
+                    minimal_price: mediumMinimalPrice,
+                    services: mediumServices
                 },
                 {
                     container_type: 'BIG',
                     max_mass: largeWeight,
                     cost: largePrice,
                     price_per_overload: largeOverload,
-                    minimal_price: largeMinimalPrice
+                    minimal_price: largeMinimalPrice,
+                    services: largeServices
                 }
             ],
         }
         console.log({body})
         adminInstance.patch(`${UPDATE_RATES_URL}/${item.id}/`, body).then()
+    }
+
+    const getChangeSmallServiceName = index => {
+        return name => {
+            smallServices[index].name = name
+            setSmallServices(smallServices)
+        }
+    }
+
+    const getChangeMediumServiceName = index => {
+        return name => {
+            mediumServices[index].name = name
+            setMediumServices(mediumServices)
+        }
+    }
+
+    const getChangeLargeServiceName = index => {
+        return name => {
+            largeServices[index].name = name
+            setLargeServices(largeServices)
+        }
+    }
+    const getChangeSmallServicePrice = index => {
+        return price => {
+            smallServices[index].price = price
+            setSmallServices(smallServices)
+        }
+    }
+
+    const getChangeMediumServicePrice = index => {
+        return price => {
+            mediumServices[index].price = price
+            setMediumServices(mediumServices)
+        }
+    }
+
+    const getChangeLargeServicePrice = index => {
+        return price => {
+            largeServices[index].price = price
+            setLargeServices(largeServices)
+        }
+    }
+
+    const addSmallService = () => {
+        smallServices.push(defaultService)
+        setSmallServices(smallServices)
+    }
+    const addMediumService = () => {
+        mediumServices.push(defaultService)
+        setMediumServices(mediumServices)
+    }
+    const addLargeService = () => {
+        largeServices.push(defaultService)
+        setLargeServices(largeServices)
     }
 
     return (
@@ -441,115 +507,163 @@ const ExtraShoulderItem = ({item}) => {
                     <div className={'weight-settings-wrapper'}>
                         {
                             activeButton === 'small' &&
-                            <div className={'container-price-wrapper'}>
-                                <div className={'container-price-item'}>
-                                    <label htmlFor="">Цена за контейнер</label>
-                                    <input
-                                        value={smallPrice}
-                                        type="number"
-                                        onChange={e => setSmallPrice(e.target.value)}
-                                    />
+                            <div>
+                                <div className={'container-price-wrapper'}>
+                                    <div className={'container-price-item'}>
+                                        <label htmlFor="">Цена за контейнер</label>
+                                        <input
+                                            value={smallPrice}
+                                            type="number"
+                                            onChange={e => setSmallPrice(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className={'container-price-item'}>
+                                        <label htmlFor="">Максимальная масса</label>
+                                        <input
+                                            value={smallWeight}
+                                            type="number"
+                                            onChange={e => setSmallWeight(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className={'container-price-item'}>
+                                        <label htmlFor="">Цена за перегруз</label>
+                                        <input
+                                            value={smallOverload}
+                                            type="number"
+                                            onChange={e => setSmallOverload(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className={'container-price-item'}>
+                                        <label htmlFor="smallMinimalPrice">минимальная цена</label>
+                                        <input
+                                            id={'smallMinimalPrice'}
+                                            type="number"
+                                            value={smallMinimalPrice}
+                                            onChange={e => setSmallMinimalPrice(e.target.value)}
+                                        />
+                                    </div>
                                 </div>
-                                <div className={'container-price-item'}>
-                                    <label htmlFor="">Максимальная масса</label>
-                                    <input
-                                        value={smallWeight}
-                                        type="number"
-                                        onChange={e => setSmallWeight(e.target.value)}
-                                    />
-                                </div>
-                                <div className={'container-price-item'}>
-                                    <label htmlFor="">Цена за перегруз</label>
-                                    <input
-                                        value={smallOverload}
-                                        type="number"
-                                        onChange={e => setSmallOverload(e.target.value)}
-                                    />
-                                </div>
-                                <div className={'container-price-item'}>
-                                    <label htmlFor="smallMinimalPrice">минимальная цена</label>
-                                    <input
-                                        id={'smallMinimalPrice'}
-                                        type="number"
-                                        value={smallMinimalPrice}
-                                        onChange={e => setSmallMinimalPrice(e.target.value)}
-                                    />
+                                <div>
+                                    {smallServices.map((service, index) => {
+                                        return <div>
+                                            <label htmlFor="">Название</label>
+                                            <input type="text" value={service.name}
+                                                   onChange={e => getChangeSmallServiceName(index)(e.target.value)}/>
+                                            <label htmlFor="">Цена</label>
+                                            <input type="number" value={service.price}
+                                                   onChange={e => getChangeSmallServicePrice(index)(e.target.value)}
+                                            />
+                                        </div>
+                                    })}
+                                    <button onClick={addSmallService}>+</button>
                                 </div>
                             </div>
                         }
                         {
                             activeButton === 'medium' &&
-                            <div className={'container-price-wrapper'}>
-                                <div className={'container-price-item'}>
-                                    <label htmlFor="">Цена за контейнер</label>
-                                    <input
-                                        value={mediumPrice}
-                                        type="number"
-                                        onChange={e => setMediumPrice(e.target.value)}
-                                    />
+                            <div>
+                                <div className={'container-price-wrapper'}>
+                                    <div className={'container-price-item'}>
+                                        <label htmlFor="">Цена за контейнер</label>
+                                        <input
+                                            value={mediumPrice}
+                                            type="number"
+                                            onChange={e => setMediumPrice(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className={'container-price-item'}>
+                                        <label htmlFor="">Максимальная масса</label>
+                                        <input
+                                            value={mediumWeight}
+                                            type="number"
+                                            onChange={e => setMediumWeight(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className={'container-price-item'}>
+                                        <label htmlFor="">Цена за перегруз</label>
+                                        <input
+                                            value={mediumOverload}
+                                            type="number"
+                                            onChange={e => setMediumOverload(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className={'container-price-item'}>
+                                        <label htmlFor="mediumMinimalPrice">минимальная цена</label>
+                                        <input
+                                            id={'mediumMinimalPrice'}
+                                            type="number"
+                                            value={mediumMinimalPrice}
+                                            onChange={e => setMediumMinimalPrice(e.target.value)}
+                                        />
+                                    </div>
                                 </div>
-                                <div className={'container-price-item'}>
-                                    <label htmlFor="">Максимальная масса</label>
-                                    <input
-                                        value={mediumWeight}
-                                        type="number"
-                                        onChange={e => setMediumWeight(e.target.value)}
-                                    />
-                                </div>
-                                <div className={'container-price-item'}>
-                                    <label htmlFor="">Цена за перегруз</label>
-                                    <input
-                                        value={mediumOverload}
-                                        type="number"
-                                        onChange={e => setMediumOverload(e.target.value)}
-                                    />
-                                </div>
-                                <div className={'container-price-item'}>
-                                    <label htmlFor="mediumMinimalPrice">минимальная цена</label>
-                                    <input
-                                        id={'mediumMinimalPrice'}
-                                        type="number"
-                                        value={mediumMinimalPrice}
-                                        onChange={e => setMediumMinimalPrice(e.target.value)}
-                                    />
+                                <div>
+                                    {mediumServices.map((service, index) => {
+                                        return <div>
+                                            <label htmlFor="">Название</label>
+                                            <input type="text" value={service.name}
+                                                   onChange={e => getChangeMediumServiceName(index)(e.target.value)}/>
+                                            <label htmlFor="">Цена</label>
+                                            <input type="number" value={service.price}
+                                                   onChange={e => getChangeMediumServicePrice(index)(e.target.value)}
+                                            />
+                                        </div>
+                                    })}
+                                    <button onClick={addMediumService}>+</button>
                                 </div>
                             </div>
                         }
                         {
                             activeButton === 'large' &&
-                            <div className={'container-price-wrapper'}>
-                                <div className={'container-price-item'}>
-                                    <label htmlFor="">Цена за контейнер</label>
-                                    <input
-                                        value={largePrice}
-                                        type="number"
-                                        onChange={e => setLargePrice(e.target.value)}
-                                    />
+                            <div>
+                                <div className={'container-price-wrapper'}>
+                                    <div className={'container-price-item'}>
+                                        <label htmlFor="">Цена за контейнер</label>
+                                        <input
+                                            value={largePrice}
+                                            type="number"
+                                            onChange={e => setLargePrice(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className={'container-price-item'}>
+                                        <label htmlFor="">Максимальная масса</label>
+                                        <input
+                                            value={largeWeight}
+                                            type="number"
+                                            onChange={e => setLargeWeight(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className={'container-price-item'}>
+                                        <label htmlFor="">Цена за перегруз</label>
+                                        <input
+                                            value={largeOverload}
+                                            type="number"
+                                            onChange={e => setLargeOverload(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className={'container-price-item'}>
+                                        <label htmlFor="largeMinimalPrice">минимальная цена</label>
+                                        <input
+                                            id={'largeMinimalPrice'}
+                                            type="number"
+                                            value={largeMinimalPrice}
+                                            onChange={e => setLargeMinimalPrice(e.target.value)}
+                                        />
+                                    </div>
                                 </div>
-                                <div className={'container-price-item'}>
-                                    <label htmlFor="">Максимальная масса</label>
-                                    <input
-                                        value={largeWeight}
-                                        type="number"
-                                        onChange={e => setLargeWeight(e.target.value)}
-                                    />
-                                </div>
-                                <div className={'container-price-item'}>
-                                    <label htmlFor="">Цена за перегруз</label>
-                                    <input
-                                        value={largeOverload}
-                                        type="number"
-                                        onChange={e => setLargeOverload(e.target.value)}
-                                    />
-                                </div>
-                                <div className={'container-price-item'}>
-                                    <label htmlFor="largeMinimalPrice">минимальная цена</label>
-                                    <input
-                                        id={'largeMinimalPrice'}
-                                        type="number"
-                                        value={largeMinimalPrice}
-                                        onChange={e => setLargeMinimalPrice(e.target.value)}
-                                    />
+                                <div>
+                                    {largeServices.map((service, index) => {
+                                        return <div>
+                                            <label htmlFor="">Название</label>
+                                            <input type="text" value={service.name}
+                                                   onChange={e => getChangeLargeServiceName(index)(e.target.value)}/>
+                                            <label htmlFor="">Цена</label>
+                                            <input type="number" value={service.price}
+                                                   onChange={e => getChangeLargeServicePrice(index)(e.target.value)}
+                                            />
+                                        </div>
+                                    })}
+                                    <button onClick={addLargeService}>+</button>
                                 </div>
                             </div>
                         }
