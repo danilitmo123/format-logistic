@@ -125,6 +125,64 @@
       width: 380px;
       border-radius: 20px;
       margin-bottom: 20px;
+      .container-price-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        .add-button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 400;
+          color: $white;
+          border: none;
+          width: 170px;
+          height: 40px;
+          border-radius: 8px;
+          background: $light-blue;
+          outline: none;
+          margin-top: 20px;
+          cursor: pointer;
+        }
+      }
+      .services-price-wrapper {
+        .service-item-wrapper {
+          .item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+          }
+          .item label {
+            width: 100px;
+            margin-right: 10px;
+          }
+          .item input {
+            width: 120px;
+            height: 38px;
+            padding: 2px 8px;
+            align-items: center;
+            background-color: hsl(0, 0%, 100%);
+            border-color: hsl(0, 0%, 80%);
+            border-radius: 4px;
+            border-style: solid;
+            border-width: 1px;
+            cursor: default;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            min-height: 38px;
+            outline: none;
+            position: relative;
+            transition: all 100ms;
+            box-sizing: border-box;
+            &:focus {
+              border-color: $light-blue;
+              box-shadow: 0 0 0 1px $light-blue;
+            }
+          }
+        }
+      }
       .inputs-wrapper {
         display: flex;
         flex-direction: row;

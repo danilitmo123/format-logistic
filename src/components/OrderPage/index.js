@@ -37,7 +37,6 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
     const [bigCount, setBigCount] = useState(0)
     const [activeCargo, setActiveCargo] = useState('box')
 
-
     const disabledButtonHandler = () => {
         let warning = false
         if (hasCargoError()) {
@@ -206,7 +205,7 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
                         <button
                             className={'continue-button-first-page'}
                             onClick={disabledButtonHandler}
-                        >Продолжить
+                        >Построить маршруты
                         </button>
                     </>
                     : secondActivePage ?

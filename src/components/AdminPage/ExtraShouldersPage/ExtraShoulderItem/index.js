@@ -72,14 +72,18 @@ const UPDATE_RATES_URL = `${ADMIN_SERVER_URL}admin-zones`
 const ServiceItem = ({name, price, setValue}) => {
 
     return (
-        <div>
-            <label htmlFor="">Название</label>
-            <input type="text" value={name}
-                   onChange={e => setValue('name', e.target.value)}/>
-            <label htmlFor="">Цена</label>
-            <input type="number" value={price}
-                   onChange={e => setValue('price', e.target.value)}
-            />
+        <div className={'service-item-wrapper'}>
+            <div className={'item'}>
+                <label htmlFor="">Название</label>
+                <input type="text" value={name}
+                       onChange={e => setValue('name', e.target.value)}/>
+            </div>
+            <div className={'item'}>
+                <label htmlFor="">Цена</label>
+                <input type="number" value={price}
+                       onChange={e => setValue('price', e.target.value)}
+                />
+            </div>
         </div>
     )
 }
@@ -150,7 +154,7 @@ const ExtraShoulderItem = ({item}) => {
         item.container_rates.filter(rate => rate.container_type === 'SMALL')[0] ?
             item.container_rates.filter(rate => rate.container_type === 'SMALL')[0].services : []
     )
-    
+
     const [mediumServices, setMediumServices] = useState(
         item.container_rates.filter(rate => rate.container_type === 'MIDDLE')[0] ?
             item.container_rates.filter(rate => rate.container_type === 'MIDDLE')[0].services : []
@@ -544,7 +548,7 @@ const ExtraShoulderItem = ({item}) => {
                                         />
                                     </div>
                                     <div className={'container-price-item'}>
-                                        <label htmlFor="smallMinimalPrice">минимальная цена</label>
+                                        <label htmlFor="smallMinimalPrice">Минимальная цена</label>
                                         <input
                                             id={'smallMinimalPrice'}
                                             type="number"
@@ -553,7 +557,7 @@ const ExtraShoulderItem = ({item}) => {
                                         />
                                     </div>
                                 </div>
-                                <div>
+                                <div className={'services-price-wrapper'}>
                                     {smallServices.map((service, index) => {
 
                                         const updateItem = (field, newValue) => {
@@ -566,7 +570,7 @@ const ExtraShoulderItem = ({item}) => {
                                             setValue={updateItem}
                                         />
                                     })}
-                                    <button onClick={addSmallService}>+</button>
+                                    <button onClick={addSmallService} className={'add-button'}>Добавить сервис</button>
                                 </div>
                             </div>
                         }
@@ -599,7 +603,7 @@ const ExtraShoulderItem = ({item}) => {
                                         />
                                     </div>
                                     <div className={'container-price-item'}>
-                                        <label htmlFor="mediumMinimalPrice">минимальная цена</label>
+                                        <label htmlFor="mediumMinimalPrice">Минимальная цена</label>
                                         <input
                                             id={'mediumMinimalPrice'}
                                             type="number"
@@ -608,7 +612,7 @@ const ExtraShoulderItem = ({item}) => {
                                         />
                                     </div>
                                 </div>
-                                <div>
+                                <div className={'services-price-wrapper'}>
                                     {mediumServices.map((service, index) => {
 
                                         const updateItem = (field, newValue) => {
@@ -621,7 +625,7 @@ const ExtraShoulderItem = ({item}) => {
                                             setValue={updateItem}
                                         />
                                     })}
-                                    <button onClick={addMediumService}>+</button>
+                                    <button onClick={addMediumService} className={'add-button'}>Добавить сервис</button>
                                 </div>
                             </div>
                         }
@@ -654,7 +658,7 @@ const ExtraShoulderItem = ({item}) => {
                                         />
                                     </div>
                                     <div className={'container-price-item'}>
-                                        <label htmlFor="largeMinimalPrice">минимальная цена</label>
+                                        <label htmlFor="largeMinimalPrice">Минимальная цена</label>
                                         <input
                                             id={'largeMinimalPrice'}
                                             type="number"
@@ -663,7 +667,7 @@ const ExtraShoulderItem = ({item}) => {
                                         />
                                     </div>
                                 </div>
-                                <div>
+                                <div className={'services-price-wrapper'}>
                                     {largeServices.map((service, index) => {
 
                                         const updateItem = (field, newValue) => {
@@ -676,7 +680,7 @@ const ExtraShoulderItem = ({item}) => {
                                             setValue={updateItem}
                                         />
                                     })}
-                                    <button onClick={addLargeService}>+</button>
+                                    <button onClick={addLargeService} className={'add-button'}>Добавить сервис</button>
                                 </div>
                             </div>
                         }
