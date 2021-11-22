@@ -69,16 +69,16 @@ const ldmRatesFromItem = (item) => {
 const UPDATE_RATES_URL = `${ADMIN_SERVER_URL}admin-zones`
 
 
-const ServiceItem = (name, price, setPrice, setName) => {
+const ServiceItem = ({name, price, setValue}) => {
 
     return (
         <div>
             <label htmlFor="">Название</label>
             <input type="text" value={name}
-                   onChange={e => setName(e.target.value)}/>
+                   onChange={e => setValue('name', e.target.value)}/>
             <label htmlFor="">Цена</label>
             <input type="number" value={price}
-                   onChange={e => setPrice(e.target.value)}
+                   onChange={e => setValue('price', e.target.value)}
             />
         </div>
     )
@@ -146,9 +146,20 @@ const ExtraShoulderItem = ({item}) => {
             item.container_rates.filter(rate => rate.container_type === 'SMALL')[0].minimal_price : 0
     )
 
-    const [smallServices, setSmallServices] = useState([])
-    const [mediumServices, setMediumServices] = useState([])
-    const [largeServices, setLargeServices] = useState([])
+    const [smallServices, setSmallServices] = useState(
+        item.container_rates.filter(rate => rate.container_type === 'SMALL')[0] ?
+            item.container_rates.filter(rate => rate.container_type === 'SMALL')[0].services : []
+    )
+    
+    const [mediumServices, setMediumServices] = useState(
+        item.container_rates.filter(rate => rate.container_type === 'MIDDLE')[0] ?
+            item.container_rates.filter(rate => rate.container_type === 'MIDDLE')[0].services : []
+    )
+
+    const [largeServices, setLargeServices] = useState(
+        item.container_rates.filter(rate => rate.container_type === 'BIG')[0] ?
+            item.container_rates.filter(rate => rate.container_type === 'BIG')[0].services : []
+    )
 
     const [activeButton, setActiveButton] = useState('small')
 
@@ -273,58 +284,41 @@ const ExtraShoulderItem = ({item}) => {
         adminInstance.patch(`${UPDATE_RATES_URL}/${item.id}/`, body).then()
     }
 
-    const getChangeSmallServiceName = index => {
-        return name => {
-            smallServices[index].name = name
-            setSmallServices(smallServices)
-        }
-    }
-
-    const getChangeMediumServiceName = index => {
-        return name => {
-            mediumServices[index].name = name
-            setMediumServices(mediumServices)
-        }
-    }
-
-    const getChangeLargeServiceName = index => {
-        return name => {
-            largeServices[index].name = name
-            setLargeServices(largeServices)
-        }
-    }
-    const getChangeSmallServicePrice = index => {
-        return price => {
-            smallServices[index].price = price
-            setSmallServices(smallServices)
-        }
-    }
-
-    const getChangeMediumServicePrice = index => {
-        return price => {
-            mediumServices[index].price = price
-            setMediumServices(mediumServices)
-        }
-    }
-
-    const getChangeLargeServicePrice = index => {
-        return price => {
-            largeServices[index].price = price
-            setLargeServices(largeServices)
-        }
-    }
-
     const addSmallService = () => {
-        smallServices.push(defaultService)
-        setSmallServices(smallServices)
+        const newData = [...smallServices, defaultService]
+        setSmallServices(newData)
     }
     const addMediumService = () => {
-        mediumServices.push(defaultService)
-        setMediumServices(mediumServices)
+        const newData = [...mediumServices, defaultService]
+        setMediumServices(newData)
     }
     const addLargeService = () => {
-        largeServices.push(defaultService)
-        setLargeServices(largeServices)
+        const newData = [...largeServices, defaultService]
+        setLargeServices(newData)
+    }
+
+    const updateDataItemField = (index, field, newValue) => {
+        let newData = [...smallServices]
+        let newItem = {...newData[index]}
+        newItem[field] = newValue
+        newData[index] = newItem
+        setSmallServices(newData)
+    }
+
+    const updateDataMediumItemField = (index, field, newValue) => {
+        let newData = [...mediumServices]
+        let newItem = {...newData[index]}
+        newItem[field] = newValue
+        newData[index] = newItem
+        setMediumServices(newData)
+    }
+
+    const updateDataLargeItemField = (index, field, newValue) => {
+        let newData = [...largeServices]
+        let newItem = {...newData[index]}
+        newItem[field] = newValue
+        newData[index] = newItem
+        setLargeServices(newData)
     }
 
     return (
@@ -560,14 +554,18 @@ const ExtraShoulderItem = ({item}) => {
                                     </div>
                                 </div>
                                 <div>
-                                    {smallServices.map((service, index) => (
-                                        <ServiceItem
+                                    {smallServices.map((service, index) => {
+
+                                        const updateItem = (field, newValue) => {
+                                            updateDataItemField(index, field, newValue)
+                                        }
+
+                                        return <ServiceItem
                                             name={service.name}
                                             price={service.price}
-                                            setName={getChangeSmallServiceName(index)}
-                                            setPrice={getChangeSmallServicePrice(index)}
+                                            setValue={updateItem}
                                         />
-                                    ))}
+                                    })}
                                     <button onClick={addSmallService}>+</button>
                                 </div>
                             </div>
@@ -612,15 +610,16 @@ const ExtraShoulderItem = ({item}) => {
                                 </div>
                                 <div>
                                     {mediumServices.map((service, index) => {
-                                        return <div>
-                                            <label htmlFor="">Название</label>
-                                            <input type="text" value={service.name}
-                                                   onChange={e => getChangeMediumServiceName(index)(e.target.value)}/>
-                                            <label htmlFor="">Цена</label>
-                                            <input type="number" value={service.price}
-                                                   onChange={e => getChangeMediumServicePrice(index)(e.target.value)}
-                                            />
-                                        </div>
+
+                                        const updateItem = (field, newValue) => {
+                                            updateDataMediumItemField(index, field, newValue)
+                                        }
+
+                                        return <ServiceItem
+                                            name={service.name}
+                                            price={service.price}
+                                            setValue={updateItem}
+                                        />
                                     })}
                                     <button onClick={addMediumService}>+</button>
                                 </div>
@@ -666,15 +665,16 @@ const ExtraShoulderItem = ({item}) => {
                                 </div>
                                 <div>
                                     {largeServices.map((service, index) => {
-                                        return <div>
-                                            <label htmlFor="">Название</label>
-                                            <input type="text" value={service.name}
-                                                   onChange={e => getChangeLargeServiceName(index)(e.target.value)}/>
-                                            <label htmlFor="">Цена</label>
-                                            <input type="number" value={service.price}
-                                                   onChange={e => getChangeLargeServicePrice(index)(e.target.value)}
-                                            />
-                                        </div>
+
+                                        const updateItem = (field, newValue) => {
+                                            updateDataLargeItemField(index, field, newValue)
+                                        }
+
+                                        return <ServiceItem
+                                            name={service.name}
+                                            price={service.price}
+                                            setValue={updateItem}
+                                        />
                                     })}
                                     <button onClick={addLargeService}>+</button>
                                 </div>
