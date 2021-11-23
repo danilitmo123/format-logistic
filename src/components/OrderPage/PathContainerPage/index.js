@@ -9,7 +9,7 @@ import {IMaskInput} from "react-imask";
 import {ORDER_SERVER_URL} from "../../../constants/URL";
 import axios from "axios";
 
-const CREATE_ORDER_URL = `${ORDER_SERVER_URL}/feedback`
+const CREATE_ORDER_URL = `${ORDER_SERVER_URL}feedback`
 
 const PathContainerPage = ({
                              paths,
@@ -21,7 +21,8 @@ const PathContainerPage = ({
                              containerWeight,
                              bigCount,
                              middleCount,
-                             smallCount
+                             smallCount,
+                             setAlert
                            }) => {
 
   const [index, setIndex] = useState('')
@@ -53,8 +54,10 @@ const PathContainerPage = ({
         email: email,
         comment: about
       }
-    },options)
-    window.location.href = '/'
+    },options).then(() => {
+      window.location.href = '/'
+      setAlert({active: true, isEmail: false})
+    })
   }
 
   const Form = () => {

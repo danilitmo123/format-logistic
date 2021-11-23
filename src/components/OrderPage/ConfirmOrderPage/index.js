@@ -12,7 +12,7 @@ import './ConfirmOrderPage.scss'
 
 const CREATE_ORDER_URL = `${ORDER_SERVER_URL}orders/`
 
-const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAlert, isThirdPageActive}) => {
+const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAlert}) => {
 
         const company = useInput('')
         const comment = useInput('')

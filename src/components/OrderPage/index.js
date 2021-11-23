@@ -221,6 +221,7 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
                                 smallCount={smallCount}
                                 middleCount={middleCount}
                                 bigCount={bigCount}
+                                setAlert={setShowAlert}
                             />
                             <button
                                 onClick={secondPageActiveHandler}
