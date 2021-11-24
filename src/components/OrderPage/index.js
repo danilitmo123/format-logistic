@@ -58,7 +58,9 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
             warning = true
         }
         if (!warning) {
-            ym(86376600,'reachGoal','calc_next')
+            if (typeof window.ym != 'undefined') {
+                window.ym(86376600, 'reachGoal', 'calc_next')
+            }
             getPaths()
             setFirstPageActive(false)
             setSecondActivePage(true)

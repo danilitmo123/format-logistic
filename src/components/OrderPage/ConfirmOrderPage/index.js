@@ -51,7 +51,9 @@ const ConfirmOrderPage = ({setFirstPageActive, chosenPath, volume, weight, setAl
                                                 chosenPath={chosenPath}/>, [chosenPath.routes])
 
     const createOrder = (send_mail) => {
-      ym(86376600, 'reachGoal', 'calc_send_form')
+        if (typeof window.ym != 'undefined') {
+            window.ym(86376600, 'reachGoal', 'calc_send_form')
+        }
       setCanSend(false)
       let good = JSON.parse(localStorage.getItem('good'))
       let path = JSON.parse(localStorage.getItem('path'))

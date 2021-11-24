@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {YMInitializer} from 'react-yandex-metrika';
 
 
 import OrderPage from "./components/OrderPage";
@@ -12,24 +13,24 @@ import Footer from "./components/Footer";
 
 const App = () => {
 
-  const [firstActivePage, setFirstActivePage] = useState(true)
+    const [firstActivePage, setFirstActivePage] = useState(true)
 
-  return (
-      <Router>
-        <div className={'App'}>
-          <Header setActive={setFirstActivePage}/>
-          <Switch>
-            <Route exact={true} path={'/'}>
-              <OrderPage setFirstPageActive={setFirstActivePage} firstActivePage={firstActivePage}/>
-            </Route>
-            <Route path={'/admin'}>
-              <AdminPage/>
-            </Route>
-          </Switch>
-          <Footer/>
-        </div>
-      </Router>
-  );
+    return (
+        <Router>
+            <div className={'App'}>
+                <Header setActive={setFirstActivePage}/>
+                <Switch>
+                    <Route exact={true} path={'/'}>
+                        <OrderPage setFirstPageActive={setFirstActivePage} firstActivePage={firstActivePage}/>
+                    </Route>
+                    <Route path={'/admin'}>
+                        <AdminPage/>
+                    </Route>
+                </Switch>
+                <Footer/>
+            </div>
+        </Router>
+    );
 };
 
 export default App;
