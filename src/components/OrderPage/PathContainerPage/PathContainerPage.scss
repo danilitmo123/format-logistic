@@ -42,7 +42,11 @@
         flex-direction: column;
         margin-bottom: 20px;
         margin-right: 50px;
-
+        .error {
+          color: red;
+          font-size: 10px;
+          margin-top: 5px;
+        }
         label {
           color: black;
           font-size: 15px;

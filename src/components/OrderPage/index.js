@@ -58,7 +58,9 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
             warning = true
         }
         if (!warning) {
-            ym(86376600,'reachGoal','calc_next')
+            if (typeof window.ym != 'undefined') {
+                window.ym(86376600, 'reachGoal', 'calc_next')
+            }
             getPaths()
             setFirstPageActive(false)
             setSecondActivePage(true)
@@ -77,14 +79,30 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
         return item.heightPallet === 0 || item.widthPallet === 0 || item.lengthPallet === 0 || item.weight === 0
     }
 
+    const hasContainerError = (item) => {
+        return item.containerCount === 0 || item.containerWeight === 0
+    }
+
     const hasCargoError = () => {
-        for (let i in data) {
-            let item = data[i]
-            if (hasBoxError(item) && hasPalletError(item)) {
-                return true
+        let goodType = localStorage.getItem('goodType')
+        if (goodType === 'BOX') {
+            for (let i in data) {
+                let item = data[i]
+                if (hasBoxError(item) && hasPalletError(item)) {
+                    return true
+                }
             }
+            return false
+        } else if (goodType === 'CONTAINER') {
+            for (let i in data) {
+                let item = containerData[i]
+                if (hasContainerError(item)) {
+                    return true
+                }
+            }
+            return false
         }
-        return false
+        return true
     }
 
     const getPaths = () => {
