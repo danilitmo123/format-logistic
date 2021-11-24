@@ -15,7 +15,8 @@ const Alert = ({showAlert, setAlert}) => {
         {
           showAlert.active &&
           <div className={'alert'}>
-            <div className={'alert-text'}>{showAlert.isEmail ? 'Ваш заказ отправлен на почту' : 'Ваш заказ успешно создан! Скоро мы с вами свяжемся '}</div>
+            {showAlert.isFeedback && <div className={'alert-text'}>Ваша заявка успешно создана! Скоро мы с вами свяжемся</div>}
+            {!showAlert.isFeedback && <div className={'alert-text'}>{showAlert.isEmail ? 'Ваш заказ отправлен на почту' : 'Ваш заказ успешно создан! Скоро мы с вами свяжемся '}</div>}
           </div>
         }
       </div>

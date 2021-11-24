@@ -30,7 +30,7 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
     const [containerData, setContainerData] = useState([])
     const [cargoWarning, setCargoWarning] = useState(false)
     const [chooseRussiaWarning, setChooseRussiaWarning] = useState(false)
-    const [showAlert, setShowAlert] = useState({active: false, isEmail: false})
+    const [showAlert, setShowAlert] = useState({active: false, isEmail: false, isFeedback: false})
     const [thirdPageActive, setThirdPageActive] = useState(false)
     const [smallCount, setSmallCount] = useState(1)
     const [middleCount, setMiddleCount] = useState(0)
@@ -58,6 +58,7 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
             warning = true
         }
         if (!warning) {
+            ym(86376600,'reachGoal','calc_next')
             getPaths()
             setFirstPageActive(false)
             setSecondActivePage(true)

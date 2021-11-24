@@ -81,6 +81,7 @@ const MapBlock = ({
             }
           </div>
           {chosenPath ? '' : <button className={'choose-button'} onClick={() => {
+            ym(86376600,'reachGoal','calc_next2')
             setIndex(index)
             setThirdPage(true)
           }}>Выбрать</button>}
