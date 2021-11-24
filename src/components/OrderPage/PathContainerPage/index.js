@@ -48,7 +48,7 @@ const PathContainerPage = ({
 
   const sendFeedbackForm = () => {
     (function () {
-      let PM_YM_COUNTER = 86376600;
+      let PM_YM_COUNTER =  ;
       let ee = setInterval(function () {
         if (typeof window.ym != 'undefined') {
           ym(PM_YM_COUNTER, 'reachGoal', 'calc_send_form');
