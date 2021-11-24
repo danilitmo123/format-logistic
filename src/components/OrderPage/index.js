@@ -11,6 +11,7 @@ import ConfirmOrderPage from "./ConfirmOrderPage";
 import Alert from "../Common/Alert";
 
 import './OrderPage.scss'
+import {YANDEX_ACCOUNT} from "../../constants/metrix";
 
 const OrderPage = ({setFirstPageActive, firstActivePage}) => {
 
@@ -59,7 +60,7 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
         }
         if (!warning) {
             if (typeof window.ym != 'undefined') {
-                window.ym(86376600, 'reachGoal', 'calc_next')
+                window.ym(YANDEX_ACCOUNT, 'reachGoal', 'calc_next')
             }
             getPaths()
             setFirstPageActive(false)
@@ -80,7 +81,7 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
     }
 
     const hasContainerError = (item) => {
-        return item.containerCount === 0 || item.containerWeight === 0 || item.containerWeight === null || item.containerCount === null
+        return item.containerCount === 0 || item.containerWeight === 0 || item.containerWeight === '' || item.containerWeight === null
     }
 
     const hasCargoError = () => {
@@ -94,7 +95,7 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
             }
             return false
         } else if (goodType === 'CONTAINER') {
-            for (let i in data) {
+            for (let i in containerData) {
                 let item = containerData[i]
                 if (hasContainerError(item)) {
                     return true
@@ -242,6 +243,10 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
                                 bigCount={bigCount}
                                 setFirstPageActive={setFirstPageActive}
                                 setAlert={setShowAlert}
+                                sourceType={sourceType}
+                                destinationType={destinationType}
+                                source={selectedCityIdTo}
+                                destination={selectedCityIdFrom}
                             />
                             <button
                                 onClick={secondPageActiveHandler}
@@ -257,6 +262,9 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
                                 chosenPath={chosenPath}
                                 volume={volume}
                                 weight={weight}
+                                smallCount={smallCount}
+                                middleCount={middleCount}
+                                bigCount={bigCount}
                                 isThirdPageActive={thirdPageActive}
                             />
                             <button

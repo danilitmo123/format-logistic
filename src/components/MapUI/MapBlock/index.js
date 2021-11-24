@@ -4,6 +4,7 @@ import Map from "../Map";
 import TypeOfRoutes from "../TypeOfRoutes";
 
 import './MapBlock.scss'
+import {YANDEX_ACCOUNT} from "../../../constants/metrix";
 
 const MapBlock = ({
                     weight,
@@ -82,7 +83,7 @@ const MapBlock = ({
           </div>
           {chosenPath ? '' : <button className={'choose-button'} onClick={() => {
               if (typeof window.ym != 'undefined') {
-                  window.ym(86376600, 'reachGoal', 'calc_next2')
+                  window.ym(YANDEX_ACCOUNT, 'reachGoal', 'calc_next2')
               }
             setIndex(index)
             setThirdPage(true)

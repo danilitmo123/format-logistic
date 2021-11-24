@@ -8,6 +8,7 @@ import './PathContainerPage.scss'
 import {IMaskInput} from "react-imask";
 import {ORDER_SERVER_URL} from "../../../constants/URL";
 import axios from "axios";
+import {YANDEX_ACCOUNT} from "../../../constants/metrix";
 
 const CREATE_ORDER_URL = `${ORDER_SERVER_URL}feedback/`
 
@@ -22,6 +23,10 @@ const PathContainerPage = ({
                                bigCount,
                                middleCount,
                                smallCount,
+                               sourceType,
+                               destinationType,
+                               source,
+                               destination,
                                setFirstPageActive,
                                setAlert
                            }) => {
@@ -50,25 +55,70 @@ const PathContainerPage = ({
         const options = {
             headers: {'Content-Type': 'application/json'}
         }
+        let good
+        let goodType = localStorage.getItem('goodType')
+
+        if (goodType === 'BOX') {
+            let boxes = []
+            let cargos = JSON.parse(localStorage.getItem('cargo'))
+            cargos.forEach((cargo) => {
+                let box = {}
+                let isBox = cargo.cargo === "Коробки"
+                let isCM = cargo.volumeUnits === "CM"
+                let isKg = cargo.weightUnits === "КГ"
+                if (isBox) {
+                    box["type"] = "BOX"
+                } else {
+                    box["type"] = "PALLET"
+                }
+                box["length"] = (isBox ? cargo.length : cargo.lengthPallet) * (isCM || !isBox ? 1 / 100 : 1)
+                box["height"] = (isBox ? cargo.height : cargo.heightPallet) * (isCM ? 1 / 100 : 1)
+                box["width"] = (isBox ? cargo.width : cargo.widthPallet) * (isCM || !isBox ? 1 / 100 : 1)
+                box["mass"] = cargo.weight * (isKg ? 1 : 1 / 2.2)
+                box["amount"] = cargo.count
+                boxes.push(box)
+            })
+            good = {'boxes': boxes, 'containers': []}
+        } else if (goodType === 'CONTAINER') {
+            let containers = []
+            let containersData = JSON.parse(localStorage.getItem('containers'))
+            containersData.forEach((containerItem) => {
+                let isKg = containerItem.containerWeightUnits === "КГ"
+                let mass = containerItem.containerWeight * (isKg ? 1 : 1 / 2.2)
+                let container = {
+                    'type': containerItem.containerType,
+                    'amount': containerItem.containerCount,
+                    'mass': mass
+                }
+                containers.push(container)
+            })
+            good = {'boxes': [], 'containers': containers}
+        }
+
         const body = {
             "agent": {
                 company_name: company,
                 phone: phone,
                 email: email,
                 comment: about
-            }
+            },
+            "good": good,
+            "source": {id: source},
+            "destination": {id: destination},
+            "source_type": sourceType,
+            "destination_type": destinationType
         }
         axios.post(CREATE_ORDER_URL, body, options).then(() => {
             if (typeof window.ym != 'undefined') {
-                window.ym(86376600, 'reachGoal', 'calc_send_form');
+                window.ym(YANDEX_ACCOUNT, 'reachGoal', 'calc_send_form');
             }
             setFirstPageActive(true);
             setAlert({active: true, isEmail: false, isFeedback: true})
-        }).catch( (err) => {
+        }).catch((err) => {
             if (err?.response?.data?.agent) {
                 let _errors = {}
-                for (let field in err.response.data.agent){
-                    if (err.response.data.agent.hasOwnProperty(field)){
+                for (let field in err.response.data.agent) {
+                    if (err.response.data.agent.hasOwnProperty(field)) {
                         _errors[field] = true
                     }
                 }
@@ -96,7 +146,7 @@ const PathContainerPage = ({
                                 value={company}
                                 onChange={e => setCompany(e.target.value)}
                             />
-                            {errors?.company_name  ? <div className={'error'}>Неверное названии компании</div> : ''}
+                            {errors?.company_name ? <div className={'error'}>Неверное названии компании</div> : ''}
                         </div>
                         <div className={'input-example'}>
                             <label htmlFor="">Телефон</label>
@@ -104,7 +154,7 @@ const PathContainerPage = ({
                                 mask={'+7(000)000-00-00'}
                                 onAccept={(value) => setPhone(value)}
                             />
-                            {errors?.phone  ? <div className={'error'}>Телефон введен неправилно</div> : ''}
+                            {errors?.phone ? <div className={'error'}>Телефон введен неправилно</div> : ''}
                         </div>
                         <div className={'input-example'}>
                             <label htmlFor="">Email</label>
@@ -112,7 +162,7 @@ const PathContainerPage = ({
                                 type="email"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}/>
-                            {errors?.email  ? <div className={'error'}>Email введен неправилно</div> : ''}
+                            {errors?.email ? <div className={'error'}>Email введен неправилно</div> : ''}
                         </div>
                         <div className={'input-example'}>
                             <label>Особые замечания</label>
@@ -120,7 +170,7 @@ const PathContainerPage = ({
                                 value={about}
                                 onChange={e => setAbout(e.target.value)}
                             />
-                            {errors?.comment  ? <div className={'error'}>Комментарий введен неправилно</div> : ''}
+                            {errors?.comment ? <div className={'error'}>Комментарий введен неправилно</div> : ''}
                         </div>
                     </div>
                     <button

@@ -1,0 +1,1 @@
+export const YANDEX_ACCOUNT = 86376600
