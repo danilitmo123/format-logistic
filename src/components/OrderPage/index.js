@@ -80,7 +80,7 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
     }
 
     const hasContainerError = (item) => {
-        return item.containerCount === 0 || item.containerWeight === 0
+        return item.containerCount === 0 || item.containerWeight === 0 || item.containerWeight === null || item.containerCount === null
     }
 
     const hasCargoError = () => {
