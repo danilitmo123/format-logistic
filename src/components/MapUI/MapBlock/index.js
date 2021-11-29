@@ -5,6 +5,7 @@ import TypeOfRoutes from "../TypeOfRoutes";
 
 import './MapBlock.scss'
 import {YANDEX_ACCOUNT} from "../../../constants/metrix";
+import {Button} from "antd";
 
 const MapBlock = ({
                     weight,
@@ -81,13 +82,13 @@ const MapBlock = ({
             </> : ''
             }
           </div>
-          {chosenPath ? '' : <button className={'choose-button'} onClick={() => {
+          {chosenPath ? '' : <Button type={'primary'} style={{ width: 150, height: 30, borderRadius: 4 }} onClick={() => {
               if (typeof window.ym != 'undefined') {
                   window.ym(YANDEX_ACCOUNT, 'reachGoal', 'calc_next2')
               }
             setIndex(index)
             setThirdPage(true)
-          }}>Выбрать</button>}
+          }}>Выбрать</Button>}
         </div>
       </div>
     </div>

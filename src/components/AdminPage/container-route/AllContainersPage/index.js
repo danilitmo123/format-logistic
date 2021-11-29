@@ -3,7 +3,6 @@ import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import {ADMIN_SERVER_URL} from "../../../../constants/URL";
 import loader from '../../../../img/loader.svg'
-import './AllContainersPage.scss'
 import {adminInstance} from "../../../../api/admin";
 import FilterPanel from "../../UI/FilterPanel";
 import {useRoutes} from "../../../../utils/useRoutes";

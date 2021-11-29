@@ -164,7 +164,7 @@ const ExtraShoulderItem = ({item}) => {
         item.container_rates.filter(rate => rate.container_type === 'BIG')[0] ?
             item.container_rates.filter(rate => rate.container_type === 'BIG')[0].services : []
     )
-
+    console.log(smallServices)
     const [activeButton, setActiveButton] = useState('small')
 
     const addWeightItem = () => {
@@ -291,6 +291,7 @@ const ExtraShoulderItem = ({item}) => {
     const addSmallService = () => {
         const newData = [...smallServices, defaultService]
         setSmallServices(newData)
+        console.log(smallServices)
     }
     const addMediumService = () => {
         const newData = [...mediumServices, defaultService]

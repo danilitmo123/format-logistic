@@ -1,4 +1,5 @@
-@import '../../global';
+@import '../../global.scss';
+
 .nav {
   width: 320px;
   min-width: 320px;
@@ -28,18 +29,20 @@
     .logo-text-block {
       margin-left: 15px;
       font-family: 'Montserrat', sans-serif;
+
       .logo-main-text {
         font-size: 18px;
         font-weight: 400;
         margin-bottom: 5px;
       }
+
       .logo-extra-text {
         font-size: 12px;
       }
     }
   }
 
-  .button-in-sidebar{
+  .button-in-sidebar {
     border: none;
     background: none;
     cursor: pointer;
@@ -51,6 +54,7 @@
     flex-direction: column;
     justify-content: flex-start;
     text-align: left;
+
     &:after {
       content: '';
       display: block;
@@ -100,9 +104,9 @@
 
 [id='nav-toggle']:checked ~ .nav {
   left: 0;
-  box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);
-  -moz-box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);
-  -webkit-box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);
+  box-shadow: 4px 0 20px 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 4px 0 20px 0 rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 4px 0 20px 0 rgba(0, 0, 0, 0.5);
   overflow-y: auto;
 }
 
@@ -142,7 +146,6 @@ body {
   transform: translateX(-50%);
   -webkit-transition: opacity .5s .1s, -webkit-transform .5s .1s;
   -moz-transition: opacity .5s .1s, -moz-transform .5s .1s;
-  -ms-transition: opacity .5s .1s, -ms-transform .5s .1s;
   transition: opacity .5s .1s, transform .5s .1s;
 }
 

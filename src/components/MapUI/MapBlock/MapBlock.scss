@@ -1,4 +1,4 @@
-@import '../../../global';
+@import '../../../global.scss';
 
 .all-route-info {
   display: flex;
@@ -99,7 +99,7 @@
       }
 
       .choose-button {
-        @extend %active-button;
+        @extend %active-button
       }
     }
 

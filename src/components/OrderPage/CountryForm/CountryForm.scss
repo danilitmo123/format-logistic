@@ -1,7 +1,7 @@
-@import "../../../global";
+@import "../../../global.scss";
 
 .choose-tiles-wrapper {
-  margin-top: 90px;
+  margin-top: 50px;
   display: flex;
   justify-content: space-between;
 
@@ -52,53 +52,13 @@
       }
 
       .switcher-buttons {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        font-family: 'Montserrat', sans-serif;
-
-        .place-button {
-          font-family: 'Montserrat', sans-serif;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 4px;
-          border: 1px solid hsl(0, 0%, 80%);
-          width: 96px;
-          height: 38px;
-          background: $white;
-          outline: none;
-          cursor: pointer;
-
-          &:nth-child(1) {
-            border-radius: 4px 0 0 4px;
-          }
-
-          &:nth-child(5) {
-            border-radius: 0 4px 4px 0;
-          }
-        }
-
-        .active-place-button {
-          font-family: 'Montserrat', sans-serif;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 4px;
-          width: 96px;
-          height: 38px;
-          background: $light-blue;
-          cursor: pointer;
-          outline: none;
-          border: none;
-          color: $white;
-
-          &:nth-child(1) {
-            border-radius: 4px 0 0 4px;
-          }
-
-          &:nth-child(5) {
-            border-radius: 0 4px 4px 0;
+        width: 100%;
+        .ant-btn {
+          .place-wrapper {
+            img {
+              width: 15px;
+              height: 15px;
+            }
           }
         }
       }
@@ -106,7 +66,7 @@
 
     .city-select {
       margin-bottom: 16px;
-
+      height: 80px;
       .select-title {
         @extend %label;
       }
@@ -143,6 +103,7 @@
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
+
   .choose-tiles-wrapper {
     flex-direction: column;
     margin-top: 40px;
@@ -168,10 +129,15 @@
 }
 
 @media (max-width: 767px) {
+  .ant-row {
+    flex-flow: column;
+  }
   .choose-tiles-wrapper {
-    flex-direction: column;
+    flex-direction: column !important;
     margin-top: 20px;
-
+    .ant-col-11 {
+      max-width: 100%;
+    }
     .choose-tile {
       width: 95%;
       padding: 20px 10px;
@@ -188,26 +154,22 @@
       }
     }
 
-    .country-select {
-      .select {
-        .css-2b097c-container {
-          .select__control {
-            .city-select__placeholder {
-
-            }
-          }
-        }
-      }
-    }
-
     .place-switcher {
       .switcher-buttons {
-        .place-button {
-          font-size: 12px;
+        display: flex;
+        button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 10px;
+          width: 62px !important;
         }
 
-        .active-place-button {
-          font-size: 12px;
+        span {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 10px;
         }
       }
     }

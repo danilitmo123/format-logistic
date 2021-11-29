@@ -267,11 +267,11 @@ const OrderPage = ({setFirstPageActive, firstActivePage}) => {
                                 bigCount={bigCount}
                                 isThirdPageActive={thirdPageActive}
                             />
-                            <button
-                                className={'continue-button-first-page'}
-                                onClick={returnSecondPagHandler}
-                            >Назад§
-                            </button>
+                            {/*<button*/}
+                            {/*    className={'continue-button-first-page'}*/}
+                            {/*    onClick={returnSecondPagHandler}*/}
+                            {/*>Назад§*/}
+                            {/*</button>*/}
                         </>
                 }
             </div>

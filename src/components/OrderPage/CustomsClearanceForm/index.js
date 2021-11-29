@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from 'react';
 
+import {Switch} from "antd";
+
 import './CustomsClearanceForm.scss'
+import {Tooltip} from "antd";
+import {InfoCircleOutlined} from "@ant-design/icons";
 
 const CustomsClearanceForm = () => {
 
-  const [showInfo, setShowInfo] = useState(false)
+  const [showInfo, setShowInfo] = useState(true)
 
   useEffect(() => {
     localStorage.setItem('customs', JSON.stringify(showInfo))
@@ -13,8 +17,11 @@ const CustomsClearanceForm = () => {
   return (
       <div className={'customs-clearance-wrapper'}>
         <div className={'title-wrapper'}>
-          <input type="checkbox" defaultChecked={showInfo} onChange={() => setShowInfo(!showInfo)}/>
+          <Switch checked={showInfo} onChange={() => setShowInfo(!showInfo)} style={{ marginRight: 10 }}/>
           <div className={'title'}>Таможенное оформление</div>
+          <Tooltip title={'Ознакомьтесь с данной услугой и выберите при необходимости'} placement={'right'} color={'rgba(0,0,0,.6)'}>
+            <InfoCircleOutlined className={'info'} />
+          </Tooltip>
         </div>
         <div className={'description-wrapper'}>
           {

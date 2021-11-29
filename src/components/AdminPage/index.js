@@ -1,4 +1,4 @@
-    import React from 'react';
+import React from 'react';
 
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 
@@ -13,7 +13,6 @@ import ServicesPage from "./ServicesPage";
 import AuthPage from "../AuthPage";
 import AllContainerHubsPage from "./container-route/AllContainersPage"
 import CreateContainerHub from "./container-route/CreateContainerHub"
-import './AdminPage.scss'
 import {checkAuth} from "../../api/admin";
 import {AuthStatus} from "../../constants/api";
 import EditContainerHubRoutePage from "./container-route/EditContainerHub";

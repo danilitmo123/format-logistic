@@ -18,7 +18,7 @@ export const getCities = (countryOption, setAllCities, type, flg) => {
         }
     }
 
-    axios.get(`${GEO_SERVER_URL}cities/short?country=${countryOption.value}&type=${type}&alias=ru`)
+    axios.get(`${GEO_SERVER_URL}cities/short?country=${countryOption}&type=${type}&alias=ru`)
         .then(res => {
             setAllCities(res.data)
         })

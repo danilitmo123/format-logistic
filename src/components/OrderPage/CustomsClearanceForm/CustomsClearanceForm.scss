@@ -1,4 +1,4 @@
-@import '../../../global';
+@import '../../../global.scss';
 
 .customs-clearance-wrapper {
   margin-top: 40px;
@@ -15,7 +15,7 @@
   .description-wrapper {
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 14px;
     transition: .2s;
 
     .description {
@@ -39,6 +39,11 @@
       font-weight: 400;
       font-size: 24px;
       color: black;
+      margin-right: 15px;
+    }
+
+    .info {
+      cursor: pointer;
     }
   }
 

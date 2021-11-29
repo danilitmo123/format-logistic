@@ -1,4 +1,4 @@
-@import "../../../global";
+@import "../../../global.scss";
 
 .step-of-route-wrapper {
   font-family: 'Montserrat', sans-serif;
@@ -52,10 +52,6 @@
           text-overflow: ellipsis;
           white-space: nowrap;
           width: 100px;
-          //&:hover {
-          //  width: 200px;
-          //  white-space: normal;
-          //}
         }
       }
 

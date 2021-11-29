@@ -1,8 +1,6 @@
-@import "../../../global";
+@import "../../../global.scss";
 
 .cargo-wrapper {
-  border: 1px solid gray;
-  box-shadow: 0 5px 5px -5px #333;
   width: 1100px;
   min-height: 250px;
   padding: 40px 30px;
@@ -31,9 +29,12 @@
   .title-wrapper {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 15px;
 
     .cargo-all-info {
+      display: flex;
+      justify-content: flex-end;
       font-size: 16px;
       color: black;
       opacity: 0.8;
@@ -50,31 +51,19 @@
     font-size: 14px;
     display: flex;
     margin-bottom: 40px;
-
-    .active-button {
+    .button-wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
-      border: 1px solid $light-blue;
-      width: 170px;
-      height: 30px;
-      background-color: $light-blue;
-      color: $white;
-      cursor: pointer;
-      border-radius: 8px 0 0 8px;
-      font-size: 12px;
-    }
-
-    .button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 170px;
-      height: 30px;
-      border: 1px solid $light-blue;
-      cursor: pointer;
-      border-radius: 8px 0 0 8px;
-      font-size: 12px;
+      .button-icon {
+        margin-right: 10px;
+        width: 17px;
+        height: 17px;
+      }
+      .box {
+        width: 19px;
+        height: 19px;
+      }
     }
 
     .active-button-container {
@@ -115,6 +104,7 @@
       display: flex;
       flex-direction: column;
       margin-right: 40px;
+      width: 100%;
       .container-buttons-wrapper {
         display: flex;
         .container-button {
@@ -143,6 +133,10 @@
       .input-cargo-label {
         @extend %label;
         margin-bottom: 10px;
+        .additional-info {
+          opacity: .6;
+          font-size: 12px;
+        }
       }
 
       .cargo-input {
@@ -188,14 +182,13 @@
             align-items: center;
             justify-content: flex-start;
             border-radius: 4px 0 0 4px;
+            padding: 0 11px;
+            font-size: 14px;
           }
 
           .width-pallet {
             width: 118px;
 
-            .width-pallet__control {
-              border-radius: 0;
-            }
           }
 
           .cargo-input {
@@ -240,6 +233,7 @@
       width: 20px;
       height: 20px;
       cursor: pointer;
+      margin-top: 30px;
     }
   }
 }
@@ -287,11 +281,6 @@
 
     .cargo-choice {
       font-size: 14px;
-
-      .active-box-button {
-        width: 170px;
-        height: 40px;
-      }
     }
 
     .cargo-input-wrapper {
@@ -362,12 +351,11 @@
     }
 
     .cargo-choice {
-      font-size: 12px;
+      font-size: 10px;
       margin-bottom: 20px;
-
-      .active-box-button {
-        height: 30px;
-        width: 140px;
+      .ant-btn {
+        font-size: 10px;
+        width: 50%;
       }
     }
 
@@ -375,10 +363,47 @@
       flex-wrap: wrap;
       align-items: center;
       margin-bottom: 20px;
-
+      .ant-col-3 {
+        max-width: 100%;
+      }
+      .ant-col-9 {
+        flex: none;
+        max-width: 100%;
+      }
+      .ant-col-4 {
+        flex: none;
+        max-width: 100%;
+        .weight-cargo-wrapper {
+          input {
+            width: 30% !important;
+          }
+          .ant-select {
+            width: 30% !important;
+          }
+        }
+      }
+      .ant-col-5 {
+        max-width: 100%;
+        flex: none;
+        input {
+          width: 30% !important;
+        }
+        .ant-select {
+          width: 20% !important;
+        }
+      }
       .input-cargo-example {
         margin-bottom: 10px;
-
+        .input-cargo-label {
+          font-size: 10px;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          width: 100%;
+          .additional-info {
+            font-size: 8px;
+          }
+        }
         .count-input {
           font-size: 12px;
 

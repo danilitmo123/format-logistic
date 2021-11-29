@@ -1,4 +1,4 @@
-@import '../../../../global';
+@import '../../../../global.scss';
 .order-item-wrapper {
   width: 1000px;
   height: max-content;
@@ -7,8 +7,6 @@
   margin-right: 20px;
   margin-bottom: 20px;
   padding: 20px;
-  margin-right: 20px;
-  margin-bottom: 20px;
   .agent-info-wrapper {
     margin-bottom: 20px;
     .agent-title {

@@ -178,7 +178,7 @@ export const ContainerRouteBlock = ({initData, onSubmit}) => {
                 },
                 {
                     container_type: 'BIG',
-                    max_mass: largePrice,
+                    max_mass: largeWeight,
                     cost: largePrice,
                     price_per_overload: largeOverload
                 }

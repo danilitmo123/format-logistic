@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
 
-$light-blue: #30A5C9;
-$white: #f6fbf9;
+$light-blue: #1890ff;
+$white: white;
 $dark-blue: #2E5163;
 $main-background: #3656bd;
-
+// #f6fbf9
 %input {
   width: 100px;
   height: 32px;
@@ -27,7 +27,6 @@ $main-background: #3656bd;
 %label {
   font-weight: 400;
   font-size: 14px;
-  opacity: .4;
 }
 
 %tile-title {

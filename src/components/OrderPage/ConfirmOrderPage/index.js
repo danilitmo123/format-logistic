@@ -10,6 +10,7 @@ import {IMaskInput} from 'react-imask'
 
 import './ConfirmOrderPage.scss'
 import {YANDEX_ACCOUNT} from "../../../constants/metrix";
+import {Button, Input} from "antd";
 
 const CREATE_ORDER_URL = `${ORDER_SERVER_URL}orders/`
 
@@ -155,8 +156,8 @@ const ConfirmOrderPage = ({
                             if (path.is_hub && path.description.length) {
                                 return (
                                     <div className={'info-wrapper'}>
-                                        <div>{path.description.split('\n\n').map((point, index) => {
-                                            return <div className={'info-point'}>{index + 1}) {point}</div>
+                                        <div>{path.description.split('\n\n').map((point) => {
+                                            return <div className={'info-point'}>-{point}</div>
                                         })}</div>
                                     </div>
                                 )
@@ -196,7 +197,7 @@ const ConfirmOrderPage = ({
                     <div className="shipper">
                         <div className={'input-example'}>
                             <label htmlFor="">Компания</label>
-                            <input type="text" value={company.value} onChange={company.onChange}/>
+                            <Input type="text" value={company.value} onChange={company.onChange}/>
                         </div>
                         <div className={'input-example'}>
                             <label htmlFor="">Телефон</label>
@@ -207,7 +208,7 @@ const ConfirmOrderPage = ({
                         </div>
                         <div className={'input-example'}>
                             <label htmlFor="">Email</label>
-                            <input
+                            <Input
                                 type="email"
                                 value={email.value}
                                 onBlur={email.onBlur}
@@ -224,9 +225,9 @@ const ConfirmOrderPage = ({
                     {createOrderWarning && <ErrorMessage text={'Телефон или Email обязательны к заполнению'}/>}
                     {sendEmailWarning && <ErrorMessage text={'Email обязателен к заполнению'}/>}
                     <div className={'buttons-order-wrapper'}>
-                        <button className={'send-order-button'} onClick={validateFormCreateOrder}>Оформить заявку</button>
-                        <button className={'send-email-button'} onClick={validateFormSendEmail}>Отправить на почту</button>
-                        <button className={'send-email-button'} onClick={createBlank}>Скачать предложение</button>
+                        <Button type={'primary'} style={{ marginRight: 40, borderRadius: 4 }} onClick={validateFormCreateOrder}>Оформить заявку</Button>
+                        <Button onClick={validateFormSendEmail} style={{ borderRadius: 4 }}>Отправить на почту</Button>
+                        <Button onClick={createBlank} style={{ borderRadius: 4 }}>Скачать предложение</Button>
                     </div>
                 </div>
             </div>
