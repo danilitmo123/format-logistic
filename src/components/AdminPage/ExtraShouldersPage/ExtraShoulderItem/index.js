@@ -88,7 +88,6 @@ const ServiceItem = ({name, price, setValue}) => {
     )
 }
 
-
 const ExtraShoulderItem = ({item}) => {
     const [dataWeight, setDataWeight] = useState(() => massRatesFromItem(item))
     const [dataVolume, setDataVolume] = useState(() => sizeRatesFromItem(item))
@@ -284,21 +283,36 @@ const ExtraShoulderItem = ({item}) => {
                 }
             ],
         }
-        console.log({body})
         adminInstance.patch(`${UPDATE_RATES_URL}/${item.id}/`, body).then()
     }
 
     const addSmallService = () => {
         const newData = [...smallServices, defaultService]
         setSmallServices(newData)
-        console.log(smallServices)
     }
+
     const addMediumService = () => {
         const newData = [...mediumServices, defaultService]
         setMediumServices(newData)
     }
     const addLargeService = () => {
         const newData = [...largeServices, defaultService]
+        setLargeServices(newData)
+    }
+
+    const deleteSmallService = (i) => {
+        console.log(i)
+        const newData = [...smallServices.slice(0, i), ...smallServices.slice(i + 1)]
+        setSmallServices(newData)
+    }
+
+    const deleteMediumService = (i) => {
+        const newData = [...mediumServices.slice(0, i), ...mediumServices.slice(i + 1)]
+        setMediumServices(newData)
+    }
+
+    const deleteLargeService = (i) => {
+        const newData = [...largeServices.slice(0, i), ...largeServices.slice(i + 1)]
         setLargeServices(newData)
     }
 
@@ -565,11 +579,23 @@ const ExtraShoulderItem = ({item}) => {
                                             updateDataItemField(index, field, newValue)
                                         }
 
-                                        return <ServiceItem
-                                            name={service.name}
-                                            price={service.price}
-                                            setValue={updateItem}
-                                        />
+                                        return (
+                                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                              <ServiceItem
+                                                name={service.name}
+                                                price={service.price}
+                                                setValue={updateItem}
+                                              />
+                                              <div>
+                                                  <img
+                                                    src={trash}
+                                                    onClick={() => deleteSmallService(index)}
+                                                    alt=""
+                                                    style={{ marginLeft: 15, width: 20, height: 20 }}
+                                                  />
+                                              </div>
+                                          </div>
+                                        )
                                     })}
                                     <button onClick={addSmallService} className={'add-button'}>Добавить сервис</button>
                                 </div>
@@ -620,11 +646,23 @@ const ExtraShoulderItem = ({item}) => {
                                             updateDataMediumItemField(index, field, newValue)
                                         }
 
-                                        return <ServiceItem
-                                            name={service.name}
-                                            price={service.price}
-                                            setValue={updateItem}
-                                        />
+                                        return (
+                                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                              <ServiceItem
+                                                name={service.name}
+                                                price={service.price}
+                                                setValue={updateItem}
+                                              />
+                                              <div>
+                                                  <img
+                                                    src={trash}
+                                                    onClick={() => deleteMediumService(index)}
+                                                    alt=""
+                                                    style={{ marginLeft: 15, width: 20, height: 20 }}
+                                                  />
+                                              </div>
+                                          </div>
+                                        )
                                     })}
                                     <button onClick={addMediumService} className={'add-button'}>Добавить сервис</button>
                                 </div>
@@ -675,11 +713,23 @@ const ExtraShoulderItem = ({item}) => {
                                             updateDataLargeItemField(index, field, newValue)
                                         }
 
-                                        return <ServiceItem
-                                            name={service.name}
-                                            price={service.price}
-                                            setValue={updateItem}
-                                        />
+                                        return (
+                                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                              <ServiceItem
+                                                name={service.name}
+                                                price={service.price}
+                                                setValue={updateItem}
+                                              />
+                                              <div>
+                                                  <img
+                                                    src={trash}
+                                                    onClick={() => deleteLargeService(index)}
+                                                    alt=""
+                                                    style={{ marginLeft: 15, width: 20, height: 20 }}
+                                                  />
+                                              </div>
+                                          </div>
+                                        )
                                     })}
                                     <button onClick={addLargeService} className={'add-button'}>Добавить сервис</button>
                                 </div>
