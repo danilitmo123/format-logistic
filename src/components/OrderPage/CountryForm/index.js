@@ -456,7 +456,7 @@ const CountryForm = ({
           </div>
         </div>
         <div className={'city-select'}>
-          <label className={'select-title'}>{labelToType(sourceType)}</label>
+          <label className={'select-title'}>{labelToType(destinationType)}</label>
           <Select
             placeholder={placeholderFromType(destinationType)}
             style={{width: '100%', marginTop: '10px'}}
