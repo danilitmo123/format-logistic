@@ -8,7 +8,7 @@ import {InfoCircleOutlined} from "@ant-design/icons";
 
 const CustomsClearanceForm = () => {
 
-  const [showInfo, setShowInfo] = useState(true)
+  const [showInfo, setShowInfo] = useState(false)
 
   useEffect(() => {
     localStorage.setItem('customs', JSON.stringify(showInfo))

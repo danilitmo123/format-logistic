@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Tooltip, Button, Select, Row, Col} from "antd";
+import {Tooltip, Button, Select, Row, Col, Radio} from "antd";
 import {
   getCountries,
   getCities,
@@ -35,8 +35,8 @@ const CountryForm = ({
   const [modifyCountryObj, setModifyCountryObj] = useState([])
   const [modifyCitiesFromObj, setModifyCitiesFromObj] = useState([])
   const [modifyCitiesToObj, setModifyCitiesToObj] = useState([])
-  const [optionCountryFromValue, setOptionCountryFromValue] = useState('')
-  const [optionCountryToValue, setOptionCountryToValue] = useState('')
+  const [optionCountryFromValue, setOptionCountryFromValue] = useState('China')
+  const [optionCountryToValue, setOptionCountryToValue] = useState('Russia')
   const [countryWarning, setCountryWarning] = useState(false)
   const [cityFromOption, setCityFromOption] = useState(null)
   const [cityToOption, setCityToOption] = useState(null)
@@ -114,13 +114,12 @@ const CountryForm = ({
     }
   }
 
-  const filterCandidate = (candidate, inputValue) => {
-    let alias = candidate.data ? candidate.data.alias : candidate.alias
-    if (alias)
-      return candidate.label.toLowerCase().startsWith(inputValue.toLowerCase())
-        || alias.toLowerCase().startsWith(inputValue.toLowerCase())
-    else
-      return candidate.label.toLowerCase().startsWith(inputValue.toLowerCase())
+  const filterCandidate = (option, inputValue) => {
+    if (option[0].toLowerCase().startsWith(inputValue.toLowerCase())) {
+      return true
+    } else if (option[2] !== null) {
+      return option[2].toLowerCase().startsWith(inputValue.toLowerCase())
+    }
   }
 
   const selectedCityIdFromHandler = (newValue) => {
@@ -207,10 +206,12 @@ const CountryForm = ({
               style={{width: '100%'}}
               placeholder={'Выберите страну'}
               onChange={setCountryFromOption}
-              filterOption={(input, option) =>
-                option.children.join("").toLowerCase().startsWith(input.toLowerCase())
+              filterOption={(input, option) => {
+                return filterCandidate(option.children, input)
+              }
               }
               notFoundContent={'Не найдено'}
+              defaultValue={'China'}
             >
               {allCountries.map(country => (
                 <Select.Option value={country.name}
@@ -322,8 +323,9 @@ const CountryForm = ({
             placeholder={placeholderFromType(sourceType)}
             style={{width: '100%', marginTop: '10px'}}
             showSearch
-            filterOption={(input, option) =>
-              option.children.join("").toLowerCase().indexOf(input.toLowerCase()) >= 0
+            filterOption={(input, option) => {
+              return filterCandidate(option.children, input)
+            }
             }
             onChange={selectedCityIdFromHandler}
             value={cityFromOption}
@@ -350,10 +352,12 @@ const CountryForm = ({
               style={{width: '100%'}}
               placeholder={'Выберите страну'}
               onChange={setCountryToOption}
-              filterOption={(input, option) =>
-                option.children.join("").toLowerCase().indexOf(input.toLowerCase()) >= 0
+              filterOption={(input, option) => {
+                return filterCandidate(option.children, input)
+              }
               }
               notFoundContent={'Не найдено'}
+              defaultValue={'Russia'}
             >
               {allCountries.map(country => (
                 <Select.Option value={country.name}
@@ -461,8 +465,9 @@ const CountryForm = ({
             placeholder={placeholderFromType(destinationType)}
             style={{width: '100%', marginTop: '10px'}}
             showSearch
-            filterOption={(input, option) =>
-              option.children.join("").toLowerCase().indexOf(input.toLowerCase()) >= 0
+            filterOption={(input, option) => {
+             return filterCandidate(option.children, input)
+            }
             }
             onChange={selectedCityIdToHandler}
             value={cityToOption}

@@ -39,7 +39,15 @@ const FirstStepForm = ({
                          setSmallCount,
                          smallCount,
                          activeCargo,
-                         setActiveCargo
+                         setActiveCargo,
+                         calcType,
+                         setCalcType,
+                         setTotalCount,
+                         setTotalWeight,
+                         setTotalVolume,
+                         totalCount,
+                         totalVolume,
+                         totalWeight
                        }) => {
 
   useEffect(() => {
@@ -68,6 +76,14 @@ const FirstStepForm = ({
         setSmallCount={setSmallCount}
         activeCargo={activeCargo}
         setActiveCargo={setActiveCargo}
+        calcType={calcType}
+        setCalcType={setCalcType}
+        totalWeight={totalWeight}
+        setTotalWeight={setTotalWeight}
+        totalCount={totalCount}
+        setTotalCount={setTotalCount}
+        totalVolume={totalVolume}
+        setTotalVolume={setTotalVolume}
       />
       <CountryForm
         setChooseRussiaWarning={setChooseRussiaWarning}

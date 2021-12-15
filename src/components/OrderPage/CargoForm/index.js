@@ -8,7 +8,7 @@ import {
   typeOfContainer
 } from "../../../templates/templatesOfOptions";
 
-import {Select, Input, Button, Row, Col} from 'antd';
+import {Select, Input, Button, Row, Col, Radio} from 'antd';
 
 import trash from '../../../img/trash.svg'
 import box from '../../../img/box-icon.svg'
@@ -59,12 +59,23 @@ const CargoForm = ({
                      setMiddleCount,
                      bigCount,
                      setBigCount,
-                     activeCargo,
-                     setActiveCargo
+                     setActiveCargo,
+                     setCalcType,
+                     calcType,
+                     setTotalCount,
+                     setTotalWeight,
+                     setTotalVolume,
+                     totalCount,
+                     totalVolume,
+                     totalWeight
                    }) => {
 
   const [boxButtonActive, setBoxButtonActive] = useState(true)
   const [containerButtonActive, setContainerButtonActive] = useState(false)
+  const [totalVolumeUnit, setTotalVolumeUnit] = useState('CM')
+  const [totalWeightUnit, setTotalWeightUnit] = useState('КГ')
+
+  console.log(cargoWarning)
 
   const setData = (data) => {
     localStorage.setItem('cargo', JSON.stringify(data))
@@ -307,6 +318,12 @@ const CargoForm = ({
     setActiveCargo('container')
   }
 
+  const updateCalcType = (e) => {
+    setWeight(0)
+    setVolume(0)
+    setCalcType(e.target.value)
+  }
+
   useEffect(() => {
     if (boxButtonActive) {
       localStorage.setItem('goodType', 'BOX')
@@ -316,12 +333,45 @@ const CargoForm = ({
     }
   }, [boxButtonActive, containerButtonActive])
 
+  const updateTotalVolume = (e) => {
+    if (totalVolumeUnit === 'M') {
+      setVolume(+e.target.value)
+    } else {
+      setVolume((+e.target.value / 100000).toFixed(2))
+    }
+  }
+
+  const updateTotalWeight = (e) => {
+    if (totalWeightUnit === 'КГ') {
+      setWeight(+e.target.value)
+    } else {
+      setWeight((+e.target.value / 2.2).toFixed(2))
+    }
+  }
+
+  useEffect(() => {
+    if (totalVolumeUnit === 'M') {
+      setVolume(volume * 100000)
+    } else {
+      setVolume(volume / 100000)
+    }
+  }, [totalVolumeUnit])
+
+  useEffect(() => {
+    if (totalWeightUnit === 'КГ') {
+      setWeight(weight)
+    } else {
+      setWeight((weight / 2.2).toFixed(2))
+    }
+  }, [totalWeightUnit])
+
   return (
     <div className={'cargo-wrapper'}>
       <Row className={'title-wrapper'}>
         <Col span={4} className={'cargo-title'}>Груз</Col>
         {boxButtonActive ?
-          <Col span={20} className={'cargo-all-info'}>Грузов: {data.length} Общий вес: {weight ? weight : 0} кг Общий
+          <Col span={20} className={'cargo-all-info'}>Грузов: {calcType === 'total' ? totalCount : data.length} Общий
+            вес: {weight ? weight : 0} кг Общий
             объем: {volume ? volume : 0} м³</Col>
           :
           <Col span={20} className={'cargo-all-info'}>Грузов: {smallCount}x20', {middleCount}x40', {bigCount}x40'HC
@@ -357,237 +407,316 @@ const CargoForm = ({
           </div>
         </Button>
       </div>
-      {boxButtonActive &&
-      <div>
-        {data.map((item, index) => {
-
-          const updateItem = (field, newValue) => {
-            updateDataItemField(index, field, newValue)
-          }
-
-          return (
-            <Row className={'cargo-input-wrapper'} key={index}>
-              <Col span={3} className={'input-cargo-example'}>
-                <label className={'input-cargo-label'}>Тип груза</label>
-                <div className={'choose-cargo-select'}>
-                  <Select
-                    style={{width: '100%'}}
-                    onChange={(value) => updateItem('cargo', value)}
-                    placeholder={'Коробки'}
-                    defaultValue={'Коробки'}
-                  >
-                    {typeOfCargoOptions.map(cargo => (
-                      <Select.Option value={cargo.value} key={cargo.value}>{cargo.label}</Select.Option>
-                    ))}
-                  </Select>
-                </div>
-              </Col>
-              <Col span={3} className={'input-cargo-example'}>
-                <label className={'input-cargo-label'}>Количество <span
-                  className={'additional-info'}>(шт)</span></label>
-                <Input
-                  style={{width: '100%'}}
-                  type="number"
-                  value={item.count || ''}
-                  onChange={(e) => updateItem('count', e.target.value)}
-                  min={1}
-                  max={1000}
-                  step={1}
-                  placeholder={'1'}
-                />
-              </Col>
-              <Col span={9} className={'input-cargo-example'}>
-                <label className={'input-cargo-label'}>Габариты <span className={'additional-info'}>(L&#215;W&#215;H за единицу)</span></label>
-                {item.cargo === 'Коробки' ?
-                  <div className={'dimensions-box-wrapper'} style={{width: '100%'}}>
-                    <div className={'box-units-wrapper'}>
-                      <Input
-                        type="number"
-                        style={{width: '25%', borderRadius: '4px 0 0 4px'}}
-                        id={'sizeof-cargo'}
-                        value={item.length || ''}
-                        onChange={(e) => updateItem('length', e.target.value)}
-                        min={1}
-                        step={1}
-                        placeholder={'Длина'}
-                      />
-                      <Input
-                        type="number"
-                        style={{width: '25%', borderRadius: '0'}}
-                        id={'sizeof-cargo'}
-                        value={item.width || ''}
-                        onChange={(e) => updateItem('width', e.target.value)}
-                        min={1}
-                        step={1}
-                        placeholder={'Ширина'}
-                      />
-                      <Input
-                        type="number"
-                        style={{width: '25%', borderRadius: '0'}}
-                        id={'sizeof-cargo'}
-                        value={item.height || ''}
-                        onChange={(e) => updateItem('height', e.target.value)}
-                        min={1}
-                        step={1}
-                        placeholder={'Высота'}
-                      />
-                      <Select
-                        style={{width: '25%', borderRadius: '0 4px 4px 0'}}
-                        onChange={(value) => updateItem('volumeUnits', value)}
-                        placeholder={'CM'}
-                        defaultValue={'CM'}
-                      >
-                        {typeOfVolumeUnits.map(cargo => (
-                          <Select.Option value={cargo.value} key={cargo.value}>{cargo.label}</Select.Option>
-                        ))}
-                      </Select>
-                    </div>
-                  </div>
-                  :
-                  <div className={'dimensions-pallet-wrapper'} style={{width: '100%'}}>
-                    <div className={'pallet-units-wrapper'}>
-                      <div className={'pallet-length'} style={{width: '25%', borderRadius: '4px 0 0 4px'}}>120</div>
-                      <Select
-                        style={{width: '25%', borderRadius: '0'}}
-                        onChange={(value) => updateItem('widthPallet', value)}
-                        placeholder={'100'}
-                        defaultValue={'100'}
-                      >
-                        {typeOfWidthPalletUnits.map(cargo => (
-                          <Select.Option value={cargo.value} key={cargo.value}>{cargo.label}</Select.Option>
-                        ))}
-                      </Select>
-                      <Input
-                        style={{width: '25%', borderRadius: '0'}}
-                        type='number'
-                        placeholder={'Высота'}
-                        value={item.heightPallet || ''}
-                        onChange={e => updateItem('heightPallet', e.target.value)}/>
-                      <Select
-                        style={{width: '25%'}}
-                        onChange={(value) => updateItem('volumeUnits', value)}
-                        placeholder={'CM'}
-                        defaultValue={'CM'}
-                      >
-                        {typeOfVolumeUnits.map(cargo => (
-                          <Select.Option value={cargo.value} key={cargo.value}>{cargo.label}</Select.Option>
-                        ))}
-                      </Select>
-                    </div>
-                  </div>
-                }
-              </Col>
-              <Col span={4} className={'input-cargo-example'}>
-                <label className={'input-cargo-label'}>Вес <span
-                  className={'additional-info'}>(За единицу)</span></label>
-                <div className={'weight-cargo-wrapper'} style={{width: '100%'}}>
-                  <Input
-                    type="number"
-                    style={{width: '50%', borderRadius: '4px 0 0 4px'}}
-                    value={item.weight || ''}
-                    onChange={(e) => updateItem('weight', e.target.value)}
-                    min={1}
-                    step={1}
-                    placeholder={'Вес'}
-                  />
-                  <Select
-                    style={{width: '50%', borderRadius: '0 4px 4px 0'}}
-                    onChange={(value) => updateItem('weightUnits', value)}
-                    placeholder={'КГ'}
-                    defaultValue={'КГ'}
-                  >
-                    {typeOfWeightUnits.map(cargo => (
-                      <Select.Option value={cargo.value} key={cargo.value}>{cargo.label}</Select.Option>
-                    ))}
-                  </Select>
-                </div>
-              </Col>
-              <Col span={1}>
-                <img
-                  src={trash}
-                  alt={'trash'}
-                  className={'trash-icon'}
-                  onClick={() => deleteItem(index)}
-                />
-              </Col>
-            </Row>)
-        })}
+      <div className={'detail-switcher'}>
+        <Radio.Group onChange={updateCalcType} value={calcType}>
+          <Radio value={'total'}>Суммарные параметры груза</Radio>
+          <Radio value={'detail'}>Отдельное грузовое место</Radio>
+        </Radio.Group>
       </div>
+      {boxButtonActive &&
+        <>
+          {calcType === 'total' ?
+            <div>
+              <Row className={'cargo-input-wrapper'}>
+                <Col span={3} className={'input-cargo-example'}>
+                  <label className={'input-cargo-label'}>Количество <span
+                    className={'additional-info'}>(шт)</span></label>
+                  <Input
+                    style={{width: '100%'}}
+                    type="number"
+                    min={1}
+                    max={1000}
+                    step={1}
+                    placeholder={'1'}
+                    onChange={e => setTotalCount(e.target.value)}
+                  />
+                </Col>
+                <Col span={4} className={'input-cargo-example'}>
+                  <label className={'input-cargo-label'}>Общий вес</label>
+                  <div className={'weight-cargo-wrapper'} style={{width: '100%'}}>
+                    <Input
+                      type="number"
+                      style={{width: '50%', borderRadius: '4px 0 0 4px'}}
+                      min={1}
+                      step={1}
+                      placeholder={'Вес'}
+                      onChange={e => updateTotalWeight(e)}
+                    />
+                    <Select
+                      style={{width: '50%', borderRadius: '0 4px 4px 0'}}
+                      placeholder={'КГ'}
+                      defaultValue={'КГ'}
+                      onChange={value => setTotalWeightUnit(value)}
+                    >
+                      {typeOfWeightUnits.map(cargo => (
+                        <Select.Option value={cargo.value} key={cargo.value}>{cargo.label}</Select.Option>
+                      ))}
+                    </Select>
+                  </div>
+                </Col>
+                <Col span={4} className={'input-cargo-example'}>
+                  <label className={'input-cargo-label'}>Общий объем</label>
+                  <div className={'weight-cargo-wrapper'} style={{width: '100%'}}>
+                    <Input
+                      type="number"
+                      style={{width: '50%', borderRadius: '4px 0 0 4px'}}
+                      min={1}
+                      step={1}
+                      placeholder={'Объем'}
+                      onChange={e => updateTotalVolume(e)}
+                    />
+                    <Select
+                      style={{width: '50%', borderRadius: '0 4px 4px 0'}}
+                      placeholder={'CM'}
+                      defaultValue={'CM'}
+                      onChange={value => setTotalVolumeUnit(value)}
+                    >
+                      {typeOfVolumeUnits.map(cargo => (
+                        <Select.Option value={cargo.value} key={cargo.value}>{cargo.label}</Select.Option>
+                      ))}
+                    </Select>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+            :
+            <div>
+              {data.map((item, index) => {
+
+                const updateItem = (field, newValue) => {
+                  updateDataItemField(index, field, newValue)
+                }
+
+                return (
+                  <Row className={'cargo-input-wrapper'} key={index}>
+                    <Col span={3} className={'input-cargo-example'}>
+                      <label className={'input-cargo-label'}>Тип груза</label>
+                      <div className={'choose-cargo-select'}>
+                        <Select
+                          style={{width: '100%'}}
+                          onChange={(value) => updateItem('cargo', value)}
+                          placeholder={'Коробки'}
+                          defaultValue={'Коробки'}
+                        >
+                          {typeOfCargoOptions.map(cargo => (
+                            <Select.Option value={cargo.value} key={cargo.value}>{cargo.label}</Select.Option>
+                          ))}
+                        </Select>
+                      </div>
+                    </Col>
+                    <Col span={3} className={'input-cargo-example'}>
+                      <label className={'input-cargo-label'}>Количество <span
+                        className={'additional-info'}>(шт)</span></label>
+                      <Input
+                        style={{width: '100%'}}
+                        type="number"
+                        value={item.count || ''}
+                        onChange={(e) => updateItem('count', e.target.value)}
+                        min={1}
+                        max={1000}
+                        step={1}
+                        placeholder={'1'}
+                      />
+                    </Col>
+                    <Col span={9} className={'input-cargo-example'}>
+                      <label className={'input-cargo-label'}>Габариты <span
+                        className={'additional-info'}>(L&#215;W&#215;H за единицу)</span></label>
+                      {item.cargo === 'Коробки' ?
+                        <div className={'dimensions-box-wrapper'} style={{width: '100%'}}>
+                          <div className={'box-units-wrapper'}>
+                            <Input
+                              type="number"
+                              style={{width: '25%', borderRadius: '4px 0 0 4px'}}
+                              id={'sizeof-cargo'}
+                              value={item.length || ''}
+                              onChange={(e) => updateItem('length', e.target.value)}
+                              min={1}
+                              step={1}
+                              placeholder={'Длина'}
+                            />
+                            <Input
+                              type="number"
+                              style={{width: '25%', borderRadius: '0'}}
+                              id={'sizeof-cargo'}
+                              value={item.width || ''}
+                              onChange={(e) => updateItem('width', e.target.value)}
+                              min={1}
+                              step={1}
+                              placeholder={'Ширина'}
+                            />
+                            <Input
+                              type="number"
+                              style={{width: '25%', borderRadius: '0'}}
+                              id={'sizeof-cargo'}
+                              value={item.height || ''}
+                              onChange={(e) => updateItem('height', e.target.value)}
+                              min={1}
+                              step={1}
+                              placeholder={'Высота'}
+                            />
+                            <Select
+                              style={{width: '25%', borderRadius: '0 4px 4px 0'}}
+                              onChange={(value) => updateItem('volumeUnits', value)}
+                              placeholder={'CM'}
+                              defaultValue={'CM'}
+                            >
+                              {typeOfVolumeUnits.map(cargo => (
+                                <Select.Option value={cargo.value} key={cargo.value}>{cargo.label}</Select.Option>
+                              ))}
+                            </Select>
+                          </div>
+                        </div>
+                        :
+                        <div className={'dimensions-pallet-wrapper'} style={{width: '100%'}}>
+                          <div className={'pallet-units-wrapper'}>
+                            <div className={'pallet-length'} style={{width: '25%', borderRadius: '4px 0 0 4px'}}>120
+                            </div>
+                            <Select
+                              style={{width: '25%', borderRadius: '0'}}
+                              onChange={(value) => updateItem('widthPallet', value)}
+                              placeholder={'100'}
+                              defaultValue={'100'}
+                            >
+                              {typeOfWidthPalletUnits.map(cargo => (
+                                <Select.Option value={cargo.value} key={cargo.value}>{cargo.label}</Select.Option>
+                              ))}
+                            </Select>
+                            <Input
+                              style={{width: '25%', borderRadius: '0'}}
+                              type='number'
+                              placeholder={'Высота'}
+                              value={item.heightPallet || ''}
+                              onChange={e => updateItem('heightPallet', e.target.value)}/>
+                            <Select
+                              style={{width: '25%'}}
+                              onChange={(value) => updateItem('volumeUnits', value)}
+                              placeholder={'CM'}
+                              defaultValue={'CM'}
+                            >
+                              {typeOfVolumeUnits.map(cargo => (
+                                <Select.Option value={cargo.value} key={cargo.value}>{cargo.label}</Select.Option>
+                              ))}
+                            </Select>
+                          </div>
+                        </div>
+                      }
+                    </Col>
+                    <Col span={4} className={'input-cargo-example'}>
+                      <label className={'input-cargo-label'}>Вес <span
+                        className={'additional-info'}>(За единицу)</span></label>
+                      <div className={'weight-cargo-wrapper'} style={{width: '100%'}}>
+                        <Input
+                          type="number"
+                          style={{width: '50%', borderRadius: '4px 0 0 4px'}}
+                          value={item.weight || ''}
+                          onChange={(e) => updateItem('weight', e.target.value)}
+                          min={1}
+                          step={1}
+                          placeholder={'Вес'}
+                        />
+                        <Select
+                          style={{width: '50%', borderRadius: '0 4px 4px 0'}}
+                          onChange={(value) => updateItem('weightUnits', value)}
+                          placeholder={'КГ'}
+                          defaultValue={'КГ'}
+                        >
+                          {typeOfWeightUnits.map(cargo => (
+                            <Select.Option value={cargo.value} key={cargo.value}>{cargo.label}</Select.Option>
+                          ))}
+                        </Select>
+                      </div>
+                    </Col>
+                    <Col span={1}>
+                      <img
+                        src={trash}
+                        alt={'trash'}
+                        className={'trash-icon'}
+                        onClick={() => deleteItem(index)}
+                      />
+                    </Col>
+                  </Row>)
+              })}
+            </div>
+          }
+        </>
       }
       {containerButtonActive &&
-      <div>
-        {containerData.map((item, index) => {
+        <div>
+          {containerData.map((item, index) => {
 
-          const updateItem = (field, newValue) => {
-            updateContainerDataItemField(index, field, newValue)
-          }
+            const updateItem = (field, newValue) => {
+              updateContainerDataItemField(index, field, newValue)
+            }
 
-          return (
-            <Row className={'cargo-input-wrapper'}>
-              <Col span={3} className={'input-cargo-example'}>
-                <label className={'input-cargo-label'}>Тип контейнера</label>
-                <Select
-                  onChange={(value) => updateItem('containerType', value)}
-                  placeholder={'Контейнер'}
-                  defaultValue={'SMALL'}
-                >
-                  {typeOfContainer.map(cargo => (
-                    <Select.Option value={cargo.value} key={cargo.value}>{cargo.label}</Select.Option>
-                  ))}
-                </Select>
-              </Col>
-              <Col span={3} className={'input-cargo-example'}>
-                <label className={'input-cargo-label'}>Количество <span
-                  className={'additional-info'}>(шт)</span></label>
-                <Input
-                  type="number"
-                  value={item.containerCount || ''}
-                  onChange={(e) => updateItem('containerCount', e.target.value)}
-                  min={1}
-                  max={1000}
-                  step={1}
-                  placeholder={'1'}
-                />
-              </Col>
-              <Col span={5} className={'input-cargo-example'}>
-                <label className={'input-cargo-label'}>Вес <span
-                  className={'additional-info'}>(За единицу)</span></label>
-                <div className={'weight-cargo-wrapper'}>
-                  <Input
-                    type="number"
-                    value={item.containerWeight || ''}
-                    onChange={(e) => updateItem('containerWeight', e.target.value)}
-                    min={1}
-                    step={1}
-                    style={{width: '50%', borderRadius: '4px 0 0 4px'}}
-                    placeholder={'Вес'}
-                  />
+            return (
+              <Row className={'cargo-input-wrapper'}>
+                <Col span={3} className={'input-cargo-example'}>
+                  <label className={'input-cargo-label'}>Тип контейнера</label>
                   <Select
-                    onChange={(value) => updateItem('containerWeightUnits', value)}
-                    placeholder={'КГ'}
-                    defaultValue={'КГ'}
-                    style={{width: '50%'}}
+                    onChange={(value) => updateItem('containerType', value)}
+                    placeholder={'Контейнер'}
+                    defaultValue={'SMALL'}
                   >
-                    {typeOfWeightUnits.map(cargo => (
+                    {typeOfContainer.map(cargo => (
                       <Select.Option value={cargo.value} key={cargo.value}>{cargo.label}</Select.Option>
                     ))}
                   </Select>
-                </div>
-              </Col>
-              <Col span={3}>
-                <img
-                  src={trash}
-                  alt={'trash'}
-                  className={'trash-icon'}
-                  onClick={() => deleteContainerItem(index)}
-                />
-              </Col>
-            </Row>
-          )
-        })}
-      </div>
+                </Col>
+                <Col span={3} className={'input-cargo-example'}>
+                  <label className={'input-cargo-label'}>Количество <span
+                    className={'additional-info'}>(шт)</span></label>
+                  <Input
+                    type="number"
+                    value={item.containerCount || ''}
+                    onChange={(e) => updateItem('containerCount', e.target.value)}
+                    min={1}
+                    max={1000}
+                    step={1}
+                    placeholder={'1'}
+                  />
+                </Col>
+                <Col span={5} className={'input-cargo-example'}>
+                  <label className={'input-cargo-label'}>Вес <span
+                    className={'additional-info'}>(За единицу)</span></label>
+                  <div className={'weight-cargo-wrapper'}>
+                    <Input
+                      type="number"
+                      value={item.containerWeight || ''}
+                      onChange={(e) => updateItem('containerWeight', e.target.value)}
+                      min={1}
+                      step={1}
+                      style={{width: '50%', borderRadius: '4px 0 0 4px'}}
+                      placeholder={'Вес'}
+                    />
+                    <Select
+                      onChange={(value) => updateItem('containerWeightUnits', value)}
+                      placeholder={'КГ'}
+                      defaultValue={'КГ'}
+                      style={{width: '50%'}}
+                    >
+                      {typeOfWeightUnits.map(cargo => (
+                        <Select.Option value={cargo.value} key={cargo.value}>{cargo.label}</Select.Option>
+                      ))}
+                    </Select>
+                  </div>
+                </Col>
+                <Col span={3}>
+                  <img
+                    src={trash}
+                    alt={'trash'}
+                    className={'trash-icon'}
+                    onClick={() => deleteContainerItem(index)}
+                  />
+                </Col>
+              </Row>
+            )
+          })}
+        </div>
       }
-      <Button onClick={boxButtonActive ? addItem : addContainerItem} type='default'>+ Добавить</Button>
+      {
+        calcType === 'detail' &&
+        <Button onClick={boxButtonActive ? addItem : addContainerItem} type='default'>+ Добавить</Button>
+      }
       {cargoWarning ? <div className={'cargo-warning'}>Все поля должны быть заполнены</div> : ''}
     </div>
   );
