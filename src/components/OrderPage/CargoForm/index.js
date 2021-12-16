@@ -334,11 +334,7 @@ const CargoForm = ({
   }, [boxButtonActive, containerButtonActive])
 
   const updateTotalVolume = (e) => {
-    if (totalVolumeUnit === 'M') {
       setVolume(+e.target.value)
-    } else {
-      setVolume((+e.target.value / 100000).toFixed(2))
-    }
   }
 
   const updateTotalWeight = (e) => {
@@ -407,12 +403,12 @@ const CargoForm = ({
           </div>
         </Button>
       </div>
-      <div className={'detail-switcher'}>
+      {boxButtonActive &&  <div className={'detail-switcher'}>
         <Radio.Group onChange={updateCalcType} value={calcType}>
           <Radio value={'total'}>Суммарные параметры груза</Radio>
           <Radio value={'detail'}>Отдельное грузовое место</Radio>
         </Radio.Group>
-      </div>
+      </div>}
       {boxButtonActive &&
         <>
           {calcType === 'total' ?
@@ -467,13 +463,11 @@ const CargoForm = ({
                     />
                     <Select
                       style={{width: '50%', borderRadius: '0 4px 4px 0'}}
-                      placeholder={'CM'}
-                      defaultValue={'CM'}
+                      placeholder={'M³'}
+                      defaultValue={'M³'}ц
                       onChange={value => setTotalVolumeUnit(value)}
                     >
-                      {typeOfVolumeUnits.map(cargo => (
-                        <Select.Option value={cargo.value} key={cargo.value}>{cargo.label}</Select.Option>
-                      ))}
+                     <Select.Option value={'M³'}>M³</Select.Option>
                     </Select>
                   </div>
                 </Col>
@@ -714,8 +708,8 @@ const CargoForm = ({
         </div>
       }
       {
-        calcType === 'detail' &&
-        <Button onClick={boxButtonActive ? addItem : addContainerItem} type='default'>+ Добавить</Button>
+        calcType === 'detail' || containerButtonActive ?
+        <Button onClick={boxButtonActive ? addItem : addContainerItem} type='default'>+ Добавить</Button> : ''
       }
       {cargoWarning ? <div className={'cargo-warning'}>Все поля должны быть заполнены</div> : ''}
     </div>
